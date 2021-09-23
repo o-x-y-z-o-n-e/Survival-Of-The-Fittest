@@ -18,5 +18,28 @@ public class Player : MonoBehaviour {
 	bool isAI; public bool IsAI => isAI;
 
 
+	//----------------------------------------------------------------------------------------------------------------------------------<
+
+	private bool unitsAreMoving;
+
+
+
+	private void Start()
+	{
+		unitsAreMoving = true;
+	}
+
+	public bool GetUnitsAreMoving()
+	{
+		return unitsAreMoving;
+	}
+
+	public void SetUnitsAreMoving(bool a)
+	{
+		unitsAreMoving = a;
+	}
+
+
+
 
 }
