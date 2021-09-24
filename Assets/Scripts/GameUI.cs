@@ -38,7 +38,10 @@ public class GameUI : MonoBehaviour {
 		//Reset which screens are active.
 		HUD.gameObject.SetActive(true);
 		FinishScreen.gameObject.SetActive(false);
+	}
 
+    private void Start()
+    {
 		// Initially update evolution buttons' text
 		UpdateEvolutionText(Game.Current.Player1.evolution.GetEvolutionText(0), 0, 0);
 		UpdateEvolutionText(Game.Current.Player1.evolution.GetEvolutionText(1), 0, 1);
