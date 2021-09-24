@@ -20,13 +20,12 @@ public class GameUI : MonoBehaviour {
 	[Space]
 	[Header("HUD Elements")]
 
-	public Player Player1;
-	public Player Player2;
-
 	public Text Player1Evolve1Text;
 	public Text Player1Evolve2Text;
 	public Text Player2Evolve1Text;
 	public Text Player2Evolve2Text;
+
+	[Space]
 
 	public Text Player1DNAText;
 	public Text Player2DNAText;
@@ -39,22 +38,19 @@ public class GameUI : MonoBehaviour {
 		//Reset which screens are active.
 		HUD.gameObject.SetActive(true);
 		FinishScreen.gameObject.SetActive(false);
-	}
 
-    private void Start()
-    {
 		// Initially update evolution buttons' text
-		UpdateEvolutionText(Player1.evolution.GetEvolutionText(0), 0, 0);
-		UpdateEvolutionText(Player1.evolution.GetEvolutionText(1), 0, 1);
-		UpdateEvolutionText(Player2.evolution.GetEvolutionText(0), 1, 0);
-		UpdateEvolutionText(Player2.evolution.GetEvolutionText(1), 1, 1);
+		UpdateEvolutionText(Game.Current.Player1.evolution.GetEvolutionText(0), 0, 0);
+		UpdateEvolutionText(Game.Current.Player1.evolution.GetEvolutionText(1), 0, 1);
+		UpdateEvolutionText(Game.Current.Player2.evolution.GetEvolutionText(0), 1, 0);
+		UpdateEvolutionText(Game.Current.Player2.evolution.GetEvolutionText(1), 1, 1);
 	}
 
     private void Update()
     {
 		// updates the UI for the players' DNA
-		UpdateDNA(Player1.DNA, 0);
-		UpdateDNA(Player2.DNA, 1);
+		UpdateDNA(Game.Current.Player1.DNA, 0);
+		UpdateDNA(Game.Current.Player2.DNA, 1);
 	}
 
 
@@ -73,50 +69,6 @@ public class GameUI : MonoBehaviour {
 		TimeDisplay.text = "Time: " + hh + ":" + mm + ":" + ss;
 	}
 
-
-	/*
-	 * On click methods for evolution buttons
-	 */
-
-	/// <summary>
-	/// Player 1 Evolution 1 on click method
-	/// </summary>
-	public void UpdatePlayer1Evolution1()
-	{
-		Player1.evolution.Evolve(0, 0);
-		UpdateEvolutionText(Player1.evolution.GetEvolutionText(0), 0, 0);
-		UpdateEvolutionText(Player1.evolution.GetEvolutionText(1), 0, 1);
-	}
-
-	/// <summary>
-	/// Player 1 Evolution 2 on click method
-	/// </summary>
-	public void UpdatePlayer1Evolution2()
-	{
-		Player1.evolution.Evolve(0, 1);
-		UpdateEvolutionText(Player1.evolution.GetEvolutionText(1), 0, 1);
-		UpdateEvolutionText(Player1.evolution.GetEvolutionText(0), 0, 0);
-	}
-
-	/// <summary>
-	/// Player 2 Evolution 1 on click method
-	/// </summary>
-	public void UpdatePlayer2Evolution1()
-	{
-		Player2.evolution.Evolve(1, 0);
-		UpdateEvolutionText(Player1.evolution.GetEvolutionText(0), 1, 0);
-		UpdateEvolutionText(Player1.evolution.GetEvolutionText(1), 1, 1);
-	}
-
-	/// <summary>
-	/// Player 2 Evolution 2 on click method
-	/// </summary>
-	public void UpdatePlayer2Evolution2()
-	{
-		Player2.evolution.Evolve(1, 1);
-		UpdateEvolutionText(Player1.evolution.GetEvolutionText(1), 1, 1);
-		UpdateEvolutionText(Player1.evolution.GetEvolutionText(0), 1, 0);
-	}
 
 	//----------------------------------------------------------------------------------------------------------------------------------<
 
@@ -140,9 +92,20 @@ public class GameUI : MonoBehaviour {
 	/// <param name="player">(0 = player one), (1 = player two/AI)</param>
 	public void UpdateDNA(int count, int player) => (player == 0 ? Player1DNAText : Player2DNAText).text = "DNA: " + count.ToString();
 
+
+	//----------------------------------------------------------------------------------------------------------------------------------<
+
+
+	/// <summary>
+	/// 
+	/// </summary>
+	/// <param name="text"></param>
+	/// <param name="player"></param>
+	/// <param name="evolution"></param>
 	public void UpdateEvolutionText(string text, int player, int evolution) => 
 		(player == 0 ? (evolution == 0 ? Player1Evolve1Text : Player1Evolve2Text) 
 		: (evolution == 0 ? Player2Evolve1Text : Player2Evolve2Text)).text = text;
+
 
 	//----------------------------------------------------------------------------------------------------------------------------------<
 
@@ -156,9 +119,30 @@ public class GameUI : MonoBehaviour {
 	/// <summary>
 	/// Is called by Path (Surface/Tunnel) button click event.
 	/// </summary>
-	/// <param name="path">(0 = surface/top), (1 = tunnel/bottom)</param>
-	/// <param name="player">(0 = player one), (1 = player two/AI)</param>
-	public void OnPathSelectClick(int path, int player) {
+	public void OnPlayer1PathClick(int path) {
+		//Hook into base script
+	}
+
+
+	//----------------------------------------------------------------------------------------------------------------------------------<
+
+
+	/// <summary>
+	/// Is called by Path (Surface/Tunnel) button click event.
+	/// </summary>
+	public void OnPlayer2PathClick(int path) {
+
+	}
+
+
+	//----------------------------------------------------------------------------------------------------------------------------------<
+
+
+	/// <summary>
+	/// Is called by Unit (Soldier/Spitter/Tank) button click event.
+	/// </summary>
+	/// <param name="unit">(0 = soldier), (1 = spitter), (2 = tank)</param>
+	public void OnPlayer1UnitClick(int unit) {
 		//Hook into base script
 	}
 
@@ -170,9 +154,34 @@ public class GameUI : MonoBehaviour {
 	/// Is called by Unit (Soldier/Spitter/Tank) button click event.
 	/// </summary>
 	/// <param name="unit">(0 = soldier), (1 = spitter), (2 = tank)</param>
-	/// <param name="player">(0 = player one), (1 = player two/AI)</param>
-	public void OnUnitSpawnClick(int unit, int player) {
+	public void OnPlayer2UnitClick(int unit) {
 		//Hook into base script
+	}
+
+
+	//----------------------------------------------------------------------------------------------------------------------------------<
+
+
+	/// <summary>
+	/// Is called by Evolution button click event
+	/// </summary>
+	/// <param name="evo"></param>
+	public void OnPlayer1EvolutionClick(int evo) {
+		Game.Current.Player1.evolution.Evolve(0, evo);
+		UpdateEvolutionText(Game.Current.Player1.evolution.GetEvolutionText(evo), 0, evo);
+	}
+
+
+	//----------------------------------------------------------------------------------------------------------------------------------<
+
+
+	/// <summary>
+	/// Is called by Evolution button click event
+	/// </summary>
+	/// <param name="evo"></param>
+	public void OnPlayer2EvolutionClick(int evo) {
+		Game.Current.Player2.evolution.Evolve(0, evo);
+		UpdateEvolutionText(Game.Current.Player2.evolution.GetEvolutionText(evo), 1, evo);
 	}
 
 
