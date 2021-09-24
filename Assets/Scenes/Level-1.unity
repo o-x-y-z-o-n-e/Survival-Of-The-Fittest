@@ -317,6 +317,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Base: {fileID: 700282125}
   DNA: 0
+  playerID: 0
 --- !u!1 &182018968
 GameObject:
   m_ObjectHideFlags: 0
@@ -1461,6 +1462,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Base: {fileID: 258391092}
   DNA: 0
+  playerID: 1
 --- !u!1 &636237927
 GameObject:
   m_ObjectHideFlags: 0
