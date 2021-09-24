@@ -17,7 +17,8 @@ public class Game : MonoBehaviour {
 
 
 	public Player Player1;		//Main person who is playing.
-	public Player Player2;		//Used for AI or for second RL player.
+	public Player Player2;      //Used for AI or for second RL player.
+	public Transform UnitContainer;
 
 
 	//----------------------------------------------------------------------------------------------------------------------------------<
