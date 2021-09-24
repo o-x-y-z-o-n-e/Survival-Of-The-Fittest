@@ -51,4 +51,11 @@ public class Player : MonoBehaviour {
 		unitsAreMoving = a;
 	}
 
+
+	public void AddDNA(int amount) {
+		DNA += amount;
+
+		Game.Current.UI.UpdateDNA(DNA, playerID);
+	}
+
 }

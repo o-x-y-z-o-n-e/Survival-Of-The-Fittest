@@ -46,13 +46,6 @@ public class GameUI : MonoBehaviour {
 		UpdateEvolutionText(Game.Current.Player2.evolution.GetEvolutionText(1), 1, 1);
 	}
 
-    private void Update()
-    {
-		// updates the UI for the players' DNA
-		UpdateDNA(Game.Current.Player1.DNA, 0);
-		UpdateDNA(Game.Current.Player2.DNA, 1);
-	}
-
 
     //----------------------------------------------------------------------------------------------------------------------------------<
 

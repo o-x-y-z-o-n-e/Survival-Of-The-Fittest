@@ -64,7 +64,7 @@ public class UnitController : MonoBehaviour
         if (health <= 0)
         {
             Destroy(gameObject);
-            unitOwner.DNA += gameObject.GetComponent<UnitController>().DNA;
+            unitOwner.AddDNA(gameObject.GetComponent<UnitController>().DNA);
         }
 
         unitOwner.SetUnitsAreMoving(true);
