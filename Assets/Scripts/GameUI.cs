@@ -159,10 +159,7 @@ public class GameUI : MonoBehaviour {
 	/// Is called by Evolution button click event
 	/// </summary>
 	/// <param name="evo"></param>
-	public void OnPlayer1EvolutionClick(int evo) {
-		Game.Current.Player1.evolution.Evolve(0, evo);
-		UpdateEvolutionText(Game.Current.Player1.evolution.GetEvolutionText(evo), 0, evo);
-	}
+	public void OnPlayer1EvolutionClick(int evo) => Game.Current.Player1.evolution.Evolve(0, evo);
 
 
 	//----------------------------------------------------------------------------------------------------------------------------------<
@@ -172,10 +169,7 @@ public class GameUI : MonoBehaviour {
 	/// Is called by Evolution button click event
 	/// </summary>
 	/// <param name="evo"></param>
-	public void OnPlayer2EvolutionClick(int evo) {
-		Game.Current.Player2.evolution.Evolve(0, evo);
-		UpdateEvolutionText(Game.Current.Player2.evolution.GetEvolutionText(evo), 1, evo);
-	}
+	public void OnPlayer2EvolutionClick(int evo) => Game.Current.Player2.evolution.Evolve(0, evo);
 
 
 	//----------------------------------------------------------------------------------------------------------------------------------<

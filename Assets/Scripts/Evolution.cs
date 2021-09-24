@@ -81,6 +81,8 @@ public class Evolution
                     break;
             }
         }
+
+		Game.Current.UI.UpdateEvolutionText(GetEvolutionText(evolution), player, evolution);
     }
 
     public string GetEvolutionText(int evolution) { return evolution == 0  ? 
