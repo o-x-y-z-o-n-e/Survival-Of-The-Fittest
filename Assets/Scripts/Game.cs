@@ -11,13 +11,10 @@ public class Game : MonoBehaviour {
 
 	static Game instance; public static Game Current => instance;
 	public GameUI UI;
-
-
-	//----------------------------------------------------------------------------------------------------------------------------------<
-
-
+	[Space]
 	public Player Player1;		//Main person who is playing.
 	public Player Player2;      //Used for AI or for second RL player.
+	[Space]
 	public Transform UnitContainer;
 
 
