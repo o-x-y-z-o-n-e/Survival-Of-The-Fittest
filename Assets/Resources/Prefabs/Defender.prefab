@@ -227,6 +227,7 @@ MonoBehaviour:
   damage: 10
   speed: 0.005
   attackSpeed: 1
+  DNA: 200
   unitOwner: {fileID: 0}
 --- !u!1 &7521253556881885881
 GameObject:

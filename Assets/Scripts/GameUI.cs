@@ -20,6 +20,9 @@ public class GameUI : MonoBehaviour {
 	[Space]
 	[Header("HUD Elements")]
 
+	public Player Player1;
+	public Player Player2;
+
 	public Text Player1DNAText;
 	public Text Player2DNAText;
 
@@ -34,14 +37,22 @@ public class GameUI : MonoBehaviour {
 	}
 
 
-	//----------------------------------------------------------------------------------------------------------------------------------<
+    private void Update()
+    {
+		// updates the UI for the players' DNA
+		UpdateDNA(Player1.DNA, 0);
+		UpdateDNA(Player2.DNA, 1);
+	}
 
 
-	/// <summary>
-	/// Displays the time at the top center of the screen.
-	/// </summary>
-	/// <param name="time">Time (in seconds).</param>
-	public void UpdateTime(float time) {
+    //----------------------------------------------------------------------------------------------------------------------------------<
+
+
+    /// <summary>
+    /// Displays the time at the top center of the screen.
+    /// </summary>
+    /// <param name="time">Time (in seconds).</param>
+    public void UpdateTime(float time) {
 		string ss = ((int)(time % 60)).ToString("00");
 		string mm = ((int)(Mathf.Floor(time / 60) % 60)).ToString("00");
 		string hh = ((int)(Mathf.Floor(time / 60 / 60))).ToString("00");

@@ -316,6 +316,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Base: {fileID: 700282125}
+  DNA: 0
 --- !u!1 &182018968
 GameObject:
   m_ObjectHideFlags: 0
@@ -1437,6 +1438,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Base: {fileID: 258391092}
+  DNA: 0
 --- !u!1 &636237927
 GameObject:
   m_ObjectHideFlags: 0
@@ -2804,6 +2806,8 @@ MonoBehaviour:
   FinishScreen: {fileID: 1911487343}
   HUD: {fileID: 469454638}
   TimeDisplay: {fileID: 1771388593}
+  Player1: {fileID: 92070639}
+  Player2: {fileID: 503819697}
   Player1DNAText: {fileID: 381625889}
   Player2DNAText: {fileID: 1179124912}
 --- !u!1 &1014195695

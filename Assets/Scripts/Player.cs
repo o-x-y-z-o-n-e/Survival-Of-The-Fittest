@@ -11,6 +11,9 @@ public class Player : MonoBehaviour {
 
 	public Base Base;
 
+	// Total amount of DNA the player has gained
+	public int DNA;
+
 
 	//----------------------------------------------------------------------------------------------------------------------------------<
 
@@ -29,7 +32,7 @@ public class Player : MonoBehaviour {
 		unitsAreMoving = true;
 	}
 
-	public bool GetUnitsAreMoving()
+    public bool GetUnitsAreMoving()
 	{
 		return unitsAreMoving;
 	}
@@ -38,8 +41,5 @@ public class Player : MonoBehaviour {
 	{
 		unitsAreMoving = a;
 	}
-
-
-
 
 }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 public class UnitController : MonoBehaviour
 {
     [SerializeField] private Vector2 direction;
@@ -11,6 +12,7 @@ public class UnitController : MonoBehaviour
     [SerializeField] private int damage;
     [SerializeField] private float speed;
     [SerializeField] private float attackSpeed;
+    [SerializeField] private int DNA; // how much DNA the unit will give when killed
 
     [SerializeField] private Player unitOwner; //this will not be a serialized field once unit owners are assigned at time of prefab instantiation.
 
@@ -62,11 +64,13 @@ public class UnitController : MonoBehaviour
         if (health <= 0)
         {
             Destroy(gameObject);
+            unitOwner.DNA += gameObject.GetComponent<UnitController>().DNA;
         }
 
         unitOwner.SetUnitsAreMoving(true);
         yield return null;
     }
+
 
     public int GetHealth()
     {
