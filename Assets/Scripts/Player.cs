@@ -15,6 +15,8 @@ public class Player : MonoBehaviour {
 
 	public Evolution evolution;
 
+	public int playerID;
+
 
 	//----------------------------------------------------------------------------------------------------------------------------------<
 

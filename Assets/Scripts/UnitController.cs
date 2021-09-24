@@ -82,8 +82,24 @@ public class UnitController : MonoBehaviour
         health = newHealthValue;
     }
 
+    public Player GetUnitOwner() { return unitOwner; }
+
     public void SetUnitOwner(Player owner)
     {
         unitOwner = owner;
+    }
+
+    public int GetUnitDamage() { return damage; }
+
+    public void SetUnitDamage(int damage)
+    {
+        this.damage = damage;
+    }
+
+    public float GetUnitSpeed() { return speed; }
+
+    public void SetUnitSpeed(float speed)
+    {
+        this.speed = speed;
     }
 }

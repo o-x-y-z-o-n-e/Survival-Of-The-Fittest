@@ -83,8 +83,7 @@ public class GameUI : MonoBehaviour {
 	/// </summary>
 	public void UpdatePlayer1Evolution1()
 	{
-		// TODO: Update player evolution data
-		Player1.evolution.Evolve();
+		Player1.evolution.Evolve(0, 0);
 		UpdateEvolutionText(Player1.evolution.GetEvolutionText(0), 0, 0);
 		UpdateEvolutionText(Player1.evolution.GetEvolutionText(1), 0, 1);
 	}
@@ -94,7 +93,7 @@ public class GameUI : MonoBehaviour {
 	/// </summary>
 	public void UpdatePlayer1Evolution2()
 	{
-		Player1.evolution.Evolve();
+		Player1.evolution.Evolve(0, 1);
 		UpdateEvolutionText(Player1.evolution.GetEvolutionText(1), 0, 1);
 		UpdateEvolutionText(Player1.evolution.GetEvolutionText(0), 0, 0);
 	}
@@ -104,8 +103,7 @@ public class GameUI : MonoBehaviour {
 	/// </summary>
 	public void UpdatePlayer2Evolution1()
 	{
-		// TODO: Update player evolution data
-		Player2.evolution.Evolve();
+		Player2.evolution.Evolve(1, 0);
 		UpdateEvolutionText(Player1.evolution.GetEvolutionText(0), 1, 0);
 		UpdateEvolutionText(Player1.evolution.GetEvolutionText(1), 1, 1);
 	}
@@ -115,8 +113,7 @@ public class GameUI : MonoBehaviour {
 	/// </summary>
 	public void UpdatePlayer2Evolution2()
 	{
-		// TODO: Update player evolution data
-		Player2.evolution.Evolve();
+		Player2.evolution.Evolve(1, 1);
 		UpdateEvolutionText(Player1.evolution.GetEvolutionText(1), 1, 1);
 		UpdateEvolutionText(Player1.evolution.GetEvolutionText(0), 1, 0);
 	}
