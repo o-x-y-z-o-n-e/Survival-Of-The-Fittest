@@ -23,6 +23,11 @@ public class GameUI : MonoBehaviour {
 	public Player Player1;
 	public Player Player2;
 
+	public Text Player1Evolve1Text;
+	public Text Player1Evolve2Text;
+	public Text Player2Evolve1Text;
+	public Text Player2Evolve2Text;
+
 	public Text Player1DNAText;
 	public Text Player2DNAText;
 
@@ -36,6 +41,14 @@ public class GameUI : MonoBehaviour {
 		FinishScreen.gameObject.SetActive(false);
 	}
 
+    private void Start()
+    {
+		// Initially update evolution buttons' text
+		UpdateEvolutionText(Player1.evolution.GetEvolutionText(0), 0, 0);
+		UpdateEvolutionText(Player1.evolution.GetEvolutionText(1), 0, 1);
+		UpdateEvolutionText(Player2.evolution.GetEvolutionText(0), 1, 0);
+		UpdateEvolutionText(Player2.evolution.GetEvolutionText(1), 1, 1);
+	}
 
     private void Update()
     {
@@ -61,6 +74,53 @@ public class GameUI : MonoBehaviour {
 	}
 
 
+	/*
+	 * On click methods for evolution buttons
+	 */
+
+	/// <summary>
+	/// Player 1 Evolution 1 on click method
+	/// </summary>
+	public void UpdatePlayer1Evolution1()
+	{
+		// TODO: Update player evolution data
+		Player1.evolution.Evolve();
+		UpdateEvolutionText(Player1.evolution.GetEvolutionText(0), 0, 0);
+		UpdateEvolutionText(Player1.evolution.GetEvolutionText(1), 0, 1);
+	}
+
+	/// <summary>
+	/// Player 1 Evolution 2 on click method
+	/// </summary>
+	public void UpdatePlayer1Evolution2()
+	{
+		Player1.evolution.Evolve();
+		UpdateEvolutionText(Player1.evolution.GetEvolutionText(1), 0, 1);
+		UpdateEvolutionText(Player1.evolution.GetEvolutionText(0), 0, 0);
+	}
+
+	/// <summary>
+	/// Player 2 Evolution 1 on click method
+	/// </summary>
+	public void UpdatePlayer2Evolution1()
+	{
+		// TODO: Update player evolution data
+		Player2.evolution.Evolve();
+		UpdateEvolutionText(Player1.evolution.GetEvolutionText(0), 1, 0);
+		UpdateEvolutionText(Player1.evolution.GetEvolutionText(1), 1, 1);
+	}
+
+	/// <summary>
+	/// Player 2 Evolution 2 on click method
+	/// </summary>
+	public void UpdatePlayer2Evolution2()
+	{
+		// TODO: Update player evolution data
+		Player2.evolution.Evolve();
+		UpdateEvolutionText(Player1.evolution.GetEvolutionText(1), 1, 1);
+		UpdateEvolutionText(Player1.evolution.GetEvolutionText(0), 1, 0);
+	}
+
 	//----------------------------------------------------------------------------------------------------------------------------------<
 
 
@@ -83,6 +143,9 @@ public class GameUI : MonoBehaviour {
 	/// <param name="player">(0 = player one), (1 = player two/AI)</param>
 	public void UpdateDNA(int count, int player) => (player == 0 ? Player1DNAText : Player2DNAText).text = "DNA: " + count.ToString();
 
+	public void UpdateEvolutionText(string text, int player, int evolution) => 
+		(player == 0 ? (evolution == 0 ? Player1Evolve1Text : Player1Evolve2Text) 
+		: (evolution == 0 ? Player2Evolve1Text : Player2Evolve2Text)).text = text;
 
 	//----------------------------------------------------------------------------------------------------------------------------------<
 

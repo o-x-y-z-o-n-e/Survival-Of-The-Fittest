@@ -2808,6 +2808,10 @@ MonoBehaviour:
   TimeDisplay: {fileID: 1771388593}
   Player1: {fileID: 92070639}
   Player2: {fileID: 503819697}
+  Player1Evolve1Text: {fileID: 1295728009}
+  Player1Evolve2Text: {fileID: 1588969210}
+  Player2Evolve1Text: {fileID: 1344423314}
+  Player2Evolve2Text: {fileID: 1783457597}
   Player1DNAText: {fileID: 381625889}
   Player2DNAText: {fileID: 1179124912}
 --- !u!1 &1014195695

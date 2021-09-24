@@ -11,8 +11,9 @@ public class Player : MonoBehaviour {
 
 	public Base Base;
 
-	// Total amount of DNA the player has gained
-	public int DNA;
+	public int DNA; // Total amount of DNA the player has gained
+
+	public Evolution evolution;
 
 
 	//----------------------------------------------------------------------------------------------------------------------------------<
@@ -30,9 +31,15 @@ public class Player : MonoBehaviour {
 	private void Start()
 	{
 		unitsAreMoving = true;
+		evolution = new Evolution();
 	}
 
-    public bool GetUnitsAreMoving()
+	private void OnDestroy()
+	{
+		evolution = null;
+	}
+
+	public bool GetUnitsAreMoving()
 	{
 		return unitsAreMoving;
 	}
