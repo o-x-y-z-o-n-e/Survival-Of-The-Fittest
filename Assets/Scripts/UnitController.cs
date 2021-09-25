@@ -53,10 +53,13 @@ public class UnitController : MonoBehaviour
 
         while (health > 0 && enemyController.GetHealth() > 0)
         {
+
             if (Time.time >= nextHitTime)
             {
                 enemyController.SetHealth(enemyController.GetHealth() - damage);
                 nextHitTime += attackSpeed;
+                //Shakes unit every attack
+                StartCoroutine(Shake());
             }
             yield return null;
         }
@@ -69,6 +72,30 @@ public class UnitController : MonoBehaviour
 
         unitOwner.SetUnitsAreMoving(true);
         yield return null;
+    }
+
+    //Causes sprite to shake - Used for recording purposes
+    IEnumerator Shake()
+    {
+        transform.position = transform.position + new Vector3(0, 0.1f);
+        transform.Rotate(0, 0, 10);
+        yield return new WaitForSeconds(0.01f);
+        transform.position = transform.position + new Vector3(0, -0.1f);
+        transform.Rotate(0, 0, -10);
+        yield return new WaitForSeconds(0.01f);
+        transform.position = transform.position + new Vector3(0, -0.1f);
+        transform.Rotate(0, 0, 10);
+        yield return new WaitForSeconds(0.01f);
+        transform.position = transform.position + new Vector3(0, 0.1f);
+        transform.Rotate(0, 0, -10);
+        yield return new WaitForSeconds(0.01f);
+        transform.position = transform.position + new Vector3(0, 0.1f);
+        transform.Rotate(0, 0, 10);
+        yield return new WaitForSeconds(0.01f);
+        transform.position = transform.position + new Vector3(0, -0.1f);
+        transform.Rotate(0, 0, -10);
+        yield return new WaitForSeconds(0.01f);
+
     }
 
 
@@ -102,4 +129,5 @@ public class UnitController : MonoBehaviour
     {
         this.speed = speed;
     }
+
 }
