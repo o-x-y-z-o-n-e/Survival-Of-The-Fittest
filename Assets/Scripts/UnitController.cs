@@ -7,6 +7,9 @@ using UnityEngine.UI;
 
 public class UnitController : MonoBehaviour
 {
+
+	public UnitType Type;
+
     [SerializeField] private Vector2 direction;
     [SerializeField] private int health;
     [SerializeField] private int damage;
@@ -99,35 +102,26 @@ public class UnitController : MonoBehaviour
     }
 
 
-    public int GetHealth()
-    {
-        return health;
-    }
+    public int GetHealth() => health;
+    public void SetHealth(int newHealthValue) => health = newHealthValue;
+    public Player GetUnitOwner() => unitOwner;
+    public void SetUnitOwner(Player owner) => unitOwner = owner;
+    public int GetUnitDamage() => damage;
+    public void SetUnitDamage(int damage) => this.damage = damage;
+    public float GetUnitSpeed() => speed;
+    public void SetUnitSpeed(float speed) => this.speed = speed;
+    
 
-    public void SetHealth(int newHealthValue)
-    {
-        health = newHealthValue;
-    }
+}
 
-    public Player GetUnitOwner() { return unitOwner; }
+public enum UnitType {
+	Worker,
+	Soldier,
+	Spitter,
+	Defender
+}
 
-    public void SetUnitOwner(Player owner)
-    {
-        unitOwner = owner;
-    }
 
-    public int GetUnitDamage() { return damage; }
-
-    public void SetUnitDamage(int damage)
-    {
-        this.damage = damage;
-    }
-
-    public float GetUnitSpeed() { return speed; }
-
-    public void SetUnitSpeed(float speed)
-    {
-        this.speed = speed;
-    }
+public struct UnitModifiers {
 
 }

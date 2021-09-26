@@ -46,10 +46,10 @@ public class GameUI : MonoBehaviour {
 
 	private void Start() {
 		// Initially update evolution buttons' text
-		UpdateEvolutionText(Game.Current.Player1.evolution.GetEvolutionText(0), 0, 0);
-		UpdateEvolutionText(Game.Current.Player1.evolution.GetEvolutionText(1), 0, 1);
-		UpdateEvolutionText(Game.Current.Player2.evolution.GetEvolutionText(0), 1, 0);
-		UpdateEvolutionText(Game.Current.Player2.evolution.GetEvolutionText(1), 1, 1);
+		UpdateEvolutionText(Game.Current.Player1.Evolutions.GetEvolutionText(0), 0, 0);
+		UpdateEvolutionText(Game.Current.Player1.Evolutions.GetEvolutionText(1), 0, 1);
+		UpdateEvolutionText(Game.Current.Player2.Evolutions.GetEvolutionText(0), 1, 0);
+		UpdateEvolutionText(Game.Current.Player2.Evolutions.GetEvolutionText(1), 1, 1);
 	}
 
 
@@ -165,7 +165,7 @@ public class GameUI : MonoBehaviour {
 	/// Is called by Evolution button click event
 	/// </summary>
 	/// <param name="evo"></param>
-	public void OnPlayer1EvolutionClick(int option) => Game.Current.Player1.evolution.Evolve(option);
+	public void OnPlayer1EvolutionClick(int option) => Game.Current.Player1.Evolutions.Evolve(option);
 
 
 	//----------------------------------------------------------------------------------------------------------------------------------<
@@ -175,7 +175,7 @@ public class GameUI : MonoBehaviour {
 	/// Is called by Evolution button click event
 	/// </summary>
 	/// <param name="evo"></param>
-	public void OnPlayer2EvolutionClick(int option) => Game.Current.Player2.evolution.Evolve(option);
+	public void OnPlayer2EvolutionClick(int option) => Game.Current.Player2.Evolutions.Evolve(option);
 
 
 	//----------------------------------------------------------------------------------------------------------------------------------<

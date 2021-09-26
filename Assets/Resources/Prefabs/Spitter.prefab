@@ -186,10 +186,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2201412021323544027}
+  - component: {fileID: 3347381172289257715}
   - component: {fileID: 2062593399770612411}
   - component: {fileID: 8732725655899721737}
   - component: {fileID: 1623760112398397303}
-  - component: {fileID: 3347381172289257715}
   m_Layer: 0
   m_Name: Spitter
   m_TagString: PlayerUnit
@@ -212,6 +212,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3347381172289257715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7766483010586190318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d24ef8238f3e8624bac14305928191ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Type: 2
+  direction: {x: -1, y: 0}
+  health: 55
+  damage: 20
+  speed: 0.005
+  attackSpeed: 1
+  DNA: 200
+  unitOwner: {fileID: 0}
 --- !u!212 &2062593399770612411
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -309,22 +329,3 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.4, y: 0.7}
   m_EdgeRadius: 0
---- !u!114 &3347381172289257715
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7766483010586190318}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d24ef8238f3e8624bac14305928191ec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  direction: {x: -1, y: 0}
-  health: 55
-  damage: 20
-  speed: 0.005
-  attackSpeed: 1
-  DNA: 200
-  unitOwner: {fileID: 0}

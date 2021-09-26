@@ -13,9 +13,9 @@ public class Player : MonoBehaviour {
 
 	public int DNA; // Total amount of DNA the player has gained
 
-	public Evolution evolution;
+	public Evolution Evolutions;
 
-	public int playerID;
+	public int PlayerID;
 
 
 	//----------------------------------------------------------------------------------------------------------------------------------<
@@ -33,12 +33,12 @@ public class Player : MonoBehaviour {
 	private void Awake()
 	{
 		unitsAreMoving = true;
-		evolution = new Evolution(this);
+		Evolutions = new Evolution(this);
 	}
 
 	private void OnDestroy()
 	{
-		evolution = null;
+		Evolutions = null;
 	}
 
 	public bool GetUnitsAreMoving()
@@ -55,7 +55,7 @@ public class Player : MonoBehaviour {
 	public void AddDNA(int amount) {
 		DNA += amount;
 
-		Game.Current.UI.UpdateDNA(DNA, playerID);
+		Game.Current.UI.UpdateDNA(DNA, PlayerID);
 	}
 
 }

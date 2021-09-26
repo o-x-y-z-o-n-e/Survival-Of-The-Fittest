@@ -15,7 +15,8 @@ public class Game : MonoBehaviour {
 	public Player Player1;		//Main person who is playing.
 	public Player Player2;      //Used for AI or for second RL player.
 	[Space]
-	public Transform UnitContainer;
+	public Transform Player1Units;
+	public Transform Player2Units;
 
 
 	//----------------------------------------------------------------------------------------------------------------------------------<
@@ -69,4 +70,10 @@ public class Game : MonoBehaviour {
 		instance = null;
 		SceneManager.LoadScene(0);
 	}
+
+
+	//----------------------------------------------------------------------------------------------------------------------------------<
+
+
+	public UnitController[] GetExistingUnits(int playerID) => (playerID == 0 ? Player1Units : Player2Units).GetComponentsInChildren<UnitController>();
 }

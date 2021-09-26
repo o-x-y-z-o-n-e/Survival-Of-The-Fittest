@@ -12,13 +12,13 @@ public class Evolution {
 		DATA = new EvolveData[] {
 			new EvolveData(400,
 				"Spitters now hit 2 enemies but have 50% damage",
-				func => { IncreaseSpreadAndDecreaseDamage("Spitter"); return 0; },
+				func => { IncreaseSpreadAndDecreaseDamage(UnitType.Spitter); return 0; },
 				"Spitters now heal the front ally for 10% of damage dealt",
 				func => { return 0; }),
 
 			new EvolveData(400,
 				"Soldiers run 5% faster",
-				func => { IncreaseUnitSpeed(0.05f, "Soldier"); return 0; },
+				func => { IncreaseUnitSpeed(0.05f, UnitType.Soldier); return 0; },
 				"Defenders have 5% more hp",
 				func => { return 0; }),
 
@@ -92,8 +92,8 @@ public class Evolution {
 		else if (option == 1) DATA[evolutionCounter].Option2Func(0);
 
 
-		Game.Current.UI.UpdateEvolutionText(GetEvolutionText(0), player.playerID, 0);
-		Game.Current.UI.UpdateEvolutionText(GetEvolutionText(1), player.playerID, 1);
+		Game.Current.UI.UpdateEvolutionText(GetEvolutionText(0), player.PlayerID, 0);
+		Game.Current.UI.UpdateEvolutionText(GetEvolutionText(1), player.PlayerID, 1);
     }
 
 
@@ -115,14 +115,14 @@ public class Evolution {
 	/// <summary>
 	/// Decreases given units' damage and increases range
 	/// </summary>
-	/// <param name="player"></param>
-	private void IncreaseSpreadAndDecreaseDamage(string unitName)
+	/// <param name="unitType"></param>
+	private void IncreaseSpreadAndDecreaseDamage(UnitType unitType)
     {
         // TODO: make unit hit 2 enimies
 
         foreach (UnitController unit in Units)
         {
-            if (unit.name.Contains(unitName) && unit.GetUnitOwner().playerID == player.playerID)
+            if (unit.Type == unitType && unit.GetUnitOwner().PlayerID == player.PlayerID)
             {
                 unit.SetUnitDamage(unit.GetUnitDamage() / 2);
             }
@@ -137,12 +137,12 @@ public class Evolution {
 	/// Increases given units' speed
 	/// </summary>
 	/// <param name="speedIncrease">(percentage in decimal)</param>
-	/// <param name="unitName"></param>
-	private void IncreaseUnitSpeed(float speedIncrease, string unitName)
+	/// <param name="unitType"></param>
+	private void IncreaseUnitSpeed(float speedIncrease, UnitType unitType)
     {
         foreach (UnitController unit in Units)
         {
-            if (unit.name.Contains(unitName) && unit.GetUnitOwner().playerID == player.playerID)
+            if (unit.Type == unitType && unit.GetUnitOwner().PlayerID == player.PlayerID)
             {
                 unit.SetUnitSpeed(unit.GetUnitSpeed() * 1.05f);
             }

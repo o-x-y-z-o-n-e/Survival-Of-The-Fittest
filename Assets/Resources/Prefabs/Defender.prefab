@@ -87,10 +87,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3765004461740621139}
+  - component: {fileID: -8879041841179326341}
   - component: {fileID: 3903717942430812723}
   - component: {fileID: -3205480213691819903}
   - component: {fileID: -4883091436067051521}
-  - component: {fileID: -8879041841179326341}
   m_Layer: 0
   m_Name: Defender
   m_TagString: PlayerUnit
@@ -113,6 +113,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-8879041841179326341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4718382814567098726}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d24ef8238f3e8624bac14305928191ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Type: 3
+  direction: {x: -1, y: 0}
+  health: 120
+  damage: 40
+  speed: 0.005
+  attackSpeed: 2
+  DNA: 200
+  unitOwner: {fileID: 0}
 --- !u!212 &3903717942430812723
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -210,25 +230,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2, y: 1}
   m_EdgeRadius: 0
---- !u!114 &-8879041841179326341
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4718382814567098726}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d24ef8238f3e8624bac14305928191ec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  direction: {x: -1, y: 0}
-  health: 120
-  damage: 40
-  speed: 0.005
-  attackSpeed: 2
-  DNA: 200
-  unitOwner: {fileID: 0}
 --- !u!1 &7521253556881885881
 GameObject:
   m_ObjectHideFlags: 0
