@@ -114,6 +114,8 @@ public class UnitController : MonoBehaviour
 
 }
 
+
+
 public enum UnitType {
 	Worker,
 	Soldier,
@@ -122,8 +124,19 @@ public enum UnitType {
 }
 
 
-public struct UnitModifiers {
 
-	public float MoveSpeed;
+[System.Serializable]
+public class UnitModifiers {
+
+	[Header("General")]
+	public float MoveSpeed = 1;
+	public float Damage = 1;
+	public float Health = 1;
+	public float AttackSpeed = 1;
+
+	[Space]
+
+	[Header("For Spitters Only")]
+	public bool HitTwoEnemies;
 
 }

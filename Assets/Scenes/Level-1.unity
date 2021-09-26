@@ -391,6 +391,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Base: {fileID: 700282125}
   DNA: 0
+  WorkerModifiers:
+    MoveSpeed: 1
+    Damage: 1
+    Health: 1
+    AttackSpeed: 1
+    HitTwoEnemies: 0
+  SoldierModifiers:
+    MoveSpeed: 1
+    Damage: 1
+    Health: 1
+    AttackSpeed: 1
+    HitTwoEnemies: 0
+  SpitterModifiers:
+    MoveSpeed: 1
+    Damage: 1
+    Health: 1
+    AttackSpeed: 1
+    HitTwoEnemies: 0
+  DefenderModifiers:
+    MoveSpeed: 1
+    Damage: 1
+    Health: 1
+    AttackSpeed: 1
+    HitTwoEnemies: 0
   PlayerID: 0
 --- !u!1 &95904311
 GameObject:
@@ -2168,6 +2192,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Base: {fileID: 258391092}
   DNA: 0
+  WorkerModifiers:
+    MoveSpeed: 1
+    Damage: 1
+    Health: 1
+    AttackSpeed: 1
+    HitTwoEnemies: 0
+  SoldierModifiers:
+    MoveSpeed: 1
+    Damage: 1
+    Health: 1
+    AttackSpeed: 1
+    HitTwoEnemies: 0
+  SpitterModifiers:
+    MoveSpeed: 1
+    Damage: 1
+    Health: 1
+    AttackSpeed: 1
+    HitTwoEnemies: 0
+  DefenderModifiers:
+    MoveSpeed: 1
+    Damage: 1
+    Health: 1
+    AttackSpeed: 1
+    HitTwoEnemies: 0
   PlayerID: 1
 --- !u!1 &636237927
 GameObject:

@@ -49,7 +49,7 @@ public class Evolution {
 			new EvolveData(400,
 				"Workers have extra speed",
 				func => { return 0; },
-				"When a defender dies, it heals 10% of its hp as damage to the front 2 enemies",
+				"When a defender dies, it deals 10% of its max hp as damage to the front 2 enemies",
 				func => { return 0; }),
 		};
 	}
@@ -138,17 +138,32 @@ public class Evolution {
 	/// </summary>
 	/// <param name="speedIncrease">(percentage in decimal)</param>
 	/// <param name="unitType"></param>
-	private void IncreaseUnitSpeed(float speedIncrease, UnitType unitType)
-    {
-        foreach (UnitController unit in Units)
-        {
-            if (unit.Type == unitType && unit.GetUnitOwner().PlayerID == player.PlayerID)
-            {
-                unit.SetUnitSpeed(unit.GetUnitSpeed() * 1.05f);
-            }
-        }
-    }
+	private void IncreaseUnitSpeed(float speedIncrease, UnitType unitType) {
+		/*
+        foreach (UnitController unit in Game.Current.GetExistingUnits(player.PlayerID)) {
+            if (unit.Type == unitType) unit.SetUnitSpeed(unit.GetUnitSpeed() * 1.05f);
+        }*/
 
+
+		switch(unitType) {
+			case UnitType.Worker: {
+				player.WorkerModifiers.MoveSpeed *= (1 + speedIncrease);
+				break;
+			}
+			case UnitType.Soldier: {
+				player.SoldierModifiers.MoveSpeed *= (1 + speedIncrease);
+				break;
+			}
+			case UnitType.Spitter: {
+				player.SpitterModifiers.MoveSpeed *= (1 + speedIncrease);
+				break;
+			}
+			case UnitType.Defender: {
+				player.DefenderModifiers.MoveSpeed *= (1 + speedIncrease);
+				break;
+			}
+		}
+    }
 
 
 	//----------------------------------------------------------------------------------------------------------------------------------<

@@ -18,10 +18,10 @@ public class Player : MonoBehaviour {
 	[Space]
 
 	public Evolution Evolutions;
-	public UnitModifiers WorkerModifiers;
-	public UnitModifiers SoldierModifiers;
-	public UnitModifiers SpitterModifiers;
-	public UnitModifiers DefenderModifiers;
+	public UnitModifiers WorkerModifiers = new UnitModifiers();
+	public UnitModifiers SoldierModifiers = new UnitModifiers();
+	public UnitModifiers SpitterModifiers = new UnitModifiers();
+	public UnitModifiers DefenderModifiers = new UnitModifiers();
 
 	[Space]
 
