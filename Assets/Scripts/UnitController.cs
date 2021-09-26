@@ -124,4 +124,6 @@ public enum UnitType {
 
 public struct UnitModifiers {
 
+	public float MoveSpeed;
+
 }

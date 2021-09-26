@@ -11,9 +11,19 @@ public class Player : MonoBehaviour {
 
 	public Base Base;
 
+	[Space]
+
 	public int DNA; // Total amount of DNA the player has gained
 
+	[Space]
+
 	public Evolution Evolutions;
+	public UnitModifiers WorkerModifiers;
+	public UnitModifiers SoldierModifiers;
+	public UnitModifiers SpitterModifiers;
+	public UnitModifiers DefenderModifiers;
+
+	[Space]
 
 	public int PlayerID;
 

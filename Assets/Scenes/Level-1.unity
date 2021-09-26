@@ -391,7 +391,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Base: {fileID: 700282125}
   DNA: 0
-  playerID: 0
+  PlayerID: 0
 --- !u!1 &95904311
 GameObject:
   m_ObjectHideFlags: 0
@@ -2168,7 +2168,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Base: {fileID: 258391092}
   DNA: 0
-  playerID: 1
+  PlayerID: 1
 --- !u!1 &636237927
 GameObject:
   m_ObjectHideFlags: 0
@@ -6281,7 +6281,7 @@ Transform:
   - {fileID: 703806808}
   - {fileID: 2018199229}
   m_Father: {fileID: 2104212282}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1877730300 stripped
 Transform:
@@ -6589,7 +6589,7 @@ Transform:
   - {fileID: 242123112}
   - {fileID: 481120515}
   m_Father: {fileID: 2104212282}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1949748732
 PrefabInstance:
@@ -6962,7 +6962,8 @@ MonoBehaviour:
   UI: {fileID: 966588221}
   Player1: {fileID: 92070639}
   Player2: {fileID: 503819697}
-  UnitContainer: {fileID: 2104212282}
+  Player1Units: {fileID: 1942696556}
+  Player2Units: {fileID: 1847397458}
 --- !u!4 &2027026344
 Transform:
   m_ObjectHideFlags: 0
@@ -7233,8 +7234,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1847397458}
   - {fileID: 1942696556}
+  - {fileID: 1847397458}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
