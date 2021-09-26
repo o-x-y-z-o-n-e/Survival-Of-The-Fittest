@@ -78,4 +78,25 @@ public class Player : MonoBehaviour {
 		Game.Current.UI.UpdateDNA(DNA, PlayerID);
 	}
 
+
+	//----------------------------------------------------------------------------------------------------------------------------------<
+
+
+	public UnitModifiers GetModifierReference(UnitType type) {
+		switch(type) {
+			case UnitType.Worker: {
+				return WorkerModifiers;
+			}
+			case UnitType.Soldier: {
+				return SoldierModifiers;
+			}
+			case UnitType.Spitter: {
+				return SpitterModifiers;
+			}
+			case UnitType.Defender: {
+				return DefenderModifiers;
+			}
+		}
+		return null;
+	}
 }

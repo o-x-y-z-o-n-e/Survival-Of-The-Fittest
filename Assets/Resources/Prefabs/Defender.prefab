@@ -89,7 +89,6 @@ GameObject:
   - component: {fileID: 3765004461740621139}
   - component: {fileID: -8879041841179326341}
   - component: {fileID: 3903717942430812723}
-  - component: {fileID: -3205480213691819903}
   - component: {fileID: -4883091436067051521}
   m_Layer: 0
   m_Name: Defender
@@ -126,12 +125,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Type: 3
-  direction: {x: -1, y: 0}
+  direction: 1
   health: 120
   damage: 40
-  speed: 0.005
+  moveSpeed: 1
   attackSpeed: 2
-  DNA: 200
+  giveDNA: 10
   unitOwner: {fileID: 0}
 --- !u!212 &3903717942430812723
 SpriteRenderer:
@@ -183,27 +182,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!50 &-3205480213691819903
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4718382814567098726}
-  m_BodyType: 1
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!61 &-4883091436067051521
 BoxCollider2D:
   m_ObjectHideFlags: 0

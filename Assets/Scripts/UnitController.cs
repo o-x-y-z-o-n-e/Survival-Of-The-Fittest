@@ -5,30 +5,39 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-public class UnitController : MonoBehaviour
-{
+public class UnitController : MonoBehaviour {
+
+	const float ATTACK_EXTEND = 0.2f;
+	const float FRIENDLY_OVERLAP = 0.0f;
 
 	public UnitType Type;
 
-    [SerializeField] private Vector2 direction;
+    [SerializeField] private int direction;
     [SerializeField] private int health;
     [SerializeField] private int damage;
-    [SerializeField] private float speed;
+    [SerializeField] private float moveSpeed;
     [SerializeField] private float attackSpeed;
-    [SerializeField] private int DNA; // how much DNA the unit will give when killed
+    [SerializeField] private int giveDNA; // how much DNA the unit will give when killed
 
     [SerializeField] private Player unitOwner; //this will not be a serialized field once unit owners are assigned at time of prefab instantiation.
 
-    private Text healthText;
+	new BoxCollider2D collider;
+    Text healthText;
+	UnitModifiers modifiers;
+
+	bool stopMoving;
+
+	UnitController frontUnit;
 
 
 	//----------------------------------------------------------------------------------------------------------------------------------<
 
 
 	// Start is called before the first frame update
-	void Start()
-    {
+	void Awake() {
+		collider = GetComponent<BoxCollider2D>();
         healthText = GetComponentInChildren<Text>();
+		modifiers = unitOwner.GetModifierReference(Type);
     }
 
 
@@ -36,15 +45,40 @@ public class UnitController : MonoBehaviour
 
 
 	// Update is called once per frame
-	void Update()
-    {
-        if (unitOwner.GetUnitsAreMoving())
-        {
-            transform.position = (Vector2)transform.position + new Vector2(direction.x * speed, direction.y * speed);
-        }
+	void Update() {
+		RaycastHit2D hit;
+		Vector3 origin = transform.localPosition + (Vector3.right * collider.size.x * direction);
+		hit = Physics2D.Raycast(origin, Vector3.right * direction, ATTACK_EXTEND);
 
-        healthText.text = health.ToString();
-    }
+		if (hit.collider != null) {
+			if (frontUnit == null) {
+				UnitController unit = hit.collider.GetComponent<UnitController>();
+				if (unit != null) frontUnit = unit;
+			} else {
+				if (frontUnit.gameObject.GetInstanceID() != hit.collider.gameObject.GetInstanceID()) {
+					UnitController unit = hit.collider.GetComponent<UnitController>();
+					if (unit != null) frontUnit = unit;
+				}
+			}
+		}
+
+
+		if (frontUnit != null) {
+			if (frontUnit.GetPlayerID() != unitOwner.PlayerID) stopMoving = true;
+			else {
+				float p = (frontUnit.GetWidth() + GetWidth())/2;
+				stopMoving = (Mathf.Abs(frontUnit.transform.localPosition.x - transform.localPosition.x) <= p - FRIENDLY_OVERLAP);
+			}
+		} else stopMoving = false;
+	}
+
+
+	//----------------------------------------------------------------------------------------------------------------------------------<
+
+
+	void FixedUpdate() {
+		if (!stopMoving) transform.Translate(moveSpeed * modifiers.MoveSpeed * direction * Time.fixedDeltaTime, 0, 0);
+	}
 
 
 	//----------------------------------------------------------------------------------------------------------------------------------<
@@ -55,8 +89,8 @@ public class UnitController : MonoBehaviour
         if (collision.gameObject.tag == "PlayerUnit")
         {
             Debug.Log(gameObject.name + " Collided with " + collision.name);
-            unitOwner.SetUnitsAreMoving(false);
-            StartCoroutine("AttackEnemy", collision);
+            //unitOwner.SetUnitsAreMoving(false);
+            //StartCoroutine("AttackEnemy", collision);
         }
     }
 
@@ -85,7 +119,7 @@ public class UnitController : MonoBehaviour
         if (health <= 0)
         {
             Destroy(gameObject);
-            unitOwner.AddDNA(gameObject.GetComponent<UnitController>().DNA);
+            unitOwner.AddDNA(gameObject.GetComponent<UnitController>().giveDNA);
         }
 
         unitOwner.SetUnitsAreMoving(true);
@@ -124,15 +158,54 @@ public class UnitController : MonoBehaviour
 	//----------------------------------------------------------------------------------------------------------------------------------<
 
 
+	public void TakeDamage(int damage, UnitController sender) {
+		if (health <= 0) return;
+
+		health -= damage;
+
+		if (health <= 0) {
+			sender.GiveDNA(giveDNA);
+			Die();
+			return;
+		}
+
+		healthText.text = health.ToString();
+	}
+
+
+	//----------------------------------------------------------------------------------------------------------------------------------<
+
+
+	public void GiveDNA(int amount) {
+
+	}
+
+
+	//----------------------------------------------------------------------------------------------------------------------------------<
+
+
+	void Die() {
+		health = 0;
+
+		healthText.gameObject.SetActive(false);
+
+		Destroy(gameObject);
+	}
+
+
+	//----------------------------------------------------------------------------------------------------------------------------------<
+
+
 	public int GetHealth() => health;
     public void SetHealth(int newHealthValue) => health = newHealthValue;
     public Player GetUnitOwner() => unitOwner;
     public void SetUnitOwner(Player owner) => unitOwner = owner;
     public int GetUnitDamage() => damage;
     public void SetUnitDamage(int damage) => this.damage = damage;
-    public float GetUnitSpeed() => speed;
-    public void SetUnitSpeed(float speed) => this.speed = speed;
-    
+    public float GetUnitSpeed() => moveSpeed;
+    public void SetUnitSpeed(float speed) => this.moveSpeed = speed;
+	public int GetPlayerID() => unitOwner.PlayerID;
+	public float GetWidth() => collider.size.x;
 
 }
 

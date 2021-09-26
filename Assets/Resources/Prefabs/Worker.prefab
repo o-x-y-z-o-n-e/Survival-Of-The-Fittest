@@ -89,7 +89,6 @@ GameObject:
   - component: {fileID: 3597006446452064668}
   - component: {fileID: 77572396989723828}
   - component: {fileID: 3744764097476425468}
-  - component: {fileID: 6221442959242732622}
   - component: {fileID: 4174590460404636464}
   m_Layer: 0
   m_Name: Worker
@@ -126,12 +125,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Type: 0
-  direction: {x: -1, y: 0}
+  direction: 1
   health: 20
   damage: 5
-  speed: 0.005
+  moveSpeed: 1
   attackSpeed: 0.6
-  DNA: 200
+  giveDNA: 10
   unitOwner: {fileID: 0}
 --- !u!212 &3744764097476425468
 SpriteRenderer:
@@ -183,27 +182,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!50 &6221442959242732622
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4949396589753652649}
-  m_BodyType: 1
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!61 &4174590460404636464
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -228,7 +206,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.8, y: 0.4}
+  m_Size: {x: 0.8, y: 1}
   m_EdgeRadius: 0
 --- !u!1 &7904949364991800950
 GameObject:
