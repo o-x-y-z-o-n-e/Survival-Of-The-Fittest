@@ -92,7 +92,8 @@ public class Evolution {
 		else if (option == 1) DATA[evolutionCounter].Option2Func(0);
 
 
-		Game.Current.UI.UpdateEvolutionText(GetEvolutionText(option), player.playerID, option);
+		Game.Current.UI.UpdateEvolutionText(GetEvolutionText(0), player.playerID, 0);
+		Game.Current.UI.UpdateEvolutionText(GetEvolutionText(1), player.playerID, 1);
     }
 
 
