@@ -33,7 +33,7 @@ public class Player : MonoBehaviour {
 	private void Awake()
 	{
 		unitsAreMoving = true;
-		evolution = new Evolution();
+		evolution = new Evolution(this);
 	}
 
 	private void OnDestroy()
