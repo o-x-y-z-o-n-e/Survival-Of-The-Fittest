@@ -12,6 +12,7 @@ public class GameUI : MonoBehaviour {
 	[Header("Screens/Menus")]
 	public RectTransform FinishScreen;
 	public RectTransform HUD;
+	public RectTransform PauseScreen;
 
 	[Space]
 
