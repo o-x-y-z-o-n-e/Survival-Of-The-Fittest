@@ -21,14 +21,22 @@ public class UnitController : MonoBehaviour
 
     private Text healthText;
 
-    // Start is called before the first frame update
-    void Start()
+
+	//----------------------------------------------------------------------------------------------------------------------------------<
+
+
+	// Start is called before the first frame update
+	void Start()
     {
         healthText = GetComponentInChildren<Text>();
     }
 
-    // Update is called once per frame
-    void Update()
+
+	//----------------------------------------------------------------------------------------------------------------------------------<
+
+
+	// Update is called once per frame
+	void Update()
     {
         if (unitOwner.GetUnitsAreMoving())
         {
@@ -39,7 +47,10 @@ public class UnitController : MonoBehaviour
     }
 
 
-    private void OnTriggerEnter2D(Collider2D collision)
+	//----------------------------------------------------------------------------------------------------------------------------------<
+
+
+	private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "PlayerUnit")
         {
@@ -49,7 +60,11 @@ public class UnitController : MonoBehaviour
         }
     }
 
-    private IEnumerator AttackEnemy(Collider2D collision)
+
+	//----------------------------------------------------------------------------------------------------------------------------------<
+
+
+	private IEnumerator AttackEnemy(Collider2D collision)
     {
         UnitController enemyController = collision.GetComponent<UnitController>();
         float nextHitTime = Time.time;
@@ -77,8 +92,12 @@ public class UnitController : MonoBehaviour
         yield return null;
     }
 
-    //Causes sprite to shake - Used for recording purposes
-    IEnumerator Shake()
+
+	//----------------------------------------------------------------------------------------------------------------------------------<
+
+
+	//Causes sprite to shake - Used for recording purposes
+	IEnumerator Shake()
     {
         transform.position = transform.position + new Vector3(0, 0.1f);
         transform.Rotate(0, 0, 10);
@@ -102,7 +121,10 @@ public class UnitController : MonoBehaviour
     }
 
 
-    public int GetHealth() => health;
+	//----------------------------------------------------------------------------------------------------------------------------------<
+
+
+	public int GetHealth() => health;
     public void SetHealth(int newHealthValue) => health = newHealthValue;
     public Player GetUnitOwner() => unitOwner;
     public void SetUnitOwner(Player owner) => unitOwner = owner;

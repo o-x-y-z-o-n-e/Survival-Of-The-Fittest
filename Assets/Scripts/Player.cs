@@ -36,30 +36,40 @@ public class Player : MonoBehaviour {
 
 	//----------------------------------------------------------------------------------------------------------------------------------<
 
+
 	private bool unitsAreMoving;
 
 
+	//----------------------------------------------------------------------------------------------------------------------------------<
 
-	private void Awake()
-	{
+
+	private void Awake() {
 		unitsAreMoving = true;
 		Evolutions = new Evolution(this);
 	}
 
-	private void OnDestroy()
-	{
+
+	//----------------------------------------------------------------------------------------------------------------------------------<
+
+
+	private void OnDestroy() {
 		Evolutions = null;
 	}
 
-	public bool GetUnitsAreMoving()
-	{
-		return unitsAreMoving;
-	}
 
-	public void SetUnitsAreMoving(bool a)
-	{
-		unitsAreMoving = a;
-	}
+	//----------------------------------------------------------------------------------------------------------------------------------<
+
+
+	public bool GetUnitsAreMoving() => unitsAreMoving;
+
+
+	//----------------------------------------------------------------------------------------------------------------------------------<
+
+
+	public void SetUnitsAreMoving(bool a) => unitsAreMoving = a;
+
+
+	//----------------------------------------------------------------------------------------------------------------------------------<
 
 
 	public void AddDNA(int amount) {

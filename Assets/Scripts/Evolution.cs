@@ -55,13 +55,13 @@ public class Evolution {
 	}
 
 
+	//----------------------------------------------------------------------------------------------------------------------------------<
+
 
 	private Player player;
 
     // How many evolutions the player has gone through so far
     private int evolutionCounter = 0;
-
-	private UnitController[] Units;
 
 
 	//----------------------------------------------------------------------------------------------------------------------------------<
@@ -69,8 +69,6 @@ public class Evolution {
 
 	public Evolution(Player player) {
 		this.player = player;
-        Units = GameObject.FindObjectsOfType<UnitController>();
-
 		AssignData();
     }
 
@@ -120,7 +118,7 @@ public class Evolution {
     {
         // TODO: make unit hit 2 enimies
 
-        foreach (UnitController unit in Units)
+        foreach (UnitController unit in Game.Current.GetExistingUnits(player.PlayerID))
         {
             if (unit.Type == unitType && unit.GetUnitOwner().PlayerID == player.PlayerID)
             {
@@ -139,7 +137,8 @@ public class Evolution {
 	/// <param name="speedIncrease">(percentage in decimal)</param>
 	/// <param name="unitType"></param>
 	private void IncreaseUnitSpeed(float speedIncrease, UnitType unitType) {
-		/*
+
+		/* Instead of using a function, maybe change modifiers. Then the units use the modifier values in realtime. This way, current & future units are dealt with.
         foreach (UnitController unit in Game.Current.GetExistingUnits(player.PlayerID)) {
             if (unit.Type == unitType) unit.SetUnitSpeed(unit.GetUnitSpeed() * 1.05f);
         }*/

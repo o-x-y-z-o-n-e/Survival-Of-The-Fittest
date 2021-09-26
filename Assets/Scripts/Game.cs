@@ -75,5 +75,10 @@ public class Game : MonoBehaviour {
 	//----------------------------------------------------------------------------------------------------------------------------------<
 
 
+	/// <summary>
+	/// Returns a list of units that are currently spawned and belong to specified player.
+	/// </summary>
+	/// <param name="playerID">(0 = Player 1), (1 = Player 2/AI)</param>
+	/// <returns></returns>
 	public UnitController[] GetExistingUnits(int playerID) => (playerID == 0 ? Player1Units : Player2Units).GetComponentsInChildren<UnitController>();
 }
