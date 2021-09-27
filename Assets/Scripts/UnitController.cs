@@ -43,16 +43,14 @@ public class UnitController : MonoBehaviour {
 		modifiers = unitOwner.GetModifierReference(Type);
 
 		health = (int)(baseHealth * modifiers.Health);
-
 		healthText.text = health.ToString();
     }
 
+    //----------------------------------------------------------------------------------------------------------------------------------<
 
-	//----------------------------------------------------------------------------------------------------------------------------------<
 
-
-	// Update is called once per frame
-	void Update() {
+    // Update is called once per frame
+    void Update() {
 		if (Game.Current.IsFinished) return;
 
 		CheckCollision();
@@ -292,6 +290,7 @@ public class UnitModifiers {
 	public float Damage = 1;
 	public float Health = 1;
 	public float AttackSpeed = 1;
+	public float GiveDNA = 1;
 
 	[Space]
 

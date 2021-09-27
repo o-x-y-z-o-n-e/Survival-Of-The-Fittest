@@ -12,7 +12,7 @@ public class Evolution {
 		DATA = new EvolveData[] {
 			new EvolveData(400,
 				"Spitters now hit 2 enemies but have 50% damage",
-				func => { IncreaseSpreadAndDecreaseDamage(UnitType.Spitter); return 0; },
+				func => { ModifyUnit(UnitType.Spitter, damage:-0.5f, ranged:true); ; return 0; },
 				"Spitters now heal the front ally for 10% of damage dealt",
 				func => { return 0; }),
 
@@ -25,14 +25,14 @@ public class Evolution {
 			new EvolveData(400,
 				"DNA generation is 5% faster",
 				func => { return 0; },
-				"Soldiers give DNA on kill",
-				func => { return 0; }),
+				"Soldiers give extra DNA on kill",
+				func => { ModifyUnit(UnitType.Soldier, dna:100); return 0; }),
 
 			new EvolveData(400,
 				"Defenders have 20% damage reduction",
 				func => { ModifyUnit(UnitType.Defender, damage:-0.2f); return 0; },
 				"Your hive restores 10% hp",
-				func => { return 0; }),
+				func => { player.Base.Health *= 1.1f; return 0; }),
 
 			new EvolveData(400,
 				"Enemies that attack your hive take 5% damage per hit",
@@ -50,6 +50,11 @@ public class Evolution {
 				"Workers have 10% extra speed",
 				func => { ModifyUnit(UnitType.Worker, moveSpeed:0.1f); return 0; },
 				"When a defender dies, it deals 10% of its max hp as damage to the front 2 enemies",
+				func => { return 0; }),
+			new EvolveData(0,
+				"Evolution tree complete",
+				func => { return 0; },
+				"Evolution tree complete",
 				func => { return 0; }),
 		};
 	}
@@ -111,28 +116,8 @@ public class Evolution {
 
 	//----------------------------------------------------------------------------------------------------------------------------------<
 
-
-	/// <summary>
-	/// Decreases given units' damage and increases range
-	/// </summary>
-	/// <param name="unitType"></param>
-	private void IncreaseSpreadAndDecreaseDamage(UnitType unitType)
-    {
-        // TODO: make unit hit 2 enimies
-
-        foreach (UnitController unit in Game.Current.GetExistingUnits(player.PlayerID))
-        {
-            if (unit.Type == unitType && unit.GetUnitOwner().PlayerID == player.PlayerID)
-            {
-                unit.SetUnitDamage(unit.GetUnitDamage() / 2);
-            }
-        }
-    }
-
-	//----------------------------------------------------------------------------------------------------------------------------------<
-
 	private void ModifyUnit(UnitType unitType, float moveSpeed = 1, float attackSpeed = 1, 
-		float damage = 1, float health = 1, bool ranged = false)
+		float damage = 1, float health = 1, int dna=0, bool ranged = false)
     {
 		switch(unitType)
         {
@@ -141,6 +126,7 @@ public class Evolution {
 				player.WorkerModifiers.AttackSpeed *= (1 + attackSpeed);
 				player.WorkerModifiers.Damage *= (1 + damage);
 				player.WorkerModifiers.Health *= (1 + health);
+				player.WorkerModifiers.GiveDNA += dna;
 				player.WorkerModifiers.HitTwoEnemies = ranged;
 				break;
 			case UnitType.Soldier:
@@ -148,6 +134,7 @@ public class Evolution {
 				player.SoldierModifiers.AttackSpeed *= (1 + attackSpeed);
 				player.SoldierModifiers.Damage *= (1 + damage);
 				player.SoldierModifiers.Health *= (1 + health);
+				player.SoldierModifiers.GiveDNA += dna;
 				player.SoldierModifiers.HitTwoEnemies = ranged;
 				break;
 			case UnitType.Spitter:
@@ -155,6 +142,7 @@ public class Evolution {
 				player.SpitterModifiers.AttackSpeed *= (1 + attackSpeed);
 				player.SpitterModifiers.Damage *= (1 + damage);
 				player.SpitterModifiers.Health *= (1 + health);
+				player.SpitterModifiers.GiveDNA += dna;
 				player.SpitterModifiers.HitTwoEnemies = ranged;
 				break;
 			case UnitType.Defender:
@@ -162,6 +150,7 @@ public class Evolution {
 				player.DefenderModifiers.AttackSpeed *= (1 + attackSpeed);
 				player.DefenderModifiers.Damage *= (1 + damage);
 				player.DefenderModifiers.Health *= (1 + health);
+				player.DefenderModifiers.GiveDNA += dna;
 				player.DefenderModifiers.HitTwoEnemies = ranged;
 				break;
 			case UnitType.All:
@@ -169,21 +158,25 @@ public class Evolution {
 				player.WorkerModifiers.AttackSpeed *= (1 + attackSpeed);
 				player.WorkerModifiers.Damage *= (1 + damage);
 				player.WorkerModifiers.Health *= (1 + health);
+				player.WorkerModifiers.GiveDNA += dna;
 				player.WorkerModifiers.HitTwoEnemies = ranged;
 				player.SoldierModifiers.MoveSpeed *= (1 + moveSpeed);
 				player.SoldierModifiers.AttackSpeed *= (1 + attackSpeed);
 				player.SoldierModifiers.Damage *= (1 + damage);
 				player.SoldierModifiers.Health *= (1 + health);
+				player.SoldierModifiers.GiveDNA += dna;
 				player.SoldierModifiers.HitTwoEnemies = ranged;
 				player.SpitterModifiers.MoveSpeed *= (1 + moveSpeed);
 				player.SpitterModifiers.AttackSpeed *= (1 + attackSpeed);
 				player.SpitterModifiers.Damage *= (1 + damage);
 				player.SpitterModifiers.Health *= (1 + health);
+				player.SpitterModifiers.GiveDNA += dna;
 				player.SpitterModifiers.HitTwoEnemies = ranged;
 				player.DefenderModifiers.MoveSpeed *= (1 + moveSpeed);
 				player.DefenderModifiers.AttackSpeed *= (1 + attackSpeed);
 				player.DefenderModifiers.Damage *= (1 + damage);
 				player.DefenderModifiers.Health *= (1 + health);
+				player.DefenderModifiers.GiveDNA += dna;
 				player.DefenderModifiers.HitTwoEnemies = ranged;
 				break;
 		}
