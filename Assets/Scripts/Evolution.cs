@@ -18,9 +18,9 @@ public class Evolution {
 
 			new EvolveData(400,
 				"Soldiers run 5% faster",
-				func => { IncreaseUnitSpeed(0.05f, UnitType.Soldier); return 0; },
+				func => { ModifyUnit(UnitType.Soldier, moveSpeed:0.05f); return 0; },
 				"Defenders have 5% more hp",
-				func => { return 0; }),
+				func => { ModifyUnit(UnitType.Defender, health:0.05f); return 0; }),
 
 			new EvolveData(400,
 				"DNA generation is 5% faster",
@@ -30,7 +30,7 @@ public class Evolution {
 
 			new EvolveData(400,
 				"Defenders have 20% damage reduction",
-				func => { return 0; },
+				func => { ModifyUnit(UnitType.Defender, damage:-0.2f); return 0; },
 				"Your hive restores 10% hp",
 				func => { return 0; }),
 
@@ -38,17 +38,17 @@ public class Evolution {
 				"Enemies that attack your hive take 5% damage per hit",
 				func => { return 0; },
 				"All units have 5% more hp",
-				func => { return 0; }),
+				func => { ModifyUnit(UnitType.All, health:0.05f); return 0; }),
 
 			new EvolveData(400,
 				"Soldiers have 50% extra damage, but 50% slower attack speed",
-				func => { return 0; },
+				func => { ModifyUnit(UnitType.Soldier, damage:0.5f, attackSpeed:-0.5f); return 0; },
 				"Spitters increase nearby units damage by 10%",
 				func => { return 0; }),
 
 			new EvolveData(400,
-				"Workers have extra speed",
-				func => { return 0; },
+				"Workers have 10% extra speed",
+				func => { ModifyUnit(UnitType.Worker, moveSpeed:0.1f); return 0; },
 				"When a defender dies, it deals 10% of its max hp as damage to the front 2 enemies",
 				func => { return 0; }),
 		};
@@ -129,40 +129,63 @@ public class Evolution {
         }
     }
 
-
 	//----------------------------------------------------------------------------------------------------------------------------------<
 
-
-	/// <summary>
-	/// Increases given units' speed
-	/// </summary>
-	/// <param name="speedIncrease">(percentage in decimal)</param>
-	/// <param name="unitType"></param>
-	private void IncreaseUnitSpeed(float speedIncrease, UnitType unitType) {
-
-		/* Instead of using a function, maybe change modifiers. Then the units use the modifier values in realtime. This way, current & future units are dealt with.
-        foreach (UnitController unit in Game.Current.GetExistingUnits(player.PlayerID)) {
-            if (unit.Type == unitType) unit.SetUnitSpeed(unit.GetUnitSpeed() * 1.05f);
-        }*/
-
-
-		switch(unitType) {
-			case UnitType.Worker: {
-				player.WorkerModifiers.MoveSpeed *= (1 + speedIncrease);
+	private void ModifyUnit(UnitType unitType, float moveSpeed = 1, float attackSpeed = 1, 
+		float damage = 1, float health = 1, bool ranged = false)
+    {
+		switch(unitType)
+        {
+			case UnitType.Worker:
+				player.WorkerModifiers.MoveSpeed *= (1 + moveSpeed);
+				player.WorkerModifiers.AttackSpeed *= (1 + attackSpeed);
+				player.WorkerModifiers.Damage *= (1 + damage);
+				player.WorkerModifiers.Health *= (1 + health);
+				player.WorkerModifiers.HitTwoEnemies = ranged;
 				break;
-			}
-			case UnitType.Soldier: {
-				player.SoldierModifiers.MoveSpeed *= (1 + speedIncrease);
+			case UnitType.Soldier:
+				player.SoldierModifiers.MoveSpeed *= (1 + moveSpeed);
+				player.SoldierModifiers.AttackSpeed *= (1 + attackSpeed);
+				player.SoldierModifiers.Damage *= (1 + damage);
+				player.SoldierModifiers.Health *= (1 + health);
+				player.SoldierModifiers.HitTwoEnemies = ranged;
 				break;
-			}
-			case UnitType.Spitter: {
-				player.SpitterModifiers.MoveSpeed *= (1 + speedIncrease);
+			case UnitType.Spitter:
+				player.SpitterModifiers.MoveSpeed *= (1 + moveSpeed);
+				player.SpitterModifiers.AttackSpeed *= (1 + attackSpeed);
+				player.SpitterModifiers.Damage *= (1 + damage);
+				player.SpitterModifiers.Health *= (1 + health);
+				player.SpitterModifiers.HitTwoEnemies = ranged;
 				break;
-			}
-			case UnitType.Defender: {
-				player.DefenderModifiers.MoveSpeed *= (1 + speedIncrease);
+			case UnitType.Defender:
+				player.DefenderModifiers.MoveSpeed *= (1 + moveSpeed);
+				player.DefenderModifiers.AttackSpeed *= (1 + attackSpeed);
+				player.DefenderModifiers.Damage *= (1 + damage);
+				player.DefenderModifiers.Health *= (1 + health);
+				player.DefenderModifiers.HitTwoEnemies = ranged;
 				break;
-			}
+			case UnitType.All:
+				player.WorkerModifiers.MoveSpeed *= (1 + moveSpeed);
+				player.WorkerModifiers.AttackSpeed *= (1 + attackSpeed);
+				player.WorkerModifiers.Damage *= (1 + damage);
+				player.WorkerModifiers.Health *= (1 + health);
+				player.WorkerModifiers.HitTwoEnemies = ranged;
+				player.SoldierModifiers.MoveSpeed *= (1 + moveSpeed);
+				player.SoldierModifiers.AttackSpeed *= (1 + attackSpeed);
+				player.SoldierModifiers.Damage *= (1 + damage);
+				player.SoldierModifiers.Health *= (1 + health);
+				player.SoldierModifiers.HitTwoEnemies = ranged;
+				player.SpitterModifiers.MoveSpeed *= (1 + moveSpeed);
+				player.SpitterModifiers.AttackSpeed *= (1 + attackSpeed);
+				player.SpitterModifiers.Damage *= (1 + damage);
+				player.SpitterModifiers.Health *= (1 + health);
+				player.SpitterModifiers.HitTwoEnemies = ranged;
+				player.DefenderModifiers.MoveSpeed *= (1 + moveSpeed);
+				player.DefenderModifiers.AttackSpeed *= (1 + attackSpeed);
+				player.DefenderModifiers.Damage *= (1 + damage);
+				player.DefenderModifiers.Health *= (1 + health);
+				player.DefenderModifiers.HitTwoEnemies = ranged;
+				break;
 		}
     }
 
