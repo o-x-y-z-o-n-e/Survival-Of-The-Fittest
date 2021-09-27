@@ -225,10 +225,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Type: 2
   direction: 1
-  health: 55
+  baseHealth: 55
   damage: 20
   moveSpeed: 1
-  attackSpeed: 1
+  attackInterval: 1
+  attackIntervalDeviation: 0
   giveDNA: 10
   unitOwner: {fileID: 0}
 --- !u!212 &2062593399770612411
