@@ -640,24 +640,28 @@ MonoBehaviour:
     Damage: 1
     Health: 1
     AttackSpeed: 1
+    GiveDNA: 1
     HitTwoEnemies: 0
   SoldierModifiers:
     MoveSpeed: 1
     Damage: 1
     Health: 1
     AttackSpeed: 1
+    GiveDNA: 1
     HitTwoEnemies: 0
   SpitterModifiers:
     MoveSpeed: 1
     Damage: 1
     Health: 1
     AttackSpeed: 1
+    GiveDNA: 1
     HitTwoEnemies: 0
   DefenderModifiers:
     MoveSpeed: 1
     Damage: 1
     Health: 1
     AttackSpeed: 1
+    GiveDNA: 1
     HitTwoEnemies: 0
   PlayerID: 0
 --- !u!1 &95904311
@@ -2557,6 +2561,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 77572396989723828, guid: fe763d4e63a708b439c4c17fff1bb069,
         type: 3}
+      propertyPath: moveSpeed
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 77572396989723828, guid: fe763d4e63a708b439c4c17fff1bb069,
+        type: 3}
       propertyPath: unitOwner
       value: 
       objectReference: {fileID: 92070639}
@@ -2682,24 +2691,28 @@ MonoBehaviour:
     Damage: 1
     Health: 1
     AttackSpeed: 1
+    GiveDNA: 1
     HitTwoEnemies: 0
   SoldierModifiers:
     MoveSpeed: 1
     Damage: 1
     Health: 1
     AttackSpeed: 1
+    GiveDNA: 1
     HitTwoEnemies: 0
   SpitterModifiers:
     MoveSpeed: 1
     Damage: 1
     Health: 1
     AttackSpeed: 1
+    GiveDNA: 1
     HitTwoEnemies: 0
   DefenderModifiers:
     MoveSpeed: 1
     Damage: 1
     Health: 1
     AttackSpeed: 1
+    GiveDNA: 1
     HitTwoEnemies: 0
   PlayerID: 1
 --- !u!1 &587878429
