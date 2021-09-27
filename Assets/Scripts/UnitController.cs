@@ -273,7 +273,6 @@ public class UnitController : MonoBehaviour {
 
 
 public enum UnitType {
-	All,
 	Worker,
 	Soldier,
 	Spitter,
