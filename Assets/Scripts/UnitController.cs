@@ -117,6 +117,7 @@ public class UnitController : MonoBehaviour {
 
 				int d = (int)(damage * modifiers.Damage);
 				frontUnit.TakeDamage(d, this);
+				SoundManagerScript.PlayUnitSound(Type + "_Attack");
 			}
 		}
 	}
