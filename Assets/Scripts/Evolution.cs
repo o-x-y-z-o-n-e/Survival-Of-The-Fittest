@@ -91,14 +91,22 @@ public class Evolution {
 
 		if (evolutionCounter + 1 >= DATA.Length) return;// else already fully evolved
 
-		evolutionCounter += 1;
+		if (player.DNA >= DATA[evolutionCounter].DNACost)
+		{
+			if (option == 0) DATA[evolutionCounter].Option1Func(0);
+			else if (option == 1) DATA[evolutionCounter].Option2Func(0);
 
-		if		(option == 0) DATA[evolutionCounter].Option1Func(0);
-		else if (option == 1) DATA[evolutionCounter].Option2Func(0);
+			player.DNA -= DATA[evolutionCounter].DNACost;
 
+			evolutionCounter += 1;
 
-		Game.Current.UI.UpdateEvolutionText(GetEvolutionText(0), player.PlayerID, 0);
-		Game.Current.UI.UpdateEvolutionText(GetEvolutionText(1), player.PlayerID, 1);
+			Game.Current.UI.UpdateEvolutionText(GetEvolutionText(0), player.PlayerID, 0);
+			Game.Current.UI.UpdateEvolutionText(GetEvolutionText(1), player.PlayerID, 1);
+		}
+        else
+        {
+			// not enough DNA to evolve
+        }
     }
 
 

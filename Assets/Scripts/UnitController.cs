@@ -184,7 +184,7 @@ public class UnitController : MonoBehaviour {
 
 
 	public void GiveDNA(int amount) {
-
+		unitOwner.AddDNA(giveDNA);
 	}
 
 
