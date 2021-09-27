@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4292489536773555164}
   - component: {fileID: 3085585262268802461}
   - component: {fileID: 8226591728302643575}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: DNA
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -90,7 +90,7 @@ GameObject:
   - component: {fileID: 386979842071591388}
   - component: {fileID: 4014203332044045204}
   - component: {fileID: 4441213703894619736}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Soldier
   m_TagString: PlayerUnit
   m_Icon: {fileID: 0}
@@ -221,7 +221,7 @@ GameObject:
   - component: {fileID: 743412043779983893}
   - component: {fileID: 4917087599284070366}
   - component: {fileID: 5209651997584487943}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}

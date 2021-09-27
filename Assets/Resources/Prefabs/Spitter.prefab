@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1205664050536528627}
   - component: {fileID: 142054840631975090}
   - component: {fileID: 6413166527657107544}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: DNA
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -90,7 +90,7 @@ GameObject:
   - component: {fileID: 2412728999668675386}
   - component: {fileID: 8005038884553891569}
   - component: {fileID: 7162688847311359784}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -189,7 +189,7 @@ GameObject:
   - component: {fileID: 3347381172289257715}
   - component: {fileID: 2062593399770612411}
   - component: {fileID: 1623760112398397303}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Spitter
   m_TagString: PlayerUnit
   m_Icon: {fileID: 0}

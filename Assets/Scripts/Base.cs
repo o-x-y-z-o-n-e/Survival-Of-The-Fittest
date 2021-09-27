@@ -58,4 +58,18 @@ public class Base : MonoBehaviour {
 
 		Game.Current.End();
 	}
+
+
+	//----------------------------------------------------------------------------------------------------------------------------------<
+
+
+	/// <summary>
+	/// Creates a unit instance at specified position.
+	/// </summary>
+	/// <param name="type"></param>
+	/// <param name="path"></param>
+	public void SpawnUnit(UnitType type, int path) {
+		if (Game.Current.IsFinished) return;
+
+	}
 }

@@ -38,8 +38,12 @@ public class Game : MonoBehaviour {
 
 
 	void Update() {
-		time += Time.deltaTime;
-		UI.UpdateTime(time);
+		if (isFinished) {
+
+		} else {
+			time += Time.deltaTime;
+			UI.UpdateTime(time);
+		}
     }
 
 
