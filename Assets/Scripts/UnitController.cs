@@ -51,7 +51,7 @@ public class UnitController : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-		if (Game.Current.IsFinished) return;
+		if (Game.Current.IsFinished || Game.Current.IsPaused) return;
 
 		CheckCollision();
 		CheckMove();
@@ -125,7 +125,7 @@ public class UnitController : MonoBehaviour {
 
 
 	void FixedUpdate() {
-		if (Game.Current.IsFinished) return;
+		if (Game.Current.IsFinished || Game.Current.IsPaused) return;
 
 		if (!stopMoving) transform.Translate(moveSpeed * modifiers.MoveSpeed * direction * Time.fixedDeltaTime, 0, 0);
 	}

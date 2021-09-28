@@ -24,6 +24,7 @@ public class Game : MonoBehaviour {
 
 	float time;
 	bool isFinished; public bool IsFinished => isFinished;
+	bool isPaused; public bool IsPaused => isPaused;
 
 
 	//----------------------------------------------------------------------------------------------------------------------------------<
@@ -41,8 +42,13 @@ public class Game : MonoBehaviour {
 		if (isFinished) {
 
 		} else {
-			time += Time.deltaTime;
-			UI.UpdateTime(time);
+
+			if (Input.GetKeyDown(Options.Input.Pause)) Pause(!isPaused);
+
+			if (!isPaused) {
+				time += Time.deltaTime;
+				UI.UpdateTime(time);
+			}
 		}
     }
 
@@ -85,4 +91,15 @@ public class Game : MonoBehaviour {
 	/// <param name="playerID">(0 = Player 1), (1 = Player 2/AI)</param>
 	/// <returns></returns>
 	public UnitController[] GetExistingUnits(int playerID) => (playerID == 0 ? Player1Units : Player2Units).GetComponentsInChildren<UnitController>();
+
+
+	//----------------------------------------------------------------------------------------------------------------------------------<
+
+
+	public void Pause(bool pause) {
+		isPaused = pause;
+
+		if (isPaused) UI.ShowPauseScreen();
+		else UI.ShowHUD();
+	}
 }

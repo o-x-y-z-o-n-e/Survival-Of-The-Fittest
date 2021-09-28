@@ -73,12 +73,33 @@ public class GameUI : MonoBehaviour {
 	//----------------------------------------------------------------------------------------------------------------------------------<
 
 
+	public void ShowHUD() {
+		HUD.gameObject.SetActive(true);
+		FinishScreen.gameObject.SetActive(false);
+		PauseScreen.gameObject.SetActive(false);
+	}
+
+
+	//----------------------------------------------------------------------------------------------------------------------------------<
+
+
 	/// <summary>
 	/// Display finish sequence screen (once game is finished).
 	/// </summary>
 	public void ShowFinishScreen() {
 		HUD.gameObject.SetActive(false);
 		FinishScreen.gameObject.SetActive(true);
+		PauseScreen.gameObject.SetActive(false);
+	}
+
+
+	//----------------------------------------------------------------------------------------------------------------------------------<
+
+
+	public void ShowPauseScreen() {
+		HUD.gameObject.SetActive(false);
+		FinishScreen.gameObject.SetActive(false);
+		PauseScreen.gameObject.SetActive(true);
 	}
 
 
