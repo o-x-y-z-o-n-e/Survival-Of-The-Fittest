@@ -65,8 +65,23 @@ public class Game : MonoBehaviour {
 		isFinished = true;
 
 		//Check for who won here...
+		string displayText = "Game Over";
 
-		UI.ShowFinishScreen();
+		if(Player1.IsAI && Player2.IsAI) {
+			if (Player2.Base.IsDestroyed) displayText = "Bot 1 Won!";
+			else if (Player1.Base.IsDestroyed) displayText = "Bot 2 Won!";
+		} else if(!Player1.IsAI && !Player2.IsAI) {
+			if (Player2.Base.IsDestroyed) displayText = "Player 1 Won!";
+			else if (Player1.Base.IsDestroyed) displayText = "Player 2 Won!";
+		} else {
+			Player player = Player1.IsAI ? Player2 : Player1;
+			Player ai = Player1.IsAI ? Player1 : Player2;
+
+			if (ai.Base.IsDestroyed) displayText = "You Won!";
+			else if (player.Base.IsDestroyed) displayText = "You Lose :(";
+		}
+
+		UI.ShowFinishScreen(displayText);
 	}
 
 

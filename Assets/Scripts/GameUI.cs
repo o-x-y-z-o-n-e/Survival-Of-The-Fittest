@@ -14,12 +14,20 @@ public class GameUI : MonoBehaviour {
 	public RectTransform HUD;
 	public RectTransform PauseScreen;
 
+
+	[Space]
+
+	[Header("Finish Elements")]
+
+	public Text FinishText;
+
+	[Space]
+
+	[Header("HUD Elements")]
+
 	[Space]
 
 	public Text TimeDisplay;
-
-	[Space]
-	[Header("HUD Elements")]
 
 	public Text Player1Evolve1Text;
 	public Text Player1Evolve2Text;
@@ -30,6 +38,8 @@ public class GameUI : MonoBehaviour {
 
 	public Text Player1DNAText;
 	public Text Player2DNAText;
+
+
 
 
 	//----------------------------------------------------------------------------------------------------------------------------------<
@@ -86,10 +96,12 @@ public class GameUI : MonoBehaviour {
 	/// <summary>
 	/// Display finish sequence screen (once game is finished).
 	/// </summary>
-	public void ShowFinishScreen() {
+	public void ShowFinishScreen(string text) {
 		HUD.gameObject.SetActive(false);
 		FinishScreen.gameObject.SetActive(true);
 		PauseScreen.gameObject.SetActive(false);
+
+		FinishText.text = text;
 	}
 
 
