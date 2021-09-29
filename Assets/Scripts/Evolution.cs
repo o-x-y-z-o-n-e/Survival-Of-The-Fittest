@@ -91,7 +91,7 @@ public class Evolution {
 	/// <param name="player"></param>
 	/// <param name="evolution">The evolution path</param>
 	public void Evolve(int option) {
-		if (Game.Current.IsFinished || Game.Current.IsPaused) return;
+		if (Game.Current.Freeze) return;
 
 		if (evolutionCounter + 1 >= DATA.Length) return;// else already fully evolved
 

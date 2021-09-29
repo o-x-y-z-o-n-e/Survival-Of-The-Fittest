@@ -23,8 +23,14 @@ public class Game : MonoBehaviour {
 
 
 	float time;
+	bool hasStarted; public bool HasStarted => hasStarted;
 	bool isFinished; public bool IsFinished => isFinished;
 	bool isPaused; public bool IsPaused => isPaused;
+
+	public bool Freeze => !hasStarted || isFinished || isPaused;
+
+
+	float startCountdown = 3;
 
 
 	//----------------------------------------------------------------------------------------------------------------------------------<
@@ -39,7 +45,17 @@ public class Game : MonoBehaviour {
 
 
 	void Update() {
-		if (isFinished) {
+		if (!hasStarted) {
+			startCountdown -= Time.deltaTime;
+
+			if(startCountdown <= 0) {
+				startCountdown = 0;
+				hasStarted = true;
+			}
+
+			UI.ShowCountdown(startCountdown);
+
+		} else if (isFinished) {
 
 		} else {
 

@@ -40,6 +40,12 @@ public class GameUI : MonoBehaviour {
 	public Text Player2DNAText;
 
 
+	[Space]
+
+	[Header("Misc Elements")]
+	public Text CountdownText;
+
+
 
 
 	//----------------------------------------------------------------------------------------------------------------------------------<
@@ -138,6 +144,19 @@ public class GameUI : MonoBehaviour {
 	public void UpdateEvolutionText(string text, int player, int evolution) => 
 		(player == 0 ? (evolution == 0 ? Player1Evolve1Text : Player1Evolve2Text) 
 		: (evolution == 0 ? Player2Evolve1Text : Player2Evolve2Text)).text = text;
+
+
+	//----------------------------------------------------------------------------------------------------------------------------------<
+
+
+	public void ShowCountdown(float t) {
+		if(t <= 0) {
+			CountdownText.gameObject.SetActive(false);
+			return;
+		}
+
+		CountdownText.text = ((int)t).ToString();
+	}
 
 
 	//----------------------------------------------------------------------------------------------------------------------------------<

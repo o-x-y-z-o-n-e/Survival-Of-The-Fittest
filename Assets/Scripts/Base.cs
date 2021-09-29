@@ -69,7 +69,7 @@ public class Base : MonoBehaviour {
 	/// <param name="type"></param>
 	/// <param name="path"></param>
 	public void SpawnUnit(UnitType type, int path) {
-		if (Game.Current.IsFinished) return;
+		if (Game.Current.Freeze) return;
 
 	}
 }
