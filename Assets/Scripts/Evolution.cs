@@ -33,7 +33,7 @@ public class Evolution {
 				"Defenders have 20% damage reduction",
 				() => { ModifyUnit(UnitType.Defender, damage:-0.2f); },
 				"Your hive restores 10% hp",
-				() => { player.Base.Health *= 1.1f; }),
+				() => { player.Base.Repair(0.1f); }),
 
 			new EvolveData(400,
 				"Enemies that attack your hive take 5% damage per hit",

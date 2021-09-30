@@ -19,6 +19,8 @@ public class Base : MonoBehaviour {
 
 
 	[Space]
+
+	public int MaxHealth = 100;
 	public float Health = 100;
 
 
@@ -32,13 +34,40 @@ public class Base : MonoBehaviour {
 
 
 	/// <summary>
+	/// Adds a percentage of the MaxHealth back into the health of the base. Range: [0, 1] = 0% to 100%
+	/// </summary>
+	/// <param name="percent">Range: [0, 1] = 0% to 100%</param>
+	/// <returns></returns>
+	public float Repair(float percent) => Repair(MaxHealth * percent);
+
+
+	//----------------------------------------------------------------------------------------------------------------------------------<
+
+
+	/// <summary>
+	/// Adds health back onto base.
+	/// </summary>
+	/// <param name="amount"></param>
+	public void Repair(int amount) {
+		if (isDestroyed) return;
+
+		Health += Mathf.Abs(amount);
+
+		if (Health >= MaxHealth) Health = MaxHealth;
+	}
+
+
+	//----------------------------------------------------------------------------------------------------------------------------------<
+
+
+	/// <summary>
 	/// Takes away specified amount of health. If the Base's health reaches zero, then is will be destroyed and the game will end.
 	/// </summary>
 	/// <param name="amount">Health points to deduct.</param>
 	public void TakeDamage(int amount) {
 		if (isDestroyed) return;
 
-		Health -= amount;
+		Health -= Mathf.Abs(amount);
 
 		if (Health <= 0) Destroy();
 	}
