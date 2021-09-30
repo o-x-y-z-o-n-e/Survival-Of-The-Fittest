@@ -32,19 +32,13 @@ public class Player : MonoBehaviour {
 
 
 	bool isAI; public bool IsAI => isAI;
-
-
-	//----------------------------------------------------------------------------------------------------------------------------------<
-
-
-	private bool unitsAreMoving;
+	int selectedPath = 0; public int SelectedPath => selectedPath;
 
 
 	//----------------------------------------------------------------------------------------------------------------------------------<
 
 
 	private void Awake() {
-		unitsAreMoving = true;
 		Evolutions = new Evolution(this);
 	}
 
@@ -60,19 +54,7 @@ public class Player : MonoBehaviour {
 	//----------------------------------------------------------------------------------------------------------------------------------<
 
 
-	public bool GetUnitsAreMoving() => unitsAreMoving;
-
-
-	//----------------------------------------------------------------------------------------------------------------------------------<
-
-
-	public void SetUnitsAreMoving(bool a) => unitsAreMoving = a;
-
-
-	//----------------------------------------------------------------------------------------------------------------------------------<
-
-
-	public void AddDNA(int amount) {
+	public void ChangeDNA(int amount) {
 		DNA += amount;
 
 		Game.Current.UI.UpdateDNA(DNA, PlayerID);
@@ -98,5 +80,13 @@ public class Player : MonoBehaviour {
 			}
 		}
 		return null;
+	}
+
+
+	//----------------------------------------------------------------------------------------------------------------------------------<
+
+
+	public void SelectPath(int path) {
+		selectedPath = path;
 	}
 }

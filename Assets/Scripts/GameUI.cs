@@ -171,9 +171,7 @@ public class GameUI : MonoBehaviour {
 	/// <summary>
 	/// Is called by Path (Surface/Tunnel) button click event.
 	/// </summary>
-	public void OnPlayer1PathClick(int path) {
-		//Hook into base script
-	}
+	public void OnPlayer1PathClick(int path) => Game.Current.Player1.SelectPath(path);
 
 
 	//----------------------------------------------------------------------------------------------------------------------------------<
@@ -182,9 +180,7 @@ public class GameUI : MonoBehaviour {
 	/// <summary>
 	/// Is called by Path (Surface/Tunnel) button click event.
 	/// </summary>
-	public void OnPlayer2PathClick(int path) {
-
-	}
+	public void OnPlayer2PathClick(int path) => Game.Current.Player2.SelectPath(path);
 
 
 	//----------------------------------------------------------------------------------------------------------------------------------<
@@ -196,6 +192,7 @@ public class GameUI : MonoBehaviour {
 	/// <param name="unit">(0 = soldier), (1 = spitter), (2 = tank)</param>
 	public void OnPlayer1UnitClick(int unit) {
 		//Hook into base script
+		Game.Current.Player1.Base.SpawnUnit((UnitType)unit, Game.Current.Player1.SelectedPath);
 	}
 
 
@@ -208,6 +205,7 @@ public class GameUI : MonoBehaviour {
 	/// <param name="unit">(0 = soldier), (1 = spitter), (2 = tank)</param>
 	public void OnPlayer2UnitClick(int unit) {
 		//Hook into base script
+		Game.Current.Player2.Base.SpawnUnit((UnitType)unit, Game.Current.Player2.SelectedPath);
 	}
 
 

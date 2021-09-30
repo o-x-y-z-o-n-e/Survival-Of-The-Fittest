@@ -7,10 +7,22 @@ using UnityEngine.UI;
 
 public class UnitController : MonoBehaviour {
 
-	const float ATTACK_EXTEND = 0.2f;
-	const float FRIENDLY_OVERLAP = 0.0f;
+	public const string WORKER_PREFAB_PATH		= "Prefabs/Worker";
+	public const string SOLDIER_PREFAB_PATH		= "Prefabs/Soldier";
+	public const string SPITTER_PREFAB_PATH		= "Prefabs/Spitter";
+	public const string DEFENDER_PREFAB_PATH	= "Prefabs/Defender";
+
+	public const int	WORKER_DNA_COST			= 25;
+	public const int	SOLDIER_DNA_COST		= 100;
+	public const int	SPITTER_DNA_COST		= 150;
+	public const int	DEFENDER_DNA_COST		= 250;
+
+	const float			ATTACK_EXTEND			= 0.2f;
+	const float			FRIENDLY_OVERLAP		= 0.0f;
+
 
 	public UnitType Type;
+
 
     [SerializeField] private int direction;
     [SerializeField] private int baseHealth;
@@ -22,6 +34,7 @@ public class UnitController : MonoBehaviour {
 
     [SerializeField] private Player unitOwner; //this will not be a serialized field once unit owners are assigned at time of prefab instantiation.
 
+	SpriteRenderer sprite;
 	new BoxCollider2D collider;
     Text healthText;
 	UnitModifiers modifiers;
@@ -37,7 +50,9 @@ public class UnitController : MonoBehaviour {
 
 
 	// Start is called before the first frame update
-	void Awake() {
+	public void Awake(Player player) {
+		unitOwner = player;
+		sprite = GetComponentInChildren<SpriteRenderer>();
 		collider = GetComponent<BoxCollider2D>();
         healthText = GetComponentInChildren<Text>();
 		modifiers = unitOwner.GetModifierReference(Type);
@@ -45,6 +60,7 @@ public class UnitController : MonoBehaviour {
 		health = (int)(baseHealth * modifiers.Health);
 		healthText.text = health.ToString();
     }
+
 
     //----------------------------------------------------------------------------------------------------------------------------------<
 
@@ -184,7 +200,7 @@ public class UnitController : MonoBehaviour {
 
 
 	public void GiveDNA(int amount) {
-		unitOwner.AddDNA(giveDNA);
+		unitOwner.ChangeDNA(giveDNA);
 	}
 
 
@@ -214,6 +230,46 @@ public class UnitController : MonoBehaviour {
 	public int GetPlayerID() => unitOwner.PlayerID;
 	public float GetWidth() => collider.size.x;
 	float GetNextAttackSpeed() => UnityEngine.Random.Range((attackInterval / modifiers.AttackSpeed) - attackIntervalDeviation, (attackInterval / modifiers.AttackSpeed) + attackIntervalDeviation);
+
+
+	//----------------------------------------------------------------------------------------------------------------------------------<
+
+
+	public void SetDirection(int dir) {
+		if (dir == 0) dir = 1;
+		else dir = Math.Sign(dir);
+
+		direction = dir;
+		sprite.flipX = dir == -1;
+	}
+
+
+	//----------------------------------------------------------------------------------------------------------------------------------<
+
+
+	public static int GetUnitBaseCost(UnitType type) {
+		switch(type) {
+			case UnitType.Worker: return WORKER_DNA_COST;
+			case UnitType.Soldier: return SOLDIER_DNA_COST;
+			case UnitType.Spitter: return SPITTER_DNA_COST;
+			case UnitType.Defender: return DEFENDER_DNA_COST;
+		}
+		return 0;
+	}
+
+
+	//----------------------------------------------------------------------------------------------------------------------------------<
+
+
+	public static string GetUnitPrefabPath(UnitType type) {
+		switch (type) {
+			case UnitType.Worker: return WORKER_PREFAB_PATH;
+			case UnitType.Soldier: return SOLDIER_PREFAB_PATH;
+			case UnitType.Spitter: return SPITTER_PREFAB_PATH;
+			case UnitType.Defender: return DEFENDER_PREFAB_PATH;
+		}
+		return "";
+	}
 
 
 	//----------------------------------------------------------------------------------------------------------------------------------<
@@ -273,10 +329,10 @@ public class UnitController : MonoBehaviour {
 
 
 public enum UnitType {
-	Worker,
-	Soldier,
-	Spitter,
-	Defender
+	Worker = 0,
+	Soldier = 1,
+	Spitter = 2,
+	Defender = 3
 }
 
 

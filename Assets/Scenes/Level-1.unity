@@ -599,6 +599,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spitter (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 7766483010586190318, guid: b7889a600ab78e24c80e7758a538f7c0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b7889a600ab78e24c80e7758a538f7c0, type: 3}
 --- !u!1 &92070637
@@ -699,7 +704,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 95904311}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4, y: 2.1, z: 0}
+  m_LocalPosition: {x: -1, y: 2.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 700282124}
@@ -1189,7 +1194,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
+          m_IntArgument: 2
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -1420,8 +1425,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a9cd4a5369119f4c9c7549ba60eb87e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Player: {fileID: 503819697}
+  UnitContainer: {fileID: 1847397458}
   Spawnpoint1: {fileID: 307360627}
   Spawnpoint2: {fileID: 968182953}
+  MaxHealth: 100
   Health: 100
 --- !u!4 &289431176 stripped
 Transform:
@@ -1453,7 +1461,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 307360626}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4, y: 4.9, z: 0}
+  m_LocalPosition: {x: 1, y: 4.9, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 258391091}
@@ -1545,6 +1553,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Defender (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4718382814567098726, guid: c6aad66fc6bb0074aa5ab00017f2568d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4909987532044960576, guid: c6aad66fc6bb0074aa5ab00017f2568d,
         type: 3}
@@ -1791,7 +1804,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 377509582}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4, y: 4.9, z: 0}
+  m_LocalPosition: {x: -1, y: 4.9, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 700282124}
@@ -2088,6 +2101,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Worker
       objectReference: {fileID: 0}
+    - target: {fileID: 4949396589753652649, guid: fe763d4e63a708b439c4c17fff1bb069,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fe763d4e63a708b439c4c17fff1bb069, type: 3}
 --- !u!1001 &455737353
@@ -2167,6 +2185,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spitter
       objectReference: {fileID: 0}
+    - target: {fileID: 7766483010586190318, guid: b7889a600ab78e24c80e7758a538f7c0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b7889a600ab78e24c80e7758a538f7c0, type: 3}
 --- !u!1001 &461258342
@@ -2245,6 +2268,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Worker (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4949396589753652649, guid: fe763d4e63a708b439c4c17fff1bb069,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fe763d4e63a708b439c4c17fff1bb069, type: 3}
@@ -2334,6 +2362,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Worker (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4949396589753652649, guid: fe763d4e63a708b439c4c17fff1bb069,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5920032926795791407, guid: fe763d4e63a708b439c4c17fff1bb069,
         type: 3}
@@ -2616,7 +2649,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 2
+          m_IntArgument: 3
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -2749,6 +2782,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Worker
+      objectReference: {fileID: 0}
+    - target: {fileID: 4949396589753652649, guid: fe763d4e63a708b439c4c17fff1bb069,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5920032926795791407, guid: fe763d4e63a708b439c4c17fff1bb069,
         type: 3}
@@ -3071,7 +3109,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 2
+          m_IntArgument: 3
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -3351,7 +3389,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -3469,6 +3507,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Worker (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4949396589753652649, guid: fe763d4e63a708b439c4c17fff1bb069,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fe763d4e63a708b439c4c17fff1bb069, type: 3}
@@ -3598,8 +3641,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a9cd4a5369119f4c9c7549ba60eb87e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Player: {fileID: 92070639}
+  UnitContainer: {fileID: 1942696556}
   Spawnpoint1: {fileID: 377509583}
   Spawnpoint2: {fileID: 95904312}
+  MaxHealth: 100
   Health: 100
 --- !u!4 &703806808 stripped
 Transform:
@@ -3988,6 +4034,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Worker (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 4949396589753652649, guid: fe763d4e63a708b439c4c17fff1bb069,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fe763d4e63a708b439c4c17fff1bb069, type: 3}
 --- !u!1001 &834191814
@@ -4076,6 +4127,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Worker (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4949396589753652649, guid: fe763d4e63a708b439c4c17fff1bb069,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5920032926795791407, guid: fe763d4e63a708b439c4c17fff1bb069,
         type: 3}
@@ -4291,6 +4347,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Defender
       objectReference: {fileID: 0}
+    - target: {fileID: 4718382814567098726, guid: c6aad66fc6bb0074aa5ab00017f2568d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c6aad66fc6bb0074aa5ab00017f2568d, type: 3}
 --- !u!4 &864220847 stripped
@@ -4375,6 +4436,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Spitter
+      objectReference: {fileID: 0}
+    - target: {fileID: 7766483010586190318, guid: b7889a600ab78e24c80e7758a538f7c0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b7889a600ab78e24c80e7758a538f7c0, type: 3}
@@ -4607,6 +4673,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Soldier
       objectReference: {fileID: 0}
+    - target: {fileID: 4675451418357831873, guid: f17a4945ba8411b448bb26cf7b50f1de,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f17a4945ba8411b448bb26cf7b50f1de, type: 3}
 --- !u!1 &945445792
@@ -4778,7 +4849,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -5102,6 +5173,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spitter (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 7766483010586190318, guid: b7889a600ab78e24c80e7758a538f7c0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b7889a600ab78e24c80e7758a538f7c0, type: 3}
 --- !u!1 &968182952
@@ -5128,7 +5204,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 968182952}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4, y: 2.1, z: 0}
+  m_LocalPosition: {x: 1, y: 2.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 258391091}
@@ -5225,6 +5301,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Spitter
+      objectReference: {fileID: 0}
+    - target: {fileID: 7766483010586190318, guid: b7889a600ab78e24c80e7758a538f7c0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b7889a600ab78e24c80e7758a538f7c0, type: 3}
@@ -5567,6 +5648,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Worker (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 4949396589753652649, guid: fe763d4e63a708b439c4c17fff1bb069,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fe763d4e63a708b439c4c17fff1bb069, type: 3}
 --- !u!1001 &1166043580
@@ -5665,6 +5751,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Defender
+      objectReference: {fileID: 0}
+    - target: {fileID: 4718382814567098726, guid: c6aad66fc6bb0074aa5ab00017f2568d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4909987532044960576, guid: c6aad66fc6bb0074aa5ab00017f2568d,
         type: 3}
@@ -5827,6 +5918,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Worker (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4949396589753652649, guid: fe763d4e63a708b439c4c17fff1bb069,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fe763d4e63a708b439c4c17fff1bb069, type: 3}
@@ -6074,6 +6170,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spitter (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 7766483010586190318, guid: b7889a600ab78e24c80e7758a538f7c0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b7889a600ab78e24c80e7758a538f7c0, type: 3}
 --- !u!4 &1237129083 stripped
@@ -6173,6 +6274,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Spitter (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7766483010586190318, guid: b7889a600ab78e24c80e7758a538f7c0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b7889a600ab78e24c80e7758a538f7c0, type: 3}
@@ -6713,6 +6819,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Worker (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 4949396589753652649, guid: fe763d4e63a708b439c4c17fff1bb069,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5920032926795791407, guid: fe763d4e63a708b439c4c17fff1bb069,
         type: 3}
       propertyPath: m_FlipX
@@ -6869,6 +6980,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Soldier (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 4675451418357831873, guid: f17a4945ba8411b448bb26cf7b50f1de,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f17a4945ba8411b448bb26cf7b50f1de, type: 3}
 --- !u!4 &1457052298 stripped
@@ -6963,6 +7079,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Worker (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4949396589753652649, guid: fe763d4e63a708b439c4c17fff1bb069,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5920032926795791407, guid: fe763d4e63a708b439c4c17fff1bb069,
         type: 3}
@@ -7355,6 +7476,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Worker (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 4949396589753652649, guid: fe763d4e63a708b439c4c17fff1bb069,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5920032926795791407, guid: fe763d4e63a708b439c4c17fff1bb069,
         type: 3}
       propertyPath: m_FlipX
@@ -7666,6 +7792,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Defender (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4718382814567098726, guid: c6aad66fc6bb0074aa5ab00017f2568d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c6aad66fc6bb0074aa5ab00017f2568d, type: 3}
@@ -7991,6 +8122,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spitter
       objectReference: {fileID: 0}
+    - target: {fileID: 7766483010586190318, guid: b7889a600ab78e24c80e7758a538f7c0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b7889a600ab78e24c80e7758a538f7c0, type: 3}
 --- !u!1 &1847397457
@@ -8133,7 +8269,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
+          m_IntArgument: 2
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -8448,6 +8584,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Worker
       objectReference: {fileID: 0}
+    - target: {fileID: 4949396589753652649, guid: fe763d4e63a708b439c4c17fff1bb069,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5920032926795791407, guid: fe763d4e63a708b439c4c17fff1bb069,
         type: 3}
       propertyPath: m_FlipX
@@ -8541,6 +8682,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Worker (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4949396589753652649, guid: fe763d4e63a708b439c4c17fff1bb069,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5920032926795791407, guid: fe763d4e63a708b439c4c17fff1bb069,
         type: 3}
@@ -8752,8 +8898,6 @@ MonoBehaviour:
   UI: {fileID: 966588221}
   Player1: {fileID: 92070639}
   Player2: {fileID: 503819697}
-  Player1Units: {fileID: 1942696556}
-  Player2Units: {fileID: 1847397458}
 --- !u!4 &2027026344
 Transform:
   m_ObjectHideFlags: 0
@@ -8849,6 +8993,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Worker (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 4949396589753652649, guid: fe763d4e63a708b439c4c17fff1bb069,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fe763d4e63a708b439c4c17fff1bb069, type: 3}
 --- !u!1001 &2054120004
@@ -8927,6 +9076,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Worker
+      objectReference: {fileID: 0}
+    - target: {fileID: 4949396589753652649, guid: fe763d4e63a708b439c4c17fff1bb069,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fe763d4e63a708b439c4c17fff1bb069, type: 3}
@@ -9138,6 +9292,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Soldier (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 4675451418357831873, guid: f17a4945ba8411b448bb26cf7b50f1de,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f17a4945ba8411b448bb26cf7b50f1de, type: 3}
 --- !u!1 &2128702258
@@ -9300,6 +9459,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Soldier
+      objectReference: {fileID: 0}
+    - target: {fileID: 4675451418357831873, guid: f17a4945ba8411b448bb26cf7b50f1de,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f17a4945ba8411b448bb26cf7b50f1de, type: 3}

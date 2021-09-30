@@ -10,7 +10,8 @@ public class Base : MonoBehaviour {
 
 	//----------------------------------------------------------------------------------------------------------------------------------<
 
-
+	public Player Player;
+	public Transform UnitContainer;
 	public Transform Spawnpoint1;
 	public Transform Spawnpoint2;
 
@@ -28,6 +29,14 @@ public class Base : MonoBehaviour {
 
 
 	bool isDestroyed; public bool IsDestroyed => isDestroyed;
+
+
+	//----------------------------------------------------------------------------------------------------------------------------------<
+
+
+	void Awake() {
+		Health = MaxHealth;
+	}
 
 
 	//----------------------------------------------------------------------------------------------------------------------------------<
@@ -100,5 +109,34 @@ public class Base : MonoBehaviour {
 	public void SpawnUnit(UnitType type, int path) {
 		if (Game.Current.Freeze) return;
 
+		int cost = UnitController.GetUnitBaseCost(type);
+
+		//if (cost > Player.DNA) return;
+
+		//Player.ChangeDNA(-cost);
+
+		UnitController prefab = Resources.Load<UnitController>(UnitController.GetUnitPrefabPath(type));
+		if (prefab == null) return;
+
+
+		Vector3 corePosition = path == 0 ? Spawnpoint1.position : Spawnpoint2.position;
+		int direction = Game.Current.Player1 == Player ? 1 : -1;
+		const float CHECK_DISTANCE = 20f;
+
+		RaycastHit2D hit;
+		hit = Physics2D.Raycast(corePosition - (Vector3.right * direction * CHECK_DISTANCE), Vector2.right * direction, CHECK_DISTANCE);
+
+		if(hit.collider != null) {
+			corePosition = hit.point - (Vector2.right * direction * (prefab.GetComponent<BoxCollider2D>().size.x/2f));
+		}
+
+
+		UnitController instance = Instantiate(prefab, corePosition, Quaternion.identity, UnitContainer);
+		instance.name = instance.Type.ToString();
+		instance.Awake(Player);
+
+		
+
+		instance.SetDirection(direction);
 	}
 }
