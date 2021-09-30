@@ -8,12 +8,14 @@ using UnityEngine;
 /// </summary>
 public class Player : MonoBehaviour {
 
+	const float DNA_UPDATE_INTERVAL = 1f;
 
 	public Base Base;
 
 	[Space]
 
 	public int DNA; // Total amount of DNA the player has gained
+	public int DNAPerMinute = 600;
 
 	[Space]
 
@@ -34,6 +36,9 @@ public class Player : MonoBehaviour {
 	bool isAI; public bool IsAI => isAI;
 	int selectedPath = 0; public int SelectedPath => selectedPath;
 
+	float remainingDNA = 0;
+	float counterDNA = 0;
+
 
 	//----------------------------------------------------------------------------------------------------------------------------------<
 
@@ -48,6 +53,35 @@ public class Player : MonoBehaviour {
 
 	private void OnDestroy() {
 		Evolutions = null;
+	}
+
+
+	//----------------------------------------------------------------------------------------------------------------------------------<
+
+
+	void Update() {
+		if (Game.Current.Freeze) return;
+
+		GatherDNA();
+	}
+
+
+	//----------------------------------------------------------------------------------------------------------------------------------<
+
+
+	void GatherDNA() {
+		float rate = DNAPerMinute / 60;
+		remainingDNA += Time.deltaTime * rate;
+
+		counterDNA += Time.deltaTime;
+		if(counterDNA >= DNA_UPDATE_INTERVAL) {
+			counterDNA = 0;
+
+			int whole = (int)remainingDNA;
+			remainingDNA = remainingDNA % 1;
+
+			ChangeDNA(whole);
+		}
 	}
 
 

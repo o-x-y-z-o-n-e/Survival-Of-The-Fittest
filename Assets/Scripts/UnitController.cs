@@ -50,23 +50,32 @@ public class UnitController : MonoBehaviour {
 
 
 	// Start is called before the first frame update
-	public void Awake(Player player) {
-		unitOwner = player;
+	void Awake() {
 		sprite = GetComponentInChildren<SpriteRenderer>();
 		collider = GetComponent<BoxCollider2D>();
         healthText = GetComponentInChildren<Text>();
+
+		if (unitOwner != null) SetPlayer(unitOwner);
+    }
+
+
+	//----------------------------------------------------------------------------------------------------------------------------------<
+
+
+	public void SetPlayer(Player player) {
+		unitOwner = player;
 		modifiers = unitOwner.GetModifierReference(Type);
 
 		health = (int)(baseHealth * modifiers.Health);
 		healthText.text = health.ToString();
-    }
+	}
 
 
-    //----------------------------------------------------------------------------------------------------------------------------------<
+	//----------------------------------------------------------------------------------------------------------------------------------<
 
 
-    // Update is called once per frame
-    void Update() {
+	// Update is called once per frame
+	void Update() {
 		if (Game.Current.Freeze) return;
 
 		CheckCollision();

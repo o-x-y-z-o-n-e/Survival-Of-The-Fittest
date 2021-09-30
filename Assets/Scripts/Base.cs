@@ -111,9 +111,9 @@ public class Base : MonoBehaviour {
 
 		int cost = UnitController.GetUnitBaseCost(type);
 
-		//if (cost > Player.DNA) return;
+		if (cost > Player.DNA) return;
 
-		//Player.ChangeDNA(-cost);
+		Player.ChangeDNA(-cost);
 
 		UnitController prefab = Resources.Load<UnitController>(UnitController.GetUnitPrefabPath(type));
 		if (prefab == null) return;
@@ -133,7 +133,7 @@ public class Base : MonoBehaviour {
 
 		UnitController instance = Instantiate(prefab, corePosition, Quaternion.identity, UnitContainer);
 		instance.name = instance.Type.ToString();
-		instance.Awake(Player);
+		instance.SetPlayer(Player);
 
 		
 
