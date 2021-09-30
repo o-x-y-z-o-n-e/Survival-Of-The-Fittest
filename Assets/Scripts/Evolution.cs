@@ -12,54 +12,54 @@ public class Evolution {
 		DATA = new EvolveData[] {
 			new EvolveData(400,
 				"Spitters now hit 2 enemies but have 50% damage",
-				func => { ModifyUnit(UnitType.Spitter, damage:-0.5f); 
-					RangedAttack(UnitType.Spitter, true); return 0; },
+				() => { ModifyUnit(UnitType.Spitter, damage:-0.5f); 
+					RangedAttack(UnitType.Spitter, true); },
 				"Spitters now heal the front ally for 10% of damage dealt",
-				func => { return 0; }),
+				() => {  }),
 
 			new EvolveData(400,
 				"Soldiers run 5% faster",
-				func => { ModifyUnit(UnitType.Soldier, moveSpeed:0.05f); return 0; },
+				() => { ModifyUnit(UnitType.Soldier, moveSpeed:0.05f); },
 				"Defenders have 5% more max hp",
-				func => { ModifyUnit(UnitType.Defender, health:0.05f); return 0; }),
+				() => { ModifyUnit(UnitType.Defender, health:0.05f); }),
 
 			new EvolveData(400,
 				"DNA generation is 5% faster",
-				func => { return 0; },
+				() => {  },
 				"Soldiers give extra DNA on kill",
-				func => { ModifyUnit(UnitType.Soldier, dna:100); return 0; }),
+				() => { ModifyUnit(UnitType.Soldier, dna:100); }),
 
 			new EvolveData(400,
 				"Defenders have 20% damage reduction",
-				func => { ModifyUnit(UnitType.Defender, damage:-0.2f); return 0; },
+				() => { ModifyUnit(UnitType.Defender, damage:-0.2f); },
 				"Your hive restores 10% hp",
-				func => { player.Base.Health *= 1.1f; return 0; }),
+				() => { player.Base.Health *= 1.1f; }),
 
 			new EvolveData(400,
 				"Enemies that attack your hive take 5% damage per hit",
-				func => { return 0; },
+				() => {  },
 				"All units have 5% more hp",
-				func => { ModifyUnit(UnitType.Defender, health:0.05f);
+				() => { ModifyUnit(UnitType.Defender, health:0.05f);
 					ModifyUnit(UnitType.Soldier, health:0.05f);
 					ModifyUnit(UnitType.Spitter, health:0.05f);
-					ModifyUnit(UnitType.Worker, health:0.05f); return 0; }),
+					ModifyUnit(UnitType.Worker, health:0.05f); }),
 
 			new EvolveData(400,
 				"Soldiers have 50% extra damage, but 50% slower attack speed",
-				func => { ModifyUnit(UnitType.Soldier, damage:0.5f, attackSpeed:-0.5f); return 0; },
+				() => { ModifyUnit(UnitType.Soldier, damage:0.5f, attackSpeed:-0.5f); },
 				"Spitters increase nearby units damage by 10%",
-				func => { return 0; }),
+				() => {  }),
 
 			new EvolveData(400,
 				"Workers have 10% extra speed",
-				func => { ModifyUnit(UnitType.Worker, moveSpeed:0.1f); return 0; },
+				() => { ModifyUnit(UnitType.Worker, moveSpeed:0.1f); },
 				"When a defender dies, it deals 10% of its max hp as damage to the front 2 enemies",
-				func => { return 0; }),
+				() => {  }),
 			new EvolveData(0,
 				"Evolution tree complete",
-				func => { return 0; },
+				() => {  },
 				"Evolution tree complete",
-				func => { return 0; }),
+				() => {  }),
 		};
 	}
 
@@ -97,8 +97,8 @@ public class Evolution {
 
 		if (player.DNA >= DATA[evolutionCounter].DNACost)
 		{
-			if (option == 0) DATA[evolutionCounter].Option1Func(0);
-			else if (option == 1) DATA[evolutionCounter].Option2Func(0);
+			if (option == 0) DATA[evolutionCounter].Option1Func();
+			else if (option == 1) DATA[evolutionCounter].Option2Func();
 
 			player.DNA -= DATA[evolutionCounter].DNACost;
 
@@ -164,11 +164,11 @@ public struct EvolveData {
 	public string Option1Text;
 	public string Option2Text;
 
-	public Func<int, int> Option1Func;
-	public Func<int, int> Option2Func;
+	public Action Option1Func;
+	public Action Option2Func;
 
 
-	public EvolveData(int cost, string op1Text, Func<int, int> op1Func, string op2Text, Func<int,int> op2Func) {
+	public EvolveData(int cost, string op1Text, Action op1Func, string op2Text, Action op2Func) {
 		DNACost = cost;
 		Option1Text = op1Text;
 		Option1Func = op1Func;
