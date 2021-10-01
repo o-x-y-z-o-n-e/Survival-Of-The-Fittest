@@ -35,6 +35,7 @@ public class UnitController : MonoBehaviour {
     [SerializeField] private Player unitOwner; //this will not be a serialized field once unit owners are assigned at time of prefab instantiation.
 
 	SpriteRenderer sprite;
+	Animator animator;
 	new BoxCollider2D collider;
     Text healthText;
 	UnitModifiers modifiers;
@@ -51,6 +52,7 @@ public class UnitController : MonoBehaviour {
 
 	// Start is called before the first frame update
 	void Awake() {
+		animator = GetComponentInChildren<Animator>();
 		sprite = GetComponentInChildren<SpriteRenderer>();
 		collider = GetComponent<BoxCollider2D>();
         healthText = GetComponentInChildren<Text>();
@@ -152,7 +154,15 @@ public class UnitController : MonoBehaviour {
 	void FixedUpdate() {
 		if (Game.Current.Freeze) return;
 
-		if (!stopMoving) transform.Translate(moveSpeed * modifiers.MoveSpeed * direction * Time.fixedDeltaTime, 0, 0);
+		if (!stopMoving)
+		{
+			transform.Translate(moveSpeed * modifiers.MoveSpeed * direction * Time.fixedDeltaTime, 0, 0);
+			animator.SetBool("isWalking", true);
+		}
+        else
+        {
+			animator.SetBool("isWalking", false);
+        }
 	}
 
 
