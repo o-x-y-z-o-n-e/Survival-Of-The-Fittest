@@ -44,7 +44,11 @@ public class UnitController : MonoBehaviour {
 	float attackCounter;
 	int health;
 
+	int attackUnitMask;
+	int attackBaseMask;
+
 	UnitController frontUnit;
+	Base frontBase;
 
 
 	//----------------------------------------------------------------------------------------------------------------------------------<
@@ -56,6 +60,9 @@ public class UnitController : MonoBehaviour {
 		sprite = GetComponentInChildren<SpriteRenderer>();
 		collider = GetComponent<BoxCollider2D>();
         healthText = GetComponentInChildren<Text>();
+
+		attackUnitMask = LayerMask.GetMask("Unit");
+		attackBaseMask = LayerMask.GetMask("Base");
 
 		if (unitOwner != null) SetPlayer(unitOwner);
     }
@@ -92,8 +99,9 @@ public class UnitController : MonoBehaviour {
 	void CheckCollision() {
 		RaycastHit2D hit;
 		Vector3 origin = transform.localPosition + (Vector3.right * collider.size.x * direction);
-		hit = Physics2D.Raycast(origin, Vector3.right * direction, ATTACK_EXTEND);
+		hit = Physics2D.Raycast(origin, Vector3.right * direction, ATTACK_EXTEND, attackUnitMask);
 
+		//Check if enemy or friendly unit is in front of this unit
 		if (hit.collider != null) {
 			if (frontUnit == null) {
 				UnitController unit = hit.collider.GetComponent<UnitController>();
@@ -110,7 +118,33 @@ public class UnitController : MonoBehaviour {
 					}
 				}
 			}
-		}
+		} else frontUnit = null;
+
+
+		//Check if unit collides with enemy base
+		hit = Physics2D.Raycast(origin, Vector3.right * direction, ATTACK_EXTEND, attackBaseMask);
+		if (hit.collider != null) {
+			if (frontBase == null) {
+				if (hit.collider.gameObject.GetInstanceID() != unitOwner.Base.gameObject.GetInstanceID()) {
+					Base b = hit.collider.GetComponent<Base>();
+					if (b != null) {
+						frontBase = b;
+						attackCounter = GetNextAttackSpeed();
+					}
+				}
+			} else {
+				if (hit.collider.gameObject.GetInstanceID() != unitOwner.Base.gameObject.GetInstanceID()) {
+					if (frontBase.gameObject.GetInstanceID() != hit.collider.gameObject.GetInstanceID()) {
+						Base b = hit.collider.GetComponent<Base>();
+						if (b != null) {
+							frontBase = b;
+							attackCounter = GetNextAttackSpeed();
+						}
+					}
+				}
+			}
+		} else frontBase = null;
+
 	}
 
 
@@ -121,10 +155,13 @@ public class UnitController : MonoBehaviour {
 		if (frontUnit != null) {
 			if (frontUnit.GetPlayerID() != unitOwner.PlayerID) stopMoving = true;
 			else {
-				float p = (frontUnit.GetWidth() + GetWidth()) / 2;
-				stopMoving = (Mathf.Abs(frontUnit.transform.localPosition.x - transform.localPosition.x) <= p - FRIENDLY_OVERLAP);
+				float p1 = frontUnit.transform.localPosition.x + ((frontUnit.GetWidth() / 2f) * -direction);
+				float p2 = transform.localPosition.x + ((GetWidth() / 2f) * direction);
+				stopMoving = (Mathf.Abs(p1 - p2) >= 0 + FRIENDLY_OVERLAP);
 			}
-		} else stopMoving = false;
+		}
+		else if (frontBase != null) stopMoving = true;
+		else stopMoving = false;
 	}
 
 
@@ -132,16 +169,26 @@ public class UnitController : MonoBehaviour {
 
 
 	void CheckAttack() {
-		if (frontUnit == null) return;
+		if (frontUnit != null) {
+			if (frontUnit.GetPlayerID() != unitOwner.PlayerID) {
+				attackCounter -= Time.deltaTime;
 
-		if(frontUnit.GetPlayerID() != unitOwner.PlayerID) {
+				if (attackCounter <= 0) {
+					attackCounter = GetNextAttackSpeed();
+
+					int d = (int)(damage * modifiers.Damage);
+					frontUnit.TakeDamage(d, this);
+					SoundManagerScript.PlayUnitSound(Type + "_Attack");
+				}
+			}
+		} else if (frontBase != null) {
 			attackCounter -= Time.deltaTime;
 
-			if(attackCounter <= 0) {
+			if (attackCounter <= 0) {
 				attackCounter = GetNextAttackSpeed();
 
 				int d = (int)(damage * modifiers.Damage);
-				frontUnit.TakeDamage(d, this);
+				frontBase.TakeDamage(d);
 				SoundManagerScript.PlayUnitSound(Type + "_Attack");
 			}
 		}
@@ -154,15 +201,11 @@ public class UnitController : MonoBehaviour {
 	void FixedUpdate() {
 		if (Game.Current.Freeze) return;
 
-		if (!stopMoving)
-		{
+		if (!stopMoving) {
 			transform.Translate(moveSpeed * modifiers.MoveSpeed * direction * Time.fixedDeltaTime, 0, 0);
-			animator.SetBool("isWalking", true);
 		}
-        else
-        {
-			animator.SetBool("isWalking", false);
-        }
+
+		animator.SetBool("isWalking", !stopMoving);
 	}
 
 

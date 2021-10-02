@@ -104,10 +104,7 @@ public class Game : MonoBehaviour {
 	/// <summary>
 	/// Load back into the main menu.
 	/// </summary>
-	public void Leave() {
-		instance = null;
-		SceneManager.LoadScene(0);
-	}
+	public void Leave() => SceneManager.LoadScene(0);
 
 
 	//----------------------------------------------------------------------------------------------------------------------------------<
@@ -129,5 +126,13 @@ public class Game : MonoBehaviour {
 
 		if (isPaused) UI.ShowPauseScreen();
 		else UI.ShowHUD();
+	}
+
+
+	//----------------------------------------------------------------------------------------------------------------------------------<
+
+
+	void OnDestroy() {
+		instance = null;
 	}
 }

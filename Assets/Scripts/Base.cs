@@ -136,7 +136,6 @@ public class Base : MonoBehaviour {
 		instance.SetPlayer(Player);
 
 		
-
 		instance.SetDirection(direction);
 	}
 }

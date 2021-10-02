@@ -9,7 +9,7 @@ public class SoundManagerScript : MonoBehaviour
     static AudioSource audioSrc;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         defenderAttack = Resources.Load<AudioClip>("Audio/FX/Defender_Attack");
         soldierAttack = Resources.Load<AudioClip>("Audio/FX/Soldier_Attack");
