@@ -1290,7 +1290,7 @@ GameObject:
   - component: {fileID: 258391092}
   - component: {fileID: 258391094}
   - component: {fileID: 258391093}
-  m_Layer: 9
+  m_Layer: 11
   m_Name: 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1393,7 +1393,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 307360627}
-  m_Layer: 9
+  m_Layer: 11
   m_Name: Spawnpoint 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3971,7 +3971,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 968182953}
-  m_Layer: 9
+  m_Layer: 11
   m_Name: Spawnpoint 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6107,7 +6107,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1996404469}
   - component: {fileID: 1996404470}
-  m_Layer: 9
+  m_Layer: 11
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}

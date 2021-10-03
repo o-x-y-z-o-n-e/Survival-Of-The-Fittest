@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-public class UnitController : MonoBehaviour {
+public class UnitController : MonoBehaviour, Damagable {
 
 	public const string WORKER_PREFAB_PATH		= "Prefabs/Worker";
 	public const string SOLDIER_PREFAB_PATH		= "Prefabs/Soldier";
@@ -44,11 +44,15 @@ public class UnitController : MonoBehaviour {
 	float attackCounter;
 	int health;
 
-	int attackUnitMask;
-	int attackBaseMask;
+	int enemyMask;
+	int allyMask;
 
-	UnitController frontUnit;
-	Base frontBase;
+
+	//Damagable frontUnit;
+	//Damagable frontBase;
+
+	UnitController nextAlly;
+	Damagable nextEnemy;
 
 
 	//----------------------------------------------------------------------------------------------------------------------------------<
@@ -60,9 +64,6 @@ public class UnitController : MonoBehaviour {
 		sprite = GetComponentInChildren<SpriteRenderer>();
 		collider = GetComponent<BoxCollider2D>();
         healthText = GetComponentInChildren<Text>();
-
-		attackUnitMask = LayerMask.GetMask("Unit");
-		attackBaseMask = LayerMask.GetMask("Base");
 
 		if (unitOwner != null) SetPlayer(unitOwner);
     }
@@ -97,54 +98,45 @@ public class UnitController : MonoBehaviour {
 
 
 	void CheckCollision() {
+		//Check for next enemy
 		RaycastHit2D hit;
 		Vector3 origin = transform.localPosition + (Vector3.right * collider.size.x * direction);
-		hit = Physics2D.Raycast(origin, Vector3.right * direction, ATTACK_EXTEND, attackUnitMask);
+		hit = Physics2D.Raycast(origin, Vector3.right * direction, ATTACK_EXTEND, enemyMask);
 
-		//Check if enemy or friendly unit is in front of this unit
 		if (hit.collider != null) {
-			if (frontUnit == null) {
-				UnitController unit = hit.collider.GetComponent<UnitController>();
-				if (unit != null) {
-					frontUnit = unit;
-					attackCounter = GetNextAttackSpeed();
-				}
+			Damagable enemy = null;
+
+			if (nextEnemy == null) {
+				enemy = hit.collider.GetComponent<Damagable>();
 			} else {
-				if (frontUnit.gameObject.GetInstanceID() != hit.collider.gameObject.GetInstanceID()) {
-					UnitController unit = hit.collider.GetComponent<UnitController>();
-					if (unit != null) {
-						frontUnit = unit;
-						attackCounter = GetNextAttackSpeed();
-					}
+				if (nextEnemy.GetInstanceID() != hit.collider.gameObject.GetInstanceID()) {
+					enemy = hit.collider.GetComponent<Damagable>();
 				}
 			}
-		} else frontUnit = null;
+
+			if (enemy != null) {
+				nextEnemy = enemy;
+				attackCounter = GetNextAttackSpeed();
+			}
+		} else nextEnemy = null;
 
 
-		//Check if unit collides with enemy base
-		hit = Physics2D.Raycast(origin, Vector3.right * direction, ATTACK_EXTEND, attackBaseMask);
+		//Check for next ally
+		hit = Physics2D.Raycast(origin, Vector3.right * direction, ATTACK_EXTEND, allyMask);
+
 		if (hit.collider != null) {
-			if (frontBase == null) {
-				if (hit.collider.gameObject.GetInstanceID() != unitOwner.Base.gameObject.GetInstanceID()) {
-					Base b = hit.collider.GetComponent<Base>();
-					if (b != null) {
-						frontBase = b;
-						attackCounter = GetNextAttackSpeed();
-					}
-				}
+			UnitController ally = null;
+
+			if (nextAlly == null) {
+				ally = hit.collider.GetComponent<UnitController>();
 			} else {
-				if (hit.collider.gameObject.GetInstanceID() != unitOwner.Base.gameObject.GetInstanceID()) {
-					if (frontBase.gameObject.GetInstanceID() != hit.collider.gameObject.GetInstanceID()) {
-						Base b = hit.collider.GetComponent<Base>();
-						if (b != null) {
-							frontBase = b;
-							attackCounter = GetNextAttackSpeed();
-						}
-					}
+				if (nextAlly.GetInstanceID() != hit.collider.gameObject.GetInstanceID()) {
+					ally = hit.collider.GetComponent<UnitController>();
 				}
 			}
-		} else frontBase = null;
 
+			if (ally != null) nextAlly = ally;
+		} else nextAlly = null;
 	}
 
 
@@ -152,15 +144,12 @@ public class UnitController : MonoBehaviour {
 
 
 	void CheckMove() {
-		if (frontUnit != null) {
-			if (frontUnit.GetPlayerID() != unitOwner.PlayerID) stopMoving = true;
-			else {
-				float p1 = frontUnit.transform.localPosition.x + ((frontUnit.GetWidth() / 2f) * -direction);
-				float p2 = transform.localPosition.x + ((GetWidth() / 2f) * direction);
-				stopMoving = (Mathf.Abs(p1 - p2) >= 0 + FRIENDLY_OVERLAP);
-			}
+		if (nextAlly != null) {
+			float p1 = nextAlly.transform.localPosition.x + ((nextAlly.GetWidth() / 2f) * -direction);
+			float p2 = transform.localPosition.x + ((GetWidth() / 2f) * direction);
+			stopMoving = (Mathf.Abs(p1 - p2) >= 0 + FRIENDLY_OVERLAP);
 		}
-		else if (frontBase != null) stopMoving = true;
+		else if (nextEnemy != null) stopMoving = true;
 		else stopMoving = false;
 	}
 
@@ -169,27 +158,15 @@ public class UnitController : MonoBehaviour {
 
 
 	void CheckAttack() {
-		if (frontUnit != null) {
-			if (frontUnit.GetPlayerID() != unitOwner.PlayerID) {
+		if (nextEnemy != null) {
+			if (nextEnemy.GetOwnerID() != unitOwner.PlayerID) {
 				attackCounter -= Time.deltaTime;
 
 				if (attackCounter <= 0) {
 					attackCounter = GetNextAttackSpeed();
 
-					int d = (int)(damage * modifiers.Damage);
-					frontUnit.TakeDamage(d, this);
-					SoundManagerScript.PlayUnitSound(Type + "_Attack");
+					Attack();
 				}
-			}
-		} else if (frontBase != null) {
-			attackCounter -= Time.deltaTime;
-
-			if (attackCounter <= 0) {
-				attackCounter = GetNextAttackSpeed();
-
-				int d = (int)(damage * modifiers.Damage);
-				frontBase.TakeDamage(d);
-				SoundManagerScript.PlayUnitSound(Type + "_Attack");
 			}
 		}
 	}
@@ -213,8 +190,7 @@ public class UnitController : MonoBehaviour {
 
 
 	//Causes sprite to shake - Used for recording purposes
-	IEnumerator Shake()
-    {
+	IEnumerator Shake() {
         transform.position = transform.position + new Vector3(0, 0.1f);
         transform.Rotate(0, 0, 10);
         yield return new WaitForSeconds(0.01f);
@@ -281,6 +257,16 @@ public class UnitController : MonoBehaviour {
 	//----------------------------------------------------------------------------------------------------------------------------------<
 
 
+	public virtual void Attack() {
+		int d = (int)(damage * modifiers.Damage);
+		nextEnemy.TakeDamage(d, this);
+		SoundManagerScript.PlayUnitSound(Type + "_Attack");
+	}
+
+
+	//----------------------------------------------------------------------------------------------------------------------------------<
+
+
 	public int GetHealth() => health;
     public void SetHealth(int newHealthValue) => health = newHealthValue;
     public Player GetUnitOwner() => unitOwner;
@@ -289,9 +275,11 @@ public class UnitController : MonoBehaviour {
     public void SetUnitDamage(int damage) => this.damage = damage;
     public float GetUnitSpeed() => moveSpeed;
     public void SetUnitSpeed(float speed) => this.moveSpeed = speed;
-	public int GetPlayerID() => unitOwner.PlayerID;
+	public int GetOwnerID() => unitOwner.PlayerID;
+	public new int GetInstanceID() => gameObject.GetInstanceID();
 	public float GetWidth() => collider.size.x;
 	float GetNextAttackSpeed() => UnityEngine.Random.Range((attackInterval / modifiers.AttackSpeed) - attackIntervalDeviation, (attackInterval / modifiers.AttackSpeed) + attackIntervalDeviation);
+	public Transform GetTransform() => transform;
 
 
 	//----------------------------------------------------------------------------------------------------------------------------------<
@@ -303,6 +291,16 @@ public class UnitController : MonoBehaviour {
 
 		direction = dir;
 		sprite.flipX = dir == -1;
+
+		gameObject.layer = LayerMask.NameToLayer(direction == 1 ? "Left Unit" : "Right Unit");
+
+		if (direction == 1) {
+			enemyMask = LayerMask.GetMask("Right Unit", "Right Base");
+			allyMask = LayerMask.GetMask("Left Unit");
+		} else {
+			enemyMask = LayerMask.GetMask("Left Unit", "Left Base");
+			allyMask = LayerMask.GetMask("Right Unit");
+		}
 	}
 
 
@@ -332,6 +330,12 @@ public class UnitController : MonoBehaviour {
 		}
 		return "";
 	}
+
+
+	//----------------------------------------------------------------------------------------------------------------------------------<
+
+
+
 
 
 	//----------------------------------------------------------------------------------------------------------------------------------<

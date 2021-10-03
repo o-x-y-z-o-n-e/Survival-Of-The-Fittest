@@ -5,7 +5,7 @@ using UnityEngine;
 /// <summary>
 /// The home base for each player. This is where ants will spawn. Goal is to destroy other player's Base.
 /// </summary>
-public class Base : MonoBehaviour {
+public class Base : MonoBehaviour, Damagable {
 
 
 	//----------------------------------------------------------------------------------------------------------------------------------<
@@ -73,7 +73,7 @@ public class Base : MonoBehaviour {
 	/// Takes away specified amount of health. If the Base's health reaches zero, then is will be destroyed and the game will end.
 	/// </summary>
 	/// <param name="amount">Health points to deduct.</param>
-	public void TakeDamage(int amount) {
+	public void TakeDamage(int amount, UnitController sender) {
 		if (isDestroyed) return;
 
 		Health -= Mathf.Abs(amount);
@@ -138,4 +138,12 @@ public class Base : MonoBehaviour {
 		
 		instance.SetDirection(direction);
 	}
+
+
+
+
+	public int GetOwnerID() => Player.PlayerID;
+	public new int GetInstanceID() => gameObject.GetInstanceID();
+	public float GetWidth() => 0;
+	public Transform GetTransform() => transform;
 }
