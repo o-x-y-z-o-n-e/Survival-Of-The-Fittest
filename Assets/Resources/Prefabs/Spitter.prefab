@@ -333,7 +333,9 @@ MonoBehaviour:
   attackIntervalDeviation: 0
   giveDNA: 10
   unitOwner: {fileID: 0}
-  ProjectilePrefab: {fileID: 0}
+  ProjectilePrefab: {fileID: 1250771802780145336, guid: ad1a194daae826a4ea4b30b088e0388d,
+    type: 3}
+  ProjectileSpawnOffset: {x: 0.5, y: 0}
 --- !u!61 &1623760112398397303
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface Damagable {
+public interface Damageable {
 
 	Transform GetTransform();
 	float GetWidth();
 	int GetOwnerID();
 	int GetInstanceID();
-	void TakeDamage(int damage, UnitController sender);
+	void TakeDamage(int damage, Player sender);
 
 }

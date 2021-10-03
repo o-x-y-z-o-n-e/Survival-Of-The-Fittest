@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-public class UnitController : MonoBehaviour, Damagable {
+public class UnitController : MonoBehaviour, Damageable {
 
 	public const string WORKER_PREFAB_PATH		= "Prefabs/Worker";
 	public const string SOLDIER_PREFAB_PATH		= "Prefabs/Soldier";
@@ -24,7 +24,7 @@ public class UnitController : MonoBehaviour, Damagable {
 	public UnitType Type;
 
 
-    [SerializeField] private int direction;
+    [SerializeField] private int direction; public int Direction => direction;
     [SerializeField] private int baseHealth;
     [SerializeField] private int damage;
     [SerializeField] private float moveSpeed;
@@ -52,7 +52,7 @@ public class UnitController : MonoBehaviour, Damagable {
 	//Damagable frontBase;
 
 	UnitController nextAlly;
-	Damagable nextEnemy;
+	Damageable nextEnemy;
 
 
 	//----------------------------------------------------------------------------------------------------------------------------------<
@@ -104,13 +104,13 @@ public class UnitController : MonoBehaviour, Damagable {
 		hit = Physics2D.Raycast(origin, Vector3.right * direction, ATTACK_EXTEND, enemyMask);
 
 		if (hit.collider != null) {
-			Damagable enemy = null;
+			Damageable enemy = null;
 
 			if (nextEnemy == null) {
-				enemy = hit.collider.GetComponent<Damagable>();
+				enemy = hit.collider.GetComponent<Damageable>();
 			} else {
 				if (nextEnemy.GetInstanceID() != hit.collider.gameObject.GetInstanceID()) {
-					enemy = hit.collider.GetComponent<Damagable>();
+					enemy = hit.collider.GetComponent<Damageable>();
 				}
 			}
 
@@ -216,14 +216,14 @@ public class UnitController : MonoBehaviour, Damagable {
 	//----------------------------------------------------------------------------------------------------------------------------------<
 
 
-	public void TakeDamage(int damage, UnitController sender) {
+	public void TakeDamage(int damage, Player sender) {
 		if (health <= 0) return;
 
 		health -= damage;
 
 		
 		if (health <= 0) {
-			sender.GiveDNA(giveDNA);
+			sender.ChangeDNA(giveDNA);
 			Die();
 			return;
 		} else {
@@ -231,14 +231,6 @@ public class UnitController : MonoBehaviour, Damagable {
 		}
 
 		healthText.text = health.ToString();
-	}
-
-
-	//----------------------------------------------------------------------------------------------------------------------------------<
-
-
-	public void GiveDNA(int amount) {
-		unitOwner.ChangeDNA(giveDNA);
 	}
 
 
@@ -258,8 +250,8 @@ public class UnitController : MonoBehaviour, Damagable {
 
 
 	public virtual void Attack() {
-		int d = (int)(damage * modifiers.Damage);
-		nextEnemy.TakeDamage(d, this);
+		int d = GetNextDamage();
+		nextEnemy.TakeDamage(d, unitOwner);
 		SoundManagerScript.PlayUnitSound(Type + "_Attack");
 	}
 
@@ -278,6 +270,7 @@ public class UnitController : MonoBehaviour, Damagable {
 	public int GetOwnerID() => unitOwner.PlayerID;
 	public new int GetInstanceID() => gameObject.GetInstanceID();
 	public float GetWidth() => collider.size.x;
+	public int GetNextDamage() => (int)(damage * modifiers.Damage);
 	float GetNextAttackSpeed() => UnityEngine.Random.Range((attackInterval / modifiers.AttackSpeed) - attackIntervalDeviation, (attackInterval / modifiers.AttackSpeed) + attackIntervalDeviation);
 	public Transform GetTransform() => transform;
 
