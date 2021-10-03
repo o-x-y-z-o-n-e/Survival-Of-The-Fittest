@@ -5,8 +5,10 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour {
 
+	public float DamageDistance = 0.5f;
+	public float MoveSpeed = 3;
+	
 	int damage;
-	float moveSpeed = 3;
 	int direction = 1;
 	int attackMask;
 
@@ -23,7 +25,7 @@ public class Projectile : MonoBehaviour {
 
 
 	void FixedUpdate() {
-		transform.Translate(Vector3.right * direction * moveSpeed * Time.fixedDeltaTime);
+		transform.Translate(Vector3.right * direction * MoveSpeed * Time.fixedDeltaTime);
 	}
 
 
@@ -43,7 +45,17 @@ public class Projectile : MonoBehaviour {
 
 
 	void CheckCollision() {
+		RaycastHit2D hit;
+		Vector3 origin = transform.localPosition;
+		hit = Physics2D.Raycast(origin, Vector3.right * direction, DamageDistance, attackMask);
 
+		if(hit.collider != null) {
+			Damageable enemy = hit.collider.GetComponent<Damageable>();
+			if (enemy != null) {
+				enemy.TakeDamage(damage, sender);
+				Destroy(gameObject);
+			}
+		}
 	}
 
 }

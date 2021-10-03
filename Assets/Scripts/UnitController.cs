@@ -17,13 +17,13 @@ public class UnitController : MonoBehaviour, Damageable {
 	public const int	SPITTER_DNA_COST		= 150;
 	public const int	DEFENDER_DNA_COST		= 250;
 
-	const float			ATTACK_EXTEND			= 0.2f;
 	const float			FRIENDLY_OVERLAP		= 0.0f;
 
 
 	public UnitType Type;
 
 
+	[SerializeField] private float attackRange = 0.2f;
     [SerializeField] private int direction; public int Direction => direction;
     [SerializeField] private int baseHealth;
     [SerializeField] private int damage;
@@ -101,7 +101,7 @@ public class UnitController : MonoBehaviour, Damageable {
 		//Check for next enemy
 		RaycastHit2D hit;
 		Vector3 origin = transform.localPosition + (Vector3.right * collider.size.x * direction);
-		hit = Physics2D.Raycast(origin, Vector3.right * direction, ATTACK_EXTEND, enemyMask);
+		hit = Physics2D.Raycast(origin, Vector3.right * direction, attackRange, enemyMask);
 
 		if (hit.collider != null) {
 			Damageable enemy = null;
@@ -122,7 +122,7 @@ public class UnitController : MonoBehaviour, Damageable {
 
 
 		//Check for next ally
-		hit = Physics2D.Raycast(origin, Vector3.right * direction, ATTACK_EXTEND, allyMask);
+		hit = Physics2D.Raycast(origin, Vector3.right * direction, 1f, allyMask);
 
 		if (hit.collider != null) {
 			UnitController ally = null;
