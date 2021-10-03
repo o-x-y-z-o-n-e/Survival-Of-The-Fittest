@@ -39,6 +39,7 @@ public class UnitController : MonoBehaviour, Damageable {
 	new BoxCollider2D collider;
     Text healthText;
 	UnitModifiers modifiers;
+	Image healthBar;
 
 	bool stopMoving;
 	float attackCounter;
@@ -64,10 +65,11 @@ public class UnitController : MonoBehaviour, Damageable {
 		sprite = GetComponentInChildren<SpriteRenderer>();
 		collider = GetComponent<BoxCollider2D>();
         healthText = GetComponentInChildren<Text>();
+		healthBar = GetComponentsInChildren<Image>()[1];
 
 		if (unitOwner != null) SetPlayer(unitOwner);
     }
-
+	
 
 	//----------------------------------------------------------------------------------------------------------------------------------<
 
@@ -77,7 +79,7 @@ public class UnitController : MonoBehaviour, Damageable {
 		modifiers = unitOwner.GetModifierReference(Type);
 
 		health = (int)(baseHealth * modifiers.Health);
-		healthText.text = health.ToString();
+		//healthText.text = health.ToString();
 	}
 
 
@@ -230,8 +232,13 @@ public class UnitController : MonoBehaviour, Damageable {
 			StartCoroutine(Shake());
 		}
 
-		healthText.text = health.ToString();
-	}
+		//healthText.text = health.ToString();
+
+        healthBar.transform.localScale = new Vector3(
+            ((float)health / 100) * healthBar.transform.localScale.x,
+            healthBar.transform.localScale.y,
+            healthBar.transform.localScale.z);
+    }
 
 
 	//----------------------------------------------------------------------------------------------------------------------------------<
