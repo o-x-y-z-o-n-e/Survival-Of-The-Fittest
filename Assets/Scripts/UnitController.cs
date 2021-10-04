@@ -12,6 +12,11 @@ public class UnitController : MonoBehaviour, Damageable {
 	public const string SPITTER_PREFAB_PATH		= "Prefabs/Spitter";
 	public const string DEFENDER_PREFAB_PATH	= "Prefabs/Defender";
 
+	public const string WORKER_SPRITE_PATH = "Sprites/Units/Worker";
+	public const string SOLDIER_SPRITE_PATH = "Sprites/Units/Soldier";
+	public const string SPITTER_SPRITE_PATH = "Sprites/Units/Spitter";
+	public const string DEFENDER_SPRITE_PATH = "Sprites/Units/Defender";
+
 	public const int	WORKER_DNA_COST			= 25;
 	public const int	SOLDIER_DNA_COST		= 100;
 	public const int	SPITTER_DNA_COST		= 150;
@@ -300,6 +305,38 @@ public class UnitController : MonoBehaviour, Damageable {
 	//----------------------------------------------------------------------------------------------------------------------------------<
 
 
+	/// <summary>
+	/// Sets the units' sprite to the sprite of the given evolution
+	/// </summary>
+	/// <param name="unitType"></param>
+	/// <param name="evolution">The evolution, which the player has evolved to</param>
+	public void SetSprite(UnitType unitType, int evolution)
+    {
+		string unitName = "";
+		switch (unitType)
+        {
+			case UnitType.Soldier:
+				unitName = "Soldier";
+				break;
+			case UnitType.Worker:
+				unitName = "Worker";
+				break;
+			case UnitType.Spitter:
+				unitName = "Spitter";
+				break;
+			case UnitType.Defender:
+				unitName = "Defender";
+				break;
+		}
+		Sprite newSprite = Resources.Load(GetUnitSpritePath(unitType) + "/" + unitName
+					+ evolution.ToString(), typeof(Sprite)) as Sprite;
+		sprite.sprite = newSprite;
+	}
+
+
+	//----------------------------------------------------------------------------------------------------------------------------------<
+
+
 	public static int GetUnitBaseCost(UnitType type) {
 		switch(type) {
 			case UnitType.Worker: return WORKER_DNA_COST;
@@ -327,8 +364,17 @@ public class UnitController : MonoBehaviour, Damageable {
 
 	//----------------------------------------------------------------------------------------------------------------------------------<
 
-
-
+	public static string GetUnitSpritePath(UnitType type)
+	{
+		switch (type)
+		{
+			case UnitType.Worker: return WORKER_SPRITE_PATH;
+			case UnitType.Soldier: return SOLDIER_SPRITE_PATH;
+			case UnitType.Spitter: return SPITTER_SPRITE_PATH;
+			case UnitType.Defender: return DEFENDER_SPRITE_PATH;
+		}
+		return "";
+	}
 
 
 	//----------------------------------------------------------------------------------------------------------------------------------<

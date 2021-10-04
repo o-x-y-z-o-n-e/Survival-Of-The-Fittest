@@ -106,6 +106,8 @@ public class Evolution {
 
 			Game.Current.UI.UpdateEvolutionText(GetEvolutionText(0), player.PlayerID, 0);
 			Game.Current.UI.UpdateEvolutionText(GetEvolutionText(1), player.PlayerID, 1);
+
+			ChangeSprites();
 		}
         else
         {
@@ -144,6 +146,11 @@ public class Evolution {
 	{
 		UnitModifiers modifier = player.GetModifierReference(unitType);
 		modifier.HitTwoEnemies = ranged;
+	}
+
+	private void ChangeSprites()
+    {
+		// Get All player units and change sprites
 	}
 
 
