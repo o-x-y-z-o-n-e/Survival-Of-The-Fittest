@@ -113,7 +113,8 @@ public class UnitController : MonoBehaviour, Damageable {
 			if (nextEnemy == null) {
 				enemy = hit.collider.GetComponent<Damageable>();
 			} else {
-				if (nextEnemy.GetInstanceID() != hit.collider.gameObject.GetInstanceID()) {
+				if (nextEnemy.IsDead()) nextEnemy = null;
+				else if (nextEnemy.GetInstanceID() != hit.collider.gameObject.GetInstanceID()) {
 					enemy = hit.collider.GetComponent<Damageable>();
 				}
 			}
@@ -134,7 +135,8 @@ public class UnitController : MonoBehaviour, Damageable {
 			if (nextAlly == null) {
 				ally = hit.collider.GetComponent<UnitController>();
 			} else {
-				if (nextAlly.GetInstanceID() != hit.collider.gameObject.GetInstanceID()) {
+				if (nextAlly.IsDead()) nextAlly = null;
+				else if (nextAlly.GetInstanceID() != hit.collider.gameObject.GetInstanceID()) {
 					ally = hit.collider.GetComponent<UnitController>();
 				}
 			}
@@ -278,6 +280,7 @@ public class UnitController : MonoBehaviour, Damageable {
 	public int GetNextDamage() => (int)(damage * modifiers.Damage);
 	float GetNextAttackSpeed() => UnityEngine.Random.Range((attackInterval / modifiers.AttackSpeed) - attackIntervalDeviation, (attackInterval / modifiers.AttackSpeed) + attackIntervalDeviation);
 	public Transform GetTransform() => transform;
+	public bool IsDead() => health <= 0;
 
 
 	//----------------------------------------------------------------------------------------------------------------------------------<
