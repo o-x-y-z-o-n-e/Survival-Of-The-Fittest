@@ -5,22 +5,32 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour {
 
+	public float MoveDistance = 5f;
 	public float DamageDistance = 0.5f;
 	public float MoveSpeed = 3;
-	
+
+	int collideCount = 1;
 	int damage;
 	int direction = 1;
-	int attackMask;
+	LayerMask attackMask;
 
 	SpriteRenderer sprite;
 	Player sender;
 
+	HashSet<int> collided = new HashSet<int>();
+	int collideCounter = 0;
+
+	float startX;
+
 	void Awake() {
 		sprite = GetComponentInChildren<SpriteRenderer>();
+		startX = transform.localPosition.x;
 	}
 
 	void Update() {
 		CheckCollision();
+
+		if(Mathf.Abs(transform.localPosition.x - startX) >= MoveDistance) Destroy(gameObject);
 	}
 
 
@@ -36,12 +46,14 @@ public class Projectile : MonoBehaviour {
 		direction = dir;
 		sprite.flipX = dir == -1;
 
-		attackMask = LayerMask.GetMask(direction == 1 ? "Right Unit" : "Left Unit");
+		if(direction == 1)		attackMask = LayerMask.GetMask("Right Unit", "Right Base");
+		else					attackMask = LayerMask.GetMask("Left Unit", "Left Base");
 	}
 
 
 	public void SetSender(Player sender) => this.sender = sender;
 	public void SetDamage(int damage) => this.damage = damage;
+	public void SetCollideNumber(int num) => collideCount = num;
 
 
 	void CheckCollision() {
@@ -49,13 +61,23 @@ public class Projectile : MonoBehaviour {
 		Vector3 origin = transform.localPosition;
 		hit = Physics2D.Raycast(origin, Vector3.right * direction, DamageDistance, attackMask);
 
-		if(hit.collider != null) {
-			Damageable enemy = hit.collider.GetComponent<Damageable>();
-			if (enemy != null) {
-				enemy.TakeDamage(damage, sender);
-				Destroy(gameObject);
+		if (hit.collider != null) {
+			if (!collided.Contains(hit.collider.GetInstanceID())) {
+				collided.Add(hit.collider.GetInstanceID());
+
+				Damageable enemy = hit.collider.GetComponent<Damageable>();
+				if (enemy != null) {
+					enemy.TakeDamage(damage, sender);
+				}
+
+
+				collideCounter++;
+				if(collideCounter >= collideCount) {
+					Destroy(gameObject);
+				}
 			}
 		}
+
 	}
 
 }

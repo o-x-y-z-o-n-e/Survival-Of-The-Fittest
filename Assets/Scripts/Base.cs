@@ -146,4 +146,5 @@ public class Base : MonoBehaviour, Damageable {
 	public new int GetInstanceID() => gameObject.GetInstanceID();
 	public float GetWidth() => 0;
 	public Transform GetTransform() => transform;
+	public bool IsDead() => Health <= 0;
 }
