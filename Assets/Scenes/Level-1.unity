@@ -4243,6 +4243,10 @@ MonoBehaviour:
   PauseScreen: {fileID: 1634725215}
   FinishText: {fileID: 2074429488}
   TimeDisplay: {fileID: 1771388593}
+  Player1Evolve1Button: {fileID: 927020385}
+  Player1Evolve2Button: {fileID: 252024620}
+  Player2Evolve1Button: {fileID: 849526387}
+  Player2Evolve2Button: {fileID: 373010294}
   Player1Evolve1Text: {fileID: 1295728009}
   Player1Evolve2Text: {fileID: 1588969210}
   Player2Evolve1Text: {fileID: 1344423314}

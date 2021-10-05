@@ -55,11 +55,6 @@ public class Evolution {
 				() => { ModifyUnit(UnitType.Worker, moveSpeed:0.1f); },
 				"When a defender dies, it deals 10% of its max hp as damage to the front 2 enemies",
 				() => {  }),
-			new EvolveData(0,
-				"Evolution tree complete",
-				() => {  },
-				"Evolution tree complete",
-				() => {  }),
 		};
 	}
 
@@ -70,7 +65,7 @@ public class Evolution {
 	private Player player;
 
     // How many evolutions the player has gone through so far
-    private int evolutionCounter = 0;
+    private int nextEvolution = 0;
 
 
 	//----------------------------------------------------------------------------------------------------------------------------------<
@@ -93,19 +88,25 @@ public class Evolution {
 	public void Evolve(int option) {
 		if (Game.Current.Freeze) return;
 
-		if (evolutionCounter + 1 >= DATA.Length) return;// else already fully evolved
+		if (nextEvolution >= DATA.Length) return;// else already fully evolved
 
-		if (player.DNA >= DATA[evolutionCounter].DNACost)
+		if (player.DNA >= DATA[nextEvolution].DNACost)
 		{
-			if (option == 0) DATA[evolutionCounter].Option1Func();
-			else if (option == 1) DATA[evolutionCounter].Option2Func();
+			if (option == 0) DATA[nextEvolution].Option1Func();
+			else if (option == 1) DATA[nextEvolution].Option2Func();
 
-			player.DNA -= DATA[evolutionCounter].DNACost;
+			player.DNA -= DATA[nextEvolution].DNACost;
 
-			evolutionCounter += 1;
+			nextEvolution += 1;
 
-			Game.Current.UI.UpdateEvolutionText(GetEvolutionText(0), player.PlayerID, 0);
-			Game.Current.UI.UpdateEvolutionText(GetEvolutionText(1), player.PlayerID, 1);
+			if (nextEvolution < DATA.Length) {
+				Game.Current.UI.UpdateEvolutionText(GetEvolutionText(0), player.PlayerID, 0);
+				Game.Current.UI.UpdateEvolutionText(GetEvolutionText(1), player.PlayerID, 1);
+			} else {
+				Game.Current.UI.UpdateEvolutionText("Evolution tree complete", player.PlayerID, 0);
+				Game.Current.UI.UpdateEvolutionText("Evolution tree complete", player.PlayerID, 1);
+				Game.Current.UI.DisableEvolutionButtons(player.PlayerID);
+			}
 
 			ChangeSprites();
 		}
@@ -119,7 +120,7 @@ public class Evolution {
 	//----------------------------------------------------------------------------------------------------------------------------------<
 
 
-	public string GetEvolutionText(int option) => option == 0  ? DATA[evolutionCounter].Option1Text : DATA[evolutionCounter].Option2Text;
+	public string GetEvolutionText(int option) => option == 0  ? DATA[nextEvolution].Option1Text : DATA[nextEvolution].Option2Text;
 
 
 	//----------------------------------------------------------------------------------------------------------------------------------<

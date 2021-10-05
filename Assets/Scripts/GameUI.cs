@@ -29,6 +29,15 @@ public class GameUI : MonoBehaviour {
 
 	public Text TimeDisplay;
 
+	[Space]
+
+	public Button Player1Evolve1Button;
+	public Button Player1Evolve2Button;
+	public Button Player2Evolve1Button;
+	public Button Player2Evolve2Button;
+
+	[Space]
+
 	public Text Player1Evolve1Text;
 	public Text Player1Evolve2Text;
 	public Text Player2Evolve1Text;
@@ -157,6 +166,20 @@ public class GameUI : MonoBehaviour {
 
 		CountdownText.text = ((int)t).ToString();
 	}
+
+
+	//----------------------------------------------------------------------------------------------------------------------------------<
+
+
+	public void DisableEvolutionButtons(int player) {
+		if(player == 0) {
+			Player1Evolve1Button.interactable = false;
+			Player1Evolve2Button.interactable = false;
+		} else {
+			Player2Evolve1Button.interactable = false;
+			Player2Evolve2Button.interactable = false;
+		}
+	} 
 
 
 	//----------------------------------------------------------------------------------------------------------------------------------<
