@@ -29,6 +29,9 @@ public class UnitController : MonoBehaviour, Damageable {
 	const float BLOODLUST_MOVE_MULTIPLIER = 1f;
 
 
+	public const float CRITICAL_DAMAGE_MULTIPLIER = 3f;
+
+
 	public UnitType Type;
 
 
@@ -279,6 +282,12 @@ public class UnitController : MonoBehaviour, Damageable {
 
 	public virtual void Attack() {
 		int d = GetNextDamage();
+
+		if (TryCritical()) {
+			d = (int)(d * CRITICAL_DAMAGE_MULTIPLIER);
+			//DO CRITICAL ATTACK VISUAL EFFECT HERE
+		}
+
 		nextEnemy.TakeDamage(d, unitOwner);
 		SoundManagerScript.PlayUnitSound(Type + "_Attack");
 	}
@@ -301,6 +310,7 @@ public class UnitController : MonoBehaviour, Damageable {
 	float GetNextAttackSpeed() => UnityEngine.Random.Range((attackInterval / modifiers.AttackSpeed) - attackIntervalDeviation, (attackInterval / modifiers.AttackSpeed) + attackIntervalDeviation);
 	public Transform GetTransform() => transform;
 	public bool IsDead() => health <= 0;
+	public bool TryCritical() => UnityEngine.Random.value <= modifiers.CriticalChance;
 
 
 	//----------------------------------------------------------------------------------------------------------------------------------<
@@ -460,8 +470,10 @@ public class UnitModifiers {
 	public float Damage = 1;
 	public float Health = 1;
 	[Range(0, 1)] public float Armor = 0;
+	[Range(0, 1)] public float CriticalChance = 0.08f;
 	public float AttackSpeed = 1;
 	public float GiveDNA = 1;
+	
 
 	[Space]
 

@@ -11,6 +11,7 @@ public class Projectile : MonoBehaviour {
 
 	int collideCount = 1;
 	int damage;
+	bool critical;
 	int direction = 1;
 	LayerMask attackMask;
 
@@ -51,9 +52,13 @@ public class Projectile : MonoBehaviour {
 	}
 
 
-	public void SetSender(Player sender) => this.sender = sender;
-	public void SetDamage(int damage) => this.damage = damage;
 	public void SetCollideNumber(int num) => collideCount = num;
+	public void SetSender(Player sender) => this.sender = sender;
+	public void SetDamage(int damage, bool critical) {
+		this.damage = damage;
+		this.critical = critical;
+	}
+	
 
 
 	void CheckCollision() {

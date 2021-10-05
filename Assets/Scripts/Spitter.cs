@@ -19,7 +19,12 @@ public class Spitter : UnitController {
 
 		proj.SetSender(GetUnitOwner());
 		proj.SetDirection(Direction);
-		proj.SetDamage(GetNextDamage());
+
+		int damage = GetNextDamage();
+		bool critical = TryCritical();
+		if(critical) damage = (int)(damage * CRITICAL_DAMAGE_MULTIPLIER);
+		
+		proj.SetDamage(damage, critical);
 	}
 
 }

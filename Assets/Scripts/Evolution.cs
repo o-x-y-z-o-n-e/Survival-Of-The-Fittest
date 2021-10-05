@@ -214,6 +214,20 @@ public class Evolution {
 	}
 
 
+	//----------------------------------------------------------------------------------------------------------------------------------<
+
+
+	/// <summary>
+	/// Add to the chances that the unit will do a critical attack.
+	/// </summary>
+	/// <param name="unitType"></param>
+	/// <param name="addedPercent"></param>
+	void AddCriticalChance(UnitType unitType, float addedPercent) {
+		UnitModifiers mod = player.GetModifierReference(unitType);
+		mod.CriticalChance = Mathf.Clamp01(mod.CriticalChance + addedPercent);
+	}
+
+
 	#endregion
 }
 
