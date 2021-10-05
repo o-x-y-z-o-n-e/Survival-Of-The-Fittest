@@ -200,6 +200,20 @@ public class Evolution {
 	}
 
 
+	//----------------------------------------------------------------------------------------------------------------------------------<
+
+
+	/// <summary>
+	/// Add to the damage reduction mulitplier for a specified unit type.
+	/// </summary>
+	/// <param name="unitType"></param>
+	/// <param name="addedPercent"></param>
+	void AddArmorModifier(UnitType unitType, float addedPercent) {
+		UnitModifiers mod = player.GetModifierReference(unitType);
+		mod.Armor = Mathf.Clamp01(mod.Armor + addedPercent);
+	}
+
+
 	#endregion
 }
 

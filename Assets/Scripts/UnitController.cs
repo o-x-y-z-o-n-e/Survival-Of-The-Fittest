@@ -237,7 +237,8 @@ public class UnitController : MonoBehaviour, Damageable {
 	public void TakeDamage(int damage, Player sender) {
 		if (health <= 0) return;
 
-		health -= damage;
+		int d = (int)(damage * (1f - modifiers.Armor));
+		health -= d;
 
 
 		if(modifiers.Bloodlust) {
@@ -458,6 +459,7 @@ public class UnitModifiers {
 	public float MoveSpeed = 1;
 	public float Damage = 1;
 	public float Health = 1;
+	[Range(0, 1)] public float Armor = 0;
 	public float AttackSpeed = 1;
 	public float GiveDNA = 1;
 
