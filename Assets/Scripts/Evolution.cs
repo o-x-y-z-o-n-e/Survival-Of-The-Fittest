@@ -186,6 +186,19 @@ public class Evolution {
 	void RepairBase(float percent) => player.Base.Repair(percent);
 
 
+	//----------------------------------------------------------------------------------------------------------------------------------<
+
+
+	/// <summary>
+	/// Flicks the toggle for the bloodlust feature on a specified unit type.
+	/// </summary>
+	/// <param name="unitType"></param>
+	void EnableBloodlust(UnitType unitType) {
+		UnitModifiers mod = player.GetModifierReference(unitType);
+		mod.Bloodlust = true;
+	}
+
+
 	#endregion
 }
 

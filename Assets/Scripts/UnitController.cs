@@ -24,6 +24,10 @@ public class UnitController : MonoBehaviour, Damageable {
 
 	const float			FRIENDLY_OVERLAP		= 0.0f;
 
+	const float BLOODLUST_THRESHOLD = 0.15f; //What percent of total health does a Unit have to reach below for bloodlust to activate.
+	const float BLOODLUST_DAMAGE_MULTIPLIER = 2f;
+	const float BLOODLUST_MOVE_MULTIPLIER = 1f;
+
 
 	public UnitType Type;
 
@@ -48,16 +52,17 @@ public class UnitController : MonoBehaviour, Damageable {
 	bool stopMoving;
 	float attackCounter;
 	int health;
+	bool bloodlust;
 
 	int enemyMask;
 	int allyMask;
 
 
-	//Damagable frontUnit;
-	//Damagable frontBase;
-
 	UnitController nextAlly;
 	Damageable nextEnemy;
+
+
+	float bloodlustRotate;
 
 
 	//----------------------------------------------------------------------------------------------------------------------------------<
@@ -185,8 +190,15 @@ public class UnitController : MonoBehaviour, Damageable {
 		if (Game.Current.Freeze) return;
 
 		if (!stopMoving) {
-			transform.Translate(moveSpeed * modifiers.MoveSpeed * direction * Time.fixedDeltaTime, 0, 0);
+			float velocity = moveSpeed * modifiers.MoveSpeed * direction * Time.fixedDeltaTime;
+
+			//Current BLOODLUST_MOVE_MULTIPLIER is set to '1' added this in case we wanted it.
+			if (bloodlust) velocity *= BLOODLUST_MOVE_MULTIPLIER;
+
+			transform.Translate(velocity, 0, 0);
 		}
+
+		MoveSprite();
 
 		animator.SetBool("isWalking", !stopMoving);
 	}
@@ -226,6 +238,14 @@ public class UnitController : MonoBehaviour, Damageable {
 		if (health <= 0) return;
 
 		health -= damage;
+
+
+		if(modifiers.Bloodlust) {
+			float t = health / baseHealth;
+
+			//Activate bloodlust if helath is below threshold
+			if(t <= BLOODLUST_THRESHOLD) bloodlust = true;
+		}
 
 		
 		if (health <= 0) {
@@ -277,10 +297,21 @@ public class UnitController : MonoBehaviour, Damageable {
 	public int GetOwnerID() => unitOwner.PlayerID;
 	public new int GetInstanceID() => gameObject.GetInstanceID();
 	public float GetWidth() => collider.size.x;
-	public int GetNextDamage() => (int)(damage * modifiers.Damage);
 	float GetNextAttackSpeed() => UnityEngine.Random.Range((attackInterval / modifiers.AttackSpeed) - attackIntervalDeviation, (attackInterval / modifiers.AttackSpeed) + attackIntervalDeviation);
 	public Transform GetTransform() => transform;
 	public bool IsDead() => health <= 0;
+
+
+	//----------------------------------------------------------------------------------------------------------------------------------<
+
+
+	public int GetNextDamage() {
+		float d = damage * modifiers.Damage;
+
+		if (bloodlust) d *= BLOODLUST_DAMAGE_MULTIPLIER;
+
+		return (int)d;
+	}
 
 
 	//----------------------------------------------------------------------------------------------------------------------------------<
@@ -340,6 +371,30 @@ public class UnitController : MonoBehaviour, Damageable {
 	//----------------------------------------------------------------------------------------------------------------------------------<
 
 
+	/// <summary>
+	/// This is for moving/rotating the unit sprite. Used to illustrate effects like bloodlust.
+	/// </summary>
+	void MoveSprite() {
+		Vector2 offset = Vector2.zero;
+		float rotation = 0;
+
+		//Visualize bloodlust by 'shaking' back and forth.
+		if (bloodlust) {
+			bloodlustRotate += Time.fixedDeltaTime * 25f;
+			float r = Mathf.Sin(bloodlustRotate) * 7f;
+
+			rotation += r;
+		}
+
+
+		sprite.transform.localPosition = offset;
+		sprite.transform.localRotation = Quaternion.Euler(0, 0, rotation);
+	}
+
+
+	//----------------------------------------------------------------------------------------------------------------------------------<
+
+
 	public static int GetUnitBaseCost(UnitType type) {
 		switch(type) {
 			case UnitType.Worker: return WORKER_DNA_COST;
@@ -367,6 +422,7 @@ public class UnitController : MonoBehaviour, Damageable {
 
 	//----------------------------------------------------------------------------------------------------------------------------------<
 
+
 	public static string GetUnitSpritePath(UnitType type)
 	{
 		switch (type)
@@ -382,56 +438,6 @@ public class UnitController : MonoBehaviour, Damageable {
 
 	//----------------------------------------------------------------------------------------------------------------------------------<
 
-
-	#region Legacy Code
-	/*
-
-
-	private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag == "PlayerUnit")
-        {
-            Debug.Log(gameObject.name + " Collided with " + collision.name);
-            //unitOwner.SetUnitsAreMoving(false);
-            //StartCoroutine("AttackEnemy", collision);
-        }
-    }
-
-
-	//----------------------------------------------------------------------------------------------------------------------------------<
-
-
-	private IEnumerator AttackEnemy(Collider2D collision)
-    {
-        UnitController enemyController = collision.GetComponent<UnitController>();
-        float nextHitTime = Time.time;
-
-        while (health > 0 && enemyController.GetHealth() > 0)
-        {
-
-            if (Time.time >= nextHitTime)
-            {
-                enemyController.SetHealth(enemyController.GetHealth() - damage);
-                nextHitTime += attackInterval;
-                //Shakes unit every attack
-                StartCoroutine(Shake());
-            }
-            yield return null;
-        }
-
-        if (health <= 0)
-        {
-            Destroy(gameObject);
-            unitOwner.AddDNA(gameObject.GetComponent<UnitController>().giveDNA);
-        }
-
-        unitOwner.SetUnitsAreMoving(true);
-        yield return null;
-    }
-
-
-	*/
-	#endregion
 }
 
 

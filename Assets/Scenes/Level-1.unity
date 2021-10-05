@@ -574,28 +574,32 @@ MonoBehaviour:
     Health: 1
     AttackSpeed: 1
     GiveDNA: 1
-    HitTwoEnemies: 0
+    RangedPassCount: 1
+    Bloodlust: 0
   SoldierModifiers:
     MoveSpeed: 1
     Damage: 1
     Health: 1
     AttackSpeed: 1
     GiveDNA: 1
-    HitTwoEnemies: 0
+    RangedPassCount: 1
+    Bloodlust: 0
   SpitterModifiers:
     MoveSpeed: 1
     Damage: 1
     Health: 1
     AttackSpeed: 1
     GiveDNA: 1
-    HitTwoEnemies: 0
+    RangedPassCount: 1
+    Bloodlust: 0
   DefenderModifiers:
     MoveSpeed: 1
     Damage: 1
     Health: 1
     AttackSpeed: 1
     GiveDNA: 1
-    HitTwoEnemies: 0
+    RangedPassCount: 1
+    Bloodlust: 0
   PlayerID: 0
 --- !u!1 &95904311
 GameObject:
@@ -2327,28 +2331,32 @@ MonoBehaviour:
     Health: 1
     AttackSpeed: 1
     GiveDNA: 1
-    HitTwoEnemies: 0
+    RangedPassCount: 1
+    Bloodlust: 0
   SoldierModifiers:
     MoveSpeed: 1
     Damage: 1
     Health: 1
     AttackSpeed: 1
     GiveDNA: 1
-    HitTwoEnemies: 0
+    RangedPassCount: 1
+    Bloodlust: 0
   SpitterModifiers:
     MoveSpeed: 1
     Damage: 1
     Health: 1
     AttackSpeed: 1
     GiveDNA: 1
-    HitTwoEnemies: 0
+    RangedPassCount: 1
+    Bloodlust: 0
   DefenderModifiers:
     MoveSpeed: 1
     Damage: 1
     Health: 1
     AttackSpeed: 1
     GiveDNA: 1
-    HitTwoEnemies: 0
+    RangedPassCount: 1
+    Bloodlust: 0
   PlayerID: 1
 --- !u!1 &587878429
 GameObject:
