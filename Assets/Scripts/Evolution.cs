@@ -13,7 +13,7 @@ public class Evolution {
 			new EvolveData(400,
 				"Spitters now hit 2 enemies but have 50% damage",
 				() => { ModifyUnit(UnitType.Spitter, damage:-0.5f); 
-					RangedAttack(UnitType.Spitter, true); },
+					RangedAttack(UnitType.Spitter, 2); },
 				"Spitters now heal the front ally for 10% of damage dealt",
 				() => {  }),
 
@@ -24,8 +24,8 @@ public class Evolution {
 				() => { ModifyUnit(UnitType.Defender, health:0.05f); }),
 
 			new EvolveData(400,
-				"DNA generation is 5% faster",
-				() => {  },
+				"DNA generation is increased to 700 per minute",
+				() => { player.SetDNAGenerationRate(700); },
 				"Soldiers give extra DNA on kill",
 				() => { ModifyUnit(UnitType.Soldier, dna:100); }),
 
@@ -33,7 +33,7 @@ public class Evolution {
 				"Defenders have 20% damage reduction",
 				() => { ModifyUnit(UnitType.Defender, damage:-0.2f); },
 				"Your hive restores 10% hp",
-				() => { player.Base.Repair(0.1f); }),
+				() => { RepairBase(0.1f); }),
 
 			new EvolveData(400,
 				"Enemies that attack your hive take 5% damage per hit",
@@ -131,6 +131,15 @@ public class Evolution {
 	//----------------------------------------------------------------------------------------------------------------------------------<
 
 
+	/// <summary>
+	/// Changes a specified unit type's modifiers
+	/// </summary>
+	/// <param name="unitType"></param>
+	/// <param name="moveSpeed"></param>
+	/// <param name="attackSpeed"></param>
+	/// <param name="damage"></param>
+	/// <param name="health"></param>
+	/// <param name="dna"></param>
 	private void ModifyUnit(UnitType unitType, float moveSpeed = 0, float attackSpeed = 0,
 		float damage = 0, float health = 0, int dna = 0)
 	{
@@ -142,11 +151,24 @@ public class Evolution {
 		modifier.GiveDNA += dna;
 	}
 
-	private void RangedAttack(UnitType unitType, bool ranged)
+
+	//----------------------------------------------------------------------------------------------------------------------------------<
+
+
+	/// <summary>
+	/// [For Spitters] Defines how many enemies a spitter's projectile will pass through.
+	/// </summary>
+	/// <param name="unitType"></param>
+	/// <param name="ranged"></param>
+	private void RangedAttack(UnitType unitType, int passCount)
 	{
 		UnitModifiers modifier = player.GetModifierReference(unitType);
-		modifier.HitTwoEnemies = ranged;
+		modifier.RangedPassCount = passCount;
 	}
+
+
+	//----------------------------------------------------------------------------------------------------------------------------------<
+
 
 	private void ChangeSprites()
     {
@@ -155,6 +177,13 @@ public class Evolution {
 
 
 	//----------------------------------------------------------------------------------------------------------------------------------<
+
+
+	/// <summary>
+	/// Adds a percent of the base's max health [100], back onto base's current health.
+	/// </summary>
+	/// <param name="percent"></param>
+	void RepairBase(float percent) => player.Base.Repair(percent);
 
 
 	#endregion

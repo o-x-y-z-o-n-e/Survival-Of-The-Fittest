@@ -458,6 +458,9 @@ public class UnitModifiers {
 	[Space]
 
 	[Header("For Spitters Only")]
-	public bool HitTwoEnemies;
+	public int RangedPassCount = 1;
+
+	[Header("For Soldiers Only")]
+	public bool Bloodlust;
 
 }

@@ -123,4 +123,12 @@ public class Player : MonoBehaviour {
 	public void SelectPath(int path) {
 		selectedPath = path;
 	}
+
+
+	//----------------------------------------------------------------------------------------------------------------------------------<
+
+
+	public void SetDNAGenerationRate(int bpm) {
+		DNAPerMinute = bpm;
+	}
 }
