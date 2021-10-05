@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 /// The home base for each player. This is where ants will spawn. Goal is to destroy other player's Base.
@@ -14,6 +15,8 @@ public class Base : MonoBehaviour, Damageable {
 	public Transform UnitContainer;
 	public Transform Spawnpoint1;
 	public Transform Spawnpoint2;
+
+	private Image healthBar;
 
 
 	//----------------------------------------------------------------------------------------------------------------------------------<
@@ -36,6 +39,7 @@ public class Base : MonoBehaviour, Damageable {
 
 	void Awake() {
 		Health = MaxHealth;
+		healthBar = GetComponentsInChildren<Image>()[1];
 	}
 
 
@@ -77,6 +81,11 @@ public class Base : MonoBehaviour, Damageable {
 		if (isDestroyed) return;
 
 		Health -= Mathf.Abs(amount);
+
+		healthBar.transform.localScale = new Vector3(
+			((float)Health / 100) * healthBar.transform.localScale.x,
+			healthBar.transform.localScale.y,
+			healthBar.transform.localScale.z);
 
 		if (Health <= 0) Destroy();
 	}
