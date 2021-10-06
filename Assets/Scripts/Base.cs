@@ -34,6 +34,10 @@ public class Base : MonoBehaviour, Damageable {
 	bool isDestroyed; public bool IsDestroyed => isDestroyed;
 
 
+	LinkedList<UnitController> topUnits = new LinkedList<UnitController>();
+	LinkedList<UnitController> bottomUnits = new LinkedList<UnitController>();
+
+
 	//----------------------------------------------------------------------------------------------------------------------------------<
 
 
@@ -151,6 +155,9 @@ public class Base : MonoBehaviour, Damageable {
 
 		
 		instance.SetDirection(direction);
+
+		if (path == 0) topUnits.AddLast(instance);
+		else bottomUnits.AddLast(instance);
 	}
 
 
@@ -161,4 +168,22 @@ public class Base : MonoBehaviour, Damageable {
 	public float GetWidth() => 0;
 	public Transform GetTransform() => transform;
 	public bool IsDead() => Health <= 0;
+
+	public void RemoveUnit(UnitController unit) {
+		if (!topUnits.Remove(unit)) bottomUnits.Remove(unit);
+	}
+
+	public UnitController GetUnit(int index, int path) {
+		LinkedList<UnitController> units = (path == 0 ? topUnits : bottomUnits);
+
+		if (units.Count == 0) return null;
+
+		int i = 0;
+		LinkedListNode<UnitController> node = units.First;
+		while (true) {
+			if (i == index) return node.Value;
+			else if (node.Next != null) node = node.Next;
+			else return null;
+		}
+	}
 }
