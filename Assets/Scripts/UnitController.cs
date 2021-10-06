@@ -237,8 +237,8 @@ public class UnitController : MonoBehaviour, Damageable {
 	//----------------------------------------------------------------------------------------------------------------------------------<
 
 
-	public void TakeDamage(int damage, Player sender) {
-		if (health <= 0) return;
+	public bool TakeDamage(int damage, Player sender) {
+		if (health <= 0) return false;
 
 		int d = (int)(damage * (1f - modifiers.Armor));
 		health -= d;
@@ -255,7 +255,7 @@ public class UnitController : MonoBehaviour, Damageable {
 		if (health <= 0) {
 			sender.ChangeDNA(giveDNA);
 			Die();
-			return;
+			return true;
 		} else {
 			StartCoroutine(Shake());
 		}
@@ -264,6 +264,8 @@ public class UnitController : MonoBehaviour, Damageable {
             ((float)health / baseHealth) * healthBar.transform.localScale.x,
             healthBar.transform.localScale.y,
             healthBar.transform.localScale.z);
+
+		return false;
     }
 
 
@@ -288,7 +290,10 @@ public class UnitController : MonoBehaviour, Damageable {
 			//DO CRITICAL ATTACK VISUAL EFFECT HERE
 		}
 
-		nextEnemy.TakeDamage(d, unitOwner);
+		if (nextEnemy.TakeDamage(damage, unitOwner)) {
+			unitOwner.ChangeDNA(modifiers.ExtraDNAHarvest);
+		}
+		
 		SoundManagerScript.PlayUnitSound(Type + "_Attack");
 	}
 
@@ -472,7 +477,7 @@ public class UnitModifiers {
 	[Range(0, 1)] public float Armor = 0;
 	[Range(0, 1)] public float CriticalChance = 0.08f;
 	public float AttackSpeed = 1;
-	public float GiveDNA = 1;
+	public int ExtraDNAHarvest = 0;
 	
 
 	[Space]

@@ -17,6 +17,7 @@ public class Projectile : MonoBehaviour {
 
 	SpriteRenderer sprite;
 	Player sender;
+	UnitType ownerType;
 
 	HashSet<int> collided = new HashSet<int>();
 	int collideCounter = 0;
@@ -58,6 +59,7 @@ public class Projectile : MonoBehaviour {
 		this.damage = damage;
 		this.critical = critical;
 	}
+	public void SetUnitSenderType(UnitType type) => ownerType = type;
 	
 
 
@@ -72,7 +74,10 @@ public class Projectile : MonoBehaviour {
 
 				Damageable enemy = hit.collider.GetComponent<Damageable>();
 				if (enemy != null) {
-					enemy.TakeDamage(damage, sender);
+					if(enemy.TakeDamage(damage, sender)) {
+						UnitModifiers mod = sender.GetModifierReference(ownerType);
+						sender.ChangeDNA(mod.ExtraDNAHarvest);
+					}
 				}
 
 

@@ -77,8 +77,8 @@ public class Base : MonoBehaviour, Damageable {
 	/// Takes away specified amount of health. If the Base's health reaches zero, then is will be destroyed and the game will end.
 	/// </summary>
 	/// <param name="amount">Health points to deduct.</param>
-	public void TakeDamage(int amount, Player sender) {
-		if (isDestroyed) return;
+	public bool TakeDamage(int amount, Player sender) {
+		if (isDestroyed) return false;
 
 		Health -= Mathf.Abs(amount);
 
@@ -87,7 +87,12 @@ public class Base : MonoBehaviour, Damageable {
 			healthBar.transform.localScale.y,
 			healthBar.transform.localScale.z);
 
-		if (Health <= 0) Destroy();
+		if (Health <= 0) {
+			Destroy();
+			return true;
+		}
+
+		return false;
 	}
 
 

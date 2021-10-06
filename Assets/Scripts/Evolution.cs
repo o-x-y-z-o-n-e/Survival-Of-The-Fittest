@@ -27,7 +27,7 @@ public class Evolution {
 				"DNA generation is increased to 700 per minute",
 				() => { player.SetDNAGenerationRate(700); },
 				"Soldiers give extra DNA on kill",
-				() => { ModifyUnit(UnitType.Soldier, dna:100); }),
+				() => { AddExtraHarvestDNA(UnitType.Soldier, 10); }),
 
 			new EvolveData(400,
 				"Defenders have 20% damage reduction",
@@ -142,14 +142,13 @@ public class Evolution {
 	/// <param name="health"></param>
 	/// <param name="dna"></param>
 	private void ModifyUnit(UnitType unitType, float moveSpeed = 0, float attackSpeed = 0,
-		float damage = 0, float health = 0, int dna = 0)
+		float damage = 0, float health = 0)
 	{
 		UnitModifiers modifier = player.GetModifierReference(unitType);
 		modifier.MoveSpeed *= (1 + moveSpeed);
 		modifier.AttackSpeed *= (1 + attackSpeed);
 		modifier.Damage *= (1 + damage);
 		modifier.Health *= (1 + health);
-		modifier.GiveDNA += dna;
 	}
 
 
@@ -225,6 +224,20 @@ public class Evolution {
 	void AddCriticalChance(UnitType unitType, float addedPercent) {
 		UnitModifiers mod = player.GetModifierReference(unitType);
 		mod.CriticalChance = Mathf.Clamp01(mod.CriticalChance + addedPercent);
+	}
+
+
+	//----------------------------------------------------------------------------------------------------------------------------------<
+
+
+	/// <summary>
+	/// Player earns extra amount of dna when a unit of specified type kills and enemy unit.
+	/// </summary>
+	/// <param name="unitType"></param>
+	/// <param name="amount"></param>
+	void AddExtraHarvestDNA(UnitType unitType, int amount) {
+		UnitModifiers mod = player.GetModifierReference(unitType);
+		mod.ExtraDNAHarvest += amount;
 	}
 
 
