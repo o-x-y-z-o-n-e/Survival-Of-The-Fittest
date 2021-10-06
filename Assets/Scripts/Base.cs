@@ -55,7 +55,7 @@ public class Base : MonoBehaviour, Damageable {
 	/// </summary>
 	/// <param name="percent">Range: [0, 1] = 0% to 100%</param>
 	/// <returns></returns>
-	public float Repair(float percent) => Repair(MaxHealth * percent);
+	public void Repair(float percent) => Repair((int)(MaxHealth * percent));
 
 
 	//----------------------------------------------------------------------------------------------------------------------------------<

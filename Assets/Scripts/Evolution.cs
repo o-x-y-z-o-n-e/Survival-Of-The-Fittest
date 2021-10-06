@@ -6,57 +6,120 @@ using UnityEngine;
 public class Evolution {
 
 
-	public EvolveData[] DATA;
+	const int TREE_LENGTH = 16;
+
+
+	//----------------------------------------------------------------------------------------------------------------------------------<
+
+
+	EvolveLevel[] TREE;
+	void GenerateTree() {
+		TREE = new EvolveLevel[TREE_LENGTH];
+		for (int i = 0; i < TREE.Length; i++) {
+			int lastOp1 = -1;
+			int lastOp2 = -1;
+
+			if(i > 0) {
+				lastOp1 = TREE[i - 1].Option1;
+				lastOp2 = TREE[i - 1].Option2;
+			}
+
+			int op1 = GetNewFuncIndex(lastOp1, lastOp2, -1);
+			int op2 = GetNewFuncIndex(lastOp1, lastOp2, op1);
+
+			TREE[i] = new EvolveLevel(GetCost(i), op1, op2);
+		}
+	}
+
+
+	//----------------------------------------------------------------------------------------------------------------------------------<
+
+
+	/// <summary>
+	/// Find new evolution option index that was not in the last level and is not that same as it's counterpart option
+	/// </summary>
+	int GetNewFuncIndex(int lastOp1, int lastOp2, int pairOp) {
+		while(true) {
+			int i = UnityEngine.Random.Range(0, DATA.Length);
+
+			if (i != lastOp1 && i != lastOp2 && i != pairOp) return i;
+		}
+	}
+
+
+	//----------------------------------------------------------------------------------------------------------------------------------<
+
+
+	EvolveData[] DATA;
 	void AssignData() {
 		// I would of assigned the data in the field initializer as readonly. But because OOP is shit, the delegate func calls need to refernece the object(Evolution), so the here it is.
 		DATA = new EvolveData[] {
-			new EvolveData(400,
+			new EvolveData(
 				"Spitters now hit 2 enemies but have 50% damage",
-				() => { ModifyUnit(UnitType.Spitter, damage:-0.5f); 
-					RangedAttack(UnitType.Spitter, 2); },
+				() => { ModifyUnit(UnitType.Spitter, damage:-0.5f); RangedAttack(UnitType.Spitter, 2); }),
+
+			new EvolveData(
 				"Spitters now heal the front ally for 10% of damage dealt",
 				() => {  }),
 
-			new EvolveData(400,
+			new EvolveData(
 				"Soldiers run 5% faster",
-				() => { ModifyUnit(UnitType.Soldier, moveSpeed:0.05f); },
+				() => { ModifyUnit(UnitType.Soldier, moveSpeed:0.05f); }),
+
+			new EvolveData(
 				"Defenders have 5% more max hp",
 				() => { ModifyUnit(UnitType.Defender, health:0.05f); }),
 
-			new EvolveData(400,
+			new EvolveData(
 				"DNA generation is increased by 100 per minute",
-				() => { IncreaseDNAGeneration(100); },
+				() => { IncreaseDNAGeneration(100); }),
+
+			new EvolveData(
 				"Soldiers give extra DNA on kill",
 				() => { AddExtraHarvestDNA(UnitType.Soldier, 10); }),
 
-			new EvolveData(400,
+			new EvolveData(
 				"Defenders have 20% damage reduction",
-				() => { ModifyUnit(UnitType.Defender, damage:-0.2f); },
+				() => { ModifyUnit(UnitType.Defender, damage:-0.2f); }),
+
+			new EvolveData(
 				"Your hive restores 10% hp",
 				() => { RepairBase(0.1f); }),
 
-			new EvolveData(400,
+			new EvolveData(
 				"Enemies that attack your hive take 5% damage per hit",
-				() => {  },
+				() => {  }),
+
+			new EvolveData(
 				"All units have 5% more hp",
 				() => { ModifyUnit(UnitType.Defender, health:0.05f);
 					ModifyUnit(UnitType.Soldier, health:0.05f);
 					ModifyUnit(UnitType.Spitter, health:0.05f);
 					ModifyUnit(UnitType.Worker, health:0.05f); }),
 
-			new EvolveData(400,
+			new EvolveData(
 				"Soldiers have 50% extra damage, but 50% slower attack speed",
-				() => { ModifyUnit(UnitType.Soldier, damage:0.5f, attackSpeed:-0.5f); },
+				() => { ModifyUnit(UnitType.Soldier, damage:0.5f, attackSpeed:-0.5f); }),
+
+			new EvolveData(
 				"Spitters increase nearby units damage by 10%",
 				() => {  }),
 
-			new EvolveData(400,
+			new EvolveData(
 				"Workers have 10% extra speed",
-				() => { ModifyUnit(UnitType.Worker, moveSpeed:0.1f); },
+				() => { ModifyUnit(UnitType.Worker, moveSpeed:0.1f); }),
+
+			new EvolveData(
 				"When a defender dies, it deals 10% of its max hp as damage to the front 2 enemies",
 				() => {  }),
 		};
 	}
+
+
+	//----------------------------------------------------------------------------------------------------------------------------------<
+
+
+	static int GetCost(int level) => 400 + (level*100);
 
 
 	//----------------------------------------------------------------------------------------------------------------------------------<
@@ -74,6 +137,7 @@ public class Evolution {
 	public Evolution(Player player) {
 		this.player = player;
 		AssignData();
+		GenerateTree();
     }
 
 
@@ -88,18 +152,18 @@ public class Evolution {
 	public void Evolve(int option) {
 		if (Game.Current.Freeze) return;
 
-		if (nextEvolution >= DATA.Length) return;// else already fully evolved
+		if (nextEvolution >= TREE.Length) return;// else already fully evolved
 
-		if (player.DNA >= DATA[nextEvolution].DNACost)
+		if (player.DNA >= TREE[nextEvolution].Cost)
 		{
-			if (option == 0) DATA[nextEvolution].Option1Func();
-			else if (option == 1) DATA[nextEvolution].Option2Func();
+			if (option == 0) DATA[TREE[nextEvolution].Option1].Func();
+			else if (option == 1) DATA[TREE[nextEvolution].Option2].Func();
 
-			player.DNA -= DATA[nextEvolution].DNACost;
+			player.DNA -= TREE[nextEvolution].Cost;
 
 			nextEvolution += 1;
 
-			if (nextEvolution < DATA.Length) {
+			if (nextEvolution < TREE.Length) {
 				Game.Current.UI.UpdateEvolutionText(GetEvolutionText(0), player.PlayerID, 0);
 				Game.Current.UI.UpdateEvolutionText(GetEvolutionText(1), player.PlayerID, 1);
 			} else {
@@ -120,7 +184,7 @@ public class Evolution {
 	//----------------------------------------------------------------------------------------------------------------------------------<
 
 
-	public string GetEvolutionText(int option) => option == 0  ? DATA[nextEvolution].Option1Text : DATA[nextEvolution].Option2Text;
+	public string GetEvolutionText(int option) => option == 0  ? DATA[TREE[nextEvolution].Option1].Text : DATA[TREE[nextEvolution].Option2].Text;
 
 
 	//----------------------------------------------------------------------------------------------------------------------------------<
@@ -258,21 +322,32 @@ public class Evolution {
 
 public struct EvolveData {
 
-	public int DNACost;
-
-	public string Option1Text;
-	public string Option2Text;
-
-	public Action Option1Func;
-	public Action Option2Func;
+	public string Text;
+	public Action Func;
 
 
-	public EvolveData(int cost, string op1Text, Action op1Func, string op2Text, Action op2Func) {
-		DNACost = cost;
-		Option1Text = op1Text;
-		Option1Func = op1Func;
-		Option2Text = op2Text;
-		Option2Func = op2Func;
+	public EvolveData(string text, Action func) {
+		Text = text;
+		Func = func;
+	}
+
+}
+
+
+//----------------------------------------------------------------------------------------------------------------------------------<
+
+
+public struct EvolveLevel {
+
+	public int Cost;
+
+	public int Option1;
+	public int Option2;
+
+	public EvolveLevel(int cost, int op1, int op2) {
+		Cost = cost;
+		Option1 = op1;
+		Option2 = op2;
 	}
 
 }
