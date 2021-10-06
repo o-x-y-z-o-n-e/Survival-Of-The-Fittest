@@ -9,6 +9,6 @@ public interface Damageable {
 	float GetWidth();
 	int GetOwnerID();
 	int GetInstanceID();
-	void TakeDamage(int damage, Player sender);
+	bool TakeDamage(int damage, Player sender);
 
 }
