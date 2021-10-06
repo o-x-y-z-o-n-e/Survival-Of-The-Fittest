@@ -131,4 +131,21 @@ public class Player : MonoBehaviour {
 	public void SetDNAGenerationRate(int bpm) {
 		DNAPerMinute = bpm;
 	}
+
+
+	//----------------------------------------------------------------------------------------------------------------------------------<
+
+
+	public void SetMode(PlayerMode mode) {
+		isAI = mode == PlayerMode.AI;
+
+		Game.Current.UI.SetPlayerControls(PlayerID, !isAI);
+	}
+
+
+}
+
+public enum PlayerMode {
+	Real = 0,
+	AI = 1,
 }

@@ -31,6 +31,11 @@ public class GameUI : MonoBehaviour {
 
 	[Space]
 
+	public RectTransform Player1Controls;
+	public RectTransform Player2Controls;
+
+	[Space]
+
 	public Button Player1Evolve1Button;
 	public Button Player1Evolve2Button;
 	public Button Player2Evolve1Button;
@@ -179,7 +184,13 @@ public class GameUI : MonoBehaviour {
 			Player2Evolve1Button.interactable = false;
 			Player2Evolve2Button.interactable = false;
 		}
-	} 
+	}
+
+
+	//----------------------------------------------------------------------------------------------------------------------------------<
+
+
+	public void SetPlayerControls(int player, bool on) => (player == 0 ? Player1Controls : Player2Controls).gameObject.SetActive(on);
 
 
 	//----------------------------------------------------------------------------------------------------------------------------------<

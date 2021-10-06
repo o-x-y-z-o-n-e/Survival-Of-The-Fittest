@@ -42,6 +42,17 @@ public class Game : MonoBehaviour {
 	//----------------------------------------------------------------------------------------------------------------------------------<
 
 
+	void Start() {
+
+		//For testing... This will change to fit the Start Menu options.
+		Player1.SetMode(PlayerMode.Real);
+		Player2.SetMode(PlayerMode.Real);
+	}
+
+
+	//----------------------------------------------------------------------------------------------------------------------------------<
+
+
 	void Update() {
 		if (!hasStarted) {
 			startCountdown -= Time.deltaTime;
