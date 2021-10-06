@@ -24,8 +24,8 @@ public class Evolution {
 				() => { ModifyUnit(UnitType.Defender, health:0.05f); }),
 
 			new EvolveData(400,
-				"DNA generation is increased to 700 per minute",
-				() => { player.SetDNAGenerationRate(700); },
+				"DNA generation is increased by 100 per minute",
+				() => { IncreaseDNAGeneration(100); },
 				"Soldiers give extra DNA on kill",
 				() => { AddExtraHarvestDNA(UnitType.Soldier, 10); }),
 
@@ -238,6 +238,14 @@ public class Evolution {
 	void AddExtraHarvestDNA(UnitType unitType, int amount) {
 		UnitModifiers mod = player.GetModifierReference(unitType);
 		mod.ExtraDNAHarvest += amount;
+	}
+
+
+	//----------------------------------------------------------------------------------------------------------------------------------<
+
+
+	void IncreaseDNAGeneration(int increase) {
+		player.DNAPerMinute += increase;
 	}
 
 
