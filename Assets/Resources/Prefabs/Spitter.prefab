@@ -398,8 +398,8 @@ MonoBehaviour:
   Type: 2
   attackRange: 4
   direction: 1
-  baseHealth: 55
-  damage: 20
+  baseHealth: 50
+  damage: 15
   moveSpeed: 1
   attackInterval: 1
   attackIntervalDeviation: 0

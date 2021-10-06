@@ -123,8 +123,8 @@ MonoBehaviour:
   Type: 1
   attackRange: 0.2
   direction: 1
-  baseHealth: 85
-  damage: 30
+  baseHealth: 100
+  damage: 40
   moveSpeed: 1
   attackInterval: 1
   attackIntervalDeviation: 0

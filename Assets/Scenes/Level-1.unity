@@ -566,12 +566,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Base: {fileID: 700282125}
-  DNA: 1000
-  DNAPerMinute: 600
+  DNA: 100
+  DNAPerMinute: 800
   WorkerModifiers:
     MoveSpeed: 1
     Damage: 1
     Health: 1
+    Armor: 0
+    CriticalChance: 0.08
     AttackSpeed: 1
     GiveDNA: 1
     RangedPassCount: 1
@@ -580,6 +582,8 @@ MonoBehaviour:
     MoveSpeed: 1
     Damage: 1
     Health: 1
+    Armor: 0
+    CriticalChance: 0.08
     AttackSpeed: 1
     GiveDNA: 1
     RangedPassCount: 1
@@ -588,6 +592,8 @@ MonoBehaviour:
     MoveSpeed: 1
     Damage: 1
     Health: 1
+    Armor: 0
+    CriticalChance: 0.08
     AttackSpeed: 1
     GiveDNA: 1
     RangedPassCount: 1
@@ -596,6 +602,8 @@ MonoBehaviour:
     MoveSpeed: 1
     Damage: 1
     Health: 1
+    Armor: 0
+    CriticalChance: 0.08
     AttackSpeed: 1
     GiveDNA: 1
     RangedPassCount: 1
@@ -2323,12 +2331,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Base: {fileID: 258391092}
-  DNA: 1000
-  DNAPerMinute: 600
+  DNA: 100
+  DNAPerMinute: 800
   WorkerModifiers:
     MoveSpeed: 1
     Damage: 1
     Health: 1
+    Armor: 0
+    CriticalChance: 0.08
     AttackSpeed: 1
     GiveDNA: 1
     RangedPassCount: 1
@@ -2337,6 +2347,8 @@ MonoBehaviour:
     MoveSpeed: 1
     Damage: 1
     Health: 1
+    Armor: 0
+    CriticalChance: 0.08
     AttackSpeed: 1
     GiveDNA: 1
     RangedPassCount: 1
@@ -2345,6 +2357,8 @@ MonoBehaviour:
     MoveSpeed: 1
     Damage: 1
     Health: 1
+    Armor: 0
+    CriticalChance: 0.08
     AttackSpeed: 1
     GiveDNA: 1
     RangedPassCount: 1
@@ -2353,6 +2367,8 @@ MonoBehaviour:
     MoveSpeed: 1
     Damage: 1
     Health: 1
+    Armor: 0
+    CriticalChance: 0.08
     AttackSpeed: 1
     GiveDNA: 1
     RangedPassCount: 1
