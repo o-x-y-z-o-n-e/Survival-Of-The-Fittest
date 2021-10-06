@@ -261,7 +261,7 @@ public class UnitController : MonoBehaviour, Damageable {
 		}
 
         healthBar.transform.localScale = new Vector3(
-            ((float)health / 100) * healthBar.transform.localScale.x,
+            ((float)health / baseHealth) * healthBar.transform.localScale.x,
             healthBar.transform.localScale.y,
             healthBar.transform.localScale.z);
     }
