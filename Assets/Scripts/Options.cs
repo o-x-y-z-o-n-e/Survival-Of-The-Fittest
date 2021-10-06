@@ -4,6 +4,13 @@ using UnityEngine;
 
 public static class Options {
 
+
+	//Runtime options
+	//public static int Difficulty = 1;
+	public static PlayerMode Player1Mode = PlayerMode.Real;
+	public static PlayerMode Player2Mode = PlayerMode.Real;
+
+
 	public static InputBindings Input = new InputBindings();
 
 }

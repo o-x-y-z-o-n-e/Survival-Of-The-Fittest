@@ -45,8 +45,8 @@ public class Game : MonoBehaviour {
 	void Start() {
 
 		//For testing... This will change to fit the Start Menu options.
-		Player1.SetMode(PlayerMode.Real);
-		Player2.SetMode(PlayerMode.Real);
+		Player1.SetMode(Options.Player1Mode);
+		Player2.SetMode(Options.Player2Mode);
 	}
 
 

@@ -575,7 +575,7 @@ MonoBehaviour:
     Armor: 0
     CriticalChance: 0.08
     AttackSpeed: 1
-    GiveDNA: 1
+    ExtraDNAHarvest: 0
     RangedPassCount: 1
     Bloodlust: 0
   SoldierModifiers:
@@ -585,7 +585,7 @@ MonoBehaviour:
     Armor: 0
     CriticalChance: 0.08
     AttackSpeed: 1
-    GiveDNA: 1
+    ExtraDNAHarvest: 0
     RangedPassCount: 1
     Bloodlust: 0
   SpitterModifiers:
@@ -595,7 +595,7 @@ MonoBehaviour:
     Armor: 0
     CriticalChance: 0.08
     AttackSpeed: 1
-    GiveDNA: 1
+    ExtraDNAHarvest: 0
     RangedPassCount: 1
     Bloodlust: 0
   DefenderModifiers:
@@ -605,7 +605,7 @@ MonoBehaviour:
     Armor: 0
     CriticalChance: 0.08
     AttackSpeed: 1
-    GiveDNA: 1
+    ExtraDNAHarvest: 0
     RangedPassCount: 1
     Bloodlust: 0
   PlayerID: 0
@@ -2340,7 +2340,7 @@ MonoBehaviour:
     Armor: 0
     CriticalChance: 0.08
     AttackSpeed: 1
-    GiveDNA: 1
+    ExtraDNAHarvest: 0
     RangedPassCount: 1
     Bloodlust: 0
   SoldierModifiers:
@@ -2350,7 +2350,7 @@ MonoBehaviour:
     Armor: 0
     CriticalChance: 0.08
     AttackSpeed: 1
-    GiveDNA: 1
+    ExtraDNAHarvest: 0
     RangedPassCount: 1
     Bloodlust: 0
   SpitterModifiers:
@@ -2360,7 +2360,7 @@ MonoBehaviour:
     Armor: 0
     CriticalChance: 0.08
     AttackSpeed: 1
-    GiveDNA: 1
+    ExtraDNAHarvest: 0
     RangedPassCount: 1
     Bloodlust: 0
   DefenderModifiers:
@@ -2370,7 +2370,7 @@ MonoBehaviour:
     Armor: 0
     CriticalChance: 0.08
     AttackSpeed: 1
-    GiveDNA: 1
+    ExtraDNAHarvest: 0
     RangedPassCount: 1
     Bloodlust: 0
   PlayerID: 1
@@ -4259,6 +4259,8 @@ MonoBehaviour:
   PauseScreen: {fileID: 1634725215}
   FinishText: {fileID: 2074429488}
   TimeDisplay: {fileID: 1771388593}
+  Player1Controls: {fileID: 1919498450}
+  Player2Controls: {fileID: 711513823}
   Player1Evolve1Button: {fileID: 927020385}
   Player1Evolve2Button: {fileID: 252024620}
   Player2Evolve1Button: {fileID: 849526387}
