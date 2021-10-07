@@ -32,6 +32,11 @@ public class UnitController : MonoBehaviour, Damageable {
 	public const float CRITICAL_DAMAGE_MULTIPLIER = 3f;
 
 
+	const float ATTACK_LUNGE_TIME = 0.25f;
+	const float ATTACK_LUNGE_WIDTH = 0.5f;
+	const float ATTACK_LUNGE_HEIGHT = 0.2f;
+
+
 	public UnitType Type;
 
 
@@ -44,7 +49,7 @@ public class UnitController : MonoBehaviour, Damageable {
 	[SerializeField] private float attackIntervalDeviation;
 	[SerializeField] private int giveDNA; // how much DNA the unit will give when killed
 
-    [SerializeField] private Player unitOwner; //this will not be a serialized field once unit owners are assigned at time of prefab instantiation.
+    private Player unitOwner; //this will not be a serialized field once unit owners are assigned at time of prefab instantiation.
 
 	SpriteRenderer sprite;
 	Animator animator;
@@ -66,6 +71,8 @@ public class UnitController : MonoBehaviour, Damageable {
 
 
 	float bloodlustRotate;
+	float attackLungeCounter;
+	float attackLungeHeightMulitplier = 1;
 
 
 	//----------------------------------------------------------------------------------------------------------------------------------<
@@ -293,6 +300,13 @@ public class UnitController : MonoBehaviour, Damageable {
 	public virtual void Attack() {
 		int d = GetNextDamage();
 
+		/*Activate attack lunge movement*/ {
+			attackLungeCounter = ATTACK_LUNGE_TIME;
+			//This might seem a bit hacky. Basically, the bounds for lunge height is perfect, but I wanted variation around that value.
+			//with rand(-1, 1) too many values where close to 0. I changed the chances gravitate towards +- 1 by having a linear range of [-2, 2] and clamping to [-1, 1]
+			attackLungeHeightMulitplier = Mathf.Clamp(UnityEngine.Random.Range(-2f, 2f), -1f, 1f);
+		}
+
 		if (TryCritical()) {
 			d = (int)(d * CRITICAL_DAMAGE_MULTIPLIER);
 			//DO CRITICAL ATTACK VISUAL EFFECT HERE
@@ -408,6 +422,22 @@ public class UnitController : MonoBehaviour, Damageable {
 			float r = Mathf.Sin(bloodlustRotate) * 7f;
 
 			rotation += r;
+		}
+
+
+		if(attackLungeCounter > 0) {
+			attackLungeCounter -= Time.fixedDeltaTime;
+
+			if(attackLungeCounter <= 0) {
+				attackLungeCounter = 0;
+			}
+
+			float t = 1f - (attackLungeCounter / ATTACK_LUNGE_TIME);
+
+			float x = Mathf.Sin(t * Mathf.PI) * ATTACK_LUNGE_WIDTH * direction;
+			float y = Mathf.Sin(Mathf.Clamp(t, 0, 0.5f) * 2 * Mathf.PI) * ATTACK_LUNGE_HEIGHT * attackLungeHeightMulitplier;
+
+			offset += new Vector2(x, y);
 		}
 
 
