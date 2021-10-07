@@ -11,6 +11,9 @@ public class Spitter : UnitController {
 	public override void Attack() {
 		//base.Attack();
 
+
+		SoundManagerScript.PlayUnitSound(Type + "_Attack");
+
 		Vector3 offset = ProjectileSpawnOffset;
 		offset.x *= Direction;
 
