@@ -566,7 +566,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Base: {fileID: 700282125}
-  DNA: 1000000000
+  DNA: 100
   DNAPerMinute: 800
   WorkerModifiers:
     MoveSpeed: 1
