@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 /// <summary>
@@ -36,10 +37,26 @@ public class GameUI : MonoBehaviour {
 
 	[Space]
 
+	public Button Player1SoldierButton;
+	public Button Player1SpitterButton;
+	public Button Player1DefenderButton;
+	public Button Player2SoldierButton;
+	public Button Player2SpitterButton;
+	public Button Player2DefenderButton;
+
+	[Space]
+
 	public Button Player1Evolve1Button;
 	public Button Player1Evolve2Button;
 	public Button Player2Evolve1Button;
 	public Button Player2Evolve2Button;
+
+	[Space]
+
+	public Button Player1Path1Button;
+	public Button Player1Path2Button;
+	public Button Player2Path1Button;
+	public Button Player2Path2Button;
 
 	[Space]
 
@@ -191,6 +208,16 @@ public class GameUI : MonoBehaviour {
 
 
 	public void SetPlayerControls(int player, bool on) => (player == 0 ? Player1Controls : Player2Controls).gameObject.SetActive(on);
+
+
+	//----------------------------------------------------------------------------------------------------------------------------------<
+
+
+	public static void ClickButton(GameObject obj) {
+		PointerEventData p = new PointerEventData(EventSystem.current);
+		ExecuteEvents.Execute(obj, p, ExecuteEvents.pointerEnterHandler);
+		ExecuteEvents.Execute(obj, p, ExecuteEvents.submitHandler);
+	}
 
 
 	//----------------------------------------------------------------------------------------------------------------------------------<

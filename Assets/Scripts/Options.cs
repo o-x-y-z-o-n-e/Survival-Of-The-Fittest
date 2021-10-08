@@ -21,7 +21,7 @@ public class InputBindings {
 
 	//
 
-	public  KeyCode Player1Working	= KeyCode.None;
+	public  KeyCode Player1Worker	= KeyCode.None;
 	public  KeyCode Player1Soldier	= KeyCode.Q;
 	public  KeyCode Player1Spitter	= KeyCode.W;
 	public  KeyCode Player1Defender	= KeyCode.E;
@@ -34,7 +34,7 @@ public class InputBindings {
 
 	//
 
-	public  KeyCode Player2Working	= KeyCode.None;
+	public  KeyCode Player2Worker	= KeyCode.None;
 	public  KeyCode Player2Soldier	= KeyCode.P;
 	public  KeyCode Player2Spitter	= KeyCode.O;
 	public  KeyCode Player2Defender	= KeyCode.I;

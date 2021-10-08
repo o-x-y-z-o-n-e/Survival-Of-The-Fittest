@@ -2820,7 +2820,7 @@ GameObject:
   - component: {fileID: 671145686}
   - component: {fileID: 671145685}
   m_Layer: 0
-  m_Name: Solider
+  m_Name: Soldier
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4261,10 +4261,20 @@ MonoBehaviour:
   TimeDisplay: {fileID: 1771388593}
   Player1Controls: {fileID: 1919498450}
   Player2Controls: {fileID: 711513823}
+  Player1SoldierButton: {fileID: 962049136}
+  Player1SpitterButton: {fileID: 1881969858}
+  Player1DefenderButton: {fileID: 636237929}
+  Player2SoldierButton: {fileID: 671145685}
+  Player2SpitterButton: {fileID: 208491888}
+  Player2DefenderButton: {fileID: 502655567}
   Player1Evolve1Button: {fileID: 927020385}
   Player1Evolve2Button: {fileID: 252024620}
   Player2Evolve1Button: {fileID: 849526387}
   Player2Evolve2Button: {fileID: 373010294}
+  Player1Path1Button: {fileID: 11441994}
+  Player1Path2Button: {fileID: 1201089614}
+  Player2Path1Button: {fileID: 659102850}
+  Player2Path2Button: {fileID: 1014195697}
   Player1Evolve1Text: {fileID: 1295728009}
   Player1Evolve2Text: {fileID: 1588969210}
   Player2Evolve1Text: {fileID: 1344423314}

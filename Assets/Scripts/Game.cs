@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -80,72 +81,57 @@ public class Game : MonoBehaviour {
 			// Player 1 Hotkeys
 			// Unit Spawning
 			if (Input.GetKeyDown(Options.Input.Player1Soldier))
-			{
-				Current.Player1.Base.SpawnUnit(UnitType.Soldier, Current.Player1.SelectedPath);
-			}
+				GameUI.ClickButton(UI.Player1SoldierButton.gameObject);
+
 			if (Input.GetKeyDown(Options.Input.Player1Spitter))
-			{
-				Current.Player1.Base.SpawnUnit(UnitType.Spitter, Current.Player1.SelectedPath);
-			}
-			if (Input.GetKeyDown(Options.Input.Player1Defender)){
-				Current.Player1.Base.SpawnUnit(UnitType.Defender, Current.Player1.SelectedPath);
-			}
+				GameUI.ClickButton(UI.Player1SpitterButton.gameObject);
+
+			if (Input.GetKeyDown(Options.Input.Player1Defender))
+				GameUI.ClickButton(UI.Player1DefenderButton.gameObject);
+
 
 			// Path Selection
 			if (Input.GetKeyDown(Options.Input.Player1Surface))
-			{
-				Current.UI.Player1Controls.Find("Path 1").GetComponent<Button>().onClick.Invoke();
-			}
+				GameUI.ClickButton(UI.Player1Path1Button.gameObject);
+
 			if (Input.GetKeyDown(Options.Input.Player1Tunnel))
-			{
-				Current.UI.Player1Controls.Find("Path 2").GetComponent<Button>().onClick.Invoke();
-			}
+				GameUI.ClickButton(UI.Player1Path2Button.gameObject);
+
 
 			// Evolution Selection
 			if (Input.GetKeyDown(Options.Input.Player1Evolve1))
-			{
-				Current.Player1.Evolutions.Evolve(0);
-			}
+				GameUI.ClickButton(UI.Player1Evolve1Button.gameObject);
+
 			if (Input.GetKeyDown(Options.Input.Player1Evolve2))
-			{
-				Current.Player1.Evolutions.Evolve(1);
-			}
+				GameUI.ClickButton(UI.Player1Evolve2Button.gameObject);
 
 
 			// Player 2 Hotkeys
 			// Unit Spawning
 			if (Input.GetKeyDown(Options.Input.Player2Soldier))
-			{
-				Current.Player2.Base.SpawnUnit(UnitType.Soldier, Current.Player2.SelectedPath);
-			}
+				GameUI.ClickButton(UI.Player2SoldierButton.gameObject);
+
 			if (Input.GetKeyDown(Options.Input.Player2Spitter))
-			{
-				Current.Player2.Base.SpawnUnit(UnitType.Spitter, Current.Player2.SelectedPath);
-			}
+				GameUI.ClickButton(UI.Player2SpitterButton.gameObject);
+
 			if (Input.GetKeyDown(Options.Input.Player2Defender))
-			{
-				Current.Player2.Base.SpawnUnit(UnitType.Defender, Current.Player2.SelectedPath);
-			}
+				GameUI.ClickButton(UI.Player2DefenderButton.gameObject);
+
 
 			// Path Selection
 			if (Input.GetKeyDown(Options.Input.Player2Surface))
-			{
-				Current.UI.Player2Controls.Find("Path 1").GetComponent<Button>().onClick.Invoke();
-			}
+				GameUI.ClickButton(UI.Player2Path1Button.gameObject);
+
 			if (Input.GetKeyDown(Options.Input.Player2Tunnel))
-			{
-				Current.UI.Player2Controls.Find("Path 2").GetComponent<Button>().onClick.Invoke();
-			}
+				GameUI.ClickButton(UI.Player2Path2Button.gameObject);
+
 
 			// Evolution Selection
 			if (Input.GetKeyDown(Options.Input.Player2Evolve1))
-			{
-				Current.Player2.Evolutions.Evolve(0);
-			}
+				GameUI.ClickButton(UI.Player2Evolve1Button.gameObject);
+
 			if (Input.GetKeyDown(Options.Input.Player2Evolve2))
-			{
-				Current.Player2.Evolutions.Evolve(1);
-			}
+				GameUI.ClickButton(UI.Player2Evolve2Button.gameObject);
 
 		}
 	}
