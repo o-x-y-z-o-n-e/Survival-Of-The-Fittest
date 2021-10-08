@@ -37,8 +37,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0.115, y: 1}
-  m_SizeDelta: {x: 200, y: 100}
+  m_AnchoredPosition: {x: 0, y: 0.5}
+  m_SizeDelta: {x: 100, y: 10}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &2412728999668675386
 Canvas:
@@ -127,7 +127,7 @@ Transform:
   m_GameObject: {fileID: 5096400319210431033}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 1}
   m_Children: []
   m_Father: {fileID: 2201412021323544027}
   m_RootOrder: 0
@@ -228,7 +228,7 @@ RectTransform:
   m_GameObject: {fileID: 6732626918069829593}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.6249999, y: 1.6249999, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 477010475681849730}
   m_RootOrder: 0
@@ -236,7 +236,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 123.076935, y: 15}
+  m_SizeDelta: {x: 100, y: 10}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!222 &184253221180508395
 CanvasRenderer:
@@ -302,7 +302,7 @@ RectTransform:
   m_GameObject: {fileID: 7474575668633866122}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.6249999, y: 1.6249999, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 477010475681849730}
   m_RootOrder: 1
@@ -310,7 +310,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 123.076935, y: 15}
+  m_SizeDelta: {x: 100, y: 10}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!222 &1737981524327665450
 CanvasRenderer:
@@ -376,7 +376,7 @@ Transform:
   m_GameObject: {fileID: 7766483010586190318}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.8, y: 0.8, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6802744748944367194}
   - {fileID: 477010475681849730}
@@ -396,11 +396,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Type: 2
-  attackRange: 4
+  attackRange: 2
   direction: 1
   baseHealth: 50
   damage: 15
-  moveSpeed: 1
+  moveSpeed: 0.5
   attackInterval: 1
   attackIntervalDeviation: 0
   giveDNA: 10
@@ -431,5 +431,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.4, y: 1}
+  m_Size: {x: 1, y: 0.75}
   m_EdgeRadius: 0

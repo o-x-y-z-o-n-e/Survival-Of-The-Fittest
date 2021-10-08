@@ -33,8 +33,8 @@ public class UnitController : MonoBehaviour, Damageable {
 
 
 	const float ATTACK_LUNGE_TIME = 0.25f;
-	const float ATTACK_LUNGE_WIDTH = 0.5f;
-	const float ATTACK_LUNGE_HEIGHT = 0.2f;
+	const float ATTACK_LUNGE_WIDTH = 0.25f;
+	const float ATTACK_LUNGE_HEIGHT = 0.125f;
 
 
 	public UnitType Type;
