@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 /// <summary>
 /// Core class of each 'level'. This controls the state of the level, eg. Timer, score, etc...
@@ -74,8 +75,80 @@ public class Game : MonoBehaviour {
 				time += Time.deltaTime;
 				UI.UpdateTime(time);
 			}
+
+
+			// Player 1 Hotkeys
+			// Unit Spawning
+			if (Input.GetKeyDown(Options.Input.Player1Soldier))
+			{
+				Current.Player1.Base.SpawnUnit(UnitType.Soldier, Current.Player1.SelectedPath);
+			}
+			if (Input.GetKeyDown(Options.Input.Player1Spitter))
+			{
+				Current.Player1.Base.SpawnUnit(UnitType.Spitter, Current.Player1.SelectedPath);
+			}
+			if (Input.GetKeyDown(Options.Input.Player1Defender)){
+				Current.Player1.Base.SpawnUnit(UnitType.Defender, Current.Player1.SelectedPath);
+			}
+
+			// Path Selection
+			if (Input.GetKeyDown(Options.Input.Player1Surface))
+			{
+				Current.UI.Player1Controls.Find("Path 1").GetComponent<Button>().onClick.Invoke();
+			}
+			if (Input.GetKeyDown(Options.Input.Player1Tunnel))
+			{
+				Current.UI.Player1Controls.Find("Path 2").GetComponent<Button>().onClick.Invoke();
+			}
+
+			// Evolution Selection
+			if (Input.GetKeyDown(Options.Input.Player1Evolve1))
+			{
+				Current.Player1.Evolutions.Evolve(0);
+			}
+			if (Input.GetKeyDown(Options.Input.Player1Evolve2))
+			{
+				Current.Player1.Evolutions.Evolve(1);
+			}
+
+
+			// Player 2 Hotkeys
+			// Unit Spawning
+			if (Input.GetKeyDown(Options.Input.Player2Soldier))
+			{
+				Current.Player2.Base.SpawnUnit(UnitType.Soldier, Current.Player2.SelectedPath);
+			}
+			if (Input.GetKeyDown(Options.Input.Player2Spitter))
+			{
+				Current.Player2.Base.SpawnUnit(UnitType.Spitter, Current.Player2.SelectedPath);
+			}
+			if (Input.GetKeyDown(Options.Input.Player2Defender))
+			{
+				Current.Player2.Base.SpawnUnit(UnitType.Defender, Current.Player2.SelectedPath);
+			}
+
+			// Path Selection
+			if (Input.GetKeyDown(Options.Input.Player2Surface))
+			{
+				Current.UI.Player2Controls.Find("Path 1").GetComponent<Button>().onClick.Invoke();
+			}
+			if (Input.GetKeyDown(Options.Input.Player2Tunnel))
+			{
+				Current.UI.Player2Controls.Find("Path 2").GetComponent<Button>().onClick.Invoke();
+			}
+
+			// Evolution Selection
+			if (Input.GetKeyDown(Options.Input.Player2Evolve1))
+			{
+				Current.Player2.Evolutions.Evolve(0);
+			}
+			if (Input.GetKeyDown(Options.Input.Player2Evolve2))
+			{
+				Current.Player2.Evolutions.Evolve(1);
+			}
+
 		}
-    }
+	}
 
 
 	//----------------------------------------------------------------------------------------------------------------------------------<

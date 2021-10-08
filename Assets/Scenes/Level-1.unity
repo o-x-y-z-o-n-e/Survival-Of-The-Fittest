@@ -3944,7 +3944,7 @@ GameObject:
   - component: {fileID: 962049137}
   - component: {fileID: 962049136}
   m_Layer: 0
-  m_Name: Solider
+  m_Name: Soldier
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
