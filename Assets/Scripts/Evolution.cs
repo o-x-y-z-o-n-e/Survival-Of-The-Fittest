@@ -94,7 +94,7 @@ public class Evolution {
 
 			new EvolveData(
 				"Enemies that attack your hive take 5% damage per hit",
-				() => {  }),
+				() => { AddBaseThorns(0.05f); }),
 
 			new EvolveData(
 				"All units have 5% more hp",
@@ -322,6 +322,15 @@ public class Evolution {
 
 	void IncreaseDNAGeneration(int increase) {
 		player.DNAPerMinute += increase;
+	}
+
+
+	//----------------------------------------------------------------------------------------------------------------------------------<
+
+
+	void AddBaseThorns(float damagePercent)
+	{
+		player.Base.ReflectedDamage += damagePercent;
 	}
 
 

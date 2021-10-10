@@ -26,6 +26,7 @@ public class Base : MonoBehaviour, Damageable {
 
 	public int MaxHealth = 100;
 	public float Health = 100;
+	public float ReflectedDamage = 0;
 
 
 	//----------------------------------------------------------------------------------------------------------------------------------<

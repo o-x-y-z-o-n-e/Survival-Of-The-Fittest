@@ -315,6 +315,17 @@ public class UnitController : MonoBehaviour, Damageable {
 		if (nextEnemy.TakeDamage(damage, unitOwner)) {
 			unitOwner.ChangeDNA(modifiers.ExtraDNAHarvest);
 		}
+
+		if(nextEnemy.GetType().ToString() == "Base")
+		{
+			Base nextBase = (Base)nextEnemy;
+			SetHealth(GetHealth() - (int)(baseHealth * nextBase.ReflectedDamage));
+
+			healthBar.transform.localScale = new Vector3(
+				((float)health / baseHealth) * healthBar.transform.localScale.x,
+				healthBar.transform.localScale.y,
+				healthBar.transform.localScale.z);
+		}
 		
 		SoundManagerScript.PlayUnitSound(Type + "_Attack");
 	}
