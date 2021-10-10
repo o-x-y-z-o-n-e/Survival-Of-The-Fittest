@@ -319,12 +319,7 @@ public class UnitController : MonoBehaviour, Damageable {
 		if(nextEnemy.GetType().ToString() == "Base")
 		{
 			Base nextBase = (Base)nextEnemy;
-			SetHealth(GetHealth() - (int)(baseHealth * nextBase.ReflectedDamage));
-
-			healthBar.transform.localScale = new Vector3(
-				((float)health / baseHealth) * healthBar.transform.localScale.x,
-				healthBar.transform.localScale.y,
-				healthBar.transform.localScale.z);
+			TakeDamage((int)(baseHealth * nextBase.ReflectedDamage), nextBase.Player);
 		}
 		
 		SoundManagerScript.PlayUnitSound(Type + "_Attack");

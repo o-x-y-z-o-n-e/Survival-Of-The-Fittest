@@ -1419,6 +1419,7 @@ MonoBehaviour:
   Spawnpoint2: {fileID: 968182953}
   MaxHealth: 100
   Health: 100
+  ReflectedDamage: 0
 --- !u!61 &258391093
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3065,6 +3066,7 @@ MonoBehaviour:
   Spawnpoint2: {fileID: 95904312}
   MaxHealth: 100
   Health: 100
+  ReflectedDamage: 0
 --- !u!61 &700282126
 BoxCollider2D:
   m_ObjectHideFlags: 0
