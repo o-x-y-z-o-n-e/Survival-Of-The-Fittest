@@ -90,6 +90,6 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
-    - _TeamTarget: {r: 1, g: 1, b: 1, a: 1}
+    - _TeamTarget: {r: 0.11372549, g: 0.15686275, b: 0.11955448, a: 1}
     - _TypeAccent: {r: 0, g: 0, b: 0, a: 1}
     - _TypeTarget: {r: 0, g: 0, b: 0, a: 1}
