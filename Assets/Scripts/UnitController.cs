@@ -105,6 +105,8 @@ public class UnitController : MonoBehaviour, Damageable {
 		modifiers = unitOwner.GetModifierReference(Type);
 
 		health = (int)(baseHealth * modifiers.Health);
+
+		sprite.color = player.Color;
 	}
 
 
