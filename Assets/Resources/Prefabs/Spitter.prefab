@@ -402,7 +402,7 @@ MonoBehaviour:
   damage: 15
   moveSpeed: 0.5
   attackInterval: 1
-  attackIntervalDeviation: 0
+  attackIntervalDeviation: 0.2
   giveDNA: 10
   ProjectilePrefab: {fileID: 1250771802780145336, guid: ad1a194daae826a4ea4b30b088e0388d,
     type: 3}

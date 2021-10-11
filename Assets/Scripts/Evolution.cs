@@ -116,8 +116,8 @@ public class Evolution {
 				() => { ModifyUnit(UnitType.Worker, moveSpeed:0.1f); }),
 
 			new EvolveData(
-				"When a defender dies, it deals 10% of its max hp as damage to the front 2 enemies",
-				() => {  }),
+				"When a defender dies, it deals 30% of its max hp as damage to the front enemy",
+				() => { EnableKamikase(UnitType.Defender); }),
 		};
 	}
 
@@ -331,6 +331,15 @@ public class Evolution {
 	void AddBaseThorns(float damagePercent)
 	{
 		player.Base.ReflectedDamage += damagePercent;
+	}
+
+
+	//----------------------------------------------------------------------------------------------------------------------------------<
+
+
+	void EnableKamikase(UnitType unitType) {
+		UnitModifiers mod = player.GetModifierReference(unitType);
+		mod.Kamikaze = true;
 	}
 
 

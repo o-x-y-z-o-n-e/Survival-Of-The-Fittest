@@ -83,7 +83,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3765004461740621139}
-  - component: {fileID: -8879041841179326341}
+  - component: {fileID: -8882079654146766767}
   - component: {fileID: -4883091436067051521}
   m_Layer: 8
   m_Name: Defender
@@ -108,7 +108,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-8879041841179326341
+--- !u!114 &-8882079654146766767
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -117,7 +117,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4718382814567098726}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d24ef8238f3e8624bac14305928191ec, type: 3}
+  m_Script: {fileID: 11500000, guid: 3930a37be2440544288e2581a60c24de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Type: 3
@@ -126,8 +126,8 @@ MonoBehaviour:
   baseHealth: 200
   damage: 30
   moveSpeed: 0.5
-  attackInterval: 2
-  attackIntervalDeviation: 0
+  attackInterval: 1.5
+  attackIntervalDeviation: 0.2
   giveDNA: 10
 --- !u!61 &-4883091436067051521
 BoxCollider2D:

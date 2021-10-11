@@ -129,7 +129,7 @@ public class UnitController : MonoBehaviour, Damageable {
 	void CheckCollision() {
 		//Check for next enemy
 		RaycastHit2D hit;
-		Vector3 origin = transform.localPosition + (Vector3.right * collider.size.x * direction);
+		Vector3 origin = transform.localPosition + (Vector3.right * (collider.size.x / 2f) * direction);
 		hit = Physics2D.Raycast(origin, Vector3.right * direction, attackRange, enemyMask);
 
 		if (hit.collider != null) {
@@ -152,6 +152,7 @@ public class UnitController : MonoBehaviour, Damageable {
 
 
 		//Check for next ally
+		origin += (Vector3.right * 0.05f * direction);
 		hit = Physics2D.Raycast(origin, Vector3.right * direction, 1f, allyMask);
 
 		if (hit.collider != null) {
@@ -292,6 +293,8 @@ public class UnitController : MonoBehaviour, Damageable {
 	void Die() {
 		health = 0;
 
+		OnDeath();
+
 		Destroy(gameObject);
 	}
 
@@ -331,6 +334,9 @@ public class UnitController : MonoBehaviour, Damageable {
 	//----------------------------------------------------------------------------------------------------------------------------------<
 
 
+	public int GetEnemyMask() => enemyMask;
+	public float GetAttackRange() => attackRange;
+	public int GetMaxHealth() => baseHealth;
 	public int GetHealth() => health;
     public void SetHealth(int newHealthValue) => health = newHealthValue;
     public Player GetUnitOwner() => unitOwner;
@@ -500,6 +506,11 @@ public class UnitController : MonoBehaviour, Damageable {
 
 	//----------------------------------------------------------------------------------------------------------------------------------<
 
+
+	public virtual void OnDeath() {
+
+	}
+
 }
 
 
@@ -531,7 +542,14 @@ public class UnitModifiers {
 	[Header("For Spitters Only")]
 	public int RangedPassCount = 1;
 
+	[Space]
+
 	[Header("For Soldiers Only")]
 	public bool Bloodlust;
+
+	[Space]
+
+	[Header("For Defenders Only")]
+	public bool Kamikaze;
 
 }

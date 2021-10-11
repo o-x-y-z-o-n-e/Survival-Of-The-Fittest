@@ -578,6 +578,7 @@ MonoBehaviour:
     ExtraDNAHarvest: 0
     RangedPassCount: 1
     Bloodlust: 0
+    Kamikaze: 0
   SoldierModifiers:
     MoveSpeed: 1
     Damage: 1
@@ -588,6 +589,7 @@ MonoBehaviour:
     ExtraDNAHarvest: 0
     RangedPassCount: 1
     Bloodlust: 0
+    Kamikaze: 0
   SpitterModifiers:
     MoveSpeed: 1
     Damage: 1
@@ -598,6 +600,7 @@ MonoBehaviour:
     ExtraDNAHarvest: 0
     RangedPassCount: 1
     Bloodlust: 0
+    Kamikaze: 0
   DefenderModifiers:
     MoveSpeed: 1
     Damage: 1
@@ -608,6 +611,7 @@ MonoBehaviour:
     ExtraDNAHarvest: 0
     RangedPassCount: 1
     Bloodlust: 0
+    Kamikaze: 0
   PlayerID: 0
   Color: {r: 0, g: 1, b: 1, a: 1}
 --- !u!1 &95904311
@@ -2345,6 +2349,7 @@ MonoBehaviour:
     ExtraDNAHarvest: 0
     RangedPassCount: 1
     Bloodlust: 0
+    Kamikaze: 0
   SoldierModifiers:
     MoveSpeed: 1
     Damage: 1
@@ -2355,6 +2360,7 @@ MonoBehaviour:
     ExtraDNAHarvest: 0
     RangedPassCount: 1
     Bloodlust: 0
+    Kamikaze: 0
   SpitterModifiers:
     MoveSpeed: 1
     Damage: 1
@@ -2365,6 +2371,7 @@ MonoBehaviour:
     ExtraDNAHarvest: 0
     RangedPassCount: 1
     Bloodlust: 0
+    Kamikaze: 0
   DefenderModifiers:
     MoveSpeed: 1
     Damage: 1
@@ -2375,6 +2382,7 @@ MonoBehaviour:
     ExtraDNAHarvest: 0
     RangedPassCount: 1
     Bloodlust: 0
+    Kamikaze: 0
   PlayerID: 1
   Color: {r: 1, g: 0, b: 1, a: 1}
 --- !u!1 &587878429
