@@ -25,7 +25,7 @@ public class Base : MonoBehaviour, Damageable {
 	[Space]
 
 	public int MaxHealth = 100;
-	public float Health = 100;
+	public int Health = 100;
 	public float ReflectedDamage = 0;
 
 
@@ -87,10 +87,14 @@ public class Base : MonoBehaviour, Damageable {
 
 		Health -= Mathf.Abs(amount);
 
+		/*
 		healthBar.transform.localScale = new Vector3(
 			((float)Health / 100) * healthBar.transform.localScale.x,
 			healthBar.transform.localScale.y,
 			healthBar.transform.localScale.z);
+		*/
+		healthBar.rectTransform.sizeDelta = new Vector2(((float)Health / MaxHealth) * 300, 15);
+
 
 		if (Health <= 0) {
 			Destroy();

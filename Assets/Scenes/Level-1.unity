@@ -577,6 +577,7 @@ MonoBehaviour:
     AttackSpeed: 1
     ExtraDNAHarvest: 0
     RangedPassCount: 1
+    HealFrontAlly: 0
     Bloodlust: 0
     Kamikaze: 0
   SoldierModifiers:
@@ -588,6 +589,7 @@ MonoBehaviour:
     AttackSpeed: 1
     ExtraDNAHarvest: 0
     RangedPassCount: 1
+    HealFrontAlly: 0
     Bloodlust: 0
     Kamikaze: 0
   SpitterModifiers:
@@ -599,6 +601,7 @@ MonoBehaviour:
     AttackSpeed: 1
     ExtraDNAHarvest: 0
     RangedPassCount: 1
+    HealFrontAlly: 0
     Bloodlust: 0
     Kamikaze: 0
   DefenderModifiers:
@@ -610,6 +613,7 @@ MonoBehaviour:
     AttackSpeed: 1
     ExtraDNAHarvest: 0
     RangedPassCount: 1
+    HealFrontAlly: 0
     Bloodlust: 0
     Kamikaze: 0
   PlayerID: 0
@@ -670,15 +674,15 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 128416445}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.1}
-  m_LocalScale: {x: 0.012999999, y: 0.012999999, z: 0.01}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 771623157}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: -14.375, y: -204.625}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 300, y: 15}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &128416447
@@ -1422,8 +1426,8 @@ MonoBehaviour:
   UnitContainer: {fileID: 1847397458}
   Spawnpoint1: {fileID: 307360627}
   Spawnpoint2: {fileID: 968182953}
-  MaxHealth: 100
-  Health: 100
+  MaxHealth: 500
+  Health: 500
   ReflectedDamage: 0
 --- !u!61 &258391093
 BoxCollider2D:
@@ -2348,6 +2352,7 @@ MonoBehaviour:
     AttackSpeed: 1
     ExtraDNAHarvest: 0
     RangedPassCount: 1
+    HealFrontAlly: 0
     Bloodlust: 0
     Kamikaze: 0
   SoldierModifiers:
@@ -2359,6 +2364,7 @@ MonoBehaviour:
     AttackSpeed: 1
     ExtraDNAHarvest: 0
     RangedPassCount: 1
+    HealFrontAlly: 0
     Bloodlust: 0
     Kamikaze: 0
   SpitterModifiers:
@@ -2370,6 +2376,7 @@ MonoBehaviour:
     AttackSpeed: 1
     ExtraDNAHarvest: 0
     RangedPassCount: 1
+    HealFrontAlly: 0
     Bloodlust: 0
     Kamikaze: 0
   DefenderModifiers:
@@ -2381,6 +2388,7 @@ MonoBehaviour:
     AttackSpeed: 1
     ExtraDNAHarvest: 0
     RangedPassCount: 1
+    HealFrontAlly: 0
     Bloodlust: 0
     Kamikaze: 0
   PlayerID: 1
@@ -3074,8 +3082,8 @@ MonoBehaviour:
   UnitContainer: {fileID: 1942696556}
   Spawnpoint1: {fileID: 377509583}
   Spawnpoint2: {fileID: 95904312}
-  MaxHealth: 100
-  Health: 100
+  MaxHealth: 500
+  Health: 500
   ReflectedDamage: 0
 --- !u!61 &700282126
 BoxCollider2D:
@@ -3271,15 +3279,15 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 757938463}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.1}
-  m_LocalScale: {x: 0.012999999, y: 0.012999999, z: 0.01}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1543343603}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 10.5, y: -204.625}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 300, y: 15}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &757938465
@@ -3528,7 +3536,7 @@ RectTransform:
   m_GameObject: {fileID: 771623156}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.01, y: 0.01, z: 1}
   m_Children:
   - {fileID: 128416446}
   - {fileID: 2113976372}
@@ -3537,8 +3545,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 336, y: 209}
-  m_SizeDelta: {x: 640, y: 400}
+  m_AnchoredPosition: {x: 4, y: 7}
+  m_SizeDelta: {x: 300, y: 15}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &771623158
 MonoBehaviour:
@@ -5413,7 +5421,7 @@ RectTransform:
   m_GameObject: {fileID: 1543343602}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.01, y: 0.01, z: 1}
   m_Children:
   - {fileID: 757938464}
   - {fileID: 1958064370}
@@ -5422,8 +5430,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 304, y: 209}
-  m_SizeDelta: {x: 640, y: 400}
+  m_AnchoredPosition: {x: -4, y: 7}
+  m_SizeDelta: {x: 300, y: 15}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1543343604
 MonoBehaviour:
@@ -6492,15 +6500,15 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1958064369}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.1}
-  m_LocalScale: {x: 0.012999999, y: 0.012999999, z: 0.01}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1543343603}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 10.5, y: -204.625}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 300, y: 15}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &1958064371
@@ -6886,15 +6894,15 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2113976371}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.1}
-  m_LocalScale: {x: 0.012999999, y: 0.012999999, z: 0.01}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 771623157}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: -14.375, y: -204.625}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 300, y: 15}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &2113976373
