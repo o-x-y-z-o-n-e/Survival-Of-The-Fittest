@@ -53,6 +53,8 @@ public class UnitController : MonoBehaviour, Damageable {
     private Player unitOwner; //this will not be a serialized field once unit owners are assigned at time of prefab instantiation.
 
 	SpriteRenderer sprite;
+	SpriteRenderer spriteBody;
+	Array getSprites;
 	Animator animator;
 	new BoxCollider2D collider;
 	UnitModifiers modifiers; public UnitModifiers Modifiers => modifiers;
@@ -87,6 +89,7 @@ public class UnitController : MonoBehaviour, Damageable {
 	void Awake() {
 		animator = GetComponentInChildren<Animator>();
 		sprite = GetComponentInChildren<SpriteRenderer>();
+		getSprites = GetComponentsInChildren<SpriteRenderer>();
 		collider = GetComponent<BoxCollider2D>();
 		healthBar = GetComponentsInChildren<Image>()[1];
 
@@ -111,7 +114,8 @@ public class UnitController : MonoBehaviour, Damageable {
 
 		health = (int)(baseHealth * modifiers.Health);
 
-		sprite.color = player.Color;
+		foreach (SpriteRenderer sprite in getSprites)
+			sprite.color = player.Color;
 	}
 
 
@@ -406,7 +410,8 @@ public class UnitController : MonoBehaviour, Damageable {
 		else dir = Math.Sign(dir);
 
 		direction = dir;
-		sprite.flipX = dir == -1;
+		foreach (SpriteRenderer sprite in getSprites)
+			sprite.flipX = dir == -1;
 
 		gameObject.layer = LayerMask.NameToLayer(direction == 1 ? "Left Unit" : "Right Unit");
 

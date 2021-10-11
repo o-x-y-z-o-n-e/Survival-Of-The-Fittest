@@ -62,7 +62,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _AlphaBlend: 0.5
+    - _AlphaBlend: 0
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
@@ -76,7 +76,7 @@ Material:
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _QueueOffset: 0
-    - _RangeBlend: 0.5
+    - _RangeBlend: 0.2
     - _ReceiveShadows: 1
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
@@ -90,6 +90,6 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
-    - _TeamTarget: {r: 0.11372549, g: 0.15686275, b: 0.11955448, a: 1}
-    - _TypeAccent: {r: 0, g: 0, b: 0, a: 1}
-    - _TypeTarget: {r: 0, g: 0, b: 0, a: 1}
+    - _TeamTarget: {r: 0.9960785, g: 0.9960785, b: 0.9960785, a: 1}
+    - _TypeAccent: {r: 0.21124065, g: 0.3577668, b: 0.9528302, a: 1}
+    - _TypeTarget: {r: 0.6862745, g: 0.6862745, b: 0.6862745, a: 1}
