@@ -9,9 +9,7 @@ public class Defender : UnitController {
 	public override void OnDeath() {
 		base.OnDeath();
 
-		UnitModifiers mod = GetUnitOwner().GetModifierReference(Type);
-
-		if(mod.Kamikaze) {
+		if(Modifiers.Kamikaze) {
 			float a = GetWidth() / 2 * Direction;
 
 			RaycastHit2D hit;

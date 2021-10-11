@@ -125,7 +125,7 @@ public class Base : MonoBehaviour, Damageable {
 	/// </summary>
 	/// <param name="type"></param>
 	/// <param name="path"></param>
-	public void SpawnUnit(UnitType type, int path) {
+	public void SpawnUnit(UnitType type, Path path) {
 		if (Game.Current.Freeze) return;
 
 		int cost = UnitController.GetUnitBaseCost(type);
@@ -138,7 +138,7 @@ public class Base : MonoBehaviour, Damageable {
 		if (prefab == null) return;
 
 
-		Vector3 corePosition = path == 0 ? Spawnpoint1.position : Spawnpoint2.position;
+		Vector3 corePosition = path == Path.Surface ? Spawnpoint1.position : Spawnpoint2.position;
 		int direction = Game.Current.Player1 == Player ? 1 : -1;
 		const float CHECK_DISTANCE = 20f;
 
@@ -157,7 +157,7 @@ public class Base : MonoBehaviour, Damageable {
 		
 		instance.SetDirection(direction);
 
-		if (path == 0) topUnits.AddLast(instance);
+		if (path == Path.Surface) topUnits.AddLast(instance);
 		else bottomUnits.AddLast(instance);
 	}
 
@@ -174,8 +174,8 @@ public class Base : MonoBehaviour, Damageable {
 		if (!topUnits.Remove(unit)) bottomUnits.Remove(unit);
 	}
 
-	public UnitController GetUnit(int index, int path) {
-		LinkedList<UnitController> units = (path == 0 ? topUnits : bottomUnits);
+	public UnitController GetUnit(int index, Path path) {
+		LinkedList<UnitController> units = (path == Path.Surface ? topUnits : bottomUnits);
 
 		if (units.Count == 0) return null;
 

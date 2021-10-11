@@ -54,7 +54,7 @@ public class UnitController : MonoBehaviour, Damageable {
 	SpriteRenderer sprite;
 	Animator animator;
 	new BoxCollider2D collider;
-	UnitModifiers modifiers;
+	UnitModifiers modifiers; public UnitModifiers Modifiers => modifiers;
 	Image healthBar;
 
 	bool stopMoving;
@@ -64,6 +64,8 @@ public class UnitController : MonoBehaviour, Damageable {
 
 	int enemyMask;
 	int allyMask;
+
+	Path path; //0 = Surface, 1 = Tunnel
 
 
 	UnitController nextAlly;
@@ -114,7 +116,7 @@ public class UnitController : MonoBehaviour, Damageable {
 
 
 	// Update is called once per frame
-	void Update() {
+	public virtual void Update() {
 		if (Game.Current.Freeze) return;
 
 		CheckCollision();
@@ -255,6 +257,18 @@ public class UnitController : MonoBehaviour, Damageable {
 	//----------------------------------------------------------------------------------------------------------------------------------<
 
 
+	public void Heal(int amount) {
+		health += Mathf.Abs(amount);
+
+		if (health > baseHealth) health = baseHealth;
+
+		UpdateHealthBar();
+	}
+
+
+	//----------------------------------------------------------------------------------------------------------------------------------<
+
+
 	public bool TakeDamage(int damage, Player sender) {
 		if (health <= 0) return false;
 
@@ -278,10 +292,7 @@ public class UnitController : MonoBehaviour, Damageable {
 			StartCoroutine(Shake());
 		}
 
-        healthBar.transform.localScale = new Vector3(
-            ((float)health / baseHealth) * healthBar.transform.localScale.x,
-            healthBar.transform.localScale.y,
-            healthBar.transform.localScale.z);
+		UpdateHealthBar();
 
 		return false;
     }
@@ -296,6 +307,17 @@ public class UnitController : MonoBehaviour, Damageable {
 		OnDeath();
 
 		Destroy(gameObject);
+	}
+
+
+	//----------------------------------------------------------------------------------------------------------------------------------<
+
+
+	void UpdateHealthBar() {
+		healthBar.transform.localScale = new Vector3(
+			((float)health / baseHealth) * healthBar.transform.localScale.x,
+			healthBar.transform.localScale.y,
+			healthBar.transform.localScale.z);
 	}
 
 
@@ -352,6 +374,8 @@ public class UnitController : MonoBehaviour, Damageable {
 	public Transform GetTransform() => transform;
 	public bool IsDead() => health <= 0;
 	public bool TryCritical() => UnityEngine.Random.value <= modifiers.CriticalChance;
+	public void SetPath(Path path) => this.path = path;
+	public Path GetPath() => path;
 
 
 	//----------------------------------------------------------------------------------------------------------------------------------<
@@ -541,6 +565,7 @@ public class UnitModifiers {
 
 	[Header("For Spitters Only")]
 	public int RangedPassCount = 1;
+	public bool HealFrontAlly;
 
 	[Space]
 

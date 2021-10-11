@@ -232,7 +232,7 @@ public class GameUI : MonoBehaviour {
 	/// <summary>
 	/// Is called by Path (Surface/Tunnel) button click event.
 	/// </summary>
-	public void OnPlayer1PathClick(int path) => Game.Current.Player1.SelectPath(path);
+	public void OnPlayer1PathClick(int path) => Game.Current.Player1.SelectPath((Path)path);
 
 
 	//----------------------------------------------------------------------------------------------------------------------------------<
@@ -241,7 +241,7 @@ public class GameUI : MonoBehaviour {
 	/// <summary>
 	/// Is called by Path (Surface/Tunnel) button click event.
 	/// </summary>
-	public void OnPlayer2PathClick(int path) => Game.Current.Player2.SelectPath(path);
+	public void OnPlayer2PathClick(int path) => Game.Current.Player2.SelectPath((Path)path);
 
 
 	//----------------------------------------------------------------------------------------------------------------------------------<

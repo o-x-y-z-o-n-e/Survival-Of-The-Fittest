@@ -65,8 +65,8 @@ public class Evolution {
 				() => { ModifyUnit(UnitType.Spitter, damage:-0.5f); RangedAttack(UnitType.Spitter, 2); }),
 
 			new EvolveData(
-				"Spitters now heal the front ally for 10% of damage dealt",
-				() => {  }),
+				"Spitters now heal the front ally 5 hp every 1 second",
+				() => { EnableHealingForntAlly(UnitType.Spitter); }),
 
 			new EvolveData(
 				"Soldiers run 5% faster",
@@ -340,6 +340,15 @@ public class Evolution {
 	void EnableKamikase(UnitType unitType) {
 		UnitModifiers mod = player.GetModifierReference(unitType);
 		mod.Kamikaze = true;
+	}
+
+
+	//----------------------------------------------------------------------------------------------------------------------------------<
+
+
+	void EnableHealingForntAlly(UnitType unitType) {
+		UnitModifiers mod = player.GetModifierReference(unitType);
+		mod.HealFrontAlly = true;
 	}
 
 

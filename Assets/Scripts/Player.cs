@@ -38,7 +38,7 @@ public class Player : MonoBehaviour {
 
 
 	bool isAI; public bool IsAI => isAI;
-	int selectedPath = 0; public int SelectedPath => selectedPath;
+	Path selectedPath = Path.Surface; public Path SelectedPath => selectedPath;
 
 	float remainingDNA = 0;
 	float counterDNA = 0;
@@ -124,7 +124,7 @@ public class Player : MonoBehaviour {
 	//----------------------------------------------------------------------------------------------------------------------------------<
 
 
-	public void SelectPath(int path) {
+	public void SelectPath(Path path) {
 		selectedPath = path;
 	}
 
