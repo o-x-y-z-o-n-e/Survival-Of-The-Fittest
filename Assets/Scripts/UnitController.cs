@@ -23,6 +23,7 @@ public class UnitController : MonoBehaviour, Damageable {
 	public const int	DEFENDER_DNA_COST		= 250;
 
 	const float			FRIENDLY_OVERLAP		= 0.0f;
+	const float			ALLY_CHECK_DIST			= 0.1f;
 
 	const float BLOODLUST_THRESHOLD = 0.15f; //What percent of total health does a Unit have to reach below for bloodlust to activate.
 	const float BLOODLUST_DAMAGE_MULTIPLIER = 2f;
@@ -72,6 +73,8 @@ public class UnitController : MonoBehaviour, Damageable {
 	Damageable nextEnemy;
 
 
+	Vector2 hitOffset = Vector2.zero;
+	float hitRotate;
 	float bloodlustRotate;
 	float attackLungeCounter;
 	float attackLungeHeightMulitplier = 1;
@@ -155,7 +158,7 @@ public class UnitController : MonoBehaviour, Damageable {
 
 		//Check for next ally
 		origin += (Vector3.right * 0.05f * direction);
-		hit = Physics2D.Raycast(origin, Vector3.right * direction, 1f, allyMask);
+		hit = Physics2D.Raycast(origin, Vector3.right * direction, ALLY_CHECK_DIST, allyMask);
 
 		if (hit.collider != null) {
 			UnitController ally = null;
@@ -232,25 +235,27 @@ public class UnitController : MonoBehaviour, Damageable {
 
 	//Causes sprite to shake - Used for recording purposes
 	IEnumerator Shake() {
-        transform.position = transform.position + new Vector3(0, 0.1f);
-        transform.Rotate(0, 0, 10);
+        hitOffset = new Vector3(0, 0.1f);
+		hitRotate = 10;
         yield return new WaitForSeconds(0.01f);
-        transform.position = transform.position + new Vector3(0, -0.1f);
-        transform.Rotate(0, 0, -10);
-        yield return new WaitForSeconds(0.01f);
-        transform.position = transform.position + new Vector3(0, -0.1f);
-        transform.Rotate(0, 0, 10);
-        yield return new WaitForSeconds(0.01f);
-        transform.position = transform.position + new Vector3(0, 0.1f);
-        transform.Rotate(0, 0, -10);
-        yield return new WaitForSeconds(0.01f);
-        transform.position = transform.position + new Vector3(0, 0.1f);
-        transform.Rotate(0, 0, 10);
-        yield return new WaitForSeconds(0.01f);
-        transform.position = transform.position + new Vector3(0, -0.1f);
-        transform.Rotate(0, 0, -10);
-        yield return new WaitForSeconds(0.01f);
+		hitOffset = new Vector3(0, -0.1f);
+		hitRotate = -10;
+		yield return new WaitForSeconds(0.01f);
+		hitOffset = new Vector3(0, 0.1f);
+		hitRotate = 10;
+		yield return new WaitForSeconds(0.01f);
+		hitOffset = new Vector3(0, -0.1f);
+		hitRotate = -10;
+		yield return new WaitForSeconds(0.01f);
+		hitOffset = new Vector3(0, 0.1f);
+		hitRotate = 10;
+		yield return new WaitForSeconds(0.01f);
+		hitOffset = new Vector3(0, -0.1f);
+		hitRotate = -10;
+		yield return new WaitForSeconds(0.01f);
 
+		hitOffset = Vector2.zero;
+		hitRotate = 0;
     }
 
 
@@ -477,6 +482,10 @@ public class UnitController : MonoBehaviour, Damageable {
 
 			offset += new Vector2(x, y);
 		}
+
+
+		offset += hitOffset;
+		rotation += hitRotate;
 
 
 		sprite.transform.localPosition = offset;
