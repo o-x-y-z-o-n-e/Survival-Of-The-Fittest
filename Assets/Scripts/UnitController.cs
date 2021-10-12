@@ -64,6 +64,7 @@ public class UnitController : MonoBehaviour, Damageable {
 	float attackCounter;
 	int health;
 	bool bloodlust;
+	bool stunNextAttack = false;
 
 	int enemyMask;
 	int allyMask;
@@ -113,6 +114,8 @@ public class UnitController : MonoBehaviour, Damageable {
 		modifiers = unitOwner.GetModifierReference(Type);
 
 		health = (int)(baseHealth * modifiers.Health);
+
+		if (modifiers.StunNextAttackAcquired == true) stunNextAttack = true;
 
 		foreach (SpriteRenderer sprite in getSprites)
 			sprite.color = player.Color;
@@ -360,8 +363,24 @@ public class UnitController : MonoBehaviour, Damageable {
 			Base nextBase = (Base)nextEnemy;
 			TakeDamage((int)(baseHealth * nextBase.ReflectedDamage), nextBase.Player);
 		}
+
+		if (stunNextAttack == true) {
+			StartCoroutine(StunEnemy(nextEnemy));
+			stunNextAttack = false;
+		}
 		
 		SoundManagerScript.PlayUnitSound(Type + "_Attack");
+	}
+
+	private IEnumerator StunEnemy(Damageable unit)
+	{
+		UnitController unitToStun = (UnitController)unit;
+		float originalInterval = unitToStun.GetUnitAttackInterval();
+
+		unitToStun.SetUnitAttackInterval(3);
+		yield return new WaitForSeconds(3);
+		unitToStun.SetUnitAttackInterval(originalInterval);
+		yield return null;
 	}
 
 
@@ -388,7 +407,8 @@ public class UnitController : MonoBehaviour, Damageable {
 	public bool TryCritical() => UnityEngine.Random.value <= modifiers.CriticalChance;
 	public void SetPath(Path path) => this.path = path;
 	public Path GetPath() => path;
-
+	public void SetUnitAttackInterval(float interval) => attackInterval = interval;
+	public float GetUnitAttackInterval() => attackInterval;
 
 	//----------------------------------------------------------------------------------------------------------------------------------<
 
@@ -588,6 +608,7 @@ public class UnitModifiers {
 
 	[Header("For Soldiers Only")]
 	public bool Bloodlust;
+	public bool StunNextAttackAcquired = false;
 
 	[Space]
 

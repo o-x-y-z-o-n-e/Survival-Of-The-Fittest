@@ -118,6 +118,10 @@ public class Evolution {
 			new EvolveData(
 				"When a defender dies, it deals 30% of its max hp as damage to the front enemy",
 				() => { EnableKamikase(UnitType.Defender); }),
+
+			new EvolveData(
+				"When a soldier attacks for the first time, the enemy unit is stunned briefly",
+				() => { EnableStun(UnitType.Soldier); }),
 		};
 	}
 
@@ -349,6 +353,15 @@ public class Evolution {
 	void EnableHealingForntAlly(UnitType unitType) {
 		UnitModifiers mod = player.GetModifierReference(unitType);
 		mod.HealFrontAlly = true;
+	}
+
+	//----------------------------------------------------------------------------------------------------------------------------------<
+
+
+	void EnableStun(UnitType unitType)
+	{
+		UnitModifiers mod = player.GetModifierReference(unitType);
+		mod.StunNextAttackAcquired = true;
 	}
 
 
