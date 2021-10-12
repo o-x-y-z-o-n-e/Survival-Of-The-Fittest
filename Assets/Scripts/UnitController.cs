@@ -66,6 +66,7 @@ public class UnitController : MonoBehaviour, Damageable {
 	bool bloodlust;
 	bool stunNextAttack = false;
 	bool isStunned = false;
+	float blockEnemyChance = 0.025f;
 
 	int enemyMask;
 	int allyMask;
@@ -206,8 +207,9 @@ public class UnitController : MonoBehaviour, Damageable {
 		if (nextEnemy != null) {
 			if (nextEnemy.GetOwnerID() != unitOwner.PlayerID) {
 				attackCounter -= Time.deltaTime;
-
-				if (attackCounter <= 0 && !isStunned) {
+				
+				if (attackCounter <= 0 && !isStunned)
+				{
 					attackCounter = GetNextAttackSpeed();
 
 					Attack();
@@ -285,11 +287,21 @@ public class UnitController : MonoBehaviour, Damageable {
 	public bool TakeDamage(int damage, Player sender) {
 		if (health <= 0) return false;
 
+		float blockRange = UnityEngine.Random.Range(0f, 1f);
+		bool blockEnemy = blockRange > 1 - blockEnemyChance;
+		Debug.Log(health);
+		if (blockEnemy)
+		{
+			return false;
+		}
+
 		int d = (int)(damage * (1f - modifiers.Armor));
 		health -= d;
 
 
-		if(modifiers.Bloodlust) {
+		
+
+		if (modifiers.Bloodlust) {
 			float t = health / baseHealth;
 
 			//Activate bloodlust if helath is below threshold
@@ -617,5 +629,6 @@ public class UnitModifiers {
 
 	[Header("For Defenders Only")]
 	public bool Kamikaze;
+	public bool BlockEnemy;
 
 }

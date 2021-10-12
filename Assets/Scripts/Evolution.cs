@@ -122,6 +122,9 @@ public class Evolution {
 			new EvolveData(
 				"When a soldier attacks for the first time, the enemy unit is stunned briefly",
 				() => { EnableStun(UnitType.Soldier); }),
+			new EvolveData(
+				"Defenders have a chance to block an attack from an enemy",
+				() => { EnableNullify(UnitType.Defender); })
 		};
 	}
 
@@ -364,6 +367,11 @@ public class Evolution {
 		mod.StunNextAttackAcquired = true;
 	}
 
+	void EnableNullify(UnitType unitType)
+    {
+		UnitModifiers mod = player.GetModifierReference(unitType);
+		mod.BlockEnemy = true;
+    }
 
 	#endregion
 }
