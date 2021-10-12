@@ -169,19 +169,19 @@ public class Player : MonoBehaviour {
 
 		if(a < 0 || b < 0) {
 			Path path = a < b ? Path.Surface : Path.Tunnels;
-			UnitType type = PickUnitType();
+			UnitType type = PickUnitType(0.5f,0.25f,0.25f);
 			Base.SpawnUnit(type, Path.Surface);
 			return;
 		}
 
 		if(a > RUSH_ATTACK_THRESHOLD) {
-			UnitType type = PickUnitType();
+			UnitType type = PickUnitType(0.65f,0.3f,0.05f);
 			Base.SpawnUnit(type, Path.Surface);
 			return;
 		}
 
 		if(b > RUSH_ATTACK_THRESHOLD) {
-			UnitType type = PickUnitType();
+			UnitType type = PickUnitType(0.65f,0.3f,0.05f);
 			Base.SpawnUnit(type, Path.Tunnels);
 			return;
 		}
@@ -202,11 +202,18 @@ public class Player : MonoBehaviour {
 	//----------------------------------------------------------------------------------------------------------------------------------<
 
 
-	UnitType PickUnitType() {
-		//temp func. To be filled in.
-		//pass unit weight parameters here;
+	UnitType PickUnitType(float soldier, float spitter, float defender) {
+		soldier = Mathf.Abs(soldier);
+		spitter = Mathf.Abs(spitter);
+		defender = Mathf.Abs(defender);
 
-		return UnitType.Soldier;
+		float m = soldier + spitter + defender;
+
+		float t = Random.value * m;
+
+		if (t > soldier + spitter) return UnitType.Defender;
+		else if (t > soldier) return UnitType.Spitter;
+		else return UnitType.Soldier;
 	}
 
 
