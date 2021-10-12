@@ -206,7 +206,7 @@ MonoBehaviour:
   direction: 1
   baseHealth: 100
   damage: 30
-  moveSpeed: 0.5
+  moveSpeed: 1
   attackInterval: 1
   attackIntervalDeviation: 0.2
   giveDNA: 10
