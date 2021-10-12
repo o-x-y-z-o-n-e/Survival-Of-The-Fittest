@@ -77,62 +77,7 @@ public class Game : MonoBehaviour {
 				UI.UpdateTime(time);
 			}
 
-
-			// Player 1 Hotkeys
-			// Unit Spawning
-			if (Input.GetKeyDown(Options.Input.Player1Soldier))
-				GameUI.ClickButton(UI.Player1SoldierButton.gameObject);
-
-			if (Input.GetKeyDown(Options.Input.Player1Spitter))
-				GameUI.ClickButton(UI.Player1SpitterButton.gameObject);
-
-			if (Input.GetKeyDown(Options.Input.Player1Defender))
-				GameUI.ClickButton(UI.Player1DefenderButton.gameObject);
-
-
-			// Path Selection
-			if (Input.GetKeyDown(Options.Input.Player1Surface))
-				GameUI.ClickButton(UI.Player1Path1Button.gameObject);
-
-			if (Input.GetKeyDown(Options.Input.Player1Tunnel))
-				GameUI.ClickButton(UI.Player1Path2Button.gameObject);
-
-
-			// Evolution Selection
-			if (Input.GetKeyDown(Options.Input.Player1Evolve1))
-				GameUI.ClickButton(UI.Player1Evolve1Button.gameObject);
-
-			if (Input.GetKeyDown(Options.Input.Player1Evolve2))
-				GameUI.ClickButton(UI.Player1Evolve2Button.gameObject);
-
-
-			// Player 2 Hotkeys
-			// Unit Spawning
-			if (Input.GetKeyDown(Options.Input.Player2Soldier))
-				GameUI.ClickButton(UI.Player2SoldierButton.gameObject);
-
-			if (Input.GetKeyDown(Options.Input.Player2Spitter))
-				GameUI.ClickButton(UI.Player2SpitterButton.gameObject);
-
-			if (Input.GetKeyDown(Options.Input.Player2Defender))
-				GameUI.ClickButton(UI.Player2DefenderButton.gameObject);
-
-
-			// Path Selection
-			if (Input.GetKeyDown(Options.Input.Player2Surface))
-				GameUI.ClickButton(UI.Player2Path1Button.gameObject);
-
-			if (Input.GetKeyDown(Options.Input.Player2Tunnel))
-				GameUI.ClickButton(UI.Player2Path2Button.gameObject);
-
-
-			// Evolution Selection
-			if (Input.GetKeyDown(Options.Input.Player2Evolve1))
-				GameUI.ClickButton(UI.Player2Evolve1Button.gameObject);
-
-			if (Input.GetKeyDown(Options.Input.Player2Evolve2))
-				GameUI.ClickButton(UI.Player2Evolve2Button.gameObject);
-
+			CheckHotkeyInput();
 		}
 	}
 
@@ -205,6 +150,70 @@ public class Game : MonoBehaviour {
 
 	void OnDestroy() {
 		instance = null;
+	}
+
+
+	//----------------------------------------------------------------------------------------------------------------------------------<
+
+
+	void CheckHotkeyInput() {
+		// Player 1 Hotkeys
+		if (!Player1.IsAI) {
+			// Unit Spawning
+			if (Input.GetKeyDown(Options.Input.Player1Soldier))
+				GameUI.ClickButton(UI.Player1SoldierButton.gameObject);
+
+			if (Input.GetKeyDown(Options.Input.Player1Spitter))
+				GameUI.ClickButton(UI.Player1SpitterButton.gameObject);
+
+			if (Input.GetKeyDown(Options.Input.Player1Defender))
+				GameUI.ClickButton(UI.Player1DefenderButton.gameObject);
+
+
+			// Path Selection
+			if (Input.GetKeyDown(Options.Input.Player1Surface))
+				GameUI.ClickButton(UI.Player1Path1Button.gameObject);
+
+			if (Input.GetKeyDown(Options.Input.Player1Tunnel))
+				GameUI.ClickButton(UI.Player1Path2Button.gameObject);
+
+
+			// Evolution Selection
+			if (Input.GetKeyDown(Options.Input.Player1Evolve1))
+				GameUI.ClickButton(UI.Player1Evolve1Button.gameObject);
+
+			if (Input.GetKeyDown(Options.Input.Player1Evolve2))
+				GameUI.ClickButton(UI.Player1Evolve2Button.gameObject);
+		}
+
+		// Player 2 Hotkeys
+		if (!Player2.IsAI) {
+			// Unit Spawning
+			if (Input.GetKeyDown(Options.Input.Player2Soldier))
+				GameUI.ClickButton(UI.Player2SoldierButton.gameObject);
+
+			if (Input.GetKeyDown(Options.Input.Player2Spitter))
+				GameUI.ClickButton(UI.Player2SpitterButton.gameObject);
+
+			if (Input.GetKeyDown(Options.Input.Player2Defender))
+				GameUI.ClickButton(UI.Player2DefenderButton.gameObject);
+
+
+			// Path Selection
+			if (Input.GetKeyDown(Options.Input.Player2Surface))
+				GameUI.ClickButton(UI.Player2Path1Button.gameObject);
+
+			if (Input.GetKeyDown(Options.Input.Player2Tunnel))
+				GameUI.ClickButton(UI.Player2Path2Button.gameObject);
+
+
+			// Evolution Selection
+			if (Input.GetKeyDown(Options.Input.Player2Evolve1))
+				GameUI.ClickButton(UI.Player2Evolve1Button.gameObject);
+
+			if (Input.GetKeyDown(Options.Input.Player2Evolve2))
+				GameUI.ClickButton(UI.Player2Evolve2Button.gameObject);
+		}
 	}
 }
 
