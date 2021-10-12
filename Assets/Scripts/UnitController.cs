@@ -65,6 +65,7 @@ public class UnitController : MonoBehaviour, Damageable {
 	int health;
 	bool bloodlust;
 	bool stunNextAttack = false;
+	bool isStunned = false;
 
 	int enemyMask;
 	int allyMask;
@@ -206,7 +207,7 @@ public class UnitController : MonoBehaviour, Damageable {
 			if (nextEnemy.GetOwnerID() != unitOwner.PlayerID) {
 				attackCounter -= Time.deltaTime;
 
-				if (attackCounter <= 0) {
+				if (attackCounter <= 0 && !isStunned) {
 					attackCounter = GetNextAttackSpeed();
 
 					Attack();
@@ -375,12 +376,16 @@ public class UnitController : MonoBehaviour, Damageable {
 	private IEnumerator StunEnemy(Damageable unit)
 	{
 		UnitController unitToStun = (UnitController)unit;
-		float originalInterval = unitToStun.GetUnitAttackInterval();
 
-		unitToStun.SetUnitAttackInterval(3);
+		unitToStun.SetStunned(true);
 		yield return new WaitForSeconds(3);
-		unitToStun.SetUnitAttackInterval(originalInterval);
+		unitToStun.SetStunned(false);
 		yield return null;
+	}
+
+	private void SetStunned(bool v)
+	{
+		isStunned = v;
 	}
 
 
@@ -407,8 +412,6 @@ public class UnitController : MonoBehaviour, Damageable {
 	public bool TryCritical() => UnityEngine.Random.value <= modifiers.CriticalChance;
 	public void SetPath(Path path) => this.path = path;
 	public Path GetPath() => path;
-	public void SetUnitAttackInterval(float interval) => attackInterval = interval;
-	public float GetUnitAttackInterval() => attackInterval;
 
 	//----------------------------------------------------------------------------------------------------------------------------------<
 
