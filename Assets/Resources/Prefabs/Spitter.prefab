@@ -501,9 +501,9 @@ MonoBehaviour:
   attackRange: 2
   direction: 1
   baseHealth: 50
-  damage: 15
+  damage: 25
   moveSpeed: 0.5
-  attackInterval: 1
+  attackInterval: 2
   attackIntervalDeviation: 0.2
   giveDNA: 10
   HealthPackagePrefab: {fileID: 8379993457103392243, guid: 6583130263b23ad4f857b60b4ad2a610,

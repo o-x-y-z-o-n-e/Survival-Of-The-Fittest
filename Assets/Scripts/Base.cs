@@ -15,6 +15,7 @@ public class Base : MonoBehaviour, Damageable {
 	public Transform UnitContainer;
 	public Transform Spawnpoint1;
 	public Transform Spawnpoint2;
+	public Animator anim;
 
 	private Image healthBar;
 
@@ -114,6 +115,7 @@ public class Base : MonoBehaviour, Damageable {
 	public void Destroy() {
 		if (isDestroyed) return;
 
+		anim.SetBool("hiveDestroy", true);
 		Health = 0;
 		isDestroyed = true;
 

@@ -205,7 +205,7 @@ MonoBehaviour:
   attackRange: 0.1
   direction: 1
   baseHealth: 100
-  damage: 40
+  damage: 30
   moveSpeed: 0.5
   attackInterval: 1
   attackIntervalDeviation: 0.2
