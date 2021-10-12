@@ -50,7 +50,7 @@ public class UnitController : MonoBehaviour, Damageable {
 	[SerializeField] private float attackIntervalDeviation;
 	[SerializeField] private int giveDNA; // how much DNA the unit will give when killed
 
-    private Player unitOwner; //this will not be a serialized field once unit owners are assigned at time of prefab instantiation.
+	private Player unitOwner; //this will not be a serialized field once unit owners are assigned at time of prefab instantiation.
 
 	SpriteRenderer sprite;
 	SpriteRenderer spriteBody;
@@ -66,7 +66,6 @@ public class UnitController : MonoBehaviour, Damageable {
 	bool bloodlust;
 	bool stunNextAttack = false;
 	bool isStunned = false;
-	float blockEnemyChance = 0.025f;
 
 	int enemyMask;
 	int allyMask;
@@ -288,7 +287,9 @@ public class UnitController : MonoBehaviour, Damageable {
 		if (health <= 0) return false;
 
 		float blockRange = UnityEngine.Random.Range(0f, 1f);
-		bool blockEnemy = blockRange > 1 - blockEnemyChance;
+		bool blockEnemy = false;
+		if (modifiers.BlockEnemy)
+			blockEnemy = blockRange > 1 - modifiers.BlockEnemyChance;
 
 		if (blockEnemy)
 		{
@@ -630,5 +631,6 @@ public class UnitModifiers {
 	[Header("For Defenders Only")]
 	public bool Kamikaze;
 	public bool BlockEnemy;
+	public float BlockEnemyChance = 0f;
 
 }
