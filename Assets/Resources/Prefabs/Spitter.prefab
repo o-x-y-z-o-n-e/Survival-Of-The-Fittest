@@ -511,7 +511,7 @@ MonoBehaviour:
   ProjectilePrefab: {fileID: 1250771802780145336, guid: ad1a194daae826a4ea4b30b088e0388d,
     type: 3}
   ProjectileSpawnOffset: {x: 0.5, y: 0}
-  HealAmount: 0
+  HealAmount: 5
 --- !u!61 &1623760112398397303
 BoxCollider2D:
   m_ObjectHideFlags: 0
