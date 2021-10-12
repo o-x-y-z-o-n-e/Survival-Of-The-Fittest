@@ -6,12 +6,16 @@ public static class Options {
 
 
 	//Runtime options
-	//public static int Difficulty = 1;
+	public static Difficulty Difficulty = Difficulty.Casual;
 	public static PlayerMode Player1Mode = PlayerMode.Real;
 	public static PlayerMode Player2Mode = PlayerMode.Real;
 
 
 	public static InputBindings Input = new InputBindings();
+
+
+
+	public static float GetLinearDifficulty() => Mathf.InverseLerp(1, 5, (int)Difficulty);
 
 }
 
@@ -44,4 +48,13 @@ public class InputBindings {
 
 	public  KeyCode Player2Evolve1	= KeyCode.Alpha8;
 	public  KeyCode Player2Evolve2	= KeyCode.Alpha7;
+}
+
+
+public enum Difficulty {
+	Baby = 1,			//Very easy
+	Gentle = 2,			//Easy
+	Casual = 3,			//Normal/Medium
+	Sweating = 4,		//Hard
+	Barrage = 5,		//Crazy
 }

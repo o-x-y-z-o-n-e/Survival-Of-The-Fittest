@@ -67,6 +67,8 @@ public class Player : MonoBehaviour {
 		if (Game.Current.Freeze) return;
 
 		GatherDNA();
+
+		if (IsAI) UpdateAI();
 	}
 
 
@@ -138,6 +140,80 @@ public class Player : MonoBehaviour {
 		Game.Current.UI.SetPlayerControls(PlayerID, !isAI);
 	}
 
+
+	//----------------------------------------------------------------------------------------------------------------------------------<
+
+
+	#region AI
+
+
+	//----------------------------------------------------------------------------------------------------------------------------------<
+
+
+	void UpdateAI() {
+		//Options.GetLinearDifficulty will return a value of [0, 1]. You can use this as 't' for a Lerp func to get AI frame interval with upper/lower bounds.
+	}
+
+
+	//----------------------------------------------------------------------------------------------------------------------------------<
+
+
+	/// <summary>
+	/// Checks if the AI needs to defend or push a hard attack.
+	/// </summary>
+	/// <param name="timeDelta">The change in time, between each AI frame.</param>
+	/// <param name="a">Surface Lane Dominance</param>
+	/// <param name="b">Tunnels Lane Dominance</param>
+	void CheckPriorityStates(float timeDelta, float a, float b) {
+		const float RUSH_ATTACK_THRESHOLD = 0.5f;
+
+		if(a < 0 || b < 0) {
+			Path path = a < b ? Path.Surface : Path.Tunnels;
+			UnitType type = PickUnitType();
+			Base.SpawnUnit(type, Path.Surface);
+			return;
+		}
+
+		if(a > RUSH_ATTACK_THRESHOLD) {
+			UnitType type = PickUnitType();
+			Base.SpawnUnit(type, Path.Surface);
+			return;
+		}
+
+		if(b > RUSH_ATTACK_THRESHOLD) {
+			UnitType type = PickUnitType();
+			Base.SpawnUnit(type, Path.Tunnels);
+			return;
+		}
+
+		CheckEvolutionStates(timeDelta);
+	}
+
+
+	//----------------------------------------------------------------------------------------------------------------------------------<
+
+
+	void CheckEvolutionStates(float timeDelta) {
+		//This is a note for Alex: you can rename this function if you want.
+		//With the evolution counter, use timeDelta instead of Time.deltaTime. Because timeDelta will account for the AI frame interval.
+	}
+
+
+	//----------------------------------------------------------------------------------------------------------------------------------<
+
+
+	UnitType PickUnitType() {
+		//temp func. To be filled in.
+		//pass unit weight parameters here;
+
+		return UnitType.Soldier;
+	}
+
+
+	//----------------------------------------------------------------------------------------------------------------------------------<
+
+
+	#endregion
 
 }
 
