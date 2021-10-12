@@ -289,7 +289,7 @@ public class UnitController : MonoBehaviour, Damageable {
 
 		float blockRange = UnityEngine.Random.Range(0f, 1f);
 		bool blockEnemy = blockRange > 1 - blockEnemyChance;
-		Debug.Log(health);
+
 		if (blockEnemy)
 		{
 			return false;

@@ -579,7 +579,9 @@ MonoBehaviour:
     RangedPassCount: 1
     HealFrontAlly: 0
     Bloodlust: 0
+    StunNextAttackAcquired: 0
     Kamikaze: 0
+    BlockEnemy: 0
   SoldierModifiers:
     MoveSpeed: 1
     Damage: 1
@@ -591,7 +593,9 @@ MonoBehaviour:
     RangedPassCount: 1
     HealFrontAlly: 0
     Bloodlust: 0
+    StunNextAttackAcquired: 0
     Kamikaze: 0
+    BlockEnemy: 0
   SpitterModifiers:
     MoveSpeed: 1
     Damage: 1
@@ -603,7 +607,9 @@ MonoBehaviour:
     RangedPassCount: 1
     HealFrontAlly: 0
     Bloodlust: 0
+    StunNextAttackAcquired: 0
     Kamikaze: 0
+    BlockEnemy: 0
   DefenderModifiers:
     MoveSpeed: 1
     Damage: 1
@@ -615,7 +621,9 @@ MonoBehaviour:
     RangedPassCount: 1
     HealFrontAlly: 0
     Bloodlust: 0
+    StunNextAttackAcquired: 0
     Kamikaze: 0
+    BlockEnemy: 0
   PlayerID: 0
   Color: {r: 0.69486135, g: 0.36854753, b: 0.7735849, a: 1}
 --- !u!1 &95904311
@@ -2387,7 +2395,9 @@ MonoBehaviour:
     RangedPassCount: 1
     HealFrontAlly: 0
     Bloodlust: 0
+    StunNextAttackAcquired: 0
     Kamikaze: 0
+    BlockEnemy: 0
   SoldierModifiers:
     MoveSpeed: 1
     Damage: 1
@@ -2399,7 +2409,9 @@ MonoBehaviour:
     RangedPassCount: 1
     HealFrontAlly: 0
     Bloodlust: 0
+    StunNextAttackAcquired: 0
     Kamikaze: 0
+    BlockEnemy: 0
   SpitterModifiers:
     MoveSpeed: 1
     Damage: 1
@@ -2411,7 +2423,9 @@ MonoBehaviour:
     RangedPassCount: 1
     HealFrontAlly: 0
     Bloodlust: 0
+    StunNextAttackAcquired: 0
     Kamikaze: 0
+    BlockEnemy: 0
   DefenderModifiers:
     MoveSpeed: 1
     Damage: 1
@@ -2423,7 +2437,9 @@ MonoBehaviour:
     RangedPassCount: 1
     HealFrontAlly: 0
     Bloodlust: 0
+    StunNextAttackAcquired: 0
     Kamikaze: 0
+    BlockEnemy: 0
   PlayerID: 1
   Color: {r: 0.34015664, g: 0.5344453, b: 0.7924528, a: 1}
 --- !u!1 &587878429
