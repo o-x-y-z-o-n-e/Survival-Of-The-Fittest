@@ -60,6 +60,7 @@ public class UnitController : MonoBehaviour, Damageable {
 	UnitModifiers modifiers; public UnitModifiers Modifiers => modifiers;
 	Image healthBar;
 
+	float attackSpeedBuff = 1f;
 	bool stopMoving;
 	float attackCounter;
 	int health;
@@ -205,7 +206,7 @@ public class UnitController : MonoBehaviour, Damageable {
 	void CheckAttack() {
 		if (nextEnemy != null) {
 			if (nextEnemy.GetOwnerID() != unitOwner.PlayerID) {
-				attackCounter -= Time.deltaTime;
+				attackCounter -= Time.deltaTime * attackSpeedBuff;
 				
 				if (attackCounter <= 0 && !isStunned)
 				{
@@ -372,7 +373,7 @@ public class UnitController : MonoBehaviour, Damageable {
 			unitOwner.ChangeDNA(modifiers.ExtraDNAHarvest);
 		}
 
-		if(nextEnemy.GetType().ToString() == "Base")
+		if(nextEnemy.GetType() == typeof(Base))
 		{
 			Base nextBase = (Base)nextEnemy;
 			TakeDamage((int)(baseHealth * nextBase.ReflectedDamage), nextBase.Player);
@@ -386,6 +387,10 @@ public class UnitController : MonoBehaviour, Damageable {
 		SoundManagerScript.PlayUnitSound(Type + "_Attack");
 	}
 
+
+	//----------------------------------------------------------------------------------------------------------------------------------<
+
+
 	private IEnumerator StunEnemy(Damageable unit)
 	{
 		UnitController unitToStun = (UnitController)unit;
@@ -395,6 +400,10 @@ public class UnitController : MonoBehaviour, Damageable {
 		unitToStun.SetStunned(false);
 		yield return null;
 	}
+
+
+	//----------------------------------------------------------------------------------------------------------------------------------<
+
 
 	private void SetStunned(bool v)
 	{
@@ -425,6 +434,7 @@ public class UnitController : MonoBehaviour, Damageable {
 	public bool TryCritical() => UnityEngine.Random.value <= modifiers.CriticalChance;
 	public void SetPath(Path path) => this.path = path;
 	public Path GetPath() => path;
+
 
 	//----------------------------------------------------------------------------------------------------------------------------------<
 
@@ -588,8 +598,17 @@ public class UnitController : MonoBehaviour, Damageable {
 
 	}
 
+
+	//----------------------------------------------------------------------------------------------------------------------------------<
+
+
+	public void SetAttackSpeedBuff(float multiplier) => attackSpeedBuff = multiplier;
+	
+
 }
 
+
+//----------------------------------------------------------------------------------------------------------------------------------<
 
 
 public enum UnitType {
@@ -599,6 +618,8 @@ public enum UnitType {
 	Defender = 3
 }
 
+
+//----------------------------------------------------------------------------------------------------------------------------------<
 
 
 [System.Serializable]
@@ -619,6 +640,7 @@ public class UnitModifiers {
 	[Header("For Spitters Only")]
 	public int RangedPassCount = 1;
 	public bool HealFrontAlly;
+	public bool BuffFrontAlly;
 
 	[Space]
 
