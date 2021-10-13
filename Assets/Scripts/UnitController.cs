@@ -597,7 +597,7 @@ public class UnitController : MonoBehaviour, Damageable {
 
 
 	public virtual void OnDeath() {
-
+		SoundManagerScript.PlayUnitSound(Type + "_Death");
 	}
 
 
