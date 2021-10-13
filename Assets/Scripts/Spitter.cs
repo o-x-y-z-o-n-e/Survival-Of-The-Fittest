@@ -194,7 +194,7 @@ public class Spitter : UnitController {
 		}
 
 		buffAllyCounter += Time.deltaTime;
-		if (buffAllyCounter < BUFF_ALLY_INTERVAL) return;
+		if (buffAllyCounter < BUFF_ALLY_INTERVAL * 1.5f) return;
 		buffAllyCounter = 0;
 
 		//wait to create another package
