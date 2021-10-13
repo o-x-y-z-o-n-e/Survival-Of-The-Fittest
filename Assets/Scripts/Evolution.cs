@@ -60,79 +60,162 @@ public class Evolution {
 	void AssignData() {
 		// I would of assigned the data in the field initializer as readonly. But because OOP is shit, the delegate func calls need to refernece the object(Evolution), so the here it is.
 		DATA = new EvolveData[] {
-			new EvolveData(
-				"Spitters now hit 2 enemies but have 50% damage",
+
+			//***SPITTER***
+			new EvolveData( //Multi Hit
+				"Spitters now hit an additional enemy but deal 50% damage",
 				() => { ModifyUnit(UnitType.Spitter, damage:-0.5f); RangedAttack(UnitType.Spitter, 2); }),
 
-			new EvolveData(
-				"Spitters now heal the front ally 5 hp every 1 second",
+			new EvolveData( //Spitter Heal
+				"Spitters heal the front all 5 health per second",
 				() => { EnableHealingForntAlly(UnitType.Spitter); }),
 
-			new EvolveData(
-				"Soldiers run 5% faster",
-				() => { ModifyUnit(UnitType.Soldier, moveSpeed:0.05f); }),
+			new EvolveData( //Stat Aura
+				"Spitters increase nearby units *STAT* by *X*%",
+				() => {  }),
 
-			new EvolveData(
-				"Defenders have 5% more max hp",
-				() => { ModifyUnit(UnitType.Defender, health:0.05f); }),
+			new EvolveData( //M_Spd+
+				"Spitters Move Speed +5%",
+				() => { ModifyUnit(UnitType.Spitter, moveSpeed:0.05f); }),
 
-			new EvolveData(
-				"DNA generation is increased by 100 per minute",
-				() => { IncreaseDNAGeneration(100); }),
+			new EvolveData( //A_Spd+
+				"Spitters Attack Speed +5%",
+				() => { ModifyUnit(UnitType.Spitter, attackSpeed:0.05f); }),
 
-			new EvolveData(
-				"Soldiers give extra DNA on kill",
+			new EvolveData( //HP+
+				"Spitters Health +5%",
+				() => { ModifyUnit(UnitType.Spitter, health:0.05f); }),
+
+			new EvolveData( //Damage+
+				"Spitters Damage +5%",
+				() => { ModifyUnit(UnitType.Spitter, damage:0.05f); }),
+
+			new EvolveData( //Critical+
+				"Spitters Critical Hit Chance +5%",
+				() => { AddCriticalChance(UnitType.Spitter, 0.05f); }),
+			
+
+			//**SOLDIER**
+			new EvolveData( //Harvest
+				"Soldiers harvest additional DNA on kill",
 				() => { AddExtraHarvestDNA(UnitType.Soldier, 10); }),
 
-			new EvolveData(
-				"Defenders have 20% damage reduction",
-				() => { ModifyUnit(UnitType.Defender, damage:-0.2f); }),
-
-			new EvolveData(
-				"Your hive restores 10% hp",
-				() => { RepairBase(0.1f); }),
-
-			new EvolveData(
-				"Enemies that attack your hive take 5% damage per hit",
-				() => { AddBaseThorns(0.05f); }),
-
-			new EvolveData(
-				"All units have 5% more hp",
-				() => { ModifyUnit(UnitType.Defender, health:0.05f);
-					ModifyUnit(UnitType.Soldier, health:0.05f);
-					ModifyUnit(UnitType.Spitter, health:0.05f);
-					ModifyUnit(UnitType.Worker, health:0.05f); }),
-
-			new EvolveData(
+			new EvolveData( //SlowHard Hit **DISCUSS**
 				"Soldiers have 50% extra damage, but 50% slower attack speed",
 				() => { ModifyUnit(UnitType.Soldier, damage:0.5f, attackSpeed:-0.5f); }),
 
-			new EvolveData(
-				"Spitters increase nearby units damage by 10%",
-				() => {  }),
+			new EvolveData( //Stun
+				"Soldiers stun enemies on their first hit",
+				() => { EnableStun(UnitType.Soldier); }),
 
-			new EvolveData(
-				"Workers have 10% extra speed",
-				() => { ModifyUnit(UnitType.Worker, moveSpeed:0.1f); }),
+			new EvolveData( //M_Spd+
+				"Soldiers Move Speed +5%",
+				() => { ModifyUnit(UnitType.Soldier, moveSpeed:0.05f); }),
 
-			new EvolveData(
-				"When a defender dies, it deals 30% of its max hp as damage to the front enemy",
+			new EvolveData( //A_Spd+
+				"Soldiers Attack Speed +5%",
+				() => { ModifyUnit(UnitType.Soldier, attackSpeed:0.05f); }),
+
+			new EvolveData( //HP+
+				"Soldiers Health +5%",
+				() => { ModifyUnit(UnitType.Soldier, health:0.05f); }),
+
+			new EvolveData( //Damage+
+				"Soldiers Damage +5%",
+				() => { ModifyUnit(UnitType.Soldier, damage:0.05f); }),
+
+			new EvolveData( //Critical+
+				"Soldiers Critical Hit Chance +5%",
+				() => { AddCriticalChance(UnitType.Soldier, 0.05f); }),
+
+
+			//**DEFENDER**
+			new EvolveData(//Mitigate ***DAMAGE -0.2*** PLEASE CHECK
+				"Defenders take 20% less damage",
+				() => { ModifyUnit(UnitType.Defender, damage:-0.2f); }),
+
+			new EvolveData(//Martyr
+				"Defenders explode on death, damaging enemies for 30% of their health",
 				() => { EnableKamikase(UnitType.Defender); }),
 
-			new EvolveData(
-				"When a soldier attacks for the first time, the enemy unit is stunned briefly",
-				() => { EnableStun(UnitType.Soldier); }),
-			new EvolveData(
-				"Defenders have a chance to block an attack from an enemy",
-				() => { EnableNullify(UnitType.Defender); })
-		};
+			new EvolveData(//Nullfiy
+				"Defenders gain a chance to ignore an attack",
+				() => { EnableNullify(UnitType.Defender); }),
+
+			new EvolveData( //M_Spd+
+				"Defenders Move Speed +5%",
+				() => { ModifyUnit(UnitType.Defender, moveSpeed:0.05f); }),
+
+			new EvolveData( //A_Spd+
+				"Defenders Attack Speed +5%",
+				() => { ModifyUnit(UnitType.Defender, attackSpeed:0.05f); }),
+
+			new EvolveData( //HP+
+				"Defenders Health +5%",
+				() => { ModifyUnit(UnitType.Defender, health:0.05f); }),
+
+			new EvolveData( //Damage+
+				"Defenders Damage +5%",
+				() => { ModifyUnit(UnitType.Defender, damage:0.05f); }),
+
+			new EvolveData( //Critical+
+				"Defenders Critical Hit Chance +5%",
+				() => { AddCriticalChance(UnitType.Defender, 0.05f); }),
+
+
+			//**GENERAL**
+			new EvolveData(//DNA+
+				"DNA generation is increased by 100 per minute",
+				() => { IncreaseDNAGeneration(100); }),
+
+			new EvolveData(//HiveHeal
+				"Your hive restores 10% hp",
+				() => { RepairBase(0.1f); }),
+
+			new EvolveData(//HiveThorns
+				"Hive Thorns: Melee Attackers take 5% damage per hit.",
+				() => { AddBaseThorns(0.05f); }),
+
+			new EvolveData(//ALL_HP+
+				"All units Health +5%",
+				() => { ModifyUnit(UnitType.Defender, health:0.05f);
+					ModifyUnit(UnitType.Soldier, health:0.05f);
+					ModifyUnit(UnitType.Spitter, health:0.05f);}),
+
+			new EvolveData( //ALL_M_Spd+
+				"All Units Move Speed +5%",
+				() => { ModifyUnit(UnitType.Defender, moveSpeed:0.05f);
+						ModifyUnit(UnitType.Soldier, moveSpeed:0.05f);
+						ModifyUnit(UnitType.Spitter, moveSpeed:0.05f);}),
+
+			new EvolveData( //ALL_A_Spd+
+				"All Units Attack Speed +5%",
+				() => { ModifyUnit(UnitType.Defender, attackSpeed:0.05f);
+						ModifyUnit(UnitType.Soldier, attackSpeed:0.05f);
+						ModifyUnit(UnitType.Spitter, attackSpeed:0.05f);}),
+
+			new EvolveData( //ALL_Damage+
+				"All Units Damage +5%",
+				() => { ModifyUnit(UnitType.Defender, damage:0.05f);
+						ModifyUnit(UnitType.Soldier, damage:0.05f);
+						ModifyUnit(UnitType.Spitter, damage:0.05f);}),
+
+			new EvolveData( //ALL_Critical+
+				"All Units Critical Hit Chance +5%",
+				() => { AddCriticalChance(UnitType.Defender, 0.05f);
+						AddCriticalChance(UnitType.Soldier, 0.05f);
+						AddCriticalChance(UnitType.Spitter, 0.05f); }),
+
+
+
+			};
 	}
 
 
 	//----------------------------------------------------------------------------------------------------------------------------------<
 
 
-	static int GetCost(int level) => 400 + (level*100);
+	static int GetCost(int level) => 0 + (level*100);
 
 
 	//----------------------------------------------------------------------------------------------------------------------------------<
