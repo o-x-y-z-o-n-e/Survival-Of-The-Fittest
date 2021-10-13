@@ -160,7 +160,18 @@ public class GameUI : MonoBehaviour {
 	/// </summary>
 	/// <param name="count"></param>
 	/// <param name="player">(0 = player one), (1 = player two/AI)</param>
-	public void UpdateDNA(int count, int player) => (player == 0 ? Player1DNAText : Player2DNAText).text = "DNA: " + count.ToString();
+	public void UpdateDNA(int count, int player) {
+		(player == 0 ? Player1DNAText : Player2DNAText).text = "DNA: " + count.ToString();
+
+		(player == 0 ? Player1SoldierButton : Player2SoldierButton).interactable = count >= UnitController.GetUnitBaseCost(UnitType.Soldier);
+		(player == 0 ? Player1SpitterButton : Player2SpitterButton).interactable = count >= UnitController.GetUnitBaseCost(UnitType.Spitter);
+		(player == 0 ? Player1DefenderButton : Player2DefenderButton).interactable = count >= UnitController.GetUnitBaseCost(UnitType.Defender);
+
+		bool affordEvolve = count >= (player == 0 ? Game.Current.Player1 : Game.Current.Player2).Evolutions.GetEvolutionCost();
+
+		(player == 0 ? Player1Evolve1Button : Player2Evolve1Button).interactable = affordEvolve;
+		(player == 0 ? Player1Evolve2Button : Player2Evolve2Button).interactable = affordEvolve;
+	}
 
 
 	//----------------------------------------------------------------------------------------------------------------------------------<

@@ -215,7 +215,7 @@ public class Evolution {
 	//----------------------------------------------------------------------------------------------------------------------------------<
 
 
-	static int GetCost(int level) => 0 + (level*100);
+	static int GetCost(int level) => 100 + (level*100);
 
 
 	//----------------------------------------------------------------------------------------------------------------------------------<
@@ -261,7 +261,7 @@ public class Evolution {
 			if (option == 0) DATA[TREE[nextEvolution].Option1].Func();
 			else if (option == 1) DATA[TREE[nextEvolution].Option2].Func();
 
-			player.DNA -= TREE[nextEvolution].Cost;
+			player.ChangeDNA(-TREE[nextEvolution].Cost);
 
 			nextEvolution += 1;
 
@@ -281,6 +281,12 @@ public class Evolution {
 			// not enough DNA to evolve
         }
     }
+
+
+	//----------------------------------------------------------------------------------------------------------------------------------<
+
+
+	public int GetEvolutionCost() => TREE[nextEvolution].Cost;
 
 
 	//----------------------------------------------------------------------------------------------------------------------------------<
