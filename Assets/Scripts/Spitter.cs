@@ -27,7 +27,7 @@ public class Spitter : UnitController {
 	Transform buffPackage;
 
 
-	float checkAllyCounter = 0;
+	float checkAllyCounter = BUFF_ALLY_INTERVAL/2;
 	float healAllyCounter = 0;
 	float buffAllyCounter = 0;
 	float healPackageCounter = 0;
@@ -194,7 +194,7 @@ public class Spitter : UnitController {
 		}
 
 		buffAllyCounter += Time.deltaTime;
-		if (buffAllyCounter < BUFF_ALLY_INTERVAL * 1.5f) return;
+		if (buffAllyCounter < BUFF_ALLY_INTERVAL) return;
 		buffAllyCounter = 0;
 
 		//wait to create another package
