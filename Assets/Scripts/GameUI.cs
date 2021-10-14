@@ -20,7 +20,7 @@ public class GameUI : MonoBehaviour {
 
 	[Header("Finish Elements")]
 
-	public Text FinishText;
+	public Image winnerBanner;
 
 	[Space]
 
@@ -147,12 +147,11 @@ public class GameUI : MonoBehaviour {
 	/// <summary>
 	/// Display finish sequence screen (once game is finished).
 	/// </summary>
-	public void ShowFinishScreen(string text) {
+	public void ShowFinishScreen(Sprite sprite) {
 		HUD.gameObject.SetActive(false);
 		FinishScreen.gameObject.SetActive(true);
 		PauseScreen.gameObject.SetActive(false);
-
-		FinishText.text = text;
+		winnerBanner.sprite = sprite;
 	}
 
 

@@ -18,6 +18,12 @@ public class Game : MonoBehaviour {
 	public Player Player2;      //Used for AI or for second RL player.
 	public Transform ProjectileContainer;
 
+	[Space]
+	public Sprite player1Win;
+	public Sprite player2Win;
+	public Sprite bot1Win;
+	public Sprite bot2Win;
+
 
 	//----------------------------------------------------------------------------------------------------------------------------------<
 
@@ -94,23 +100,23 @@ public class Game : MonoBehaviour {
 		isFinished = true;
 
 		//Check for who won here...
-		string displayText = "Game Over";
+		Sprite displaySprite = null;
 
 		if(Player1.IsAI && Player2.IsAI) {
-			if (Player2.Base.IsDestroyed) displayText = "Bot 1 Won!";
-			else if (Player1.Base.IsDestroyed) displayText = "Bot 2 Won!";
+			if (Player2.Base.IsDestroyed) displaySprite = bot1Win;//"Bot 1 Won!";
+			else if (Player1.Base.IsDestroyed) displaySprite = bot2Win;//"Bot 2 Won!";
 		} else if(!Player1.IsAI && !Player2.IsAI) {
-			if (Player2.Base.IsDestroyed) displayText = "Player 1 Won!";
-			else if (Player1.Base.IsDestroyed) displayText = "Player 2 Won!";
+			if (Player2.Base.IsDestroyed) displaySprite = player1Win;//"Player 1 Won!";
+			else if (Player1.Base.IsDestroyed) displaySprite = player2Win;//"Player 2 Won!";
 		} else {
 			Player player = Player1.IsAI ? Player2 : Player1;
 			Player ai = Player1.IsAI ? Player1 : Player2;
 
-			if (ai.Base.IsDestroyed) displayText = "You Won!";
-			else if (player.Base.IsDestroyed) displayText = "You Lose :(";
+			if (ai.Base.IsDestroyed) displaySprite = player1Win;//"You Won!";
+			else if (player.Base.IsDestroyed) displaySprite = player2Win;//"You Lose :(";
 		}
 
-		UI.ShowFinishScreen(displayText);
+		UI.ShowFinishScreen(displaySprite);
 	}
 
 
