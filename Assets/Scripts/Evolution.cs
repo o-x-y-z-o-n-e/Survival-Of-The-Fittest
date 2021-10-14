@@ -100,10 +100,6 @@ public class Evolution {
 				"Soldiers harvest additional DNA on kill",
 				() => { AddExtraHarvestDNA(UnitType.Soldier, 10); }),
 
-			new EvolveData( //SlowHard Hit **DISCUSS**
-				"Soldiers have 50% extra damage, but 50% slower attack speed",
-				() => { ModifyUnit(UnitType.Soldier, damage:0.5f, attackSpeed:-0.5f); }),
-
 			new EvolveData( //Stun
 				"Soldiers stun enemies on their first hit",
 				() => { EnableStun(UnitType.Soldier); }),
