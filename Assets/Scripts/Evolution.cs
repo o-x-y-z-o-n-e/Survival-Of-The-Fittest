@@ -227,6 +227,7 @@ public class Evolution {
 
     // How many evolutions the player has gone through so far
     private int nextEvolution = 0;
+	public bool HasFinished => nextEvolution >= TREE.Length;
 
 
 	//----------------------------------------------------------------------------------------------------------------------------------<
@@ -264,6 +265,7 @@ public class Evolution {
 			if (nextEvolution < TREE.Length) {
 				Game.Current.UI.UpdateEvolutionText(GetEvolutionText(0), player.PlayerID, 0);
 				Game.Current.UI.UpdateEvolutionText(GetEvolutionText(1), player.PlayerID, 1);
+				Game.Current.UI.UpdateEvolutionCost(GetEvolutionCost(), player.PlayerID);
 			} else {
 				Game.Current.UI.UpdateEvolutionText("Evolution tree complete", player.PlayerID, 0);
 				Game.Current.UI.UpdateEvolutionText("Evolution tree complete", player.PlayerID, 1);

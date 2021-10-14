@@ -46,13 +46,6 @@ public class GameUI : MonoBehaviour {
 
 	[Space]
 
-	public Button Player1Evolve1Button;
-	public Button Player1Evolve2Button;
-	public Button Player2Evolve1Button;
-	public Button Player2Evolve2Button;
-
-	[Space]
-
 	public Button Player1Path1Button;
 	public Button Player1Path2Button;
 	public Button Player2Path1Button;
@@ -60,10 +53,31 @@ public class GameUI : MonoBehaviour {
 
 	[Space]
 
+	public Button Player1Evolve1Button;
+	public Button Player1Evolve2Button;
+	public Button Player2Evolve1Button;
+	public Button Player2Evolve2Button;
+
+	[Space]
+
 	public Text Player1Evolve1Text;
 	public Text Player1Evolve2Text;
 	public Text Player2Evolve1Text;
 	public Text Player2Evolve2Text;
+
+	[Space]
+
+	public Text Player1Evolve1Cost;
+	public Text Player1Evolve2Cost;
+	public Text Player2Evolve1Cost;
+	public Text Player2Evolve2Cost;
+
+	[Space]
+
+	public Text Player1Evolve1Keybind;
+	public Text Player1Evolve2Keybind;
+	public Text Player2Evolve1Keybind;
+	public Text Player2Evolve2Keybind;
 
 	[Space]
 
@@ -161,16 +175,19 @@ public class GameUI : MonoBehaviour {
 	/// <param name="count"></param>
 	/// <param name="player">(0 = player one), (1 = player two/AI)</param>
 	public void UpdateDNA(int count, int player) {
-		(player == 0 ? Player1DNAText : Player2DNAText).text = "DNA: " + count.ToString();
+		(player == 0 ? Player1DNAText : Player2DNAText).text = string.Format("DNA: <color=#00D0FF>{0}</color>", count);
 
 		(player == 0 ? Player1SoldierButton : Player2SoldierButton).interactable = count >= UnitController.GetUnitBaseCost(UnitType.Soldier);
 		(player == 0 ? Player1SpitterButton : Player2SpitterButton).interactable = count >= UnitController.GetUnitBaseCost(UnitType.Spitter);
 		(player == 0 ? Player1DefenderButton : Player2DefenderButton).interactable = count >= UnitController.GetUnitBaseCost(UnitType.Defender);
 
-		bool affordEvolve = count >= (player == 0 ? Game.Current.Player1 : Game.Current.Player2).Evolutions.GetEvolutionCost();
+		Player p = (player == 0 ? Game.Current.Player1 : Game.Current.Player2);
+		if (!p.Evolutions.HasFinished) {
+			bool affordEvolve = count >= p.Evolutions.GetEvolutionCost();
 
-		(player == 0 ? Player1Evolve1Button : Player2Evolve1Button).interactable = affordEvolve;
-		(player == 0 ? Player1Evolve2Button : Player2Evolve2Button).interactable = affordEvolve;
+			(player == 0 ? Player1Evolve1Button : Player2Evolve1Button).interactable = affordEvolve;
+			(player == 0 ? Player1Evolve2Button : Player2Evolve2Button).interactable = affordEvolve;
+		}
 	}
 
 
@@ -186,6 +203,15 @@ public class GameUI : MonoBehaviour {
 	public void UpdateEvolutionText(string text, int player, int evolution) => 
 		(player == 0 ? (evolution == 0 ? Player1Evolve1Text : Player1Evolve2Text) 
 		: (evolution == 0 ? Player2Evolve1Text : Player2Evolve2Text)).text = text;
+
+
+	//----------------------------------------------------------------------------------------------------------------------------------<
+
+
+	public void UpdateEvolutionCost(int cost, int player) {
+		(player == 0 ? Player1Evolve1Cost : Player2Evolve1Cost).text = cost.ToString();
+		(player == 0 ? Player1Evolve2Cost : Player2Evolve2Cost).text = cost.ToString();
+	}
 
 
 	//----------------------------------------------------------------------------------------------------------------------------------<
@@ -208,9 +234,19 @@ public class GameUI : MonoBehaviour {
 		if(player == 0) {
 			Player1Evolve1Button.interactable = false;
 			Player1Evolve2Button.interactable = false;
+
+			Player1Evolve1Cost.gameObject.SetActive(false);
+			Player1Evolve2Cost.gameObject.SetActive(false);
+			Player1Evolve1Keybind.gameObject.SetActive(false);
+			Player1Evolve2Keybind.gameObject.SetActive(false);
 		} else {
 			Player2Evolve1Button.interactable = false;
 			Player2Evolve2Button.interactable = false;
+
+			Player2Evolve1Cost.gameObject.SetActive(false);
+			Player2Evolve2Cost.gameObject.SetActive(false);
+			Player2Evolve1Keybind.gameObject.SetActive(false);
+			Player2Evolve2Keybind.gameObject.SetActive(false);
 		}
 	}
 

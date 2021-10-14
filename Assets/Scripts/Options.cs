@@ -26,28 +26,28 @@ public class InputBindings {
 	//
 
 	public  KeyCode Player1Worker	= KeyCode.None;
-	public  KeyCode Player1Soldier	= KeyCode.Q;
-	public  KeyCode Player1Spitter	= KeyCode.W;
-	public  KeyCode Player1Defender	= KeyCode.E;
+	public  KeyCode Player1Soldier	= KeyCode.A;
+	public  KeyCode Player1Spitter	= KeyCode.S;
+	public  KeyCode Player1Defender	= KeyCode.D;
 
-	public  KeyCode Player1Surface	= KeyCode.Alpha1;
-	public  KeyCode Player1Tunnel	= KeyCode.Alpha2;
+	public  KeyCode Player1Surface	= KeyCode.Q;
+	public  KeyCode Player1Tunnel	= KeyCode.W;
 
-	public  KeyCode Player1Evolve1	= KeyCode.Alpha3;
-	public  KeyCode Player1Evolve2	= KeyCode.Alpha4;
+	public  KeyCode Player1Evolve1	= KeyCode.E;
+	public  KeyCode Player1Evolve2	= KeyCode.R;
 
 	//
 
 	public  KeyCode Player2Worker	= KeyCode.None;
-	public  KeyCode Player2Soldier	= KeyCode.P;
-	public  KeyCode Player2Spitter	= KeyCode.O;
-	public  KeyCode Player2Defender	= KeyCode.I;
+	public  KeyCode Player2Soldier	= KeyCode.L;
+	public  KeyCode Player2Spitter	= KeyCode.K;
+	public  KeyCode Player2Defender	= KeyCode.J;
 	
-	public  KeyCode Player2Surface	= KeyCode.Alpha0;
-	public  KeyCode Player2Tunnel	= KeyCode.Alpha9;
+	public  KeyCode Player2Surface	= KeyCode.P;
+	public  KeyCode Player2Tunnel	= KeyCode.O;
 
-	public  KeyCode Player2Evolve1	= KeyCode.Alpha8;
-	public  KeyCode Player2Evolve2	= KeyCode.Alpha7;
+	public  KeyCode Player2Evolve1	= KeyCode.U;
+	public  KeyCode Player2Evolve2	= KeyCode.I;
 }
 
 
