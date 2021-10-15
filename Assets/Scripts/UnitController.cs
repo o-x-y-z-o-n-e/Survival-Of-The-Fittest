@@ -483,32 +483,31 @@ public class UnitController : MonoBehaviour, Damageable {
 	/// <param name="evolution">The evolution, which the player has evolved to</param>
 	public void SetSprite(int evolution)
     {
-		Sprite newSprite = null;
+		string unitName = "";
 		switch (Type)
-		{
+        {
 			case UnitType.Soldier:
-				if(evolution < Game.Current.SoldierSprites.Count)
-				{
-					newSprite = Game.Current.SoldierSprites[evolution];
-				}
+				unitName = "Soldier";
+				break;
+			case UnitType.Worker:
+				unitName = "Worker";
 				break;
 			case UnitType.Spitter:
-				if (evolution < Game.Current.SpitterSprites.Count)
-				{
-					newSprite = Game.Current.SpitterSprites[evolution];
-				}
+				unitName = "Spitter";
 				break;
 			case UnitType.Defender:
-				if (evolution < Game.Current.DefenderSprites.Count)
-				{
-					newSprite = Game.Current.DefenderSprites[evolution];
-				}
+				unitName = "Defender";
 				break;
 		}
+		Sprite newSprite = Resources.Load<Sprite>(GetUnitSpritePath(Type) + "/" + unitName
+					+ evolution.ToString());
 
 		if (newSprite) { 
 			spriteBody.sprite = newSprite;
 		}
+
+		Debug.Log(GetUnitSpritePath(Type) + "/" + unitName
+					+ evolution.ToString());
 	}
 
 
