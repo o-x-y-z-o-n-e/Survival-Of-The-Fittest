@@ -33,6 +33,10 @@ public class Player : MonoBehaviour {
 
 	public Color Color;
 
+	[Space]
+
+	[SerializeField] private int evolutionWindowIncrement;
+
 
 	//----------------------------------------------------------------------------------------------------------------------------------<
 
@@ -43,12 +47,15 @@ public class Player : MonoBehaviour {
 	float remainingDNA = 0;
 	float counterDNA = 0;
 
+	private float nextEvolutionWindow;
+
 
 	//----------------------------------------------------------------------------------------------------------------------------------<
 
 
 	private void Awake() {
 		Evolutions = new Evolution(this);
+		nextEvolutionWindow = evolutionWindowIncrement; // + timeDelta !!!!
 	}
 
 
@@ -196,6 +203,19 @@ public class Player : MonoBehaviour {
 	void CheckEvolutionStates(float timeDelta) {
 		//This is a note for Alex: you can rename this function if you want.
 		//With the evolution counter, use timeDelta instead of Time.deltaTime. Because timeDelta will account for the AI frame interval.
+
+		//if (timeDelta > nextEvolutionWindow)
+		//{
+		//	if (DNA > Evolutions.GetEvolutionCost())
+		//	{
+		//		Evolutions.Evolve(Random.Range(0, 2));
+		//		nextEvolutionWindow += evolutionWindowIncrement;
+		//	}
+		//}
+		//else
+		//{
+		//	Base.SpawnUnit(PickUnitType(0.5f, 0.25f, 0.25f), (Path)Random.Range(0, 2));
+		//}
 	}
 
 
