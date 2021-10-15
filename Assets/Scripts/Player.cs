@@ -36,7 +36,6 @@ public class Player : MonoBehaviour {
 	[Space]
 
 	[SerializeField] private int evolutionWindowIncrement;
-	public GameObject PlayerUnitObjects;
 
 
 	//----------------------------------------------------------------------------------------------------------------------------------<

@@ -343,10 +343,6 @@ public class Evolution {
 	private void ChangeSprites()
     {
 		// Get All player units and change sprites
-		foreach(Transform child in player.PlayerUnitObjects.transform)
-		{
-			child.gameObject.GetComponent<UnitController>().SetSprite(nextEvolution);
-		}
 	}
 
 
@@ -464,19 +460,11 @@ public class Evolution {
 		mod.BlockEnemy = true;
     }
 
-
-	//----------------------------------------------------------------------------------------------------------------------------------<
-
-	public int GetEvolutionLevel() => nextEvolution;
-
-
-
 	#endregion
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------------------
-
+//----------------------------------------------------------------------------------------------------------------------------------<
 
 
 #region Evolve Data Structures

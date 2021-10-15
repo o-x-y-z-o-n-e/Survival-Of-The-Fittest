@@ -706,8 +706,6 @@ MonoBehaviour:
     BlockEnemyChance: 0
   PlayerID: 0
   Color: {r: 0.69486135, g: 0.36854753, b: 0.7735849, a: 1}
-  evolutionWindowIncrement: 0
-  PlayerUnitObjects: {fileID: 1942696555}
 --- !u!1 &95904311
 GameObject:
   m_ObjectHideFlags: 0
@@ -3002,8 +3000,6 @@ MonoBehaviour:
     BlockEnemyChance: 0
   PlayerID: 1
   Color: {r: 0.34015664, g: 0.5344453, b: 0.7924528, a: 1}
-  evolutionWindowIncrement: 0
-  PlayerUnitObjects: {fileID: 1847397457}
 --- !u!1 &587878429
 GameObject:
   m_ObjectHideFlags: 0
