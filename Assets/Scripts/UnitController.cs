@@ -55,7 +55,7 @@ public class UnitController : MonoBehaviour, Damageable {
 	private Player unitOwner; //this will not be a serialized field once unit owners are assigned at time of prefab instantiation.
 
 	SpriteRenderer sprite;
-	SpriteRenderer spriteBody;
+	[SerializeField] SpriteRenderer spriteBody;
 	Array getSprites;
 	Animator animator;
 	new BoxCollider2D collider;
@@ -481,10 +481,10 @@ public class UnitController : MonoBehaviour, Damageable {
 	/// </summary>
 	/// <param name="unitType"></param>
 	/// <param name="evolution">The evolution, which the player has evolved to</param>
-	public void SetSprite(UnitType unitType, int evolution)
+	public void SetSprite(int evolution)
     {
 		string unitName = "";
-		switch (unitType)
+		switch (Type)
         {
 			case UnitType.Soldier:
 				unitName = "Soldier";
@@ -499,9 +499,15 @@ public class UnitController : MonoBehaviour, Damageable {
 				unitName = "Defender";
 				break;
 		}
-		Sprite newSprite = Resources.Load(GetUnitSpritePath(unitType) + "/" + unitName
-					+ evolution.ToString(), typeof(Sprite)) as Sprite;
-		sprite.sprite = newSprite;
+		Sprite newSprite = Resources.Load<Sprite>(GetUnitSpritePath(Type) + "/" + unitName
+					+ evolution.ToString());
+
+		if (newSprite) { 
+			spriteBody.sprite = newSprite;
+		}
+
+		Debug.Log(GetUnitSpritePath(Type) + "/" + unitName
+					+ evolution.ToString());
 	}
 
 

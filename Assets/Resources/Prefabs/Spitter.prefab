@@ -506,12 +506,15 @@ MonoBehaviour:
   attackInterval: 2
   attackIntervalDeviation: 0.2
   giveDNA: 10
+  spriteBody: {fileID: 6046808748564481745}
   HealthPackagePrefab: {fileID: 8379993457103392243, guid: 6583130263b23ad4f857b60b4ad2a610,
     type: 3}
+  AttackSpeedPackagePrefab: {fileID: 0}
   ProjectilePrefab: {fileID: 1250771802780145336, guid: ad1a194daae826a4ea4b30b088e0388d,
     type: 3}
   ProjectileSpawnOffset: {x: 0.5, y: 0}
   HealAmount: 5
+  AttackSpeedBuff: 0.25
 --- !u!61 &1623760112398397303
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -210,6 +210,7 @@ MonoBehaviour:
   attackInterval: 1
   attackIntervalDeviation: 0.2
   giveDNA: 10
+  spriteBody: {fileID: 4433654084929077511}
 --- !u!61 &4441213703894619736
 BoxCollider2D:
   m_ObjectHideFlags: 0
