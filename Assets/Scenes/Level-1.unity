@@ -27585,6 +27585,22 @@ MonoBehaviour:
   player2Win: {fileID: 21300000, guid: 1e1a215d434333140af21dc72070ede3, type: 3}
   bot1Win: {fileID: 21300000, guid: 5e798f3744d7aa843bf2dd5d564ab335, type: 3}
   bot2Win: {fileID: 21300000, guid: 1e1a215d434333140af21dc72070ede3, type: 3}
+  SoldierSprites:
+  - {fileID: 21300000, guid: b29e7bc185f9abb47b3723408e357987, type: 3}
+  - {fileID: 21300000, guid: 8264c14be50556f459a3b1b29ae7aff6, type: 3}
+  - {fileID: 21300000, guid: 2ec4561c45e470a469d1f82c1f54091f, type: 3}
+  - {fileID: 21300000, guid: 99e378b1ef1500841b8a89e3b19ba544, type: 3}
+  SpitterSprites:
+  - {fileID: 21300000, guid: 30e307b9d817ef642b6f2ad9b252eb17, type: 3}
+  - {fileID: 21300000, guid: 5d8b81f71f087b045b9cb1c38e642984, type: 3}
+  - {fileID: 21300000, guid: 890674b09b35b3f4a99cce3809238d82, type: 3}
+  - {fileID: 21300000, guid: 3c02b87acd8c62642964a2db1dd5c4ba, type: 3}
+  - {fileID: 21300000, guid: 72959936c00215f48aa8e16af3d9abb3, type: 3}
+  DefenderSprites:
+  - {fileID: 21300000, guid: a9a1187544895b944be6573dba20cf1e, type: 3}
+  - {fileID: 21300000, guid: 76432873f87080b4c8cfa774ff9cd604, type: 3}
+  - {fileID: 21300000, guid: e7138496316fe334c9a3c67734174d2a, type: 3}
+  - {fileID: 21300000, guid: 41cfbf1e4d866ab48ab35b7abf59a86d, type: 3}
 --- !u!4 &2027026344
 Transform:
   m_ObjectHideFlags: 0
