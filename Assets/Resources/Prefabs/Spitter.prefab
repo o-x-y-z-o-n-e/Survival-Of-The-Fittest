@@ -71,12 +71,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 30e307b9d817ef642b6f2ad9b252eb17, type: 3}
+  m_Sprite: {fileID: 21300000, guid: df5a210c62a515c4b952aa09a65cdd9e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 2.25, y: 1.5}
+  m_Size: {x: 1.25, y: 0.625}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -506,12 +506,15 @@ MonoBehaviour:
   attackInterval: 2
   attackIntervalDeviation: 0.2
   giveDNA: 10
+  spriteBody: {fileID: 6046808748564481745}
   HealthPackagePrefab: {fileID: 8379993457103392243, guid: 6583130263b23ad4f857b60b4ad2a610,
     type: 3}
+  AttackSpeedPackagePrefab: {fileID: 0}
   ProjectilePrefab: {fileID: 1250771802780145336, guid: ad1a194daae826a4ea4b30b088e0388d,
     type: 3}
   ProjectileSpawnOffset: {x: 0.5, y: 0}
   HealAmount: 5
+  AttackSpeedBuff: 0.25
 --- !u!61 &1623760112398397303
 BoxCollider2D:
   m_ObjectHideFlags: 0

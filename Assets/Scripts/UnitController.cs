@@ -55,7 +55,7 @@ public class UnitController : MonoBehaviour, Damageable {
 	private Player unitOwner; //this will not be a serialized field once unit owners are assigned at time of prefab instantiation.
 
 	SpriteRenderer sprite;
-	SpriteRenderer spriteBody;
+	[SerializeField] SpriteRenderer spriteBody;
 	Array getSprites;
 	Animator animator;
 	new BoxCollider2D collider;
@@ -481,27 +481,39 @@ public class UnitController : MonoBehaviour, Damageable {
 	/// </summary>
 	/// <param name="unitType"></param>
 	/// <param name="evolution">The evolution, which the player has evolved to</param>
-	public void SetSprite(UnitType unitType, int evolution)
+	public void SetSprite(int evolution)
     {
-		string unitName = "";
-		switch (unitType)
+		Sprite newSprite = null;
+
+		switch (Type)
         {
 			case UnitType.Soldier:
-				unitName = "Soldier";
-				break;
-			case UnitType.Worker:
-				unitName = "Worker";
+				if (evolution < Game.Current.SoldierSprites.Count)
+				{
+					newSprite = Game.Current.SoldierSprites[evolution];
+				}
 				break;
 			case UnitType.Spitter:
-				unitName = "Spitter";
+				if (evolution < Game.Current.SpitterSprites.Count)
+				{
+					Debug.Log("Spitter sprite changed!");
+					newSprite = Game.Current.SpitterSprites[evolution];
+				}
 				break;
 			case UnitType.Defender:
-				unitName = "Defender";
+				if (evolution < Game.Current.DefenderSprites.Count)
+				{
+					newSprite = Game.Current.DefenderSprites[evolution];
+				}
 				break;
 		}
-		Sprite newSprite = Resources.Load(GetUnitSpritePath(unitType) + "/" + unitName
-					+ evolution.ToString(), typeof(Sprite)) as Sprite;
-		sprite.sprite = newSprite;
+
+		Debug.Log(newSprite);
+
+		if (newSprite)
+		{
+			spriteBody.sprite = newSprite;
+		}
 	}
 
 

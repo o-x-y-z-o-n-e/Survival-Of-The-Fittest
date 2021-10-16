@@ -129,9 +129,7 @@ MonoBehaviour:
   attackInterval: 2.5
   attackIntervalDeviation: 0.2
   giveDNA: 10
-  evo2: {fileID: 21300000, guid: 76432873f87080b4c8cfa774ff9cd604, type: 3}
-  evo3: {fileID: 21300000, guid: e7138496316fe334c9a3c67734174d2a, type: 3}
-  evo4: {fileID: 21300000, guid: 41cfbf1e4d866ab48ab35b7abf59a86d, type: 3}
+  spriteBody: {fileID: 3174450103075572603}
 --- !u!61 &-4883091436067051521
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -504,7 +502,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: a9a1187544895b944be6573dba20cf1e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 660cee0850d7f3e4c8e0d99a726311e8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
   m_FlipY: 0

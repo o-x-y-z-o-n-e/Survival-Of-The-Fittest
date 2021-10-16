@@ -24,6 +24,12 @@ public class Game : MonoBehaviour {
 	public Sprite bot1Win;
 	public Sprite bot2Win;
 
+	[Space]
+	public List<Sprite> SoldierSprites;
+	public List<Sprite> SpitterSprites;
+	public List<Sprite> DefenderSprites;
+
+
 
 	//----------------------------------------------------------------------------------------------------------------------------------<
 
