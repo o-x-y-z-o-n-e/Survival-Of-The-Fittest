@@ -15636,7 +15636,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: c12feafe3ddc7434d8c7c3e25dc82c22, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 95e7c69edef9c394aa1de6e8e9394969, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.2
   m_Pitch: 1
@@ -27585,22 +27585,6 @@ MonoBehaviour:
   player2Win: {fileID: 21300000, guid: 1e1a215d434333140af21dc72070ede3, type: 3}
   bot1Win: {fileID: 21300000, guid: 5e798f3744d7aa843bf2dd5d564ab335, type: 3}
   bot2Win: {fileID: 21300000, guid: 1e1a215d434333140af21dc72070ede3, type: 3}
-  SoldierSprites:
-  - {fileID: 21300000, guid: daed885bc88c76143ae29a5167c29b01, type: 3}
-  - {fileID: 21300000, guid: 20edd9ff0ca7fd84bb9704c8bebdf08e, type: 3}
-  - {fileID: 21300000, guid: d42c90c5d1c4b1c46a95b598ed68514e, type: 3}
-  - {fileID: 21300000, guid: 9a33714c42d0ca741b6d1c1fa2e91dcb, type: 3}
-  SpitterSprites:
-  - {fileID: 21300000, guid: df5a210c62a515c4b952aa09a65cdd9e, type: 3}
-  - {fileID: 21300000, guid: 9f0455244b6df9d46a0bfb0fe3a068f7, type: 3}
-  - {fileID: 21300000, guid: fb853928314bb4a469e1d8f84960eadc, type: 3}
-  - {fileID: 21300000, guid: 13aa79eef84e30e4b9f893a7ab20880b, type: 3}
-  - {fileID: 21300000, guid: ffcd6b08a3950044fa532b34e1cb9de6, type: 3}
-  DefenderSprites:
-  - {fileID: 21300000, guid: 660cee0850d7f3e4c8e0d99a726311e8, type: 3}
-  - {fileID: 21300000, guid: 609cfea239290014d9766b1038567c07, type: 3}
-  - {fileID: 21300000, guid: 1c9430531cd510b45a5103bc63e6f29c, type: 3}
-  - {fileID: 21300000, guid: d9ceeea782cbb0b4fb58a6c5c5f3e227, type: 3}
 --- !u!4 &2027026344
 Transform:
   m_ObjectHideFlags: 0
