@@ -343,12 +343,6 @@ public class UnitController : MonoBehaviour, Damageable {
 
 
 	void UpdateHealthBar() {
-		/*
-		healthBar.transform.localScale = new Vector3(
-			((float)health / baseHealth) * healthBar.transform.localScale.x,
-			healthBar.transform.localScale.y,
-			healthBar.transform.localScale.z);*/
-
 		healthBar.rectTransform.sizeDelta = new Vector2(((float)health / baseHealth)*100, 10);
 	}
 
@@ -407,10 +401,7 @@ public class UnitController : MonoBehaviour, Damageable {
 	//----------------------------------------------------------------------------------------------------------------------------------<
 
 
-	private void SetStunned(bool v)
-	{
-		isStunned = v;
-	}
+	private void SetStunned(bool v) => isStunned = v;
 
 
 	//----------------------------------------------------------------------------------------------------------------------------------<

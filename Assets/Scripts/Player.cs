@@ -81,7 +81,7 @@ public class Player : MonoBehaviour {
 
 		GatherDNA();
 
-		if (IsAI) UpdateAI();
+		if (isAI) UpdateAI();
 	}
 
 

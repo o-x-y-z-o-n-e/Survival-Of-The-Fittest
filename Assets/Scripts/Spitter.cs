@@ -145,6 +145,9 @@ public class Spitter : UnitController {
 	//----------------------------------------------------------------------------------------------------------------------------------<
 
 
+	/// <summary>
+	/// This shoots a health icon over the battlefield to the front ally. When the icon reaches the target, it will will heal by a defined amount of hp.
+	/// </summary>
 	void HealAlly() {
 		if (healthPackage != null) {
 			healPackageCounter += Time.deltaTime;
@@ -165,14 +168,14 @@ public class Spitter : UnitController {
 			return;
 		}
 
+		//Wait to create another package
 		healAllyCounter += Time.deltaTime;
 		if (healAllyCounter < BUFF_ALLY_INTERVAL) return;
 		healAllyCounter = 0;
 
-		//wait to create another package
+		//Creates the icon instance
 		healthPackage = Instantiate(HealthPackagePrefab).transform;
 		healthPackage.localPosition = transform.localPosition;
-
 		healthPackage.name = "Health";
 	}
 
@@ -180,6 +183,9 @@ public class Spitter : UnitController {
 	//----------------------------------------------------------------------------------------------------------------------------------<
 
 
+	/// <summary>
+	/// Similar to HealAlly() however only the first package really effects the target, at the moment this only buffs the allies attack speed. All icons after the first one are for visuals and realistically don't do anything else.
+	/// </summary>
 	void BuffAlly() {
 		if(buffPackage != null) {
 			buffPackageCounter += Time.deltaTime;
@@ -200,14 +206,14 @@ public class Spitter : UnitController {
 			return;
 		}
 
+		//Wait to create another package
 		buffAllyCounter += Time.deltaTime;
 		if (buffAllyCounter < BUFF_ALLY_INTERVAL) return;
 		buffAllyCounter = 0;
 
-		//wait to create another package
+		//Creates the icon instance
 		buffPackage = Instantiate(AttackSpeedPackagePrefab).transform;
 		buffPackage.localPosition = transform.localPosition;
-
 		buffPackage.name = "Attack Speed";
 	}
 
@@ -215,6 +221,13 @@ public class Spitter : UnitController {
 	//----------------------------------------------------------------------------------------------------------------------------------<
 
 
+	/// <summary>
+	/// A simple quadratic bezier function. Returns a smooth curved path between two points (p1, p2). The weighting is calculated as the mean between p1 & p2 with a height offset (h). 
+	/// </summary>
+	/// <param name="p1">Start point</param>
+	/// <param name="p2">End point</param>
+	/// <param name="t">The blend between p1 & p2. Range: [0, 1]</param>
+	/// <param name="h">Weighting height offset</param>
 	static Vector2 Bezier(Vector2 p1, Vector2 p2, float t, float h = PACKAGE_ICON_HEIGHT) {
 		Vector2 w = new Vector2(Mathf.Lerp(p1.x, p2.x, 0.5f), ((p1.y + p2.y) / 2f) + h);
 
