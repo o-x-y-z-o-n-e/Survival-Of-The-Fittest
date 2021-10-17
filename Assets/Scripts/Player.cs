@@ -245,7 +245,7 @@ public class Player : MonoBehaviour {
 		if(a < 0 || b < 0) {
 			Path path = a < b ? Path.Surface : Path.Tunnels;
 			UnitType type = PickUnitType(0.5f,0.25f,0.25f);
-			Base.SpawnUnit(type, Path.Surface); // Note to Jeremy: should this be path instead of Path.Surface???
+			Base.SpawnUnit(type, path); // Cheers bro
 			return;
 		}
 
