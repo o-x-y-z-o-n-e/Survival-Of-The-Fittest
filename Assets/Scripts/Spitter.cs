@@ -84,6 +84,10 @@ public class Spitter : UnitController {
 	//----------------------------------------------------------------------------------------------------------------------------------<
 
 
+	/// <summary>
+	/// Finds an ally that is at the front of the battlefield (that is, furthest from home base in the same lane as this unit).
+	/// This runs every update, and checks conditions, ie timer, distance range, etc...
+	/// </summary>
 	void FindAlly() {
 		if (allyTarget == null) {
 			if (healthPackage != null) {
@@ -121,14 +125,17 @@ public class Spitter : UnitController {
 			if (d > BUFF_ALLY_RANGE) {
 				allyTarget = null;
 
-				if (healthPackage != null) {
-					Destroy(healthPackage.gameObject);
-					healthPackage = null;
-				}
+				//Delete any package icons that already exist
+				{
+					if (healthPackage != null) {
+						Destroy(healthPackage.gameObject);
+						healthPackage = null;
+					}
 
-				if (buffPackage != null) {
-					Destroy(buffPackage.gameObject);
-					buffPackage = null;
+					if (buffPackage != null) {
+						Destroy(buffPackage.gameObject);
+						buffPackage = null;
+					}
 				}
 			}
 		}

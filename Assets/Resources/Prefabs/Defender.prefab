@@ -129,6 +129,11 @@ MonoBehaviour:
   attackInterval: 2.5
   attackIntervalDeviation: 0.2
   giveDNA: 10
+  sprites:
+  - {fileID: 21300000, guid: 660cee0850d7f3e4c8e0d99a726311e8, type: 3}
+  - {fileID: 21300000, guid: 609cfea239290014d9766b1038567c07, type: 3}
+  - {fileID: 21300000, guid: 1c9430531cd510b45a5103bc63e6f29c, type: 3}
+  - {fileID: 21300000, guid: d9ceeea782cbb0b4fb58a6c5c5f3e227, type: 3}
   spriteBody: {fileID: 3174450103075572603}
 --- !u!61 &-4883091436067051521
 BoxCollider2D:
@@ -457,7 +462,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7619318990698691610}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.037, y: 0.126, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4278229451698522315}

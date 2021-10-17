@@ -51,12 +51,13 @@ public class UnitController : MonoBehaviour, Damageable {
     [SerializeField] private float attackInterval;
 	[SerializeField] private float attackIntervalDeviation;
 	[SerializeField] private int giveDNA; // how much DNA the unit will give when killed
+	[SerializeField] private Sprite[] sprites;
+
 
 	private Player unitOwner; //this will not be a serialized field once unit owners are assigned at time of prefab instantiation.
 
-	SpriteRenderer sprite;
 	[SerializeField] SpriteRenderer spriteBody;
-	Array getSprites;
+	SpriteRenderer[] spriteRenderers;
 	Animator animator;
 	new BoxCollider2D collider;
 	UnitModifiers modifiers; public UnitModifiers Modifiers => modifiers;
@@ -93,8 +94,7 @@ public class UnitController : MonoBehaviour, Damageable {
 	// Start is called before the first frame update
 	void Awake() {
 		animator = GetComponentInChildren<Animator>();
-		sprite = GetComponentInChildren<SpriteRenderer>();
-		getSprites = GetComponentsInChildren<SpriteRenderer>();
+		spriteRenderers = GetComponentsInChildren<SpriteRenderer>();
 		collider = GetComponent<BoxCollider2D>();
 		healthBar = GetComponentsInChildren<Image>()[1];
 
@@ -121,7 +121,7 @@ public class UnitController : MonoBehaviour, Damageable {
 
 		if (modifiers.StunNextAttackAcquired == true) stunNextAttack = true;
 
-		foreach (SpriteRenderer sprite in getSprites)
+		foreach (SpriteRenderer sprite in spriteRenderers)
 			sprite.color = player.Color;
 	}
 
@@ -458,7 +458,7 @@ public class UnitController : MonoBehaviour, Damageable {
 		else dir = Math.Sign(dir);
 
 		direction = dir;
-		foreach (SpriteRenderer sprite in getSprites)
+		foreach (SpriteRenderer sprite in spriteRenderers)
 			sprite.flipX = dir == -1;
 
 		gameObject.layer = LayerMask.NameToLayer(direction == 1 ? "Left Unit" : "Right Unit");
@@ -483,8 +483,10 @@ public class UnitController : MonoBehaviour, Damageable {
 	/// <param name="evolution">The evolution, which the player has evolved to</param>
 	public void SetSprite(int evolution)
     {
-		Sprite newSprite = null;
+		if (evolution < sprites.Length) spriteBody.sprite = sprites[evolution];
 
+		/*
+		Sprite newSprite = null;
 		switch (Type)
         {
 			case UnitType.Soldier:
@@ -514,6 +516,7 @@ public class UnitController : MonoBehaviour, Damageable {
 		{
 			spriteBody.sprite = newSprite;
 		}
+		*/
 	}
 
 
@@ -556,8 +559,8 @@ public class UnitController : MonoBehaviour, Damageable {
 		rotation += hitRotate;
 
 
-		sprite.transform.localPosition = offset;
-		sprite.transform.localRotation = Quaternion.Euler(0, 0, rotation);
+		animator.transform.localPosition = offset;
+		animator.transform.localRotation = Quaternion.Euler(0, 0, rotation);
 	}
 
 
