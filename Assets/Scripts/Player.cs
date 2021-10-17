@@ -48,6 +48,9 @@ public class Player : MonoBehaviour {
 	float remainingDNA = 0;
 	float counterDNA = 0;
 
+	float AIStartTime;
+	float AIFrameInterval;
+
 	private float nextEvolutionWindow;
 
 
@@ -57,6 +60,8 @@ public class Player : MonoBehaviour {
 	private void Awake() {
 		Evolutions = new Evolution(this);
 		nextEvolutionWindow = evolutionWindowIncrement; // + timeDelta !!!!
+		AIStartTime = Time.time; 
+		AIFrameInterval = Mathf.Lerp(0f, 1f, Options.GetLinearDifficulty());
 	}
 
 
@@ -158,27 +163,84 @@ public class Player : MonoBehaviour {
 	//----------------------------------------------------------------------------------------------------------------------------------<
 
 
-	void UpdateAI() {
+	void UpdateAI() 
+	{
 		//Options.GetLinearDifficulty will return a value of [0, 1]. You can use this as 't' for a Lerp func to get AI frame interval with upper/lower bounds.
+		
+		if (Time.time - AIStartTime > AIFrameInterval)
+		{
+			//CheckLaneDominance();
+
+			AIStartTime = Time.time;
+        }
 	}
 
+    //----------------------------------------------------------------------------------------------------------------------------------<
 
-	//----------------------------------------------------------------------------------------------------------------------------------<
+
+    /// <summary>
+    /// 
+    /// </summary>
+    void CheckLaneDominance()
+    {
+        int n_units = 0;
+        float SLD = 0, TLD = 0; // Surface / Tunnel lane dominance
+
+        string unitSide = PlayerID == 2 ? "Left Unit" : "Right Unit";
+        int enemyLayer = LayerMask.NameToLayer(unitSide);
+        List<GameObject> units = GetEnemyPlayers(enemyLayer);
+
+        if (units.Count > 0)
+        {
+            foreach (GameObject unit in units)
+            {
+                ++n_units;
+                int path = units[0].GetComponent<UnitController>().GetPath() == Path.Surface ? 0 : 1;
+                if (path == 0)
+                    ++SLD;
+                else if (path == 1)
+                    ++TLD;
+            }
+            CheckPriorityStates(0f, SLD / n_units, TLD / n_units);
+        }
+        else
+        {
+            CheckPriorityStates(0f, 0f, 0f);
+        }
+    }
 
 
-	/// <summary>
-	/// Checks if the AI needs to defend or push a hard attack.
-	/// </summary>
-	/// <param name="timeDelta">The change in time, between each AI frame.</param>
-	/// <param name="a">Surface Lane Dominance</param>
-	/// <param name="b">Tunnels Lane Dominance</param>
-	void CheckPriorityStates(float timeDelta, float a, float b) {
+    List<GameObject> GetEnemyPlayers(int enemyLayer)
+    {
+        GameObject[] enemyUnits = FindObjectsOfType<GameObject>();
+		List<GameObject> retUnits = new List<GameObject>();
+		for (int i=0;i<enemyUnits.Length;++i)
+        {
+			if (enemyUnits[i].layer == enemyLayer)
+            {
+				retUnits.Add(enemyUnits[i]);
+            }
+        }
+
+		return retUnits;
+    }
+
+    //----------------------------------------------------------------------------------------------------------------------------------<
+
+
+    /// <summary>
+    /// Checks if the AI needs to defend or push a hard attack.
+    /// </summary>
+    /// <param name="timeDelta">The change in time, between each AI frame.</param>
+    /// <param name="a">Surface Lane Dominance</param>
+    /// <param name="b">Tunnels Lane Dominance</param>
+    void CheckPriorityStates(float timeDelta, float a, float b) {
 		const float RUSH_ATTACK_THRESHOLD = 0.5f;
 
 		if(a < 0 || b < 0) {
 			Path path = a < b ? Path.Surface : Path.Tunnels;
 			UnitType type = PickUnitType(0.5f,0.25f,0.25f);
-			Base.SpawnUnit(type, Path.Surface);
+			Base.SpawnUnit(type, Path.Surface); // Note to Jeremy: should this be path instead of Path.Surface???
 			return;
 		}
 
@@ -202,22 +264,22 @@ public class Player : MonoBehaviour {
 
 
 	void CheckEvolutionStates(float timeDelta) {
-		//This is a note for Alex: you can rename this function if you want.
-		//With the evolution counter, use timeDelta instead of Time.deltaTime. Because timeDelta will account for the AI frame interval.
+        //This is a note for Alex: you can rename this function if you want.
+        //With the evolution counter, use timeDelta instead of Time.deltaTime. Because timeDelta will account for the AI frame interval.
 
-		//if (timeDelta > nextEvolutionWindow)
-		//{
-		//	if (DNA > Evolutions.GetEvolutionCost())
-		//	{
-		//		Evolutions.Evolve(Random.Range(0, 2));
-		//		nextEvolutionWindow += evolutionWindowIncrement;
-		//	}
-		//}
-		//else
-		//{
-		//	Base.SpawnUnit(PickUnitType(0.5f, 0.25f, 0.25f), (Path)Random.Range(0, 2));
-		//}
-	}
+        if (timeDelta > nextEvolutionWindow)
+        {
+            if (DNA > Evolutions.GetEvolutionCost())
+            {
+                Evolutions.Evolve(Random.Range(0, 2));
+                nextEvolutionWindow += evolutionWindowIncrement;
+            }
+        }
+        else
+        {
+            Base.SpawnUnit(PickUnitType(0.5f, 0.25f, 0.25f), (Path)Random.Range(0, 2));
+        }
+    }
 
 
 	//----------------------------------------------------------------------------------------------------------------------------------<
