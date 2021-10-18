@@ -39,6 +39,7 @@ public class Player : MonoBehaviour {
 	public GameObject PlayerUnitObjects;
 
 
+
 	//----------------------------------------------------------------------------------------------------------------------------------<
 
 
@@ -59,8 +60,8 @@ public class Player : MonoBehaviour {
 
 	private void Awake() {
 		Evolutions = new Evolution(this);
-		nextEvolutionWindow = evolutionWindowIncrement; // + timeDelta !!!!
 		AIStartTime = Time.time;
+		nextEvolutionWindow = AIStartTime + evolutionWindowIncrement;
 		//AIFrameInterval = Mathf.Lerp(0f, 1f, 1 - Options.GetLinearDifficulty());
 		AIFrameInterval = 0.2f;
 	}
@@ -271,15 +272,17 @@ public class Player : MonoBehaviour {
 
 
 	void CheckEvolutionStates(float timeDelta) {
-        //This is a note for Alex: you can rename this function if you want.
-        //With the evolution counter, use timeDelta instead of Time.deltaTime. Because timeDelta will account for the AI frame interval.
+		//This is a note for Alex: you can rename this function if you want.
+		//With the evolution counter, use timeDelta instead of Time.deltaTime. Because timeDelta will account for the AI frame interval.
 
-        if (timeDelta > nextEvolutionWindow)
+		Debug.Log("ENTERED");
+
+        if (AIStartTime > nextEvolutionWindow)
         {
             if (DNA > Evolutions.GetEvolutionCost())
             {
                 Evolutions.Evolve(Random.Range(0, 2));
-                nextEvolutionWindow += evolutionWindowIncrement;
+                nextEvolutionWindow += AIStartTime + evolutionWindowIncrement;
             }
         }
         else
@@ -287,7 +290,7 @@ public class Player : MonoBehaviour {
 			//Note: We possibly might want to add a time interval here. AI frames might update too fast, or it might be nice to have some randomness in the spawning.
             Base.SpawnUnit(PickUnitType(0.5f, 0.25f, 0.25f), (Path)Random.Range(0, 2));
         }
-    }
+	}
 
 
 	//----------------------------------------------------------------------------------------------------------------------------------<
