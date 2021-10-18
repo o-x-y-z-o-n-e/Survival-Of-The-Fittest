@@ -10,6 +10,23 @@ public class Player : MonoBehaviour {
 
 	const float DNA_UPDATE_INTERVAL = 1f;
 
+	//Time interval range for when Ai is pushing an attack
+	const float ATTACK_INTERVAL_MIN = 0.25f;
+	const float ATTACK_INTERVAL_MAX = 1.5f;
+
+	//Time interval range for when Ai is defending
+	const float DEFEND_INTERVAL_MIN = 0.1f;
+	const float DEFEND_INTERVAL_MAX = 1f;
+
+	//These ranges are the upper/lower bounds for the interval for Ai to spawn units 'normally'
+	const float NORMAL_INTERVAL_MIN = 0.5f;
+	const float NORMAL_INTERVAL_MAX = 2.5f;
+
+
+	const float EVO_INTERVAL_MIN = 0.5f;
+	const float EVO_INTERVAL_MAX = 2.5f;
+
+
 	public Base Base;
 
 	[Space]
@@ -49,8 +66,17 @@ public class Player : MonoBehaviour {
 	float remainingDNA = 0;
 	float counterDNA = 0;
 
-	float AIStartTime;
-	float AIFrameInterval;
+
+	float aiTickCounter = 0;
+	float aiTickInterval = 0.1f; //Might make into const (only if this will end up being independant of the difficulty range)
+
+	float aiEvoCounter = 0;
+	float aiEvoInterval = EVO_INTERVAL_MAX;
+
+	float aiSpawnCounter = 0; //this counter is shared between attack, defend & normal spawn states
+	float aiNormalInterval = NORMAL_INTERVAL_MAX;
+	float aiAttackInterval = ATTACK_INTERVAL_MAX;
+	float aiDefendInterval = DEFEND_INTERVAL_MAX;
 
 	private float nextEvolutionWindow;
 
@@ -60,10 +86,11 @@ public class Player : MonoBehaviour {
 
 	private void Awake() {
 		Evolutions = new Evolution(this);
-		AIStartTime = Time.time;
-		nextEvolutionWindow = AIStartTime + evolutionWindowIncrement;
-		//AIFrameInterval = Mathf.Lerp(0f, 1f, 1 - Options.GetLinearDifficulty());
-		AIFrameInterval = 0.2f;
+
+		aiNormalInterval = Mathf.Lerp(NORMAL_INTERVAL_MIN, NORMAL_INTERVAL_MAX, 1 - Options.GetLinearDifficulty());
+		aiAttackInterval = Mathf.Lerp(ATTACK_INTERVAL_MIN, ATTACK_INTERVAL_MAX, 1 - Options.GetLinearDifficulty());
+		aiDefendInterval = Mathf.Lerp(DEFEND_INTERVAL_MIN, DEFEND_INTERVAL_MAX, 1 - Options.GetLinearDifficulty());
+		aiEvoInterval = Mathf.Lerp(EVO_INTERVAL_MIN, EVO_INTERVAL_MAX, 1 - Options.GetLinearDifficulty());
 	}
 
 
@@ -168,13 +195,16 @@ public class Player : MonoBehaviour {
 	void UpdateAI() 
 	{
 		//Options.GetLinearDifficulty will return a value of [0, 1]. You can use this as 't' for a Lerp func to get AI frame interval with upper/lower bounds.
-		
-		if (Time.time - AIStartTime > AIFrameInterval)
-		{
-			float timeDelta = Time.time - AIStartTime;
-			CheckLaneDominance(timeDelta);
+		aiTickCounter += Time.deltaTime;
 
-			AIStartTime = Time.time;
+		if(aiTickCounter > aiTickInterval) {
+			aiTickCounter = 0;
+
+			float a = 0;
+			float b = 0;
+
+			CheckLaneDominance(out a, out b);
+			CheckPriorityStates(aiTickInterval, a, b);
 		}
 	}
 	
@@ -185,7 +215,7 @@ public class Player : MonoBehaviour {
     /// <summary>
     /// 
     /// </summary>
-    void CheckLaneDominance(float timeDelta)
+    void CheckLaneDominance(out float a, out float b)
     {
         int n_units = 0;
         float SLD = 0, TLD = 0; // Surface / Tunnel lane dominance
@@ -205,11 +235,13 @@ public class Player : MonoBehaviour {
                 else if (path == 1)
                     ++TLD;
             }
-            CheckPriorityStates(timeDelta, SLD / n_units, TLD / n_units);
+			a = SLD / n_units;
+			b = TLD / n_units;
         }
         else
         {
-            CheckPriorityStates(timeDelta, 0f, 0f);
+			a = 0;
+			b = 0;
         }
     }
 	
@@ -246,22 +278,31 @@ public class Player : MonoBehaviour {
 		const float RUSH_ATTACK_THRESHOLD = 0.5f;
 
 		if(a < 0 || b < 0) {
-			Path path = a < b ? Path.Surface : Path.Tunnels;
-			UnitType type = PickUnitType(0.5f,0.25f,0.25f);
-			Base.SpawnUnit(type, path); // Cheers bro
+
+			aiSpawnCounter += timeDelta;
+			if(aiSpawnCounter > aiDefendInterval) {
+				aiSpawnCounter = 0;
+
+				Path path = a < b ? Path.Surface : Path.Tunnels;
+				UnitType type = PickUnitType(0.5f, 0.25f, 0.25f);
+
+				Base.SpawnUnit(type, path);
+			}
+			
 			return;
 		}
 
-		if(a > RUSH_ATTACK_THRESHOLD) {
-			UnitType type = PickUnitType(0.65f,0.3f,0.05f);
-			Base.SpawnUnit(type, Path.Surface);
-			return;
-		}
+		if (a > RUSH_ATTACK_THRESHOLD || b > RUSH_ATTACK_THRESHOLD) {
 
-		if(b > RUSH_ATTACK_THRESHOLD) {
-			UnitType type = PickUnitType(0.65f,0.3f,0.05f);
-			Base.SpawnUnit(type, Path.Tunnels);
-			return;
+			aiSpawnCounter += timeDelta;
+			if(aiSpawnCounter > aiAttackInterval) {
+				aiSpawnCounter = 0;
+
+				Path path = a > b ? Path.Surface : Path.Tunnels;
+				UnitType type = PickUnitType(0.65f, 0.3f, 0.05f);
+
+				Base.SpawnUnit(type, path);
+			}
 		}
 
 		CheckEvolutionStates(timeDelta);
@@ -272,23 +313,23 @@ public class Player : MonoBehaviour {
 
 
 	void CheckEvolutionStates(float timeDelta) {
-		//This is a note for Alex: you can rename this function if you want.
-		//With the evolution counter, use timeDelta instead of Time.deltaTime. Because timeDelta will account for the AI frame interval.
+		//Debug.Log("ENTERED");
 
-		Debug.Log("ENTERED");
-
-        if (AIStartTime > nextEvolutionWindow)
-        {
-            if (DNA > Evolutions.GetEvolutionCost())
-            {
+		aiEvoCounter += timeDelta;
+        if (aiEvoCounter > aiEvoInterval) {
+            if (DNA > Evolutions.GetEvolutionCost()) {
                 Evolutions.Evolve(Random.Range(0, 2));
-                nextEvolutionWindow = AIStartTime + evolutionWindowIncrement;
+				aiEvoCounter = 0;
             }
         }
         else
         {
-			//Note: We possibly might want to add a time interval here. AI frames might update too fast, or it might be nice to have some randomness in the spawning.
-            Base.SpawnUnit(PickUnitType(0.5f, 0.25f, 0.25f), (Path)Random.Range(0, 2));
+			//Spawn units normally
+			aiSpawnCounter += timeDelta;
+			if (aiSpawnCounter > aiNormalInterval) {
+				aiSpawnCounter = 0;
+				Base.SpawnUnit(PickUnitType(0.5f, 0.25f, 0.25f), (Path)Random.Range(0, 2));
+			}
         }
 	}
 
