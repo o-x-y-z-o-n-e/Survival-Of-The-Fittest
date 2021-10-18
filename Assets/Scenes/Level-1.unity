@@ -2967,7 +2967,7 @@ MonoBehaviour:
     StunNextAttackAcquired: 0
     Kamikaze: 0
     BlockEnemy: 0
-    BlockEnemyChance: 0
+    BlockEnemyChance: 0.025
   SpitterModifiers:
     MoveSpeed: 1
     Damage: 1

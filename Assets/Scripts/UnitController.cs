@@ -52,6 +52,8 @@ public class UnitController : MonoBehaviour, Damageable {
 	[SerializeField] private float attackIntervalDeviation;
 	[SerializeField] private int giveDNA; // how much DNA the unit will give when killed
 	[SerializeField] private Sprite[] sprites;
+	[SerializeField] private GameObject[] statusEffect;
+
 
 
 	private Player unitOwner; //this will not be a serialized field once unit owners are assigned at time of prefab instantiation.
@@ -284,7 +286,7 @@ public class UnitController : MonoBehaviour, Damageable {
 
 
 	//----------------------------------------------------------------------------------------------------------------------------------<
-
+	
 
 	public bool TakeDamage(int damage, Player sender) {
 		if (health <= 0) return false;
@@ -296,6 +298,7 @@ public class UnitController : MonoBehaviour, Damageable {
 
 		if (blockEnemy)
 		{
+			StartCoroutine(CritDefendVisual());
 			return false;
 		}
 
@@ -309,7 +312,11 @@ public class UnitController : MonoBehaviour, Damageable {
 			float t = health / baseHealth;
 
 			//Activate bloodlust if helath is below threshold
-			if(t <= BLOODLUST_THRESHOLD) bloodlust = true;
+			if (t <= BLOODLUST_THRESHOLD)
+			{
+				statusEffect[0].SetActive(true);
+				bloodlust = true;
+			}
 		}
 
 		
@@ -363,6 +370,7 @@ public class UnitController : MonoBehaviour, Damageable {
 		if (TryCritical()) {
 			d = (int)(d * CRITICAL_DAMAGE_MULTIPLIER);
 			//DO CRITICAL ATTACK VISUAL EFFECT HERE
+			StartCoroutine(CritHitVisual());
 		}
 
 		if (nextEnemy.TakeDamage(damage, unitOwner)) {
@@ -399,12 +407,54 @@ public class UnitController : MonoBehaviour, Damageable {
 
 
 	//----------------------------------------------------------------------------------------------------------------------------------<
+	
+	
+	private IEnumerator CritHitVisual()
+	{
+		statusEffect[1].SetActive(true);
+		yield return new WaitForSeconds(0.7f);
+		statusEffect[1].SetActive(false);
 
-
-	private void SetStunned(bool v) => isStunned = v;
+	}
 
 
 	//----------------------------------------------------------------------------------------------------------------------------------<
+
+
+	private IEnumerator CritDefendVisual()
+	{
+		statusEffect[3].SetActive(true);
+		yield return new WaitForSeconds(0.7f);
+		statusEffect[3].SetActive(false);
+
+	}
+
+
+	//----------------------------------------------------------------------------------------------------------------------------------<
+
+
+
+	private void SetStunned(bool v)
+	{
+		StartCoroutine(StunnedVisual());
+		isStunned = v;
+	}
+
+
+	//----------------------------------------------------------------------------------------------------------------------------------<
+
+
+	private IEnumerator StunnedVisual()
+	{
+		statusEffect[2].SetActive(true);
+		yield return new WaitForSeconds(3);
+		statusEffect[2].SetActive(false);
+
+	}
+
+
+	//----------------------------------------------------------------------------------------------------------------------------------<
+
 
 
 	public int GetEnemyMask() => enemyMask;
