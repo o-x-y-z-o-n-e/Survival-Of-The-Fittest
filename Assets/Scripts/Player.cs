@@ -60,8 +60,9 @@ public class Player : MonoBehaviour {
 	private void Awake() {
 		Evolutions = new Evolution(this);
 		nextEvolutionWindow = evolutionWindowIncrement; // + timeDelta !!!!
-		AIStartTime = Time.time; 
-		AIFrameInterval = Mathf.Lerp(0f, 1f, Options.GetLinearDifficulty());
+		AIStartTime = Time.time;
+		//AIFrameInterval = Mathf.Lerp(0f, 1f, 1 - Options.GetLinearDifficulty());
+		AIFrameInterval = 0.2f;
 	}
 
 
@@ -169,10 +170,11 @@ public class Player : MonoBehaviour {
 		
 		if (Time.time - AIStartTime > AIFrameInterval)
 		{
-			//CheckLaneDominance();
+			float timeDelta = Time.time - AIStartTime;
+			CheckLaneDominance(timeDelta);
 
 			AIStartTime = Time.time;
-        }
+		}
 	}
 	
 
@@ -182,7 +184,7 @@ public class Player : MonoBehaviour {
     /// <summary>
     /// 
     /// </summary>
-    void CheckLaneDominance()
+    void CheckLaneDominance(float timeDelta)
     {
         int n_units = 0;
         float SLD = 0, TLD = 0; // Surface / Tunnel lane dominance
@@ -202,11 +204,11 @@ public class Player : MonoBehaviour {
                 else if (path == 1)
                     ++TLD;
             }
-            CheckPriorityStates(0f, SLD / n_units, TLD / n_units);
+            CheckPriorityStates(timeDelta, SLD / n_units, TLD / n_units);
         }
         else
         {
-            CheckPriorityStates(0f, 0f, 0f);
+            CheckPriorityStates(timeDelta, 0f, 0f);
         }
     }
 	
@@ -237,7 +239,7 @@ public class Player : MonoBehaviour {
     /// Checks if the AI needs to defend or push a hard attack.
     /// </summary>
     /// <param name="timeDelta">The change in time, between each AI frame.</param>
-    /// <param name="a">Surface Lane Dominance</param>
+    /// <param name="a">Surface Lane Dominance [-1, 1]</param>
     /// <param name="b">Tunnels Lane Dominance</param>
     void CheckPriorityStates(float timeDelta, float a, float b) {
 		const float RUSH_ATTACK_THRESHOLD = 0.5f;
