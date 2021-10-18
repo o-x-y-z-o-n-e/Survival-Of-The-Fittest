@@ -39,6 +39,9 @@ public class UnitController : MonoBehaviour, Damageable {
 	const float ATTACK_LUNGE_WIDTH = 0.25f;
 	const float ATTACK_LUNGE_HEIGHT = 0.125f;
 
+	const float PUNCH_ICON_TIME = 0.35f;
+	const float PUNCH_RANGE = 0.5f;
+
 
 	public UnitType Type;
 
@@ -53,12 +56,13 @@ public class UnitController : MonoBehaviour, Damageable {
 	[SerializeField] private int giveDNA; // how much DNA the unit will give when killed
 	[SerializeField] private Sprite[] sprites;
 	[SerializeField] private GameObject[] statusEffect;
-
+	[SerializeField] private Transform punchIcon;
+	[SerializeField] private SpriteRenderer spriteBody;
 
 
 	private Player unitOwner; //this will not be a serialized field once unit owners are assigned at time of prefab instantiation.
 
-	[SerializeField] SpriteRenderer spriteBody;
+	SpriteRenderer punchIconSprite;
 	SpriteRenderer[] spriteRenderers;
 	Animator animator;
 	new BoxCollider2D collider;
@@ -89,6 +93,8 @@ public class UnitController : MonoBehaviour, Damageable {
 	float attackLungeCounter;
 	float attackLungeHeightMulitplier = 1;
 
+	float punchIconCounter = 0;
+
 
 	//----------------------------------------------------------------------------------------------------------------------------------<
 
@@ -99,6 +105,7 @@ public class UnitController : MonoBehaviour, Damageable {
 		spriteRenderers = GetComponentsInChildren<SpriteRenderer>();
 		collider = GetComponent<BoxCollider2D>();
 		healthBar = GetComponentsInChildren<Image>()[1];
+		punchIconSprite = punchIcon.GetComponentInChildren<SpriteRenderer>();
 
 		if (unitOwner != null) SetPlayer(unitOwner);
     }
@@ -369,7 +376,11 @@ public class UnitController : MonoBehaviour, Damageable {
 
 		if (TryCritical()) {
 			d = (int)(d * CRITICAL_DAMAGE_MULTIPLIER);
-			//DO CRITICAL ATTACK VISUAL EFFECT HERE
+
+			punchIconCounter = PUNCH_ICON_TIME;
+			punchIcon.transform.localPosition = Vector3.zero;
+			punchIcon.transform.gameObject.SetActive(true);
+
 			StartCoroutine(CritHitVisual());
 		}
 
@@ -596,6 +607,25 @@ public class UnitController : MonoBehaviour, Damageable {
 			float y = Mathf.Sin(Mathf.Clamp(t, 0, 0.5f) * 2 * Mathf.PI) * ATTACK_LUNGE_HEIGHT * attackLungeHeightMulitplier;
 
 			offset += new Vector2(x, y);
+		}
+
+
+		if(punchIconCounter > 0) {
+			punchIconCounter -= Time.fixedDeltaTime;
+
+			if(punchIconCounter <= 0) {
+				punchIconCounter = 0;
+
+				punchIcon.gameObject.SetActive(false);
+			}
+
+			float t = 1f - (punchIconCounter / PUNCH_ICON_TIME);
+			float x = 1f - Mathf.Pow(1f-t, 3);
+			float a = 1f - Mathf.Pow(t, 9);
+
+			punchIcon.transform.localScale = new Vector3(direction, 1, 1);
+			punchIcon.transform.localPosition = Vector3.right * x * PUNCH_RANGE * direction;
+			punchIconSprite.color = new Color(1, 1, 1, a);
 		}
 
 

@@ -348,7 +348,7 @@ public class Player : MonoBehaviour {
 	//----------------------------------------------------------------------------------------------------------------------------------<
 
 
-	UnitType PickUnitType(float soldier, float spitter, float defender) {
+	static UnitType PickUnitType(float soldier, float spitter, float defender) {
 		soldier = Mathf.Abs(soldier);
 		spitter = Mathf.Abs(spitter);
 		defender = Mathf.Abs(defender);
@@ -366,7 +366,7 @@ public class Player : MonoBehaviour {
 	//----------------------------------------------------------------------------------------------------------------------------------<
 
 
-	float GetInterval(float lower, float upper, float variance) {
+	static float GetInterval(float lower, float upper, float variance) {
 		return Mathf.Lerp(lower, upper, 1 - Options.GetLinearDifficulty()) + Random.Range(-variance, variance);
 	}
 
