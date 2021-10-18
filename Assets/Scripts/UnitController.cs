@@ -401,7 +401,10 @@ public class UnitController : MonoBehaviour, Damageable {
 
 		unitToStun.SetStunned(true);
 		yield return new WaitForSeconds(3);
-		unitToStun.SetStunned(false);
+		if (unitToStun)
+		{
+			unitToStun.SetStunned(false);
+		}
 		yield return null;
 	}
 
