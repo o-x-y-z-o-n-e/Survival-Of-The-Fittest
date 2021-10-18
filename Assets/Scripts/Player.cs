@@ -23,8 +23,8 @@ public class Player : MonoBehaviour {
 	const float NORMAL_INTERVAL_MAX = 2.5f;
 
 
-	const float EVO_INTERVAL_MIN = 0.5f;
-	const float EVO_INTERVAL_MAX = 2.5f;
+	const float EVO_INTERVAL_MIN = 60f;
+	const float EVO_INTERVAL_MAX = 300f;
 
 
 	public Base Base;
@@ -273,7 +273,7 @@ public class Player : MonoBehaviour {
     /// </summary>
     /// <param name="timeDelta">The change in time, between each AI frame.</param>
     /// <param name="a">Surface Lane Dominance [-1, 1]</param>
-    /// <param name="b">Tunnels Lane Dominance</param>
+    /// <param name="b">Tunnels Lane Dominance [-1, 1]</param>
     void CheckPriorityStates(float timeDelta, float a, float b) {
 		const float RUSH_ATTACK_THRESHOLD = 0.5f;
 
@@ -303,6 +303,8 @@ public class Player : MonoBehaviour {
 
 				Base.SpawnUnit(type, path);
 			}
+
+			return;
 		}
 
 		CheckEvolutionStates(timeDelta);
@@ -313,7 +315,7 @@ public class Player : MonoBehaviour {
 
 
 	void CheckEvolutionStates(float timeDelta) {
-		//Debug.Log("ENTERED");
+		Debug.Log("ENTERED");
 
 		aiEvoCounter += timeDelta;
         if (aiEvoCounter > aiEvoInterval) {
@@ -327,6 +329,8 @@ public class Player : MonoBehaviour {
 			//Spawn units normally
 			aiSpawnCounter += timeDelta;
 			if (aiSpawnCounter > aiNormalInterval) {
+				Debug.Log("NORMAL");
+
 				aiSpawnCounter = 0;
 				Base.SpawnUnit(PickUnitType(0.5f, 0.25f, 0.25f), (Path)Random.Range(0, 2));
 			}
