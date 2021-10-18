@@ -282,7 +282,7 @@ public class Player : MonoBehaviour {
             if (DNA > Evolutions.GetEvolutionCost())
             {
                 Evolutions.Evolve(Random.Range(0, 2));
-                nextEvolutionWindow += AIStartTime + evolutionWindowIncrement;
+                nextEvolutionWindow = AIStartTime + evolutionWindowIncrement;
             }
         }
         else
