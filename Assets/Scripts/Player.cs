@@ -282,6 +282,7 @@ public class Player : MonoBehaviour {
         }
         else
         {
+			//Note: We possibly might want to add a time interval here. AI frames might update too fast, or it might be nice to have some randomness in the spawning.
             Base.SpawnUnit(PickUnitType(0.5f, 0.25f, 0.25f), (Path)Random.Range(0, 2));
         }
     }
