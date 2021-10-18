@@ -13,18 +13,22 @@ public class Player : MonoBehaviour {
 	//Time interval range for when Ai is pushing an attack
 	const float ATTACK_INTERVAL_MIN = 0.25f;
 	const float ATTACK_INTERVAL_MAX = 1.5f;
+	const float ATTACK_VARIANCE = 0.125f;
 
 	//Time interval range for when Ai is defending
-	const float DEFEND_INTERVAL_MIN = 0.1f;
+	const float DEFEND_INTERVAL_MIN = 0.25f;
 	const float DEFEND_INTERVAL_MAX = 1f;
+	const float DEFEND_VARIANCE = 0.125f;
 
-	//These ranges are the upper/lower bounds for the interval for Ai to spawn units 'normally'
+	//These ranges are the upper/lower bounds of the interval for AI to spawn units 'normally'
 	const float NORMAL_INTERVAL_MIN = 0.5f;
 	const float NORMAL_INTERVAL_MAX = 2.5f;
+	const float NORMAL_VARIANCE = 0.25f;
 
 
-	const float EVO_INTERVAL_MIN = 60f;
-	const float EVO_INTERVAL_MAX = 300f;
+	const float EVO_INTERVAL_MIN = 60;
+	const float EVO_INTERVAL_MAX = 300;
+	const float EVO_VARIANCE = 30;
 
 
 	public Base Base;
@@ -87,10 +91,10 @@ public class Player : MonoBehaviour {
 	private void Awake() {
 		Evolutions = new Evolution(this);
 
-		aiNormalInterval = Mathf.Lerp(NORMAL_INTERVAL_MIN, NORMAL_INTERVAL_MAX, 1 - Options.GetLinearDifficulty());
-		aiAttackInterval = Mathf.Lerp(ATTACK_INTERVAL_MIN, ATTACK_INTERVAL_MAX, 1 - Options.GetLinearDifficulty());
-		aiDefendInterval = Mathf.Lerp(DEFEND_INTERVAL_MIN, DEFEND_INTERVAL_MAX, 1 - Options.GetLinearDifficulty());
-		aiEvoInterval = Mathf.Lerp(EVO_INTERVAL_MIN, EVO_INTERVAL_MAX, 1 - Options.GetLinearDifficulty());
+		aiNormalInterval = GetInterval(NORMAL_INTERVAL_MIN, NORMAL_INTERVAL_MAX, NORMAL_VARIANCE);
+		aiAttackInterval = GetInterval(ATTACK_INTERVAL_MIN, ATTACK_INTERVAL_MAX, ATTACK_VARIANCE);
+		aiDefendInterval = GetInterval(DEFEND_INTERVAL_MIN, DEFEND_INTERVAL_MAX, DEFEND_VARIANCE);
+		aiEvoInterval    = GetInterval(EVO_INTERVAL_MIN, EVO_INTERVAL_MAX, EVO_VARIANCE);
 	}
 
 
@@ -282,6 +286,7 @@ public class Player : MonoBehaviour {
 			aiSpawnCounter += timeDelta;
 			if(aiSpawnCounter > aiDefendInterval) {
 				aiSpawnCounter = 0;
+				aiDefendInterval = GetInterval(DEFEND_INTERVAL_MIN, DEFEND_INTERVAL_MAX, DEFEND_VARIANCE);
 
 				Path path = a < b ? Path.Surface : Path.Tunnels;
 				UnitType type = PickUnitType(0.5f, 0.25f, 0.25f);
@@ -297,6 +302,7 @@ public class Player : MonoBehaviour {
 			aiSpawnCounter += timeDelta;
 			if(aiSpawnCounter > aiAttackInterval) {
 				aiSpawnCounter = 0;
+				aiAttackInterval = GetInterval(ATTACK_INTERVAL_MIN, ATTACK_INTERVAL_MAX, ATTACK_VARIANCE);
 
 				Path path = a > b ? Path.Surface : Path.Tunnels;
 				UnitType type = PickUnitType(0.65f, 0.3f, 0.05f);
@@ -315,23 +321,24 @@ public class Player : MonoBehaviour {
 
 
 	void CheckEvolutionStates(float timeDelta) {
-		Debug.Log("ENTERED");
+		//Debug.Log("ENTERED");
 
 		aiEvoCounter += timeDelta;
         if (aiEvoCounter > aiEvoInterval) {
             if (DNA > Evolutions.GetEvolutionCost()) {
                 Evolutions.Evolve(Random.Range(0, 2));
 				aiEvoCounter = 0;
-            }
+				aiEvoInterval = GetInterval(EVO_INTERVAL_MIN, EVO_INTERVAL_MAX, EVO_VARIANCE);
+			}
         }
         else
         {
 			//Spawn units normally
 			aiSpawnCounter += timeDelta;
 			if (aiSpawnCounter > aiNormalInterval) {
-				Debug.Log("NORMAL");
-
 				aiSpawnCounter = 0;
+				aiNormalInterval = GetInterval(NORMAL_INTERVAL_MIN, NORMAL_INTERVAL_MAX, NORMAL_VARIANCE);
+
 				Base.SpawnUnit(PickUnitType(0.5f, 0.25f, 0.25f), (Path)Random.Range(0, 2));
 			}
         }
@@ -353,6 +360,14 @@ public class Player : MonoBehaviour {
 		if (t > soldier + spitter) return UnitType.Defender;
 		else if (t > soldier) return UnitType.Spitter;
 		else return UnitType.Soldier;
+	}
+
+
+	//----------------------------------------------------------------------------------------------------------------------------------<
+
+
+	float GetInterval(float lower, float upper, float variance) {
+		return Mathf.Lerp(lower, upper, 1 - Options.GetLinearDifficulty()) + Random.Range(-variance, variance);
 	}
 
 
