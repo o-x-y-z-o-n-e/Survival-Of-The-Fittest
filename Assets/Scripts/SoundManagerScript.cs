@@ -6,7 +6,11 @@ public class SoundManagerScript : MonoBehaviour
 {
 
     public static AudioClip defenderAttack, soldierAttack, spitterAttack, defenderDeath, soldierDeath, spitterDeath;
+    public AudioClip[] levelTracks;
+    public static AudioSource levelAudio;
     static AudioSource audioSrc;
+
+    private int trackNumber = 0;
 
     // Start is called before the first frame update
     void Awake()
@@ -19,13 +23,19 @@ public class SoundManagerScript : MonoBehaviour
         spitterDeath = Resources.Load<AudioClip>("Audio/FX/Spitter_Death");
 
         audioSrc = GetComponent<AudioSource>();
+        levelAudio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (!levelAudio.isPlaying)
+        {
+            levelAudio.clip = levelTracks[Random.Range(0, levelTracks.Length)];
+            levelAudio.Play();
+        }
     }
+
 
     public static void PlayUnitSound (string clip)
     {
