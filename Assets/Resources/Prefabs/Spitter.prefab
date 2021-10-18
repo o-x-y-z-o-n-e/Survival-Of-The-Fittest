@@ -941,7 +941,8 @@ MonoBehaviour:
   spriteBody: {fileID: 6046808748564481745}
   HealthPackagePrefab: {fileID: 8379993457103392243, guid: 6583130263b23ad4f857b60b4ad2a610,
     type: 3}
-  AttackSpeedPackagePrefab: {fileID: 0}
+  AttackSpeedPackagePrefab: {fileID: 4695917587823582629, guid: 5bcd7b714db581d4f8d8b6cf96229de0,
+    type: 3}
   ProjectilePrefab: {fileID: 1250771802780145336, guid: ad1a194daae826a4ea4b30b088e0388d,
     type: 3}
   ProjectileSpawnOffset: {x: 0.5, y: 0}
