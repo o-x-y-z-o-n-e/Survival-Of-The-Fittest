@@ -399,7 +399,7 @@ public class UnitController : MonoBehaviour, Damageable {
 			stunNextAttack = false;
 		}
 		
-		SoundManagerScript.PlayUnitSound(Type + "_Attack");
+		SoundManagerScript.PlaySound(Type + "_Attack");
 	}
 
 
@@ -686,7 +686,7 @@ public class UnitController : MonoBehaviour, Damageable {
 
 
 	public virtual void OnDeath() {
-		SoundManagerScript.PlayUnitSound(Type + "_Death");
+		SoundManagerScript.PlaySound(Type + "_Death");
 	}
 
 

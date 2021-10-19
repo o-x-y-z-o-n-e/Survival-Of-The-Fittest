@@ -116,6 +116,7 @@ public class Base : MonoBehaviour, Damageable {
 		if (isDestroyed) return;
 
 		anim.SetBool("hiveDestroy", true);
+		SoundManagerScript.PlaySound("Hive_Destruction");
 		Health = 0;
 		isDestroyed = true;
 

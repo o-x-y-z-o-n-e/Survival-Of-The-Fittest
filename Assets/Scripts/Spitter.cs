@@ -41,7 +41,7 @@ public class Spitter : UnitController {
 		//base.Attack();
 
 
-		SoundManagerScript.PlayUnitSound(Type + "_Attack");
+		SoundManagerScript.PlaySound(Type + "_Attack");
 
 		Vector3 offset = ProjectileSpawnOffset;
 		offset.x *= Direction;

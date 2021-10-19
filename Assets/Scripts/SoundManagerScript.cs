@@ -5,12 +5,11 @@ using UnityEngine;
 public class SoundManagerScript : MonoBehaviour
 {
 
-    public static AudioClip defenderAttack, soldierAttack, spitterAttack, defenderDeath, soldierDeath, spitterDeath;
+    public static AudioClip defenderAttack, soldierAttack, spitterAttack, defenderDeath, soldierDeath, spitterDeath, hiveDestruction;
     public AudioClip[] levelTracks;
     public static AudioSource levelAudio;
     static AudioSource audioSrc;
 
-    private int trackNumber = 0;
 
     // Start is called before the first frame update
     void Awake()
@@ -21,6 +20,7 @@ public class SoundManagerScript : MonoBehaviour
         defenderDeath = Resources.Load<AudioClip>("Audio/FX/Defender_Death");
         soldierDeath = Resources.Load<AudioClip>("Audio/FX/Soldier_Death");
         spitterDeath = Resources.Load<AudioClip>("Audio/FX/Spitter_Death");
+        hiveDestruction = Resources.Load<AudioClip>("Audio/FX/Hive_Destruction");
 
         audioSrc = GetComponent<AudioSource>();
         levelAudio = GetComponent<AudioSource>();
@@ -37,7 +37,7 @@ public class SoundManagerScript : MonoBehaviour
     }
 
 
-    public static void PlayUnitSound (string clip)
+    public static void PlaySound (string clip)
     {
         switch (clip) {
             case "Defender_Attack":
@@ -57,6 +57,9 @@ public class SoundManagerScript : MonoBehaviour
                 break;
             case "Spitter_Death":
                 audioSrc.PlayOneShot(spitterDeath);
+                break;
+            case "Hive_Destruction":
+                audioSrc.PlayOneShot(hiveDestruction);
                 break;
         }
     }
