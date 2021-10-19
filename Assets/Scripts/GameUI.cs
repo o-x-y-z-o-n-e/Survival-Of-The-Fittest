@@ -90,6 +90,12 @@ public class GameUI : MonoBehaviour {
 	[Header("Misc Elements")]
 	public Text CountdownText;
 
+	[Space]
+
+	public ParticleSystem Player1ParticleSystemSurface;
+	public ParticleSystem Player1ParticleSystemTunnel;
+	public ParticleSystem Player2ParticleSystemSurface;
+	public ParticleSystem Player2ParticleSystemTunnel;
 
 
 
@@ -100,6 +106,10 @@ public class GameUI : MonoBehaviour {
 		//Reset which screens are active.
 		HUD.gameObject.SetActive(true);
 		FinishScreen.gameObject.SetActive(false);
+		Player1ParticleSystemSurface.Play();
+		Player1ParticleSystemTunnel.Stop();
+		Player2ParticleSystemSurface.Play();
+		Player2ParticleSystemTunnel.Stop();
 	}
 
 
@@ -278,7 +288,20 @@ public class GameUI : MonoBehaviour {
 	/// <summary>
 	/// Is called by Path (Surface/Tunnel) button click event.
 	/// </summary>
-	public void OnPlayer1PathClick(int path) => Game.Current.Player1.SelectPath((Path)path);
+	public void OnPlayer1PathClick(int path)
+	{
+		Game.Current.Player1.SelectPath((Path)path);
+		if(path == 0)
+		{
+			Player1ParticleSystemSurface.Play();
+			Player1ParticleSystemTunnel.Stop();
+		}
+		if (path == 1)
+		{
+			Player1ParticleSystemSurface.Stop();
+			Player1ParticleSystemTunnel.Play();
+		}
+	}
 
 
 	//----------------------------------------------------------------------------------------------------------------------------------<
@@ -287,7 +310,20 @@ public class GameUI : MonoBehaviour {
 	/// <summary>
 	/// Is called by Path (Surface/Tunnel) button click event.
 	/// </summary>
-	public void OnPlayer2PathClick(int path) => Game.Current.Player2.SelectPath((Path)path);
+	public void OnPlayer2PathClick(int path)
+	{
+		Game.Current.Player2.SelectPath((Path)path);
+		if (path == 0)
+		{
+			Player2ParticleSystemSurface.Play();
+			Player2ParticleSystemTunnel.Stop();
+		}
+		if (path == 1)
+		{
+			Player2ParticleSystemSurface.Stop();
+			Player2ParticleSystemTunnel.Play();
+		}
+	}
 
 
 	//----------------------------------------------------------------------------------------------------------------------------------<

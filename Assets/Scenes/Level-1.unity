@@ -9941,6 +9941,10 @@ MonoBehaviour:
   Player1DNAText: {fileID: 381625889}
   Player2DNAText: {fileID: 1179124912}
   CountdownText: {fileID: 342348739}
+  Player1ParticleSystemSurface: {fileID: 1490972719}
+  Player1ParticleSystemTunnel: {fileID: 1851000045}
+  Player2ParticleSystemSurface: {fileID: 1177809428}
+  Player2ParticleSystemTunnel: {fileID: 877245402}
 --- !u!1 &968182952
 GameObject:
   m_ObjectHideFlags: 0
