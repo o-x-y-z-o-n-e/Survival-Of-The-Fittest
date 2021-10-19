@@ -204,11 +204,10 @@ public class Player : MonoBehaviour {
 		if(aiTickCounter > aiTickInterval) {
 			aiTickCounter = 0;
 
-			float a = 0;
-			float b = 0;
+			float top = CheckLaneDominance(Path.Surface);
+			float bottom = CheckLaneDominance(Path.Tunnels);
 
-			CheckLaneDominance(out a, out b);
-			CheckPriorityStates(aiTickInterval, a, b);
+			CheckPriorityStates(aiTickInterval, top, bottom);
 		}
 	}
 	
@@ -219,54 +218,22 @@ public class Player : MonoBehaviour {
     /// <summary>
     /// 
     /// </summary>
-    void CheckLaneDominance(out float a, out float b)
+    float CheckLaneDominance(Path path)
     {
-        int n_units = 0;
-        float SLD = 0, TLD = 0; // Surface / Tunnel lane dominance
+		Base homeBase = Base;
+		Base enemyBase = (PlayerID == 0 ? Game.Current.Player2 : Game.Current.Player1).Base;
 
-        string unitSide = PlayerID == 2 ? "Left Unit" : "Right Unit";
-        int enemyLayer = LayerMask.NameToLayer(unitSide);
-        List<GameObject> units = GetEnemyPlayers(enemyLayer);
+		UnitController allyUnit = Base.GetUnit(0, path);
+		UnitController enemyUnit = enemyBase.GetUnit(0, path);
 
-        if (units.Count > 0)
-        {
-            foreach (GameObject unit in units)
-            {
-                ++n_units;
-                int path = units[0].GetComponent<UnitController>().GetPath() == Path.Surface ? 0 : 1;
-                if (path == 0)
-                    ++SLD;
-                else if (path == 1)
-                    ++TLD;
-            }
-			a = SLD / n_units;
-			b = TLD / n_units;
-        }
-        else
-        {
-			a = 0;
-			b = 0;
-        }
-    }
-	
-	
-	//----------------------------------------------------------------------------------------------------------------------------------<
+		float allyP = 0;
+		float enemyP = 0;
 
+		if (allyUnit != null) allyP = Mathf.Clamp01(allyUnit.transform.localPosition.x / enemyBase.transform.localPosition.x);
+		if (enemyUnit != null) enemyP = Mathf.Clamp01(enemyUnit.transform.localPosition.x / homeBase.transform.localPosition.x);
 
-    List<GameObject> GetEnemyPlayers(int enemyLayer)
-    {
-        GameObject[] enemyUnits = FindObjectsOfType<GameObject>();
-		List<GameObject> retUnits = new List<GameObject>();
-		for (int i=0;i<enemyUnits.Length;++i)
-        {
-			if (enemyUnits[i].layer == enemyLayer)
-            {
-				retUnits.Add(enemyUnits[i]);
-            }
-        }
-
-		return retUnits;
-    }
+		return allyP - enemyP;
+	}
 	
 
     //----------------------------------------------------------------------------------------------------------------------------------<
@@ -280,8 +247,9 @@ public class Player : MonoBehaviour {
     /// <param name="b">Tunnels Lane Dominance [-1, 1]</param>
     void CheckPriorityStates(float timeDelta, float a, float b) {
 		const float RUSH_ATTACK_THRESHOLD = 0.5f;
+		const float DEFEND_THRESHOLD = -0.5f;
 
-		if(a < 0 || b < 0) {
+		if(a < DEFEND_THRESHOLD || b < DEFEND_THRESHOLD) {
 
 			aiSpawnCounter += timeDelta;
 			if(aiSpawnCounter > aiDefendInterval) {
