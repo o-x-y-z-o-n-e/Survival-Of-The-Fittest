@@ -83,6 +83,7 @@ public class Projectile : MonoBehaviour {
 
 				collideCounter++;
 				if(collideCounter >= collideCount) {
+					SoundManagerScript.PlaySound("Projectile_Hit");
 					Destroy(gameObject);
 				}
 			}

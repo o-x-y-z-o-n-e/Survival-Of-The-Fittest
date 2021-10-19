@@ -5,7 +5,7 @@ using UnityEngine;
 public class SoundManagerScript : MonoBehaviour
 {
 
-    public static AudioClip defenderAttack, soldierAttack, spitterAttack, defenderDeath, soldierDeath, spitterDeath, hiveDestruction;
+    public static AudioClip defenderAttack, soldierAttack, spitterAttack, defenderDeath, soldierDeath, spitterDeath, hiveDestruction, projectileHit;
     public AudioClip[] levelTracks;
     public static AudioSource levelAudio;
     static AudioSource audioSrc;
@@ -17,6 +17,7 @@ public class SoundManagerScript : MonoBehaviour
         defenderAttack = Resources.Load<AudioClip>("Audio/FX/Defender_Attack");
         soldierAttack = Resources.Load<AudioClip>("Audio/FX/Soldier_Attack");
         spitterAttack = Resources.Load<AudioClip>("Audio/FX/Spitter_Attack");
+        projectileHit = Resources.Load<AudioClip>("Audio/FX/Projectile_Hit");
         defenderDeath = Resources.Load<AudioClip>("Audio/FX/Defender_Death");
         soldierDeath = Resources.Load<AudioClip>("Audio/FX/Soldier_Death");
         spitterDeath = Resources.Load<AudioClip>("Audio/FX/Spitter_Death");
@@ -48,6 +49,9 @@ public class SoundManagerScript : MonoBehaviour
                 break;
             case "Spitter_Attack":
                 audioSrc.PlayOneShot(spitterAttack);
+                break;
+            case "Projectile_Hit":
+                audioSrc.PlayOneShot(projectileHit);
                 break;
             case "Defender_Death":
                 audioSrc.PlayOneShot(defenderDeath);
