@@ -184,6 +184,16 @@ public class Player : MonoBehaviour {
 		isAI = mode == PlayerMode.AI;
 
 		Game.Current.UI.SetPlayerControls(PlayerID, !isAI);
+
+		if(isAI) {
+			if(PlayerID == 0) {
+				Game.Current.UI.Player1ParticleSystemSurface.gameObject.SetActive(false);
+				Game.Current.UI.Player1ParticleSystemTunnel.gameObject.SetActive(false);
+			} else {
+				Game.Current.UI.Player2ParticleSystemSurface.gameObject.SetActive(false);
+				Game.Current.UI.Player2ParticleSystemTunnel.gameObject.SetActive(false);
+			}
+		}
 	}
 
 
