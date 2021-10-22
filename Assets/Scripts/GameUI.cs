@@ -184,7 +184,7 @@ public class GameUI : MonoBehaviour {
 	/// <param name="count"></param>
 	/// <param name="player">(0 = player one), (1 = player two/AI)</param>
 	public void UpdateDNA(int count, int player) {
-		(player == 0 ? Player1DNAText : Player2DNAText).text = string.Format("DNA: <color=#00D0FF>{0}</color>", count);
+		(player == 0 ? Player1DNAText : Player2DNAText).text = string.Format("DNA: <color=#FFFF00>{0}</color>", count);
 
 		(player == 0 ? Player1SoldierButton : Player2SoldierButton).interactable = count >= UnitController.GetUnitBaseCost(UnitType.Soldier);
 		(player == 0 ? Player1SpitterButton : Player2SpitterButton).interactable = count >= UnitController.GetUnitBaseCost(UnitType.Spitter);
