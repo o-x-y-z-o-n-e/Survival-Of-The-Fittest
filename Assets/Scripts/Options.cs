@@ -6,7 +6,8 @@ public static class Options {
 
 
 	//Runtime options
-	public static Difficulty Difficulty = Difficulty.Casual;
+	public static Difficulty Player1Difficulty = Difficulty.Casual;
+	public static Difficulty Player2Difficulty = Difficulty.Casual;
 	public static PlayerMode Player1Mode = PlayerMode.Real;
 	public static PlayerMode Player2Mode = PlayerMode.Real;
 
@@ -15,7 +16,7 @@ public static class Options {
 
 
 
-	public static float GetLinearDifficulty() => Mathf.InverseLerp(1, 5, (int)Difficulty);
+	public static float GetLinearDifficulty(int playerID) => Mathf.InverseLerp(1, 5, (int)(playerID == 0 ? Player1Difficulty : Player2Difficulty));
 
 }
 

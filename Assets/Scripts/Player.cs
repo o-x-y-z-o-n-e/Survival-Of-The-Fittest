@@ -344,8 +344,8 @@ public class Player : MonoBehaviour {
 	//----------------------------------------------------------------------------------------------------------------------------------<
 
 
-	static float GetInterval(float lower, float upper, float variance) {
-		return Mathf.Lerp(lower, upper, 1 - Options.GetLinearDifficulty()) + Random.Range(-variance, variance);
+	float GetInterval(float lower, float upper, float variance) {
+		return Mathf.Lerp(lower, upper, 1 - Options.GetLinearDifficulty(PlayerID)) + Random.Range(-variance, variance);
 	}
 
 
