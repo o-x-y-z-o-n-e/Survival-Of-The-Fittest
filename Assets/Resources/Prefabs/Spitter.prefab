@@ -953,10 +953,10 @@ MonoBehaviour:
   Type: 2
   attackRange: 2
   direction: 1
-  baseHealth: 50
+  baseHealth: 100
   damage: 25
-  moveSpeed: 1
-  attackInterval: 2
+  moveSpeed: 1.5
+  attackInterval: 1.5
   attackIntervalDeviation: 0.2
   giveDNA: 10
   sprites:
