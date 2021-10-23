@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System.IO;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,11 +13,79 @@ public static class Options {
 	public static PlayerMode Player2Mode = PlayerMode.Real;
 
 
+
+	//Both volumes have a domain of [0, 1]
+	public static float VolumeFX = 1f;
+	public static float VolumeMusic = 1f;
+
+
 	public static InputBindings Input = new InputBindings();
 
 
+	//----------------------------------------------------------------------------------------------------------------------------------<
+
 
 	public static float GetLinearDifficulty(int playerID) => Mathf.InverseLerp(1, 5, (int)(playerID == 0 ? Player1Difficulty : Player2Difficulty));
+
+
+	//----------------------------------------------------------------------------------------------------------------------------------<
+
+
+	public static void ReadFromDisk() {
+		if (!File.Exists(GetOptionsPath())) return;
+
+		string[] lines = File.ReadAllLines(GetOptionsPath());
+
+		for(int i = 0; i < lines.Length; i++) {
+			bool isHeader = false;
+
+			isHeader = lines[i].StartsWith("[");
+
+			if(!isHeader) {
+				string[] split = lines[i].Trim().Split('=');
+
+				string id = split[0].ToLower();
+				string value = ""; if (split.Length > 1) value = split[1];
+
+				switch (id) {
+					case "music": {
+						float fltValue = VolumeMusic ;
+						float.TryParse(value, out fltValue);
+						VolumeMusic = Mathf.Clamp01(fltValue);
+						break;
+					}
+
+					case "fx": {
+						float fltValue = VolumeFX;
+						float.TryParse(value, out fltValue);
+						VolumeFX = Mathf.Clamp01(fltValue);
+						break;
+					}
+				}
+			}
+		}
+	}
+
+
+	//----------------------------------------------------------------------------------------------------------------------------------<
+
+
+	public static void WriteToDisk() {
+		string[] lines = new string[3];
+
+		lines[0] = "[Audio]";
+		lines[1] = "music=" + VolumeMusic.ToString();
+		lines[2] = "fx=" + VolumeFX.ToString();
+
+		File.WriteAllLines(GetOptionsPath(), lines);
+	}
+
+
+	//----------------------------------------------------------------------------------------------------------------------------------<
+
+
+	static string GetOptionsPath() => Application.persistentDataPath + "/options.ini";
+
 
 }
 
@@ -24,7 +93,7 @@ public class InputBindings {
 
 	public  KeyCode Pause			= KeyCode.Escape;
 
-	//
+	//-------------------------------------------<
 
 	public  KeyCode Player1Worker	= KeyCode.None;
 	public  KeyCode Player1Soldier	= KeyCode.A;
@@ -37,7 +106,7 @@ public class InputBindings {
 	public  KeyCode Player1Evolve1	= KeyCode.E;
 	public  KeyCode Player1Evolve2	= KeyCode.R;
 
-	//
+	//-------------------------------------------<
 
 	public  KeyCode Player2Worker	= KeyCode.None;
 	public  KeyCode Player2Soldier	= KeyCode.L;

@@ -19,8 +19,25 @@ public class MainMenu : MonoBehaviour {
 	public Dropdown Player1Difficulty;
 	public Dropdown Player2Difficulty;
 
+	[Space]
+
 
 	public Text SomeRandomText;
+
+	[Space]
+
+
+	public Slider MusicVolumeSlider;
+	public Slider FXVolumeSlider;
+
+	[Space]
+
+	public AudioSource MenuMusic;
+
+
+	void Awake() {
+		Options.ReadFromDisk();
+	}
 
 
 	//----------------------------------------------------------------------------------------------------------------------------------<
@@ -73,6 +90,30 @@ public class MainMenu : MonoBehaviour {
 	/// Closes the game. Called by the 'Quit' button on the main menu.
 	/// </summary>
 	public void OnQuitClick() => Application.Quit();
+
+
+	//----------------------------------------------------------------------------------------------------------------------------------<
+
+
+	public void LoadOptions() {
+		MusicVolumeSlider.value = Options.VolumeMusic * 10;
+		FXVolumeSlider.value = Options.VolumeFX * 10;
+
+		MenuMusic.volume = Options.VolumeMusic;
+	}
+
+
+	//----------------------------------------------------------------------------------------------------------------------------------<
+
+
+	public void SaveOptions() {
+		Options.VolumeMusic = MusicVolumeSlider.value / 10;
+		Options.VolumeFX = FXVolumeSlider.value / 10;
+
+		MenuMusic.volume = Options.VolumeMusic;
+
+		Options.WriteToDisk();
+	}
 
 
 	//----------------------------------------------------------------------------------------------------------------------------------<

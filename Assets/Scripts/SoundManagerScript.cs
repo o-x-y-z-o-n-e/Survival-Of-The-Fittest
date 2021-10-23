@@ -5,15 +5,19 @@ using UnityEngine;
 public class SoundManagerScript : MonoBehaviour
 {
 
+	static SoundManagerScript instance;
+
     public static AudioClip defenderAttack, soldierAttack, spitterAttack, defenderDeath, soldierDeath, spitterDeath, hiveDestruction, projectileHit;
     public AudioClip[] levelTracks;
-    public static AudioSource levelAudio;
-    static AudioSource audioSrc;
+    public AudioSource musicSrc;
+	public AudioSource fxSrc;
 
 
-    // Start is called before the first frame update
-    void Awake()
+	// Start is called before the first frame update
+	void Awake()
     {
+		instance = this;
+
         defenderAttack = Resources.Load<AudioClip>("Audio/FX/Defender_Attack");
         soldierAttack = Resources.Load<AudioClip>("Audio/FX/Soldier_Attack");
         spitterAttack = Resources.Load<AudioClip>("Audio/FX/Spitter_Attack");
@@ -23,17 +27,19 @@ public class SoundManagerScript : MonoBehaviour
         spitterDeath = Resources.Load<AudioClip>("Audio/FX/Spitter_Death");
         hiveDestruction = Resources.Load<AudioClip>("Audio/FX/Hive_Destruction");
 
-        audioSrc = GetComponent<AudioSource>();
-        levelAudio = GetComponent<AudioSource>();
-    }
+
+		musicSrc.volume = Options.VolumeMusic;
+		fxSrc.volume = Options.VolumeFX;
+	}
+
 
     // Update is called once per frame
     void Update()
     {
-        if (!levelAudio.isPlaying)
+        if (!musicSrc.isPlaying)
         {
-            levelAudio.clip = levelTracks[Random.Range(0, levelTracks.Length)];
-            levelAudio.Play();
+			musicSrc.clip = levelTracks[Random.Range(0, levelTracks.Length)];
+			musicSrc.Play();
         }
     }
 
@@ -42,29 +48,34 @@ public class SoundManagerScript : MonoBehaviour
     {
         switch (clip) {
             case "Defender_Attack":
-                audioSrc.PlayOneShot(defenderAttack);
-                break;
+				instance.fxSrc.PlayOneShot(defenderAttack);
+				break;
             case "Soldier_Attack":
-                audioSrc.PlayOneShot(soldierAttack);
-                break;
+				instance.fxSrc.PlayOneShot(soldierAttack);
+				break;
             case "Spitter_Attack":
-                audioSrc.PlayOneShot(spitterAttack);
-                break;
+				instance.fxSrc.PlayOneShot(spitterAttack);
+				break;
             case "Projectile_Hit":
-                audioSrc.PlayOneShot(projectileHit);
-                break;
+				instance.fxSrc.PlayOneShot(projectileHit);
+				break;
             case "Defender_Death":
-                audioSrc.PlayOneShot(defenderDeath);
-                break;
+				instance.fxSrc.PlayOneShot(defenderDeath);
+				break;
             case "Soldier_Death":
-                audioSrc.PlayOneShot(soldierDeath);
-                break;
+				instance.fxSrc.PlayOneShot(soldierDeath);
+				break;
             case "Spitter_Death":
-                audioSrc.PlayOneShot(spitterDeath);
+				instance.fxSrc.PlayOneShot(spitterDeath);
                 break;
             case "Hive_Destruction":
-                audioSrc.PlayOneShot(hiveDestruction);
+				instance.fxSrc.PlayOneShot(hiveDestruction);
                 break;
         }
     }
+
+
+	void OnDestroy() {
+		instance = null;
+	}
 }
