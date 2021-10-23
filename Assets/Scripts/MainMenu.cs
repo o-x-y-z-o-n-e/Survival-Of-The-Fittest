@@ -20,6 +20,9 @@ public class MainMenu : MonoBehaviour {
 	public Dropdown Player2Difficulty;
 
 
+	public Text SomeRandomText;
+
+
 	//----------------------------------------------------------------------------------------------------------------------------------<
 
 
@@ -50,7 +53,16 @@ public class MainMenu : MonoBehaviour {
 	/// Opens the options sub-menu. Called by the 'Options' button on the main menu.
 	/// </summary>
 	public void OnOptionsClick() {
+		ShowSecret();
+	}
 
+
+	//----------------------------------------------------------------------------------------------------------------------------------<
+
+
+	void Update() {
+		//Nothing to see here....
+		ShhhhItsASecret();
 	}
 
 
@@ -62,4 +74,49 @@ public class MainMenu : MonoBehaviour {
 	/// </summary>
 	public void OnQuitClick() => Application.Quit();
 
+
+	//----------------------------------------------------------------------------------------------------------------------------------<
+
+
+
+	#region TOP SECRET, DO NOT PEEK
+
+	//I told you not to look >:(
+
+	Text verySecretText = null;
+	float verySecretCounter = 0;
+	const float VERY_VERY_SECRET_INTERVAL = 60;
+	const float GOTTA_GO_FAST = 70;
+	readonly string[] TOP_SECRET_INFO = {
+		"Next up   ->   Ducks vs Cats: Battle for Quantum Supremacy",
+		"To win the game, you must kill me, Jeremy Kiel!"
+	};
+	void ShhhhItsASecret() {
+		verySecretCounter += Time.fixedDeltaTime;
+
+		if(verySecretCounter > VERY_VERY_SECRET_INTERVAL) {
+			verySecretCounter = 0;
+
+			ShowSecret();
+		}
+
+		if (verySecretText != null) {
+			verySecretText.rectTransform.localPosition -= Vector3.right * Time.fixedDeltaTime * GOTTA_GO_FAST;
+
+			if(verySecretText.rectTransform.localPosition.x < -verySecretText.rectTransform.sizeDelta.x) {
+				Destroy(verySecretText.gameObject);
+				verySecretText = null;
+			}
+		}
+	}
+	void ShowSecret() {
+		verySecretText = Instantiate(SomeRandomText, SomeRandomText.transform.parent);
+
+		int i = Random.Range(0, TOP_SECRET_INFO.Length);
+		verySecretText.text = TOP_SECRET_INFO[i];
+
+		verySecretText.gameObject.SetActive(true);
+	}
+
+	#endregion
 }
