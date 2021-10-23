@@ -130,7 +130,8 @@ public class MainMenu : MonoBehaviour {
 	const float GOTTA_GO_FAST = 70;
 	readonly string[] TOP_SECRET_INFO = {
 		"Next up   ->   Ducks vs Cats: Battle for Quantum Supremacy",
-		"To win the game, you must kill me, Jeremy Kiel!"
+		"To win the game, you must kill me, Jeremy Kiel!",
+		"Where is the bread thief?"
 	};
 	void ShhhhItsASecret() {
 		verySecretCounter += Time.fixedDeltaTime;
