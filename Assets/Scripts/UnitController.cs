@@ -379,7 +379,6 @@ public class UnitController : MonoBehaviour, Damageable {
 			punchIconCounter = PUNCH_ICON_TIME;
 			punchIcon.transform.localPosition = Vector3.zero;
 			punchIcon.transform.gameObject.SetActive(true);
-			StartCoroutine(CritHitVisual());
 		}
 		if (nextEnemy.TakeDamage(d, unitOwner)) {
 			unitOwner.ChangeDNA(modifiers.ExtraDNAHarvest);
@@ -419,25 +418,13 @@ public class UnitController : MonoBehaviour, Damageable {
 
 
 	//----------------------------------------------------------------------------------------------------------------------------------<
-	
-	
-	private IEnumerator CritHitVisual()
-	{
-		statusEffect[1].SetActive(true);
-		yield return new WaitForSeconds(0.7f);
-		statusEffect[1].SetActive(false);
-
-	}
-
-
-	//----------------------------------------------------------------------------------------------------------------------------------<
 
 
 	private IEnumerator CritDefendVisual()
 	{
-		statusEffect[3].SetActive(true);
+		statusEffect[2].SetActive(true);
 		yield return new WaitForSeconds(0.7f);
-		statusEffect[3].SetActive(false);
+		statusEffect[2].SetActive(false);
 
 	}
 
@@ -461,9 +448,9 @@ public class UnitController : MonoBehaviour, Damageable {
 
 	private IEnumerator StunnedVisual()
 	{
-		statusEffect[2].SetActive(true);
+		statusEffect[1].SetActive(true);
 		yield return new WaitForSeconds(0.9f);
-		statusEffect[2].SetActive(false);
+		statusEffect[1].SetActive(false);
 
 	}
 
