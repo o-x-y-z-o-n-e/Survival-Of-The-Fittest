@@ -14,6 +14,7 @@ public class GameUI : MonoBehaviour {
 	public RectTransform FinishScreen;
 	public RectTransform HUD;
 	public RectTransform PauseScreen;
+	public RectTransform OptionsScreen;
 
 
 	[Space]
@@ -111,6 +112,7 @@ public class GameUI : MonoBehaviour {
 		//Reset which screens are active.
 		HUD.gameObject.SetActive(true);
 		FinishScreen.gameObject.SetActive(false);
+		OptionsScreen.gameObject.SetActive(false);
 		Player1ParticleSystemSurface.Play();
 		Player1ParticleSystemTunnel.Stop();
 		Player2ParticleSystemSurface.Play();
@@ -157,6 +159,7 @@ public class GameUI : MonoBehaviour {
 		HUD.gameObject.SetActive(true);
 		FinishScreen.gameObject.SetActive(false);
 		PauseScreen.gameObject.SetActive(false);
+		OptionsScreen.gameObject.SetActive(false);
 	}
 
 
@@ -170,6 +173,7 @@ public class GameUI : MonoBehaviour {
 		HUD.gameObject.SetActive(false);
 		FinishScreen.gameObject.SetActive(true);
 		PauseScreen.gameObject.SetActive(false);
+		OptionsScreen.gameObject.SetActive(false);
 		winnerBanner.sprite = sprite;
 	}
 
