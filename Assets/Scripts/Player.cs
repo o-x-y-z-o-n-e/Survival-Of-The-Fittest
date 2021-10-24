@@ -99,6 +99,7 @@ public class Player : MonoBehaviour {
 
 
 	private void Start() {
+		Game.Current.UI.UpdateDNA(DNA, PlayerID);
 		Game.Current.UI.UpdateEvolutionCost(Evolutions.GetEvolutionCost(), PlayerID);
 	}
 
