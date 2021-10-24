@@ -68,11 +68,11 @@ public class Evolution {
 
 			new EvolveData( //Spitter Heal
 				"Spitters heal the front all 5 health per second",
-				() => { EnableHealingForntAlly(UnitType.Spitter); }),
+				() => { EnableHealingFrontAlly(UnitType.Spitter); }),
 
 			new EvolveData( //Stat Aura
 				"Spitters increase nearby units Attack Speed by 30%",
-				() => {  }),
+				() => { EnableAttackSpeedAllyBuff(); }),
 
 			new EvolveData( //M_Spd+
 				"Spitters Move Speed +15%",
@@ -449,10 +449,20 @@ public class Evolution {
 	//----------------------------------------------------------------------------------------------------------------------------------<
 
 
-	void EnableHealingForntAlly(UnitType unitType) {
+	void EnableHealingFrontAlly(UnitType unitType) {
 		UnitModifiers mod = player.GetModifierReference(unitType);
 		mod.HealFrontAlly = true;
 	}
+
+
+	//----------------------------------------------------------------------------------------------------------------------------------<
+
+
+	void EnableAttackSpeedAllyBuff() {
+		UnitModifiers mod = player.GetModifierReference(UnitType.Spitter);
+		mod.BuffFrontAlly = true;
+	}
+
 
 	//----------------------------------------------------------------------------------------------------------------------------------<
 
