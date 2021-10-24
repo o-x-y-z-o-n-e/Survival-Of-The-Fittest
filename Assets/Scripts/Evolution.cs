@@ -241,7 +241,9 @@ public class Evolution {
 		this.player = player;
 		AssignData();
 		GenerateTree();
-    }
+
+		Game.Current.UI.UpdateEvolutionCost(GetEvolutionCost(), player.PlayerID);
+	}
 
 
 	//----------------------------------------------------------------------------------------------------------------------------------<
