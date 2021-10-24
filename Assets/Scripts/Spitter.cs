@@ -27,9 +27,9 @@ public class Spitter : UnitController {
 	Transform buffPackage;
 
 
-	float checkAllyCounter = BUFF_ALLY_INTERVAL/2;
+	float checkAllyCounter = 0;
 	float healAllyCounter = 0;
-	float buffAllyCounter = 0;
+	float buffAllyCounter = BUFF_ALLY_INTERVAL / 2;
 	float healPackageCounter = 0;
 	float buffPackageCounter = 0;
 
