@@ -27,12 +27,12 @@ public class UnitController : MonoBehaviour, Damageable {
 	const float			FRIENDLY_OVERLAP		= 0.0f;
 	const float			ALLY_CHECK_DIST			= 0.1f;
 
-	const float BLOODLUST_THRESHOLD = 0.50f; //What percent of total health does a Unit have to reach below for bloodlust to activate.
-	const float BLOODLUST_DAMAGE_MULTIPLIER = 5f;
-	const float BLOODLUST_MOVE_MULTIPLIER = 1f;
+	const float BLOODLUST_THRESHOLD = 0.40f; //What percent of total health does a Unit have to reach below for bloodlust to activate.
+	const float BLOODLUST_DAMAGE_MULTIPLIER = 1.3f;
+	const float BLOODLUST_MOVE_MULTIPLIER = 1.3f;
 
 
-	public const float CRITICAL_DAMAGE_MULTIPLIER = 3f;
+	public const float CRITICAL_DAMAGE_MULTIPLIER = 1.5f;
 
 
 	const float ATTACK_LUNGE_TIME = 0.25f;
@@ -72,6 +72,7 @@ public class UnitController : MonoBehaviour, Damageable {
 	float attackSpeedBuff = 1f;
 	bool stopMoving;
 	float attackCounter;
+	int maxHealth;
 	int health;
 	bool bloodlust;
 	bool stunNextAttack = false;
@@ -126,7 +127,8 @@ public class UnitController : MonoBehaviour, Damageable {
 		unitOwner = player;
 		modifiers = unitOwner.GetModifierReference(Type);
 
-		health = (int)(baseHealth * modifiers.Health);
+		maxHealth = (int)(baseHealth * modifiers.Health);
+		health = maxHealth;
 
 		if (modifiers.StunNextAttackAcquired == true) stunNextAttack = true;
 
@@ -356,7 +358,7 @@ public class UnitController : MonoBehaviour, Damageable {
 
 
 	void UpdateHealthBar() {
-		healthBar.rectTransform.sizeDelta = new Vector2(((float)health / baseHealth)*100, 10);
+		healthBar.rectTransform.sizeDelta = new Vector2(((float)health / maxHealth)*100, 10);
 	}
 
 
@@ -372,18 +374,13 @@ public class UnitController : MonoBehaviour, Damageable {
 			//with rand(-1, 1) too many values where close to 0. I changed the chances gravitate towards +- 1 by having a linear range of [-2, 2] and clamping to [-1, 1]
 			attackLungeHeightMulitplier = Mathf.Clamp(UnityEngine.Random.Range(-2f, 2f), -1f, 1f);
 		}
-
 		if (TryCritical()) {
 			d = (int)(d * CRITICAL_DAMAGE_MULTIPLIER);
-
 			punchIconCounter = PUNCH_ICON_TIME;
 			punchIcon.transform.localPosition = Vector3.zero;
 			punchIcon.transform.gameObject.SetActive(true);
-
-			StartCoroutine(CritHitVisual());
 		}
-
-		if (nextEnemy.TakeDamage(damage, unitOwner)) {
+		if (nextEnemy.TakeDamage(d, unitOwner)) {
 			unitOwner.ChangeDNA(modifiers.ExtraDNAHarvest);
 		}
 
@@ -421,25 +418,13 @@ public class UnitController : MonoBehaviour, Damageable {
 
 
 	//----------------------------------------------------------------------------------------------------------------------------------<
-	
-	
-	private IEnumerator CritHitVisual()
-	{
-		statusEffect[1].SetActive(true);
-		yield return new WaitForSeconds(0.7f);
-		statusEffect[1].SetActive(false);
-
-	}
-
-
-	//----------------------------------------------------------------------------------------------------------------------------------<
 
 
 	private IEnumerator CritDefendVisual()
 	{
-		statusEffect[3].SetActive(true);
+		statusEffect[2].SetActive(true);
 		yield return new WaitForSeconds(0.7f);
-		statusEffect[3].SetActive(false);
+		statusEffect[2].SetActive(false);
 
 	}
 
@@ -463,9 +448,9 @@ public class UnitController : MonoBehaviour, Damageable {
 
 	private IEnumerator StunnedVisual()
 	{
-		statusEffect[2].SetActive(true);
+		statusEffect[1].SetActive(true);
 		yield return new WaitForSeconds(0.9f);
-		statusEffect[2].SetActive(false);
+		statusEffect[1].SetActive(false);
 
 	}
 
