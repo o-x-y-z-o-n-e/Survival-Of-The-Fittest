@@ -141,6 +141,10 @@ public class MainMenu : MonoBehaviour {
 		"Spitters are the most educated",
 		"Soldiers are fans of reality TV",
 		"How many ants does it take to change a light bulb?",
+		"Supercalifragilisticexpialidocious",
+		"WW91IGhhdmUgdG9vIG11Y2ggdGltZQ==", //You have too much time
+		"https://bit.ly/3pujyjl", //hehe ;)
+		"Party boy time!",
 	};
 	void ShhhhItsASecret() {
 		verySecretCounter += Time.fixedDeltaTime;

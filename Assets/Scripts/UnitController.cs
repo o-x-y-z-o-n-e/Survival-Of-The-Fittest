@@ -72,6 +72,7 @@ public class UnitController : MonoBehaviour, Damageable {
 	float attackSpeedBuff = 1f;
 	bool stopMoving;
 	float attackCounter;
+	int maxHealth;
 	int health;
 	bool bloodlust;
 	bool stunNextAttack = false;
@@ -126,7 +127,8 @@ public class UnitController : MonoBehaviour, Damageable {
 		unitOwner = player;
 		modifiers = unitOwner.GetModifierReference(Type);
 
-		health = (int)(baseHealth * modifiers.Health);
+		maxHealth = (int)(baseHealth * modifiers.Health);
+		health = maxHealth;
 
 		if (modifiers.StunNextAttackAcquired == true) stunNextAttack = true;
 
@@ -356,7 +358,7 @@ public class UnitController : MonoBehaviour, Damageable {
 
 
 	void UpdateHealthBar() {
-		healthBar.rectTransform.sizeDelta = new Vector2(((float)health / baseHealth)*100, 10);
+		healthBar.rectTransform.sizeDelta = new Vector2(((float)health / maxHealth)*100, 10);
 	}
 
 
@@ -377,7 +379,6 @@ public class UnitController : MonoBehaviour, Damageable {
 			punchIconCounter = PUNCH_ICON_TIME;
 			punchIcon.transform.localPosition = Vector3.zero;
 			punchIcon.transform.gameObject.SetActive(true);
-			StartCoroutine(CritHitVisual());
 		}
 		if (nextEnemy.TakeDamage(d, unitOwner)) {
 			unitOwner.ChangeDNA(modifiers.ExtraDNAHarvest);
@@ -417,25 +418,13 @@ public class UnitController : MonoBehaviour, Damageable {
 
 
 	//----------------------------------------------------------------------------------------------------------------------------------<
-	
-	
-	private IEnumerator CritHitVisual()
-	{
-		statusEffect[1].SetActive(true);
-		yield return new WaitForSeconds(0.7f);
-		statusEffect[1].SetActive(false);
-
-	}
-
-
-	//----------------------------------------------------------------------------------------------------------------------------------<
 
 
 	private IEnumerator CritDefendVisual()
 	{
-		statusEffect[3].SetActive(true);
+		statusEffect[2].SetActive(true);
 		yield return new WaitForSeconds(0.7f);
-		statusEffect[3].SetActive(false);
+		statusEffect[2].SetActive(false);
 
 	}
 
@@ -459,9 +448,9 @@ public class UnitController : MonoBehaviour, Damageable {
 
 	private IEnumerator StunnedVisual()
 	{
-		statusEffect[2].SetActive(true);
+		statusEffect[1].SetActive(true);
 		yield return new WaitForSeconds(0.9f);
-		statusEffect[2].SetActive(false);
+		statusEffect[1].SetActive(false);
 
 	}
 
