@@ -1,10 +1,10 @@
 # == Audio Samples ==
 
 Insect_Attack_1, Insect_Attack_2, Insect_Attack_3
-	Author: Epidemic Sound
-	Type: Audio
-	License: N/A
-	Link: https://www.epidemicsound.com
+>	Author: Epidemic Sound
+>	Type: Audio
+>	License: N/A
+>	Link: https://www.epidemicsound.com
 
 80-CC0-creature-SFX
 	Author: rubberduck
