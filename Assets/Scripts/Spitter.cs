@@ -240,4 +240,22 @@ public class Spitter : UnitController {
 
 		return l3;
 	}
+
+
+	//----------------------------------------------------------------------------------------------------------------------------------<
+
+
+	public override void OnDestroy() {
+		base.OnDestroy();
+
+		if (healthPackage != null) {
+			Destroy(healthPackage.gameObject);
+			healthPackage = null;
+		}
+
+		if (buffPackage != null) {
+			Destroy(buffPackage.gameObject);
+			buffPackage = null;
+		}
+	}
 }

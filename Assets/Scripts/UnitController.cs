@@ -115,7 +115,7 @@ public class UnitController : MonoBehaviour, Damageable {
 	//----------------------------------------------------------------------------------------------------------------------------------<
 
 
-	void OnDestroy() {
+	public virtual void OnDestroy() {
 		unitOwner.Base.RemoveUnit(this);
 	}
 
@@ -527,38 +527,6 @@ public class UnitController : MonoBehaviour, Damageable {
     {
 		if (evolution < sprites.Length) spriteBody.sprite = sprites[evolution];
 
-		/*
-		Sprite newSprite = null;
-		switch (Type)
-        {
-			case UnitType.Soldier:
-				if (evolution < Game.Current.SoldierSprites.Count)
-				{
-					newSprite = Game.Current.SoldierSprites[evolution];
-				}
-				break;
-			case UnitType.Spitter:
-				if (evolution < Game.Current.SpitterSprites.Count)
-				{
-					Debug.Log("Spitter sprite changed!");
-					newSprite = Game.Current.SpitterSprites[evolution];
-				}
-				break;
-			case UnitType.Defender:
-				if (evolution < Game.Current.DefenderSprites.Count)
-				{
-					newSprite = Game.Current.DefenderSprites[evolution];
-				}
-				break;
-		}
-
-		Debug.Log(newSprite);
-
-		if (newSprite)
-		{
-			spriteBody.sprite = newSprite;
-		}
-		*/
 	}
 
 
