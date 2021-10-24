@@ -126,8 +126,8 @@ public class MainMenu : MonoBehaviour {
 
 	Text verySecretText = null;
 	float verySecretCounter = 60;
-	const float VERY_VERY_SECRET_INTERVAL = 80;
-	const float GOTTA_GO_FAST = 35;
+	const float VERY_VERY_SECRET_INTERVAL = 120;
+	const float GOTTA_GO_FAST = 25;
 	readonly string[] TOP_SECRET_INFO = {
 		"Next up   ->   Ducks vs Cats: Battle for Quantum Supremacy",
 		"To win the game, you must kill me, Jeremy Kiel!",
@@ -153,7 +153,6 @@ public class MainMenu : MonoBehaviour {
 
 		if (verySecretText != null) {
 			verySecretText.rectTransform.localPosition -= Vector3.right * Time.fixedDeltaTime * GOTTA_GO_FAST;
-			Debug.Log(verySecretText.rectTransform.localPosition.x);
 			if(verySecretText.rectTransform.localPosition.x < -verySecretText.rectTransform.sizeDelta.x) {
 				Destroy(verySecretText.gameObject);
 				verySecretText = null;
