@@ -6,7 +6,7 @@ PDF "GameBros" - Contains Cover, FAQ, & Controls.
 MP4 "Survival of the Fittest - Gameplay Trailer" - Sample Gameplay
 PDF "Survival of the Fittest - Playtesting Data" - Contains results from playtesting
 Folder "Audio" - Contains all game audio
-README text file - Thats this! You're reading it!
+README.txt - Thats this! You're reading it!
 
 GameBros Members:
 Brayden Cooke
