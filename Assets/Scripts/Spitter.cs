@@ -216,6 +216,7 @@ public class Spitter : UnitController {
 		buffPackage = Instantiate(AttackSpeedPackagePrefab).transform;
 		buffPackage.localPosition = transform.localPosition;
 		buffPackage.name = "Attack Speed";
+		buffPackage.localScale = new Vector3(Direction, 1, 1);
 	}
 
 
