@@ -137,6 +137,10 @@ public class MainMenu : MonoBehaviour {
 		"Don't be Sklate!",
 		"Let Bygones be Bygones",
 		"I'm free... free Falling!",
+		"Defenders like protein shakes",
+		"Spitters are the most educated",
+		"Soldiers are fans of reality TV",
+		"How many ants does it take to change a light bulb?",
 	};
 	void ShhhhItsASecret() {
 		verySecretCounter += Time.fixedDeltaTime;
