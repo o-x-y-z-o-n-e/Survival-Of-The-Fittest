@@ -1,40 +1,34 @@
 # == Audio Samples ==
 
-Insect_Attack_1, Insect_Attack_2, Insect_Attack_3
->	Author: Epidemic Sound
+### Insect_Attack_1, Insect_Attack_2, Insect_Attack_3
+<br>
+Author: Epidemic Sound
+<br>
+Type: Audio
+<br>
+License: N/A
+<br>
+Link: https://www.epidemicsound.com
 <br>
 
->	Type: Audio
+### 80-CC0-creature-SFX
+<br>
+Author: rubberduck
+<br>
+Type: Audio
+<br>
+License: CC0 (1.0)
+<br>
+Link: https://opengameart.org/content/80-cc0-creature-sfx
 <br>
 
->	License: N/A
+### Small rock hit hard ground 1, Cartoon wet squelch 5
 <br>
-
->	Link: https://www.epidemicsound.com
+Author: ZapSplat
 <br>
-
-80-CC0-creature-SFX
->	Author: rubberduck
+Type: Audio
 <br>
-
->	Type: Audio
+License: Custom
 <br>
-
->	License: CC0 (1.0)
-<br>
-
->	Link: https://opengameart.org/content/80-cc0-creature-sfx
-<br>
-
-Small rock hit hard ground 1, Cartoon wet squelch 5
->	Author: ZapSplat
-<br>
-
->	Type: Audio
-<br>
-
->	License: Custom
-<br>
-
->	Link: https://www.zapsplat.com
+Link: https://www.zapsplat.com
 <br>
