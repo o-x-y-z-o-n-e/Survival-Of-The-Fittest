@@ -395,8 +395,9 @@ public class UnitController : MonoBehaviour, Damageable {
 		}
 
 		if (stunNextAttack == true) {
-			StartCoroutine(StunEnemy(nextEnemy));
 			stunNextAttack = false;
+			StartCoroutine(StunEnemy(nextEnemy));
+			
 		}
 		
 		SoundManagerScript.PlaySound(Type + "_Attack");
@@ -411,7 +412,7 @@ public class UnitController : MonoBehaviour, Damageable {
 		UnitController unitToStun = (UnitController)unit;
 
 		unitToStun.SetStunned(true);
-		yield return new WaitForSeconds(3);
+		yield return new WaitForSeconds(1f);
 		if (unitToStun)
 		{
 			unitToStun.SetStunned(false);
@@ -461,7 +462,7 @@ public class UnitController : MonoBehaviour, Damageable {
 	private IEnumerator StunnedVisual()
 	{
 		statusEffect[2].SetActive(true);
-		yield return new WaitForSeconds(3);
+		yield return new WaitForSeconds(0.9f);
 		statusEffect[2].SetActive(false);
 
 	}

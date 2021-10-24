@@ -460,8 +460,8 @@ MonoBehaviour:
   Type: 3
   attackRange: 0.1
   direction: 1
-  baseHealth: 300
-  damage: 50
+  baseHealth: 250
+  damage: 25
   moveSpeed: 1
   attackInterval: 2
   attackIntervalDeviation: 0.2

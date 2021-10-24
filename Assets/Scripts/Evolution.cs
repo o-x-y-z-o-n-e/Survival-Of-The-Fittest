@@ -97,12 +97,16 @@ public class Evolution {
 
 			//**SOLDIER**
 			new EvolveData( //Harvest
-				"Soldiers harvest additional DNA on kill",
+				"Soldiers harvest 30 additional DNA on kill",
 				() => { AddExtraHarvestDNA(UnitType.Soldier, 30); }),
 
 			new EvolveData( //Stun
-				"Soldiers stun enemies on their first hit",
+				"Soldiers first attack stuns the enemy",
 				() => { EnableStun(UnitType.Soldier); }),
+
+			new EvolveData( //Berserk
+				"Soldiers gain 50% damage below 50% health",
+				() => { EnableBloodlust(UnitType.Soldier); }),
 
 			new EvolveData( //M_Spd+
 				"Soldiers Move Speed +15%",
@@ -126,9 +130,9 @@ public class Evolution {
 
 
 			//**DEFENDER**
-			new EvolveData(//Mitigate ***DAMAGE -0.2*** PLEASE CHECK
+			new EvolveData(//Mitigate
 				"Defenders take 20% less damage",
-				() => { ModifyUnit(UnitType.Defender, damage:-0.2f); }),
+				() => { AddArmorModifier(UnitType.Defender, 0.2f); }),
 
 			new EvolveData(//Martyr
 				"Defenders explode on death, damaging enemies for 30% of their health",
@@ -463,6 +467,7 @@ public class Evolution {
     {
 		UnitModifiers mod = player.GetModifierReference(unitType);
 		mod.BlockEnemy = true;
+		mod.BlockEnemyChance = 0.15f;
     }
 
 	public int GetEvolutionLevel() => nextEvolution;
