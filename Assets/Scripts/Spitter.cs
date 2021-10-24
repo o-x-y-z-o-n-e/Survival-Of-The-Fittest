@@ -57,6 +57,7 @@ public class Spitter : UnitController {
 		if(critical) damage = (int)(damage * CRITICAL_DAMAGE_MULTIPLIER);
 		
 		proj.SetDamage(damage, critical);
+		proj.SetCollideNumber(Modifiers.RangedPassCount);
 	}
 
 
