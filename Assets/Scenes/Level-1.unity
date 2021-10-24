@@ -10357,6 +10357,7 @@ MonoBehaviour:
   FinishScreen: {fileID: 1911487343}
   HUD: {fileID: 469454638}
   PauseScreen: {fileID: 1634725215}
+  OptionsScreen: {fileID: 1126570043}
   winnerBanner: {fileID: 2074429488}
   TimeDisplay: {fileID: 1771388593}
   Player1Controls: {fileID: 1919498450}

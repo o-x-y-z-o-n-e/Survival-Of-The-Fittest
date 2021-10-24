@@ -297,7 +297,7 @@ public class GameUI : MonoBehaviour {
 		Options.VolumeFX = FXVolumeSlider.value / 10;
 
 		SoundManagerScript.SetMusicVolume(Options.VolumeMusic);
-		SoundManagerScript.SetMusicVolume(Options.VolumeFX);
+		SoundManagerScript.SetFXVolume(Options.VolumeFX);
 
 		Options.WriteToDisk();
 	}
