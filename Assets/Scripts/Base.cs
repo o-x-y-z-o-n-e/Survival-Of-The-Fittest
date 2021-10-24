@@ -57,7 +57,7 @@ public class Base : MonoBehaviour, Damageable {
 	/// </summary>
 	/// <param name="percent">Range: [0, 1] = 0% to 100%</param>
 	/// <returns></returns>
-	public void Repair(float percent) => Repair((int)(MaxHealth * percent));
+	public void Repair(float percent) => Repair(Mathf.RoundToInt(MaxHealth * percent));
 
 
 	//----------------------------------------------------------------------------------------------------------------------------------<
@@ -73,6 +73,8 @@ public class Base : MonoBehaviour, Damageable {
 		Health += Mathf.Abs(amount);
 
 		if (Health >= MaxHealth) Health = MaxHealth;
+
+		UpdateHealthBar();
 	}
 
 
@@ -94,8 +96,8 @@ public class Base : MonoBehaviour, Damageable {
 			healthBar.transform.localScale.y,
 			healthBar.transform.localScale.z);
 		*/
-		healthBar.rectTransform.sizeDelta = new Vector2(((float)Health / MaxHealth) * 300, 15);
 
+		UpdateHealthBar();
 
 		if (Health <= 0) {
 			Destroy();
@@ -104,6 +106,12 @@ public class Base : MonoBehaviour, Damageable {
 
 		return false;
 	}
+
+
+	//----------------------------------------------------------------------------------------------------------------------------------<
+
+
+	void UpdateHealthBar() => healthBar.rectTransform.sizeDelta = new Vector2(((float)Health / MaxHealth) * 300, 15);
 
 
 	//----------------------------------------------------------------------------------------------------------------------------------<
