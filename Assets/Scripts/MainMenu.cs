@@ -145,6 +145,9 @@ public class MainMenu : MonoBehaviour {
 		"WW91IGhhdmUgdG9vIG11Y2ggdGltZQ==", //You have too much time
 		"https://bit.ly/3pujyjl", //hehe ;)
 		"Party boy time!",
+		"Bog Nose Dolan",
+		"Warning! Product may contain insects.",
+		"Warning! Bug warfare is shown in this media. Viewer discretion is advised."
 	};
 	void ShhhhItsASecret() {
 		verySecretCounter += Time.fixedDeltaTime;
