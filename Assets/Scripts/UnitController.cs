@@ -28,7 +28,7 @@ public class UnitController : MonoBehaviour, Damageable {
 	const float			ALLY_CHECK_DIST			= 0.1f;
 
 	const float BLOODLUST_THRESHOLD = 0.50f; //What percent of total health does a Unit have to reach below for bloodlust to activate.
-	const float BLOODLUST_DAMAGE_MULTIPLIER = 2f;
+	const float BLOODLUST_DAMAGE_MULTIPLIER = 5f;
 	const float BLOODLUST_MOVE_MULTIPLIER = 1f;
 
 
@@ -501,10 +501,9 @@ public class UnitController : MonoBehaviour, Damageable {
 
 	public int GetNextDamage() {
 		float d = damage * modifiers.Damage;
-
 		if (bloodlust) d *= BLOODLUST_DAMAGE_MULTIPLIER;
 
-		return (int)d;
+		return Mathf.RoundToInt(d);
 	}
 
 
