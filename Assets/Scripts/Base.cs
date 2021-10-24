@@ -174,6 +174,8 @@ public class Base : MonoBehaviour, Damageable {
 
 		instance.SetSprite(Player.Evolutions.GetEvolutionLevel());
 
+		instance.SetPath(path);
+
 		if (path == Path.Surface) topUnits.AddLast(instance);
 		else bottomUnits.AddLast(instance);
 	}
