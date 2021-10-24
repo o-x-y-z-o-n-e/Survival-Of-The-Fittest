@@ -450,8 +450,11 @@ public class UnitController : MonoBehaviour, Damageable {
 
 	private void SetStunned(bool v)
 	{
-		StartCoroutine(StunnedVisual());
 		isStunned = v;
+		if (isStunned)
+		{
+			StartCoroutine(StunnedVisual());
+		}
 	}
 
 
