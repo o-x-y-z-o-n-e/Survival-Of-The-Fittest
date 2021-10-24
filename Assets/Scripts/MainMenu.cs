@@ -147,7 +147,8 @@ public class MainMenu : MonoBehaviour {
 		"Party boy time!",
 		"Bog Nose Dolan",
 		"Warning! Product may contain insects.",
-		"Warning! Bug warfare is shown in this media. Viewer discretion is advised."
+		"Warning! Bug warfare is shown in this media. Viewer discretion is advised.",
+		"Minecraft"
 	};
 	void ShhhhItsASecret() {
 		verySecretCounter += Time.fixedDeltaTime;
