@@ -78,4 +78,8 @@ public class SoundManagerScript : MonoBehaviour
 	void OnDestroy() {
 		instance = null;
 	}
+
+
+	public static void SetMusicVolume(float t) => instance.musicSrc.volume = t;
+	public static void SetFXVolume(float t) => instance.fxSrc.volume = t;
 }

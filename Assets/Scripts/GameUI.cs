@@ -97,6 +97,11 @@ public class GameUI : MonoBehaviour {
 	public ParticleSystem Player2ParticleSystemSurface;
 	public ParticleSystem Player2ParticleSystemTunnel;
 
+	[Space]
+
+	public Slider MusicVolumeSlider;
+	public Slider FXVolumeSlider;
+
 
 
 	//----------------------------------------------------------------------------------------------------------------------------------<
@@ -110,6 +115,10 @@ public class GameUI : MonoBehaviour {
 		Player1ParticleSystemTunnel.Stop();
 		Player2ParticleSystemSurface.Play();
 		Player2ParticleSystemTunnel.Stop();
+
+		Options.ReadFromDisk();
+		MusicVolumeSlider.value = Options.VolumeMusic * 10;
+		FXVolumeSlider.value = Options.VolumeFX * 10;
 	}
 
 
@@ -273,6 +282,20 @@ public class GameUI : MonoBehaviour {
 		PointerEventData p = new PointerEventData(EventSystem.current);
 		ExecuteEvents.Execute(obj, p, ExecuteEvents.pointerEnterHandler);
 		ExecuteEvents.Execute(obj, p, ExecuteEvents.submitHandler);
+	}
+
+
+	//----------------------------------------------------------------------------------------------------------------------------------<
+
+
+	public void SaveOptions() {
+		Options.VolumeMusic = MusicVolumeSlider.value / 10;
+		Options.VolumeFX = FXVolumeSlider.value / 10;
+
+		SoundManagerScript.SetMusicVolume(Options.VolumeMusic);
+		SoundManagerScript.SetMusicVolume(Options.VolumeFX);
+
+		Options.WriteToDisk();
 	}
 
 
