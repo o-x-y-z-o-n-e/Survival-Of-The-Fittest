@@ -682,8 +682,8 @@ MonoBehaviour:
     AttackSpeed: 1
     ExtraDNAHarvest: 0
     RangedPassCount: 1
-    HealFrontAlly: 1
-    BuffFrontAlly: 1
+    HealFrontAlly: 0
+    BuffFrontAlly: 0
     Bloodlust: 0
     StunNextAttackAcquired: 0
     Kamikaze: 0
