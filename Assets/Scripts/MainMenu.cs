@@ -125,13 +125,18 @@ public class MainMenu : MonoBehaviour {
 	//I told you not to look >:(
 
 	Text verySecretText = null;
-	float verySecretCounter = 0;
-	const float VERY_VERY_SECRET_INTERVAL = 60;
-	const float GOTTA_GO_FAST = 70;
+	float verySecretCounter = 60;
+	const float VERY_VERY_SECRET_INTERVAL = 80;
+	const float GOTTA_GO_FAST = 35;
 	readonly string[] TOP_SECRET_INFO = {
 		"Next up   ->   Ducks vs Cats: Battle for Quantum Supremacy",
 		"To win the game, you must kill me, Jeremy Kiel!",
-		"Where is the bread thief?"
+		"Where is the bread thief?",
+		"Bob was here",
+		"Make sure to take breaks, or you might... Blackout!",
+		"Don't be Sklate!",
+		"Let Bygones be Bygones",
+		"I'm free... free Falling!",
 	};
 	void ShhhhItsASecret() {
 		verySecretCounter += Time.fixedDeltaTime;
@@ -144,7 +149,7 @@ public class MainMenu : MonoBehaviour {
 
 		if (verySecretText != null) {
 			verySecretText.rectTransform.localPosition -= Vector3.right * Time.fixedDeltaTime * GOTTA_GO_FAST;
-
+			Debug.Log(verySecretText.rectTransform.localPosition.x);
 			if(verySecretText.rectTransform.localPosition.x < -verySecretText.rectTransform.sizeDelta.x) {
 				Destroy(verySecretText.gameObject);
 				verySecretText = null;

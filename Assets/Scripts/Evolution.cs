@@ -63,66 +63,66 @@ public class Evolution {
 
 			//***SPITTER***
 			new EvolveData( //Multi Hit
-				"Spitters now hit an additional enemy but deal 50% damage",
-				() => { ModifyUnit(UnitType.Spitter, damage:-0.5f); RangedAttack(UnitType.Spitter, 2); }),
+				"Spitters now hit an additional enemy but deal 30% damage",
+				() => { ModifyUnit(UnitType.Spitter, damage:-0.3f); RangedAttack(UnitType.Spitter, 2); }),
 
 			new EvolveData( //Spitter Heal
 				"Spitters heal the front all 5 health per second",
 				() => { EnableHealingForntAlly(UnitType.Spitter); }),
 
 			new EvolveData( //Stat Aura
-				"Spitters increase nearby units *STAT* by *X*%",
+				"Spitters increase nearby units Attack Speed by 30%",
 				() => {  }),
 
 			new EvolveData( //M_Spd+
-				"Spitters Move Speed +5%",
-				() => { ModifyUnit(UnitType.Spitter, moveSpeed:0.05f); }),
+				"Spitters Move Speed +15%",
+				() => { ModifyUnit(UnitType.Spitter, moveSpeed:0.15f); }),
 
 			new EvolveData( //A_Spd+
-				"Spitters Attack Speed +5%",
-				() => { ModifyUnit(UnitType.Spitter, attackSpeed:0.05f); }),
+				"Spitters Attack Speed +15%",
+				() => { ModifyUnit(UnitType.Spitter, attackSpeed:0.15f); }),
 
 			new EvolveData( //HP+
-				"Spitters Health +5%",
-				() => { ModifyUnit(UnitType.Spitter, health:0.05f); }),
+				"Spitters Health +15%",
+				() => { ModifyUnit(UnitType.Spitter, health:0.15f); }),
 
 			new EvolveData( //Damage+
-				"Spitters Damage +5%",
-				() => { ModifyUnit(UnitType.Spitter, damage:0.05f); }),
+				"Spitters Damage +15%",
+				() => { ModifyUnit(UnitType.Spitter, damage:0.15f); }),
 
 			new EvolveData( //Critical+
-				"Spitters Critical Hit Chance +5%",
-				() => { AddCriticalChance(UnitType.Spitter, 0.05f); }),
+				"Spitters Critical Hit Chance +15%",
+				() => { AddCriticalChance(UnitType.Spitter, 0.15f); }),
 			
 
 			//**SOLDIER**
 			new EvolveData( //Harvest
 				"Soldiers harvest additional DNA on kill",
-				() => { AddExtraHarvestDNA(UnitType.Soldier, 10); }),
+				() => { AddExtraHarvestDNA(UnitType.Soldier, 30); }),
 
 			new EvolveData( //Stun
 				"Soldiers stun enemies on their first hit",
 				() => { EnableStun(UnitType.Soldier); }),
 
 			new EvolveData( //M_Spd+
-				"Soldiers Move Speed +5%",
-				() => { ModifyUnit(UnitType.Soldier, moveSpeed:0.05f); }),
+				"Soldiers Move Speed +15%",
+				() => { ModifyUnit(UnitType.Soldier, moveSpeed:0.15f); }),
 
 			new EvolveData( //A_Spd+
-				"Soldiers Attack Speed +5%",
-				() => { ModifyUnit(UnitType.Soldier, attackSpeed:0.05f); }),
+				"Soldiers Attack Speed +15%",
+				() => { ModifyUnit(UnitType.Soldier, attackSpeed:0.15f); }),
 
 			new EvolveData( //HP+
-				"Soldiers Health +5%",
-				() => { ModifyUnit(UnitType.Soldier, health:0.05f); }),
+				"Soldiers Health +15%",
+				() => { ModifyUnit(UnitType.Soldier, health:0.15f); }),
 
 			new EvolveData( //Damage+
-				"Soldiers Damage +5%",
-				() => { ModifyUnit(UnitType.Soldier, damage:0.05f); }),
+				"Soldiers Damage +15%",
+				() => { ModifyUnit(UnitType.Soldier, damage:0.15f); }),
 
 			new EvolveData( //Critical+
-				"Soldiers Critical Hit Chance +5%",
-				() => { AddCriticalChance(UnitType.Soldier, 0.05f); }),
+				"Soldiers Critical Hit Chance +15%",
+				() => { AddCriticalChance(UnitType.Soldier, 0.15f); }),
 
 
 			//**DEFENDER**
@@ -139,24 +139,24 @@ public class Evolution {
 				() => { EnableNullify(UnitType.Defender); }),
 
 			new EvolveData( //M_Spd+
-				"Defenders Move Speed +5%",
-				() => { ModifyUnit(UnitType.Defender, moveSpeed:0.05f); }),
+				"Defenders Move Speed +15%",
+				() => { ModifyUnit(UnitType.Defender, moveSpeed:0.15f); }),
 
 			new EvolveData( //A_Spd+
-				"Defenders Attack Speed +5%",
-				() => { ModifyUnit(UnitType.Defender, attackSpeed:0.05f); }),
+				"Defenders Attack Speed +15%",
+				() => { ModifyUnit(UnitType.Defender, attackSpeed:0.15f); }),
 
 			new EvolveData( //HP+
-				"Defenders Health +5%",
-				() => { ModifyUnit(UnitType.Defender, health:0.05f); }),
+				"Defenders Health +15%",
+				() => { ModifyUnit(UnitType.Defender, health:0.15f); }),
 
 			new EvolveData( //Damage+
-				"Defenders Damage +5%",
-				() => { ModifyUnit(UnitType.Defender, damage:0.05f); }),
+				"Defenders Damage +15%",
+				() => { ModifyUnit(UnitType.Defender, damage:0.15f); }),
 
 			new EvolveData( //Critical+
-				"Defenders Critical Hit Chance +5%",
-				() => { AddCriticalChance(UnitType.Defender, 0.05f); }),
+				"Defenders Critical Hit Chance +15%",
+				() => { AddCriticalChance(UnitType.Defender, 0.15f); }),
 
 
 			//**GENERAL**
@@ -169,38 +169,38 @@ public class Evolution {
 				() => { RepairBase(0.1f); }),
 
 			new EvolveData(//HiveThorns
-				"Hive Thorns: Melee Attackers take 5% damage per hit.",
-				() => { AddBaseThorns(0.05f); }),
+				"Hive Thorns: Melee Attackers take 15% damage per hit.",
+				() => { AddBaseThorns(0.15f); }),
 
 			new EvolveData(//ALL_HP+
-				"All units Health +5%",
-				() => { ModifyUnit(UnitType.Defender, health:0.05f);
-					ModifyUnit(UnitType.Soldier, health:0.05f);
-					ModifyUnit(UnitType.Spitter, health:0.05f);}),
+				"All units Health +15%",
+				() => { ModifyUnit(UnitType.Defender, health:0.15f);
+					ModifyUnit(UnitType.Soldier, health:0.15f);
+					ModifyUnit(UnitType.Spitter, health:0.15f);}),
 
 			new EvolveData( //ALL_M_Spd+
-				"All Units Move Speed +5%",
-				() => { ModifyUnit(UnitType.Defender, moveSpeed:0.05f);
-						ModifyUnit(UnitType.Soldier, moveSpeed:0.05f);
-						ModifyUnit(UnitType.Spitter, moveSpeed:0.05f);}),
+				"All Units Move Speed +15%",
+				() => { ModifyUnit(UnitType.Defender, moveSpeed:0.15f);
+						ModifyUnit(UnitType.Soldier, moveSpeed:0.15f);
+						ModifyUnit(UnitType.Spitter, moveSpeed:0.15f);}),
 
 			new EvolveData( //ALL_A_Spd+
-				"All Units Attack Speed +5%",
-				() => { ModifyUnit(UnitType.Defender, attackSpeed:0.05f);
-						ModifyUnit(UnitType.Soldier, attackSpeed:0.05f);
-						ModifyUnit(UnitType.Spitter, attackSpeed:0.05f);}),
+				"All Units Attack Speed +15%",
+				() => { ModifyUnit(UnitType.Defender, attackSpeed:0.15f);
+						ModifyUnit(UnitType.Soldier, attackSpeed:0.15f);
+						ModifyUnit(UnitType.Spitter, attackSpeed:0.15f);}),
 
 			new EvolveData( //ALL_Damage+
-				"All Units Damage +5%",
-				() => { ModifyUnit(UnitType.Defender, damage:0.05f);
-						ModifyUnit(UnitType.Soldier, damage:0.05f);
-						ModifyUnit(UnitType.Spitter, damage:0.05f);}),
+				"All Units Damage +15%",
+				() => { ModifyUnit(UnitType.Defender, damage:0.15f);
+						ModifyUnit(UnitType.Soldier, damage:0.15f);
+						ModifyUnit(UnitType.Spitter, damage:0.15f);}),
 
 			new EvolveData( //ALL_Critical+
-				"All Units Critical Hit Chance +5%",
-				() => { AddCriticalChance(UnitType.Defender, 0.05f);
-						AddCriticalChance(UnitType.Soldier, 0.05f);
-						AddCriticalChance(UnitType.Spitter, 0.05f); }),
+				"All Units Critical Hit Chance +15%",
+				() => { AddCriticalChance(UnitType.Defender, 0.15f);
+						AddCriticalChance(UnitType.Soldier, 0.15f);
+						AddCriticalChance(UnitType.Spitter, 0.15f); }),
 
 
 
@@ -211,7 +211,7 @@ public class Evolution {
 	//----------------------------------------------------------------------------------------------------------------------------------<
 
 
-	static int GetCost(int level) => 100 + (level*100);
+	static int GetCost(int level) => 50 + (level*50);
 
 
 	//----------------------------------------------------------------------------------------------------------------------------------<

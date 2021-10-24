@@ -19,9 +19,9 @@ public class UnitController : MonoBehaviour, Damageable {
 
 
 	public const int	WORKER_DNA_COST			= 25;
-	public const int	SOLDIER_DNA_COST		= 100;
-	public const int	SPITTER_DNA_COST		= 150;
-	public const int	DEFENDER_DNA_COST		= 250;
+	public const int	SOLDIER_DNA_COST		= 120;
+	public const int	SPITTER_DNA_COST		= 100;
+	public const int	DEFENDER_DNA_COST		= 150;
 
 
 	const float			FRIENDLY_OVERLAP		= 0.0f;
