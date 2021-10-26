@@ -11,3 +11,7 @@ Evolution is the only way forward – Survival of the Fittest is a 2D Real-Time 
 - Daniel McGregor
 - John Daniels
 - Alex Bull
+
+## Future Features
+- Support for aspect ratios other than 16:9
+- Tutorial
